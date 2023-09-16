@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminLogoutController;
 use App\Livewire\Backend\AddUsers\CreateUsers;
+use App\Livewire\Backend\AddUsers\EditUser;
 use App\Livewire\Backend\AdminDashboard;
 use App\Livewire\Backend\MenusMaster\CreateMenus;
 use App\Livewire\Backend\MenusMaster\EditMenus;
@@ -61,6 +62,8 @@ Route::get('/create-menu', CreateMenus::class)->name('create_menus');
 Route::get('/edit-menu/{id}', EditMenus::class)->name('edit_menus');
 
 Route::get('/create-user', CreateUsers::class)->name('create_user');
+Route::get('/edit-user/{userid}', EditUser::class)->name('edit_user');
+
 
 
 

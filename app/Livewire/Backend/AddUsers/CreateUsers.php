@@ -3,6 +3,7 @@
 namespace App\Livewire\Backend\AddUsers;
 
 use App\Livewire\Forms\CreateUserForm;
+use App\Models\AssigneMenu;
 use App\Models\Category;
 use App\Models\Role;
 use App\Models\User;
@@ -54,7 +55,6 @@ use LivewireAlert;
                 ->get();
              $getRoles =  Role::get();
              $getCategory=  Category::where('status' ,'Active')->get();
-
         return view('livewire.backend.add-users.create-users' ,['getCategory' => $getCategory,'getRoles' => $getRoles,'records' =>$records]);
     }
 
@@ -83,18 +83,16 @@ use LivewireAlert;
 
         }
 
-        $menus = [];
-        foreach ($this->menus as $key => $value) {
-            if ($value === true) {
-                $menus[] = $key;
-            }
-        }
+        // $menus = [];
+        // foreach ($this->menus as $key => $value) {
+        //     if ($value === true) {
+        //         $menus[] = $key;
+        //     }
+        // }
         //  dd($menus);
 
-        $menusJson = json_encode($menus);
-
-
-            $createuser =new User();
+            //  $menusJson = json_encode($this->menus);
+            $createuser =new User();            
             $createuser->name = $this->name; 
             $createuser->role_id = $this->role_id ;
             $createuser->username = $this->username;
@@ -103,19 +101,45 @@ use LivewireAlert;
             $createuser->name_hin = $this->name_hin;
             $createuser->name_pbi = $this->name_pbi;
             $createuser->name_urdu = $this->name_urdu;
-            $createuser->menus =  $menusJson ;// Convert array to comma-separated string
+            // $createuser->menus =  $menusJson ;// Convert array to comma-separated string
             $createuser->about = $this->about;
             $createuser->mobile = $this->mobile;
             $createuser->address = $this->address;
             $createuser->profile_photo_path = $filePath ?? Null;
             $createuser->status = $this->status;
             $createuser->save();
-        $this->reset(); 
+          
 
-        $this->alert('success', 'User Created successfully!');
+            // $menus[] =$this->menus;
+            $assignments = [];
+            foreach ($this->menus as $key => $value) {
+                if ($value === true) {
+                    $assignments[] = [
+                        'user_id' => $createuser->id,
+                        'role_id' => $this->role_id,
+                        'category_id' => $key,
+                    ];
+                }
+            }
+            //  dd($assignments);
+            AssigneMenu::insert($assignments);
+            $this->reset(); 
+            $this->alert('success', 'User Created successfully!');
 
     }
+    public function  inactive($id){
+        $finduser = User::find($id);
+        $finduser->status = "0";
+        $finduser->save();
+        $this->alert('info', 'User Inactive successfully!');
 
+}
+public function  active($id){
+        $finduser = User::find($id);
+        $finduser->status = "1";
+        $finduser->save();
+        $this->alert('success', 'User Active successfully!');
+}
     public function  delete($id){
         try {
             
@@ -132,7 +156,7 @@ use LivewireAlert;
 
    public function edit($id){
     try {
-        return redirect()->route('edit_menus',['id' =>$id ]);
+        return redirect()->route('edit_user',['userid' =>$id ]);
     } catch (\Exception $e) {
         dd($e->getMessage());
     }

@@ -7,12 +7,12 @@
             <div class="row">
                 <div class="col-12">
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <h4 class="mb-sm-0 font-size-18">Add Users</h4>
+                        <h4 class="mb-sm-0 font-size-18">Update Users</h4>
 
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
                                 <li class="breadcrumb-item"><a href="{{url('admin/dashboard')}}">Dashboard</a></li>
-                                <li class="breadcrumb-item">Add Users</li>
+                                <li class="breadcrumb-item">Update Users</li>
                                 <li class="breadcrumb-item active">Users</li>
                             </ol>
                         </div>
@@ -26,16 +26,13 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header bg-transparent border-bottom py-3">
-                            <h4 class="card-title">Add Users</h4>
+                            <h4 class="card-title">Update Users</h4>
                             <p class="card-title-desc mb-0">Fill out the particulars in order to add or update.</p>
                         </div>
                         <div class="card-body">
                             <!--success or error alert-->
-                            <form wire:submit="CreateUsers"> <!-- Add a Livewire form -->
-
-                                <!-- First Row -->
-                                <div>
-                                    <form wire:submit.prevent="CreateUsers">
+            
+                                    <form wire:submit.prevent="updateUsers">
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
@@ -83,7 +80,7 @@
                                                 </div>
                                             </div>
                                   
-                                            <div class="col-md-4">
+                                            {{-- <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="password">Password</label>
                                                     <input wire:model="password" type="password" placeholder="Password" class="form-control" id="password">
@@ -99,7 +96,7 @@
                                                     @error('password_confirmation') <span class="error">{{ $message }}</span> @enderror
                                                     
                                                 </div>
-                                            </div>
+                                            </div> --}}
                                         
                                 
                                             <div class="col-md-4">
@@ -135,9 +132,10 @@
                                                 <div class="form-group">
                                                     <label for="menus">Menus</label>
                                                     <div>
-                                                        @foreach($getCategory as $category)
+                                                        @foreach ($getCategory as $category)
                                                         <label for="menu_{{$category->id}}">
-                                                            <input wire:model="menus.{{$category->id}}" type="checkbox" id="menu_{{$category->id}}" value="{{$category->category_en}}">
+                                                            <input wire:model="menus.{{$category->id}}" type="checkbox" id="menu_{{$category->id}}" value="{{$category->category_en}}" 
+                                                            @if($assigne_menu->contains('category_id', $category->id)) checked @endif>
                                                             {{$category->category_en}}
                                                         </label>
                                                     @endforeach
@@ -228,7 +226,7 @@
                                         <div class="row mt-3">
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <button type="submit" wire:target="CreateUsers" wire:loading.attr="disabled"  class="btn btn-primary">Save Data</button>
+                                                    <button type="submit"  wire:loading.attr="disabled"  class="btn btn-primary">Save Data</button>
                                                     <div wire:loading wire:target="CreateUsers">
                                                         <img src="{{asset('loading.gif')}}" width="30" height="30" class="m-auto mt-1/4">
                                                      </div>
@@ -236,16 +234,7 @@
                                             </div>
                                         </div>
                                     </form>
-                                </div>
-                                
                     
-                                <!-- Third Row -->
-                          
-                    
-                                <!-- Fourth Row -->
-                     
-                    
-                            </form>  
                             
                             <!--form starts-->
                      
@@ -255,95 +244,7 @@
             </div>
             <!-- end row -->
             
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="card">
-                        <div class="card-header bg-transparent border-bottom py-3">
-                            <h4 class="card-title">Manage users</h4>
-                            <p class="card-title-desc mb-0">Manage the content by clicking on action accrodingly.</p>
-                            <div class="col-md-3 float-end">
-                                <div class="form-group">
-    
-                                    <div class="mb-3">
-                                        <label class="form-label">Search</label>
-                                        <input type="search" class="form-control"  wire:model.live="search" placeholder="Search...">
-                                         @error('Search') <span class="error">{{ $message }}</span> @enderror
-                                    </div>
-                                </div>
-                                </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-striped datatable--">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <td>Profile</td>
-                                            <th> Name </th>
-                                            <th> Email </th>
-                                            {{-- <th> Mobile</th> --}}
-                                            <th> Menus</th>
-                                            <th>Status</th>    
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                                      
-                                         @forelse ( $records as $key => $record )
-                                         @if($record->role_id != 1)
-                                         <tr>
-                                            <td> {{ $key+1}}</td>
-                                            <td>  <img src="{{asset('storage/'.$record->profile_photo_path)}}" alt=".." class="img-size-50 img-circle img-bordered-sm" width="50"></td>
-
-                                            <td>{{$record->name ?? 'NA' }}</td>
-                                  
-                                            <td> {{$record->email ?? 'NA' }}</td>
-                                            <td> {{$record->mobile ?? 'NA' }} </td>
-                                            <td>
-                                                @php
-                                                    $assignedMenus = $record->assignedMenus;
-                                                @endphp
-                                                @forelse ($assignedMenus as $index => $assignedMenu)
-                                                    <span class="badge bg-dark" style="font-size: 16px;"> {{ $assignedMenu->getmenu->category_en ?? 'NA'  }}</span>
-                                                    
-                                                @empty
-                                               {{ 'NA'}}
-                                                @endforelse
-                                            </td>
-                                      
-                                            <td>
-                                                @if($record->status  == "1")
-                                                <a href="javascript:void(0)" wire:click="inactive({{$record->id}})">
-                                                    <span class="badge bg-success" > Active</span>
-                                                </a> 
-                                            @else
-                                                <a href="javascript:void(0)" wire:click="active({{$record->id}})">
-                                                    <span class="badge bg-danger" >  Inactive </span>
-                                                </a> 
-                                            </td>
-
-                                           @endif
-                                                <td>   
-                                                <a  href="javascript:void(0)" wire:click="edit({{$record->id}})" class="text-success me-2" title="Edit"  wire:target="edit({{ $record->id }})"  wire:loading.attr="disabled"><i class="fa fa-edit fa-fw"></i></a>
-                                                <a href="javascript:void(0)" class="text-danger me-2" title="Delete" wire:click="delete({{ $record->id }})" wire:target="delete({{ $record->id }})"  wire:loading.attr="disabled"><i class="fa fa-times fa-fw fa-lg"></i></a>
-                                            </td>
-                                        </tr>
-                                        @endif
-                                         @empty
-                                            <tr>
-                                                <td colspan="4"> Record Not Found</td>                                           
-                                            </tr>
-                                             @endforelse 
-
-                                    
-
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+     
             <!-- end row -->
 
 
