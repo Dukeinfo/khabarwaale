@@ -49,16 +49,16 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="role_id">Role</label>
-                                                    <select wire:model="role_id" class="form-control" id="role_id">
-                                                        <option value="">Select Role</option>
-                                                 @forelse ($getRoles as $role )
-                                                 @if($role->id != 1)
-                                                     <option value="{{$role->id}}"> {{ ucwords($role->name)}}</option>
-                                                     @endif
-                                                 @empty
-                                                     
-                                                 @endforelse
-                                                 @error('role_id') <span class="error">{{ $message }}</span> @enderror
+                                                    <select wire:model.live="role_id" class="form-control" id="role_id">
+                                                        <option  value="">Select Role</option>
+                                                        @forelse ($getRoles as $role )
+                                                            @if($role->id != 1)
+                                                                <option value="{{$role->id}}"> {{ ucwords($role->name)}}</option>
+                                                                @endif
+                                                            @empty
+                                                            
+                                                        @endforelse
+                                                        @error('role_id') <span class="error">{{ $message }}</span> @enderror
 
                                                         <!-- Add more role options as needed -->
                                                     </select>

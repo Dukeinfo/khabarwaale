@@ -37,18 +37,25 @@
 {{-- ================== --}}
 <li>
 	<a href="javascript: void(0);" class="has-arrow waves-effect">
-		<i class='bx bx-image-add'></i>
+		<i class='bx bx-user'></i>
 		<span>Add user</span>
 	</a>
 		
   <ul class="sub-menu" aria-expanded="false">
 			<li><a href="{{route('create_user')}}">Add User </a></li>
-			
-
+	
 	</ul>
 
 </li>
 {{-- ================== --}}
+<li>
+	<a href="{{route('admin.create_add')}}"  class="waves-effect"> 
+
+	   <i class='bx bx-image'></i>
+	   <span>Create Add</span>
+   </a>
+   
+</li>
 
 
 

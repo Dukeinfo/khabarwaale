@@ -200,9 +200,9 @@
                                    
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label for="profile_photo_path">Profile Photo Path</label>
-                                                    <input wire:model.live="profile_photo_path" type="file" class="form-control" id="profile_photo_path">
-                                                    @error('profile_photo_path') <span class="error">{{ $message }}</span> @enderror
+                                                    <label for="edit_profile_photo_path">Profile Photo Path</label>
+                                                    <input wire:model.live="edit_profile_photo_path" type="file" class="form-control" id="edit_profile_photo_path">
+                                                    @error('edit_profile_photo_path') <span class="error">{{ $message }}</span> @enderror
                                               
                                                 </div>
                                             </div>

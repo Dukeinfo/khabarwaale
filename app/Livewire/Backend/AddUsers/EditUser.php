@@ -39,6 +39,7 @@ class EditUser extends Component
     public $status;
     public $userId;
     public $assigne_menu;
+    public $edit_profile_photo_path;
     public function mount(User $userid){
 
         $this->userId =  $userid->id;
@@ -80,31 +81,42 @@ class EditUser extends Component
                 
                 ]);
             }
-            if(!is_null($this->profile_photo_path)){
-                $fileName = time().'_'.$this->profile_photo_path->getClientOriginalName();
+            if(!is_null($this->edit_profile_photo_path)){
+                $fileName = time().'_'.$this->edit_profile_photo_path->getClientOriginalName();
             
-                $filePath = $this->profile_photo_path->storeAs('uploads', $fileName, 'public');
+                $filePath = $this->edit_profile_photo_path->storeAs('uploads', $fileName, 'public');
           
-    
+                $userprofile = User::find($this->userId );
+                $userprofile->name = $this->name; 
+                $userprofile->role_id = $this->role_id ;
+                $userprofile->username = $this->username;
+                $userprofile->email = $this->email;
+                // $createuser->password =  Hash::make($this->password);
+                $userprofile->name_hin = $this->name_hin;
+                $userprofile->name_pbi = $this->name_pbi;
+                $userprofile->name_urdu = $this->name_urdu;
+                $userprofile->about = $this->about;
+                $userprofile->mobile = $this->mobile;
+                $userprofile->address = $this->address;
+                $userprofile->profile_photo_path =  $filePath ?? Null;
+                $userprofile->status = $this->status;
+                $userprofile->save();
             }
-
-            // $menusJson = json_encode($this->menus);
-            $createuser = User::find($this->userId );
-            $createuser->name = $this->name; 
-            $createuser->role_id = $this->role_id ;
-            $createuser->username = $this->username;
-            $createuser->email = $this->email;
+            $updateuser = User::find($this->userId );
+            $updateuser->name = $this->name; 
+            $updateuser->role_id = $this->role_id ;
+            $updateuser->username = $this->username;
+            $updateuser->email = $this->email;
             // $createuser->password =  Hash::make($this->password);
-            $createuser->name_hin = $this->name_hin;
-            $createuser->name_pbi = $this->name_pbi;
-            $createuser->name_urdu = $this->name_urdu;
-            // $createuser->menus =  $menusJson ;// Convert array to comma-separated string
-            $createuser->about = $this->about;
-            $createuser->mobile = $this->mobile;
-            $createuser->address = $this->address;
-            $createuser->profile_photo_path = $filePath ?? Null;
-            $createuser->status = $this->status;
-            $createuser->save();
+            $updateuser->name_hin = $this->name_hin;
+            $updateuser->name_pbi = $this->name_pbi;
+            $updateuser->name_urdu = $this->name_urdu;
+            $updateuser->about = $this->about;
+            $updateuser->mobile = $this->mobile;
+            $updateuser->address = $this->address;
+            $updateuser->profile_photo_path = $filePath ?? Null;
+            $updateuser->status = $this->status;
+            $updateuser->save();
 
             $assignments = [];
             AssigneMenu::where('user_id' ,$this->userId)->delete();

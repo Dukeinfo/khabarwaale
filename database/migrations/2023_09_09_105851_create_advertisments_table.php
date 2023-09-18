@@ -17,13 +17,15 @@ class CreateAdvertismentsTable extends Migration
             $table->id();
             $table->string('page_name')->nullable();
             $table->string('slug')->nullable();
-
             $table->string('location')->nullable();
-            $table->string('add_image')->nullable();
-            $table->string('add_link')->nullable();
+            $table->string('image')->nullable();
+            $table->string('thumbnail')->nullable();
+            $table->string('type')->nullable();
+            $table->string('image_add')->nullable();
+
+            $table->string('link_add')->nullable();
             $table->string('from_date')->nullable();
             $table->string('to_date')->nullable();
-            $table->string('type')->nullable();
             $table->string('post_month')->nullable();
             $table->bigInteger('sort_id')->nullable(); 
             $table->enum('status', ['Active', 'Inactive', 'Deleted'])->default('Active');

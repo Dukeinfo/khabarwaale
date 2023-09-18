@@ -60,10 +60,13 @@ use LivewireAlert;
 
 
     public function CreateUsers(){
+        if (empty( $this->role_id)) {
+            $this->alert('error', 'Role field is also required!');
 
+        }
         $this->validate([
             'name' => 'required|string|max:255',
-            'role_id' => 'required|numeric', // Assuming role_id is numeric
+            'role_id' => 'required|integer', // Assuming role_id is numeric
             'username' => 'required|string|max:255|unique:users',
             'email' => 'required|email|unique:users|max:255',
             'password' => 'required|string|confirmed|min:8', // Adjust the minimum password length as needed
@@ -90,7 +93,7 @@ use LivewireAlert;
         //     }
         // }
         //  dd($menus);
-
+   
             //  $menusJson = json_encode($this->menus);
             $createuser =new User();            
             $createuser->name = $this->name; 
