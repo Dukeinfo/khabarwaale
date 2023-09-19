@@ -18,6 +18,7 @@ class CreateAddPollsTable extends Migration
             $table->string('question')->nullable();
             $table->string('slug')->nullable();
             $table->text('options')->nullable();
+            
             $table->string('title')->nullable();
             $table->text('description')->nullable();
             $table->bigInteger('sort_id')->nullable(); 

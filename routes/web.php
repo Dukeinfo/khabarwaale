@@ -13,6 +13,8 @@ use App\Livewire\Backend\Settings\ContactMessages;
 use App\Livewire\Backend\Settings\ContactusEdit;
 use App\Livewire\Backend\Settings\ContactusView;
 use App\Livewire\Backend\Settings\SocialAppsManager;
+use App\Livewire\Backend\Videos\CreateVideos;
+use App\Livewire\Backend\Videos\EditVideos;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -68,6 +70,11 @@ Route::get('/edit-user/{userid}', EditUser::class)->name('edit_user');
 
 Route::get('/create-add', CreateAdd::class)->name('admin.create_add');
 Route::get('/edit-add/{addid}', EditAdd::class)->name('admin.edit_add');
+
+Route::get('/create-videos', CreateVideos::class)->name('admin.create_videos');
+Route::get('/edit-videos/{vid_id}', EditVideos::class)->name('admin.edit_videos');
+
+
 
 
 

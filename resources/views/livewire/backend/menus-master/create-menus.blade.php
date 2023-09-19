@@ -207,7 +207,8 @@
                                     <div class="col-md-12">
                                         <button type="submit" wire:target="storeData" wire:loading.attr="disabled"  class="btn btn-primary">Save Data</button>
                                         <div wire:loading wire:target="storeData">
-                                            <img src="{{asset('loading.gif')}}" width="30" height="30" class="m-auto mt-1/4">
+                                            <i class="fas fa-1x fa-sync-alt fa-spin"></i>
+
                                          </div>
                                     </div>
                                     

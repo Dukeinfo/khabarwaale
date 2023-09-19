@@ -105,40 +105,40 @@ class CreateAdd extends Component
 
 
     }
-    public function  inactive($id){
-        $findcat = Advertisment::find($id);
-        $findcat->status = "Inactive";
-        $findcat->save();
-        $this->alert('info', 'Advertisment Inactive successfully!');
+        public function  inactive($id){
+            $findcat = Advertisment::find($id);
+            $findcat->status = "Inactive";
+            $findcat->save();
+            $this->alert('info', 'Advertisment Inactive successfully!');
 
-}
-public function  active($id){
-        $findcat = Advertisment::find($id);
-        $findcat->status = "Active";
-        $findcat->save();
-        $this->alert('success', 'Advertisment Active successfully!');
-}
-
-public function  delete($id){
-    try {
-        
-        $findcat = Advertisment::findOrFail($id);
-        $findcat->delete();
-        $this->alert('warning', 'Advertisment Deleted successfully!');
-        
-    } catch (\Exception $e) {
-        dd($e->getMessage());
-
-    }
-
-}
-
-public function edit($id){
-        try {
-            return redirect()->route('admin.edit_add',['addid' =>$id ]);
-        } catch (\Exception $e) {
-            dd($e->getMessage());
+        }
+        public function  active($id){
+                $findcat = Advertisment::find($id);
+                $findcat->status = "Active";
+                $findcat->save();
+                $this->alert('success', 'Advertisment Active successfully!');
         }
 
-}
+        public function  delete($id){
+            try {
+                
+                $findcat = Advertisment::findOrFail($id);
+                $findcat->delete();
+                $this->alert('warning', 'Advertisment Deleted successfully!');
+                
+            } catch (\Exception $e) {
+                dd($e->getMessage());
+
+            }
+
+        }
+
+        public function edit($id){
+                try {
+                    return redirect()->route('admin.edit_add',['addid' =>$id ]);
+                } catch (\Exception $e) {
+                    dd($e->getMessage());
+                }
+
+        }
 }

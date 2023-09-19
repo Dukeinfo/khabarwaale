@@ -57,8 +57,23 @@
    
 </li>
 
+<li>
+	<a href="{{route('admin.create_videos')}}"  class="waves-effect"> 
 
+	   <i class='bx bx-video'></i>
+	   <span>Add Videos</span>
+   </a>
+   
+</li>
 
+<li>
+	<a href="{{route('admin.create_videos')}}"  class="waves-effect"> 
+
+	   <i class='bx bx-poll'></i>
+	   <span>Add Poll</span>
+   </a>
+   
+</li>
 
 	
 

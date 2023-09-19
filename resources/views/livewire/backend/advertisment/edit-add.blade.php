@@ -147,8 +147,8 @@
                                                     <label for="status">Status</label>
                                                     <select wire:model="status" class="form-select">
                                                         <option value="">Select</option>
-                                                        <option value="1">Active</option>
-                                                        <option value="0">Inactive </option>
+                                                        <option value="Active">Active</option>
+                                                        <option value="Inactive">Inactive </option>
                                                    </select>
                                                    @error('status') <span class="error">{{ $message }}</span> @enderror
         
@@ -164,7 +164,8 @@
                                                 <div class="form-group">
                                                     <button type="submit" wire:target="CreateUsers" wire:loading.attr="disabled"  class="btn btn-primary">Save Data</button>
                                                     <div wire:loading wire:target="CreateUsers">
-                                                        <img src="{{asset('loading.gif')}}" width="30" height="30" class="m-auto mt-1/4">
+                                                        <i class="fas fa-1x fa-sync-alt fa-spin"></i>
+
                                                      </div>
                                                 </div>
                                             </div>

@@ -16,9 +16,12 @@ class CreateVideoGalleriesTable extends Migration
         Schema::create('video_galleries', function (Blueprint $table) {
             $table->id();
             $table->string('video_image')->nullable();
-            $table->string('video_title')->nullable();
+            $table->string('video_title_en')->nullable();
+            $table->string('video_title_hin')->nullable();
+            $table->string('video_title_pbi')->nullable();
+            $table->string('video_title_urdu')->nullable();
             $table->string('slug')->nullable();
-
+            $table->string('thumbnail')->nullable();
             $table->string('video_url')->nullable();
             $table->string('post_date')->nullable();  
             $table->string('embed_code')->nullable();  

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\SocialApp;
 
+use Response;
 class SocialappController extends Controller
 {
     /**
@@ -12,6 +14,14 @@ class SocialappController extends Controller
     public function index()
     {
         //
+        $getCmsDatas = SocialApp::get();
+        if($getCmsDatas ){
+            $response = ["total" =>  $getCmsDatas->count(), 'getCmsData' => $getCmsDatas];
+            return Response::json($response, 200);
+        }else{
+            $response = ["message" =>'Error with SocialApp  data.'];
+            return Response::json($response, 422);
+        }
     }
 
     /**
