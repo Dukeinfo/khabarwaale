@@ -42,7 +42,7 @@
                                                     <label for="page_name">Page Name</label>
                                                     <select name="page_name" wire:model="page_name" id="page_name"  class="form-control">
                                                      <option value="" >Select page</option>          
-                                                        @foreach(Route::getRoutes() as $route)
+                                                        {{-- @foreach(Route::getRoutes() as $route)
                                                              @if (str_starts_with($route->getName(), 'home.') )
                                                             @php
                                                                 $routeName   = ucwords(str_replace('home.','',$route->getName() )  )
@@ -51,7 +51,9 @@
                                                                 </option>
                
                                                             @endif
-                                                        @endforeach
+                                                        @endforeach --}}
+                                                        <option value="Home">Home</option>
+                                                        <option value="Others">Others</option>
                                                     </select>
                                                     @error('page_name') <span class="error">{{ $message }}</span> @enderror
                                                 
@@ -147,8 +149,8 @@
                                                     <label for="status">Status</label>
                                                     <select wire:model="status" class="form-select">
                                                         <option value="">Select</option>
-                                                        <option value="Active">Active</option>
-                                                        <option value="Inactive">Inactive </option>
+                                                        <option value="Yes">Active</option>
+                                                        <option value="No">Inactive </option>
                                                    </select>
                                                    @error('status') <span class="error">{{ $message }}</span> @enderror
         

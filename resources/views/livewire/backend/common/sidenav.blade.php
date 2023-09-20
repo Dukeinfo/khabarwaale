@@ -65,7 +65,14 @@
    </a>
    
 </li>
+<li>
+	<a href="{{route('admin.create_news')}}"  class="waves-effect"> 
 
+	   <i class='bx bx-news'></i>
+	   <span>Add News</span>
+   </a>
+   
+</li>
 <li>
 	<a href="{{route('admin.create_videos')}}"  class="waves-effect"> 
 

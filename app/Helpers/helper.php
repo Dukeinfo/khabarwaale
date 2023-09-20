@@ -15,15 +15,11 @@ function authUserId(){
 
 function createSlug($val)
 {
-
     $slug = preg_replace('/[\s.]+/', '-', $val);
-
     // Convert to lowercase
     $slug = strtolower($slug);
-
     return $slug;
 }
-
 
 function getThumbnail($value) {
     if (str_starts_with($value, 'http')) {
@@ -33,15 +29,10 @@ function getThumbnail($value) {
 }
 
 
-
-
 function getUserIp()
 {
     return !empty(request()->server('HTTP_CF_CONNECTING_IP')) ? request()->server('HTTP_CF_CONNECTING_IP') : request()->getClientIp();
 }
-
-
-
 
 
 function getGallerydetail($image)

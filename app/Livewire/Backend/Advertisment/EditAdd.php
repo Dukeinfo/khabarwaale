@@ -62,7 +62,7 @@ class EditAdd extends Component
         if(!is_null($this->editimage)){
                 $image =  $this->editimage;
                 // Define folder path
-                $folder = '/imageadd';
+                $folder = '/image';
                 $editimage_add = $this->uploadOne($image, $folder);
                 $updateImg =  Advertisment::find($this->add_Id);
                 $updateImg->image = $editimage_add['file_name'];
@@ -75,19 +75,22 @@ class EditAdd extends Component
                 // Define folder path
                 $folder = '/addpic';
                 $editimageadd = $this->uploadOne($image, $folder);
-                $updateadd =  Advertisment::find($this->add_Id);
-                $updateadd->type = $this->type;
-                $updateadd->image_add = $editimageadd['file_name'];
-                $updateadd->save();
+          
+     
             } 
 
             $advertisment =  Advertisment::find($this->add_Id);
             $advertisment->page_name = $this->page_name;
             $advertisment->slug = createSlug($this->page_name);
             $advertisment->location = $this->location;
-            if(!$this->editimage_add){
-                $advertisment->type = $this->type;
+            $advertisment->type = $this->type;
+            if(isset($this->editimage_add)){
+                $advertisment->image_add = $editimageadd['file_name'] ?? Null;
+                $advertisment->link_add = Null;
+            }else{
                 $advertisment->link_add = $this->link_add;
+                $advertisment->image_add =  Null;
+
             }
             $advertisment->from_date = $this->from_date;
             $advertisment->to_date = $this->to_date;

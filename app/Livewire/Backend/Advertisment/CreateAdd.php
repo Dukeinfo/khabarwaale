@@ -30,14 +30,12 @@ class CreateAdd extends Component
     #[Rule('required', message: 'Image field is required')] 
     public $image ;
     // #[Rule('required', message: 'page name field is required')] 
-    
     public $image_add;
     public $link_add;
     #[Rule('required', message: 'From Date field is required')] 
     public $from_date;
     #[Rule('required', message: 'To date field is required')] 
     public $to_date;
-    #[Rule('required', message: 'Month field is required')] 
     public $post_month;
     #[Rule('required', message: 'Sort id field is required')] 
     public $sort_id;
@@ -70,7 +68,7 @@ class CreateAdd extends Component
         if(!is_null($this->image_add)){
             $image =  $this->image_add;
             // Define folder path
-            $folder = '/imageadd';
+            $folder = '/image';
             $image_add = $this->uploadOne($image, $folder);
     
           } 
@@ -85,17 +83,16 @@ class CreateAdd extends Component
         $model->page_name = $this->page_name;
         $model->slug = createSlug($this->page_name);
         $model->location = $this->location;
-        $model->image = $imageadd['file_name'];
-        $model->thumbnail = $imageadd['thumbnail_name'];
-
-        $model->type = $this->type;
-        $model->image_add = $image_add['file_name'];
-        $model->link_add = $this->link_add;
+        $model->image = $imageadd['file_name'] ?? NUll;
+        $model->thumbnail = $imageadd['thumbnail_name'] ?? NUll;
+        $model->type = $this->type ?? Null;
+        $model->image_add = $image_add['file_name'] ?? NUll;
+        $model->link_add = $this->link_add ?? Null;
         $model->from_date = $this->from_date;
         $model->to_date = $this->to_date;
         $model->post_month = $this->post_month;
         $model->sort_id = $this->sort_id;
-        $model->status = $this->status;
+        $model->status = $this->status ;
         $model->ip_address =getUserIp();
         $model->login = authUserId();
     
@@ -107,14 +104,14 @@ class CreateAdd extends Component
     }
         public function  inactive($id){
             $findcat = Advertisment::find($id);
-            $findcat->status = "Inactive";
+            $findcat->status = "No";
             $findcat->save();
             $this->alert('info', 'Advertisment Inactive successfully!');
 
         }
         public function  active($id){
                 $findcat = Advertisment::find($id);
-                $findcat->status = "Active";
+                $findcat->status = "Yes";
                 $findcat->save();
                 $this->alert('success', 'Advertisment Active successfully!');
         }

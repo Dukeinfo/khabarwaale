@@ -8,6 +8,7 @@ use App\Livewire\Backend\Advertisment\CreateAdd;
 use App\Livewire\Backend\Advertisment\EditAdd;
 use App\Livewire\Backend\MenusMaster\CreateMenus;
 use App\Livewire\Backend\MenusMaster\EditMenus;
+use App\Livewire\Backend\News\CreateNews;
 use App\Livewire\Backend\Settings\AdminProfile;
 use App\Livewire\Backend\Settings\ContactMessages;
 use App\Livewire\Backend\Settings\ContactusEdit;
@@ -73,6 +74,9 @@ Route::get('/edit-add/{addid}', EditAdd::class)->name('admin.edit_add');
 
 Route::get('/create-videos', CreateVideos::class)->name('admin.create_videos');
 Route::get('/edit-videos/{vid_id}', EditVideos::class)->name('admin.edit_videos');
+
+Route::get('/create-news', CreateNews::class)->name('admin.create_news');
+
 
 
 

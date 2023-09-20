@@ -15,44 +15,39 @@ class CreateNewsPostsTable extends Migration
     {
         Schema::create('news_posts', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('category_id');
-            $table->bigInteger('subcategory_id')->nullable();
-            $table->bigInteger('user_id')->nullable();
-            $table->bigInteger('reporter_id')->nullable();
-            $table->bigInteger('role_id')->nullable();
             $table->enum('news_type' , ['English','Punjabi','Hindi','Urdu'])->nullable();
+            $table->bigInteger('category_id')->comment('Menu');
+            $table->bigInteger('subcategory_id')->comment('submenu')->nullable();
+            $table->bigInteger('user_id')->comment('admin,reporter')->nullable();
+            $table->bigInteger('role_id')->comment('reporter = 2')->nullable();
+            $table->bigInteger('reporter_id')->comment('user id')->nullable();
+            $table->string('old_parm')->comment('Old parameter')->nullable();
             $table->text('title')->nullable();
             $table->string('slug')->nullable();
-            $table->text('heading')->nullable();
-            $table->text('heading2')->nullable();
+            $table->longText('heading')->nullable();
+            $table->longText('heading2')->nullable();
             $table->string('image')->nullable();
             $table->string('thumbnail')->nullable();
             $table->string('caption')->nullable();
             $table->string('pdf_file')->nullable();
-       
             $table->longText('news_description')->nullable();
-            $table->text('tags')->nullable()->nullable();
-            $table->string('post_date')->nullable();
-            $table->string('post_month')->nullable();
-            $table->string('breaking_news')->nullable();
-            $table->string('slider_news')->nullable();
-            $table->string('flash_news')->nullable();
-            $table->string('trending_news')->nullable();
-            $table->string('top_story')->nullable();
-            $table->integer('latest_news')->nullable();
-            $table->string('gallery')->nullable();
-            $table->string('more_news')->nullable();
-            $table->string('send_notification')->nullable();
-            $table->text('meta_title')->nullable();
-            $table->text('meta_description')->nullable();
-            $table->text('meta_keywords')->nullable();
-      // Open Graph Fields
-            $table->text('og_title')->nullable();
-            $table->text('og_description')->nullable();
-            $table->string('og_image')->nullable();
-            $table->enum('status', ['Active', 'Inactive', 'Deleted'])->default('Active');
+            // checkbox
+            $table->string('slider', 255)->comment('Slider path')->nullable();
+            $table->string('breaking_top', 255)->comment('Breaking news top')->nullable();
+            $table->string('breaking_side', 255)->comment('Breaking news side')->nullable();
+            $table->string('top_stories', 200)->comment('Top stories')->nullable();
+            $table->string('gallery', 200)->comment('Gallery')->nullable();
+            $table->string('more', 200)->comment('More info')->nullable();
+            $table->string('send_noti', 255)->comment('Send notification')->nullable();
+            $table->text('metatags')->nullable();
+            $table->text('description')->nullable();
+            $table->text('keywords')->nullable();
+            $table->enum('status', ['Approved','Rejected','Pending'])->default('Active');
+            $table->longText('reject_reason')->nullable();
             $table->ipAddress('ip_address')->nullable();
             $table->bigInteger('login')->nullable();
+            $table->string('post_date')->comment('post_date')->nullable();
+            $table->string('post_month')->comment('post_date')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

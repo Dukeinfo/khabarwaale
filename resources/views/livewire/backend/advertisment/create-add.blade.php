@@ -42,7 +42,7 @@
                                                     <label for="page_name">Page Name</label>
                                                     <select name="page_name" wire:model="page_name" id="page_name"  class="form-control">
                                                      <option value="" >Select page</option>          
-                                                        @foreach(Route::getRoutes() as $route)
+                                                        {{-- @foreach(Route::getRoutes() as $route)
                                                              @if (str_starts_with($route->getName(), 'home.') )
                                                             @php
                                                                 $routeName   = ucwords(str_replace('home.','',$route->getName() )  )
@@ -51,7 +51,9 @@
                                                                 </option>
                
                                                             @endif
-                                                        @endforeach
+                                                        @endforeach --}}
+                                                        <option value="Home">Home</option>
+                                                        <option value="Others">Others</option>
                                                     </select>
                                                     @error('page_name') <span class="error">{{ $message }}</span> @enderror
                                                 
@@ -147,8 +149,8 @@
                                                     <label for="status">Status</label>
                                                     <select wire:model="status" class="form-select">
                                                         <option value="">Select</option>
-                                                        <option value="Active">Active</option>
-                                                        <option value="Inactive">Inactive </option>
+                                                        <option value="Yes">Active</option>
+                                                        <option value="No">Inactive </option>
                                                    </select>
                                                    @error('status') <span class="error">{{ $message }}</span> @enderror
         
@@ -193,7 +195,7 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header bg-transparent border-bottom py-3">
-                            <h4 class="card-title">Manage users</h4>
+                            <h4 class="card-title">Manage Add</h4>
                             <p class="card-title-desc mb-0">Manage the content by clicking on action accrodingly.</p>
                             <div class="col-md-3 float-end">
                                 <div class="form-group">
@@ -214,7 +216,7 @@
                                             <th>#</th>
                                         
                                             <th> image</th>
-                                            <th>Add image</th>
+                                            <th>Add Type</th>
                                             <th> Name </th>
                                             <th> location </th>
                                             <th>Status</th>    
@@ -233,15 +235,19 @@
                                             
                                             </td>
                                             <td>
+                                                @if($record->image_add)
                                                 <img src="{{ asset('storage/addpic/'. $record->image_add)}}" alt=".." class="img-size-50 img-circle img-bordered-sm" width="50">
-
+                                                
+                                                @else
+                                                <a href="{{$record->link_add?? '#'}}" target="_blank"> Link add</a>
+                                                @endif
                                             </td>
                                             <td>{{ ucwords(str_replace('home.','',$record->page_name)) ?? 'NA' }}</td>
                                   
                                             <td> {{$record->location ?? 'NA' }}</td>
 
                                             <td>
-                                                @if($record->status  == "Active")
+                                                @if($record->status  == "Yes")
                                                 <a href="javascript:void(0)" wire:click="inactive({{$record->id}})">
                                                     <span class="badge bg-success" > Active</span>
                                                 </a> 

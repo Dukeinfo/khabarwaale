@@ -28,7 +28,7 @@ class CreateAdvertismentsTable extends Migration
             $table->string('to_date')->nullable();
             $table->string('post_month')->nullable();
             $table->bigInteger('sort_id')->nullable(); 
-            $table->enum('status', ['Active', 'Inactive', 'Deleted'])->default('Active');
+            $table->enum('status', ['Yes', 'No'])->default('Yes');
             $table->ipAddress('ip_address')->nullable();
             $table->string('login')->nullable();
             $table->softDeletes();
