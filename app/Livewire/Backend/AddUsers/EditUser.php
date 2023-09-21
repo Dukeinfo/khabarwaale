@@ -6,6 +6,7 @@ use App\Models\AssigneMenu;
 use App\Models\Category;
 use App\Models\Role;
 use App\Models\User;
+use App\Models\WebsiteType;
 use Google\Service\ServiceControl\Auth;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
@@ -40,6 +41,8 @@ class EditUser extends Component
     public $userId;
     public $assigne_menu;
     public $edit_profile_photo_path;
+    public $website_type_id ;
+
     public function mount(User $userid){
 
         $this->userId =  $userid->id;
@@ -49,6 +52,7 @@ class EditUser extends Component
         }
         // // Check if $menusData is an array before assigning it
         $this->name =  $userid->name;
+        $this->website_type_id =  $userid->website_type_id;
         $this->role_id =  $userid->role_id ;
         $this->username = $userid->username ;
         $this->email = $userid->email ;
@@ -70,7 +74,9 @@ class EditUser extends Component
     {
         $getRoles =  Role::get();
         $getCategory=  Category::where('status' ,'Active')->get();
-        return view('livewire.backend.add-users.edit-user' ,['getCategory' => $getCategory,'getRoles' => $getRoles]);
+        $getwebsite_type =  WebsiteType::where('status' ,'Active')->get();
+
+        return view('livewire.backend.add-users.edit-user' ,['getwebsite_type'  => $getwebsite_type ,'getCategory' => $getCategory,'getRoles' => $getRoles]);
     }
 
     public function updateUsers(){
@@ -86,24 +92,28 @@ class EditUser extends Component
             
                 $filePath = $this->edit_profile_photo_path->storeAs('uploads', $fileName, 'public');
           
-                $userprofile = User::find($this->userId );
-                $userprofile->name = $this->name; 
-                $userprofile->role_id = $this->role_id ;
-                $userprofile->username = $this->username;
-                $userprofile->email = $this->email;
+                $profile = User::find($this->userId );
+                $profile->name = $this->name; 
+                $profile->website_type_id = $this->website_type_id; 
+
+                $profile->role_id = $this->role_id ;
+                $profile->username = $this->username;
+                $profile->email = $this->email;
                 // $createuser->password =  Hash::make($this->password);
-                $userprofile->name_hin = $this->name_hin;
-                $userprofile->name_pbi = $this->name_pbi;
-                $userprofile->name_urdu = $this->name_urdu;
-                $userprofile->about = $this->about;
-                $userprofile->mobile = $this->mobile;
-                $userprofile->address = $this->address;
-                $userprofile->profile_photo_path =  $filePath ?? Null;
-                $userprofile->status = $this->status;
-                $userprofile->save();
-            }
+                $profile->name_hin = $this->name_hin;
+                $profile->name_pbi = $this->name_pbi;
+                $profile->name_urdu = $this->name_urdu;
+                $profile->about = $this->about;
+                $profile->mobile = $this->mobile;
+                $profile->address = $this->address;
+                $profile->profile_photo_path =  $filePath ?? Null;
+                $profile->status = $this->status;
+                $profile->save();
+            }else{
+
             $updateuser = User::find($this->userId );
             $updateuser->name = $this->name; 
+            $updateuser->website_type_id = $this->website_type_id; 
             $updateuser->role_id = $this->role_id ;
             $updateuser->username = $this->username;
             $updateuser->email = $this->email;
@@ -114,9 +124,9 @@ class EditUser extends Component
             $updateuser->about = $this->about;
             $updateuser->mobile = $this->mobile;
             $updateuser->address = $this->address;
-            $updateuser->profile_photo_path = $filePath ?? Null;
             $updateuser->status = $this->status;
             $updateuser->save();
+        }
 
             $assignments = [];
             AssigneMenu::where('user_id' ,$this->userId)->delete();

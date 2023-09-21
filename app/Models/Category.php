@@ -11,4 +11,9 @@ class Category extends Model
     use HasFactory;
     protected $guarded = [];
     use SoftDeletes;
+
+    public function assigneMenus()
+    {
+        return $this->hasMany(AssigneMenu::class, 'category_id');
+    }
 }

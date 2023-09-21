@@ -1,5 +1,10 @@
 <div>
-    
+    {{-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script> --}}
+
     <div class="page-content">
         <div class="container-fluid">
 
@@ -24,6 +29,13 @@
 
             <div class="row">
                 <div class="col-lg-12">
+
+                    <select style="display:none;" id="multSelect">
+                        <option value="te_1" data-search="arsenal">Arsenal</option>
+                        <option value="te_3" data-search="Tottenham Hotspur Spurs">Spurs</option>
+                        <option value="te_3" data-search="Manchester City">Man City</option>
+                    
+                    </select>
                     <div class="card">
                         <div class="card-header bg-transparent border-bottom py-3">
                             <h4 class="card-title">Add Users</h4>
@@ -33,19 +45,26 @@
                             <!--success or error alert-->
                             <form wire:submit="CreateUsers"> <!-- Add a Livewire form -->
 
+                    
                                 <!-- First Row -->
                                 <div>
                                     <form wire:submit.prevent="CreateUsers">
                                         <div class="row">
-                                            
+                               
+
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label for="name">Name</label>
-                                                    <div class="">
-                                                        <strong>Select Language:</strong>
-                                                  
-                                                    </div>
+                                                    <label for="getwebsite_type">Wesite type </label>
+                                                   <select name="getwebsite_type" wire:model.live="website_type_id" id="getwebsite_type" class="form-control">
+                                                    <option value=""> Select type</option>
+                                                    @forelse ($getwebsite_type as $type )
+                                                        <option value="{{$type->id}}">{{$type->name}}</option>
+                                                    @empty
+                                                    @endforelse
+                                                   </select>
                                                 </div>
+                                                @error('website_type_id') <span class="error">{{ $message }}</span> @enderror
+
                                             </div>
                                       
                                             <div class="col-md-4">
@@ -293,7 +312,7 @@
                                             <td>Profile</td>
                                             <th> Name </th>
                                             <th> Email </th>
-                                            {{-- <th> Mobile</th> --}}
+                                            <th> Website</th>
                                             <th> Menus</th>
                                             <th>Status</th>    
                                             <th>Action</th>
@@ -310,13 +329,13 @@
                                             <td>{{$record->name ?? 'NA' }}</td>
                                   
                                             <td> {{$record->email ?? 'NA' }}</td>
-                                            <td> {{$record->mobile ?? 'NA' }} </td>
+                                            <td> {{$record->websiteType['name'] ?? 'NA' }} </td>
                                             <td>
                                                 @php
                                                     $assignedMenus = $record->assignedMenus;
                                                 @endphp
                                                 @forelse ($assignedMenus as $index => $assignedMenu)
-                                                    <span class="badge bg-dark" style="font-size: 16px;"> {{ $assignedMenu->getmenu->category_en ?? 'NA'  }}</span>
+                                                    <span class="badge bg-dark"> {{ $assignedMenu->getmenu->category_en ?? 'NA'  }}</span>
                                                     
                                                 @empty
                                                {{ 'NA'}}
@@ -336,9 +355,13 @@
 
                                            @endif
                                                 <td>   
+                                        
                                                 <a  href="javascript:void(0)" wire:click="edit({{$record->id}})" class="text-success me-2" title="Edit"  wire:target="edit({{ $record->id }})"  wire:loading.attr="disabled"><i class="fa fa-edit fa-fw"></i></a>
                                                 <a href="javascript:void(0)" class="text-danger me-2" title="Delete" wire:click="delete({{ $record->id }})" wire:target="delete({{ $record->id }})"  wire:loading.attr="disabled"><i class="fa fa-times fa-fw fa-lg"></i></a>
                                             </td>
+
+
+
                                         </tr>
                                         @endif
                                          @empty

@@ -36,6 +36,21 @@
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
+                                                    <label for="getwebsite_type">Wesite type </label>
+                                                   <select name="getwebsite_type" wire:model.live="website_type_id" id="getwebsite_type" class="form-control">
+                                                    <option value=""> Select type</option>
+                                                    @forelse ($getwebsite_type as $type )
+                                                        <option value="{{$type->id}}">{{$type->name}}</option>
+                                                    @empty
+                                                    @endforelse
+                                                   </select>
+                                                </div>
+                                                @error('website_type_id') <span class="error">{{ $message }}</span> @enderror
+
+                                            </div>
+                                            
+                                            <div class="col-md-4">
+                                                <div class="form-group">
                                                     <label for="name">Name</label>
                                                     <input wire:model.live="name" type="text" placeholder="Name" class="form-control" id="name">
                                                     @error('name') <span class="error">{{ $message }}</span> @enderror

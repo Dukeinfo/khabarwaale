@@ -42,7 +42,7 @@ class CreateNewsPostsTable extends Migration
             $table->text('metatags')->nullable();
             $table->text('description')->nullable();
             $table->text('keywords')->nullable();
-            $table->enum('status', ['Approved','Rejected','Pending'])->default('Active');
+            $table->enum('status', ['Approved','Rejected','Pending'])->default('Approved');
             $table->longText('reject_reason')->nullable();
             $table->ipAddress('ip_address')->nullable();
             $table->bigInteger('login')->nullable();

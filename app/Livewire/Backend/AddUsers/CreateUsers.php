@@ -7,6 +7,7 @@ use App\Models\AssigneMenu;
 use App\Models\Category;
 use App\Models\Role;
 use App\Models\User;
+use App\Models\WebsiteType;
 use Illuminate\Support\Facades\Hash;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Attributes\Rule;
@@ -42,7 +43,7 @@ use LivewireAlert;
     public $current_team_id;
     public $profile_photo_path;
     public $status;
-
+    public $website_type_id ;
     #[Url(as: 'q')]
     public $search = '';
     protected $queryString = ['search'];
@@ -55,7 +56,9 @@ use LivewireAlert;
                 ->get();
              $getRoles =  Role::get();
              $getCategory=  Category::where('status' ,'Active')->get();
-        return view('livewire.backend.add-users.create-users' ,['getCategory' => $getCategory,'getRoles' => $getRoles,'records' =>$records]);
+             $getwebsite_type =  WebsiteType::where('status' ,'Active')->get();
+
+        return view('livewire.backend.add-users.create-users' ,['getwebsite_type' =>$getwebsite_type,'getCategory' => $getCategory,'getRoles' => $getRoles,'records' =>$records]);
     }
 
 
@@ -65,6 +68,7 @@ use LivewireAlert;
 
         }
         $this->validate([
+            'website_type_id' => 'required',
             'name' => 'required|string|max:255',
             'role_id' => 'required|integer', // Assuming role_id is numeric
             'username' => 'required|string|max:255|unique:users',
@@ -97,6 +101,7 @@ use LivewireAlert;
             //  $menusJson = json_encode($this->menus);
             $createuser =new User();            
             $createuser->name = $this->name; 
+            $createuser->website_type_id = $this->website_type_id; 
             $createuser->role_id = $this->role_id ;
             $createuser->username = $this->username;
             $createuser->email = $this->email;

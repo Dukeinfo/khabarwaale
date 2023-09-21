@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->bigInteger('role_id')->nullable();
+            $table->bigInteger('website_type_id')->nullable();            
             $table->string('username')->nullable();
             $table->string('email')->unique();
             $table->string('password');

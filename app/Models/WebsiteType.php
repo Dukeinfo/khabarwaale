@@ -9,5 +9,9 @@ class WebsiteType extends Model
 {
     use HasFactory;
     protected $guarded = [];
-
+    
+    public function users()
+    {
+        return $this->hasMany(User::class, 'website_type_id');
+    }
 }

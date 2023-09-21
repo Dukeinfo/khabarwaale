@@ -31,7 +31,231 @@
                         </div>
                         <div class="card-body">
                          
-                   
+                            <div class="row">
+                                    <div class="col-md-4 mb-3">
+                                        <!-- News Type -->
+                                        <div class="form-group">
+                                            <label for="news_type">News Type</label>
+
+                                            <select name="news_type" wire:model.live="news_type" id="news_type" class="form-control">
+                                                <option value=""> Select type</option>
+                                                @forelse ($getwebsite_type as $type )
+                                                    <option value="{{$type->id}}">{{$type->name}}</option>
+                                                @empty
+                                                @endforelse
+                                               </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <!-- Category ID -->
+                                        <div class="form-group">
+                                            <label for="category_id">Category ID</label>
+                                            <select name="category_id" wire:model.live="category_id" id="category_id" class="form-control">
+                                                <option value=""> Select type</option>
+                                                @forelse ($getCategory as $category )
+                                                    <option value="{{$category->id}}">{{$category->category_en}}</option>
+                                                @empty
+                                                @endforelse
+                                               </select>
+                                        </div>
+                                    </div>
+                            
+
+                                    <div class="col-md-4 mb-3">
+
+                                        <!-- User ID -->
+                                        <div class="form-group">
+                                            <label for="user_id">User ID</label>
+                                            <input type="text" class="form-control" wire:model="user_id" id="user_id">
+                                        </div>
+                                    </div>
+                        
+                         
+                            
+                                    <div class="col-md-6 mb-6">
+                            
+                              
+                                        <!-- Title -->
+                                        <div class="form-group">
+                                            <label for="title">Title</label>
+                                            <input type="text" class="form-control" wire:model="title" id="title">
+                                        </div>
+                                    </div>
+                         
+
+                                    <div class="col-md-6 mb-6">
+
+                                        <!-- Heading -->
+                                        <div class="form-group">
+                                            <label for="heading">Heading</label>
+                                            <input type="text" class="form-control" wire:model="heading" id="heading">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+
+                                        <!-- Heading2 -->
+                                        <div class="form-group">
+                                            <label for="heading2">Heading2</label>
+                                            <input type="text" class="form-control" wire:model="heading2" id="heading2">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+
+                                        <!-- Image -->
+                                        <div class="form-group">
+                                            <label for="image">Image</label>
+                                            <input type="file" class="form-control" wire:model="image" id="image">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+
+                    
+                                        <!-- Caption -->
+                                        <div class="form-group">
+                                            <label for="caption">Caption</label>
+                                            <input type="text" class="form-control" wire:model="caption" id="caption">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+
+                                        <!-- PDF File -->
+                                        <div class="form-group">
+                                            <label for="pdf_file">PDF File</label>
+                                            <input type="file" class="form-control" wire:model="pdf_file" id="pdf_file">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 mb-3">
+
+                                        <!-- News Description -->
+                                        <div class="form-group">
+                                            <label for="news_description">News Description</label>
+                                            <textarea class="form-control border border-dark" wire:model="news_description" id="news_description"></textarea>
+                                        </div>
+                            
+                                        <!-- Checkbox -->
+                                
+                                    </div>
+                         
+                               <!-- Slider -->
+
+            <div class="col-md-4 mb-3">
+                    <div class="form-check ">
+                        <input class="form-check-input border border-dark"  type="checkbox" wire:model="slider" id="slider">
+                        <label class="form-check-label" for="slider">Slider</label>
+                    </div>
+
+                    <!-- Breaking Top -->
+                    <div class="form-check">
+                        <input class="form-check-input border border-dark" type="checkbox" wire:model="breaking_top" id="breaking_top">
+                        <label class="form-check-label" for="breaking_top">Breaking Top</label>
+                    </div>
+
+                    <!-- Breaking Side -->
+                    <div class="form-check">
+                        <input class="form-check-input border border-dark" type="checkbox" wire:model="breaking_side" id="breaking_side">
+                        <label class="form-check-label" for="breaking_side">Breaking Side</label>
+                    </div>
+
+                    <!-- Top Stories -->
+                    <div class="form-check">
+                        <input class="form-check-input border border-dark" type="checkbox" wire:model="top_stories" id="top_stories">
+                        <label class="form-check-label" for="top_stories">Top Stories</label>
+                    </div>
+        </div>
+   
+            <div class="col-md-4 mb-3">
+                  <!-- Gallery -->
+                  <div class="form-check">
+                    <input class="form-check-input border border-dark" type="checkbox" wire:model="gallery" id="gallery">
+                    <label class="form-check-label" for="gallery">Gallery</label>
+                </div>
+    
+                <!-- More -->
+                <div class="form-check">
+                    <input class="form-check-input border border-dark" type="checkbox" wire:model="more" id="more">
+                    <label class="form-check-label" for="more">More</label>
+                </div>
+    
+                <!-- Send Notification -->
+                <div class="form-check">
+                    <input class="form-check-input border border-dark" type="checkbox" wire:model="send_noti" id="send_noti">
+                    <label class="form-check-label" for="send_noti">Send Notification</label>
+                </div>
+        </div>
+       
+
+        <div class="col-md-6">
+            <!-- ... (previous input fields) -->
+            
+            <!-- Metatags -->
+            <div class="form-group">
+                <label for="metatags">Metatags</label>
+                <textarea class="form-control border border-dark"  wire:model="metatags" id="metatags" rows="3"></textarea>
+            </div>
+        </div>
+        <div class="col-md-6">
+
+            <!-- Description -->
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea class="form-control border border-dark" wire:model="description" id="description" rows="3"></textarea>
+            </div>
+        </div>
+        <div class="col-md-6">
+
+            <!-- Keywords -->
+            <div class="form-group">
+                <label for="keywords">Keywords</label>
+                <textarea class="form-control border border-dark" wire:model="keywords" id="keywords" rows="3"></textarea>
+            </div>
+        </div>
+            <!-- Status -->
+ 
+ 
+
+        <div class="col-md-6">
+            <!-- ... (previous input fields) -->
+            
+            <!-- Reject Reason -->
+            <div class="form-group">
+                <label for="reject_reason">Reject Reason</label>
+                <textarea class="form-control border border-dark"  wire:model="reject_reason" id="reject_reason" rows="3"></textarea>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            
+            
+            <!-- Post Date -->
+            <div class="form-group">
+                <label for="post_date">Post Date</label>
+                <input type="date" class="form-control" wire:model="post_date" id="post_date">
+            </div>
+        </div>
+        <div class="col-md-4">
+
+            <!-- Post Month -->
+            <div class="form-group">
+                <label for="post_month">Post Month</label>
+                <input type="date" class="form-control" wire:model="post_month" id="post_month">
+            </div>
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="form-group">
+                <label for="status">Status</label>
+                <select wire:model="status" class="form-select">
+                    <option value="">Select</option>
+                    <option value="Approved">Approved</option>
+                    <option value="Rejected">Rejected</option>
+                    <option value="Pending">Pending</option>
+               </select>
+               @error('status') <span class="error">{{ $message }}</span> @enderror
+
+            </div>
+        </div>
+
                      
                         </div>
                     </div>
