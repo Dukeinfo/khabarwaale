@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminLogoutController;
+use App\Http\Controllers\CkImageUploadController;
 use App\Livewire\Backend\AddUsers\CreateUsers;
 use App\Livewire\Backend\AddUsers\EditUser;
 use App\Livewire\Backend\AdminDashboard;
@@ -54,6 +55,7 @@ Route::middleware([
 
 Route::group(['middleware' => 'auth'],function(){
     Route::prefix('admin')->group(function(){
+        Route::post('ckeditor/image_upload', [CkImageUploadController::class, 'upload'])->name('image.upload');
 
 Route::get('/dashboard', AdminDashboard::class)->name('admin_dashboard');
 Route::get('/profile', AdminProfile::class)->name('admin_profile');

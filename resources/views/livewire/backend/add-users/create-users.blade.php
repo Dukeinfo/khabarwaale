@@ -43,15 +43,10 @@
                         </div>
                         <div class="card-body">
                             <!--success or error alert-->
-                            <form wire:submit="CreateUsers"> <!-- Add a Livewire form -->
-
-                    
-                                <!-- First Row -->
-                                <div>
+                   
+                  
                                     <form wire:submit.prevent="CreateUsers">
                                         <div class="row">
-                               
-
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="getwebsite_type">Wesite type </label>
@@ -267,16 +262,8 @@
                                             </div>
                                         </div>
                                     </form>
-                                </div>
-                                
                     
-                                <!-- Third Row -->
-                          
-                    
-                                <!-- Fourth Row -->
-                     
-                    
-                            </form>  
+                       
                             
                             <!--form starts-->
                      

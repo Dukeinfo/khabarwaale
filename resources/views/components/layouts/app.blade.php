@@ -13,7 +13,7 @@
         <!-- App favicon -->
             <!-- CK editor -->
             {{-- <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script> --}}
-       	<script src="https://cdn.ckeditor.com/4.6.2/standard-all/ckeditor.js"></script>
+       
         <link rel="shortcut icon" href="{{asset('admin_assets/images/faviconn.ico')}}">
 
         <!-- Bootstrap Css -->
