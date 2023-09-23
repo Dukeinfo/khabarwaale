@@ -19,7 +19,201 @@
                 </div>
             </div>
             <!-- end page title -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header bg-transparent border-bottom py-3">
+                            <h4 class="card-title">Manage News</h4>
+                            <p class="card-title-desc mb-0">Manage the content by clicking on action accrodingly.</p>
+                            <div class="col-md-3 float-end">
+                                <div class="form-group">
+                                    <div class="mb-3">
+                                        <label class="form-label">Search</label>
+                                        <input type="search" class="form-control"  wire:model.live="search" placeholder="Search...">
+                                         @error('Search') <span class="error">{{ $message }}</span> @enderror
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped datatable-- table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>image</th>
+                                            <th>Add Type</th>
+                                            <th>Category </th>
+                                            <th>User Name </th>
+                                            <th>Status</th>    
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                                      
+                                         @forelse ( $records as $key => $record )
+                                         @if($record->role_id != 1)
+                                         <tr>
+                                            <td> {{ $key+1}}</td>
+                                            <td> 
+                                                <img src="{{ isset($record->thumbnail) ? getThumbnail($record->thumbnail) : asset('no_image.jpg')}}" alt=".." class="img-size-50  img-bordered-sm rounded-circle" width="50">
+                                            </td>
 
+                                            <td>{{ ucwords($record->newstype['name']) ?? 'NA' }}</td>
+                                  
+                                            <td>
+                                                <span class="badge bg-dark p-1"> {{ $record->getmenu['category_en'] ?? 'NA'  }}</span>
+                                            
+                                            </td>
+                                            <td> {{$record->user['name'] ?? 'NA' }}</td>
+
+
+                                            <td>
+                                                @if($record->status  == "Approved")
+                                                <a href="javascript:void(0)" wire:click="rejected({{$record->id}})">
+                                                    <span class="badge bg-success" > Approved</span>
+                                                </a> 
+                                            @elseif($record->status  == "Rejected")
+                                            <a href="javascript:void(0)" wire:click="approved({{$record->id}})">
+                                                <span class="badge bg-danger" >Rejected   </span>
+                                            </a> 
+                                            @else
+                                                <a href="javascript:void(0)" wire:click="pending({{$record->id}})">
+                                                    <span class="badge bg-warning" >  Pending </span>
+                                                </a> 
+                                            </td>
+
+                                           @endif
+                                                <td>   
+                                                    <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal{{$record->id}}">
+                                                        <i class="fa fa-eye fa-fw"></i></button>
+                                                    <button class="btn btn-sm btn-primary" wire:click="edit({{$record->id}})" wire:target="edit({{ $record->id }})"  wire:loading.attr="disabled">
+                                                        <i class="fa fa-edit fa-fw" ></i></button>
+                                                    <button class="btn btn-sm btn-danger" wire:click="delete({{ $record->id }})" wire:target="delete({{ $record->id }})"  wire:loading.attr="disabled">
+                                                        <i class="fa fa-times fa-fw fa-lg"></i></button>
+                        
+                                                {{-- <a  href="javascript:void(0)" wire:click="edit({{$record->id}})" class="text-success me-2" title="Edit"  ><i class="fa fa-edit fa-fw"></i></a> --}}
+                                                {{-- <a href="javascript:void(0)" class="text-danger me-2" title="Delete" ><i class="fa fa-times fa-fw fa-lg"></i></a> --}}
+                                            </td>
+                                        </tr>
+                                    <!-- Button trigger modal -->
+
+  
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="exampleModal{{$record->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">News Detail</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <h4> <span class="text-success "> User Name: </span>
+                                                        <span class="text-primary "> {{$record->user['name'] ?? 'NA' }} </span>
+                                                    </h4>
+                                                    <h4> <span class="text-success ">Category (Menu): </span>
+                                                        <span class="badge bg-dark p-1"> {{ $record->getmenu['category_en'] ?? 'NA'  }}</span>
+                                                   </h4>
+                                                 
+                                                    <h4> <span class="text-success">News Title :</span> </h4>
+                                                     <p> {{ ucwords($record->title) ?? 'NA' }}  </p>
+
+                                                    <h4> <span class="text-success">News Heading :</span> </h4>
+                                                     <p> {{ ucwords($record->heading) ?? 'NA' }}  </p> 
+                        
+
+                                                     <h4> <span class="text-success">News Description :</span> </h4>
+                                                      <p> {{ ucwords($record->news_description) ?? 'NA' }}  </p> 
+                                                    <h4> <span class="text-success">News Type :</span>
+                                                        {{ ucwords($record->newstype['name']) ?? 'NA' }}
+                                                    </h4>
+                                                
+                                              
+                                                <div class="row">
+                                                    <div class="col-md-2">
+                                                        <h6> <span class="text-success"> Slider  :</span> </h6>
+                                                        <p> {{ ucwords($record->slider) ?? 'NA' }}  </p> 
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <h6> <span class="text-success"> Breaking top  :</span> </h6>
+                                                        <p> {{ ucwords($record->breaking_top) ?? 'NA' }}  </p> 
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <h6> <span class="text-success"> Breaking side  :</span> </h6>
+                                                        <p> {{ ucwords($record->breaking_side) ?? 'NA' }}  </p> 
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <h6> <span class="text-success"> Top stories  :</span> </h6>
+                                                        <p> {{ ucwords($record->top_stories) ?? 'NA' }}  </p> 
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <h6> <span class="text-success">  Gallery  :</span> </h6>
+                                                        <p> {{ ucwords($record->gallery) ?? 'NA' }}  </p> 
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <h6> <span class="text-success"> More  :</span> </h6>
+                                                        <p> {{ ucwords($record->more) ?? 'NA' }}  </p> 
+                                                    </div>
+                                                </div>
+                                                </div>
+
+                                            </div>
+                                            </div>
+                                        </div>
+                                        @endif
+                                         @empty
+                                            <tr  class="text-center ">
+                                                <td colspan="7" class="text-danger fw-bold"> Record Not Found</td>                                           
+                                            </tr>
+                             
+                                             @endforelse 
+
+        {{-- ========================= trash data =========================== --}}
+     
+                                             @if(isset($trashdata) & count($trashdata) > 0 )
+                                             <tr> <th colspan="7">
+                                                <h3>  Trash data </h3>
+                                                 </th></tr>
+                                             @forelse ($trashdata  as $keys => $trash )
+                                             <tr>
+                                                <td> {{  $trash->id}}</td>
+
+                                                
+                                                <td> 
+                                                    <img src="{{ isset($trash->thumbnail) ? getThumbnail($trash->thumbnail) : asset('no_image.jpg')}}" alt=".." class="img-size-50  img-bordered-sm rounded-circle" width="50">
+                                                </td>
+    
+                                                <td>{{ ucwords($trash->newstype['name']) ?? 'NA' }}</td>
+                                      
+                                                <td>
+                                                    <span class="badge bg-dark p-1"> {{ $trash->getmenu['category_en'] ?? 'NA'  }}</span>
+                                                
+                                                </td>
+                                                <td> {{$trash->user['name'] ?? 'NA' }}</td>
+    
+    
+                                      
+    
+                                                    <td colspan="2" class="text-center">   
+                                            
+                                                        <button class="btn btn-sm btn-danger" wire:click="restore({{ $trash->id }})" wire:target="restore({{ $trash->id }})"  wire:loading.attr="disabled">
+                                                            Restore</button>
+                            
+                                                    {{-- <a  href="javascript:void(0)" wire:click="edit({{$record->id}})" class="text-success me-2" title="Edit"  ><i class="fa fa-edit fa-fw"></i></a> --}}
+                                                    {{-- <a href="javascript:void(0)" class="text-danger me-2" title="Delete" ><i class="fa fa-times fa-fw fa-lg"></i></a> --}}
+                                                </td>
+                                            </tr>
+                                             @empty
+                                                 
+                                             @endforelse
+                                             @endif
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                     </div>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-lg-12">
                     <div class="card">
@@ -28,6 +222,18 @@
                             <p class="card-title-desc mb-0">Fill out the particulars in order to add or update.</p>
                         </div>
                         <div class="card-body">
+                            {{-- @if($errors->any())
+                            @foreach ($errors->all() as $error)
+                            <div class="row">                     
+                                <div class="col-lg-12">
+                                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                            <div>{{$error}}</div>
+                                          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                </div>
+                            </div>
+                            @endforeach
+                            @endif --}}
                          <form  wire:submit.prevent="createNews">
                             <div class="row">
                                     <div class="col-md-4 mb-3">
@@ -68,6 +274,7 @@
                                         <div class="form-group">
                                             <label for="user_id">User </label>
                                             <select name="user_id" wire:model.live="user_id" id="user_id" class="form-control">
+                                                <option value=""> Select User</option>
 
                                             @forelse ($gerUsers as $user )
                                             <option value="{{ $user->id }}">{{ $user->name }}</option>
@@ -155,21 +362,21 @@
                                     <!-- Slider -->
                                     <div class="col-md-4 mb-3">
                                             <div class="form-check ">
-                                                <input class="form-check-input border border-dark"  type="checkbox" wire:model="slider" id="slider">
+                                                <input wire:model="slider" value="Show" class="form-check-input border border-dark"  type="checkbox"  id="slider">
                                                 <label class="form-check-label" for="slider">Slider</label>
                                                 @error('slider') <span class="error">{{ $message }}</span> @enderror
                                             </div>
 
                                             <!-- Breaking Top -->
                                             <div class="form-check">
-                                                <input class="form-check-input border border-dark" type="checkbox" wire:model="breaking_top" id="breaking_top">
+                                                <input class="form-check-input border border-dark" type="checkbox" wire:model="breaking_top"  value="Show" id="breaking_top">
                                                 <label class="form-check-label" for="breaking_top">Breaking Top</label>
                                                 @error('breaking_top') <span class="error">{{ $message }}</span> @enderror
                                             </div>
 
                                             <!-- Breaking Side -->
                                             <div class="form-check">
-                                                <input class="form-check-input border border-dark" type="checkbox" wire:model="breaking_side" id="breaking_side">
+                                                <input class="form-check-input border border-dark" type="checkbox" wire:model="breaking_side value="Show"" id="breaking_side">
                                                 <label class="form-check-label" for="breaking_side">Breaking Side</label>
                                                 @error('breaking_side') <span class="error">{{ $message }}</span> @enderror
 
@@ -177,7 +384,7 @@
 
                                             <!-- Top Stories -->
                                             <div class="form-check">
-                                                <input class="form-check-input border border-dark" type="checkbox" wire:model="top_stories" id="top_stories">
+                                                <input class="form-check-input border border-dark" type="checkbox" wire:model="top_stories" value="Show" id="top_stories">
                                                 <label class="form-check-label" for="top_stories">Top Stories</label>
                                                 @error('top_stories') <span class="error">{{ $message }}</span> @enderror
                                             </div>
@@ -186,21 +393,21 @@
                                     <div class="col-md-4 mb-3">
                                         <!-- Gallery -->
                                         <div class="form-check">
-                                            <input class="form-check-input border border-dark" type="checkbox" wire:model="gallery" id="gallery">
+                                            <input class="form-check-input border border-dark" type="checkbox" wire:model="gallery" value="Show" id="gallery">
                                             <label class="form-check-label" for="gallery">Gallery</label>
                                             @error('gallery') <span class="error">{{ $message }}</span> @enderror
                                         </div>
                             
                                         <!-- More -->
                                         <div class="form-check">
-                                            <input class="form-check-input border border-dark" type="checkbox" wire:model="more" id="more">
+                                            <input class="form-check-input border border-dark" type="checkbox" wire:model="more" value="Show" id="more">
                                             <label class="form-check-label" for="more">More</label>
                                             @error('more') <span class="error">{{ $message }}</span> @enderror
                                         </div>
                             
                                         <!-- Send Notification -->
                                         <div class="form-check">
-                                            <input class="form-check-input border border-dark" type="checkbox" wire:model="send_noti" id="send_noti">
+                                            <input class="form-check-input border border-dark" type="checkbox" wire:model="send_noti" value="Show" id="send_noti">
                                             <label class="form-check-label" for="send_noti">Send Notification</label>
                                             @error('send_noti') <span class="error">{{ $message }}</span> @enderror
                                         </div>
@@ -291,86 +498,7 @@
             </div>
             <!-- end row -->
             
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="card">
-                        <div class="card-header bg-transparent border-bottom py-3">
-                            <h4 class="card-title">Manage News</h4>
-                            <p class="card-title-desc mb-0">Manage the content by clicking on action accrodingly.</p>
-                            <div class="col-md-3 float-end">
-                                <div class="form-group">
-                                    <div class="mb-3">
-                                        <label class="form-label">Search</label>
-                                        <input type="search" class="form-control"  wire:model.live="search" placeholder="Search...">
-                                         @error('Search') <span class="error">{{ $message }}</span> @enderror
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-striped datatable--">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>image</th>
-                                            <th>Add Type</th>
-                                            <th>Name </th>
-                                            <th>location </th>
-                                            <th>Status</th>    
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                                      
-                                         @forelse ( $records as $key => $record )
-                                         @if($record->role_id != 1)
-                                         <tr>
-                                            <td> {{ $key+1}}</td>
-                                            <td> 
-                                                <img src="{{getThumbnail($record->thumbnail) ?? ''}}" alt=".." class="img-size-50 img-circle img-bordered-sm" width="50">
-                                            </td>
-                                            <td>
-                                                @if($record->image_add)
-                                                <img src="{{ asset('storage/addpic/'. $record->image_add)}}" alt=".." class="img-size-50 img-circle img-bordered-sm" width="50">
-                                                @else
-                                                    <a href="{{$record->link_add?? '#'}}" target="_blank"> Link add</a>
-                                                @endif
-                                            </td>
-                                            <td>{{ ucwords(str_replace('home.','',$record->page_name)) ?? 'NA' }}</td>
-                                  
-                                            <td> {{$record->location ?? 'NA' }}</td>
-
-                                            <td>
-                                                @if($record->status  == "Yes")
-                                                <a href="javascript:void(0)" wire:click="inactive({{$record->id}})">
-                                                    <span class="badge bg-success" > Active</span>
-                                                </a> 
-                                            @else
-                                                <a href="javascript:void(0)" wire:click="active({{$record->id}})">
-                                                    <span class="badge bg-danger" >  Inactive </span>
-                                                </a> 
-                                            </td>
-
-                                           @endif
-                                                <td>   
-                                                <a  href="javascript:void(0)" wire:click="edit({{$record->id}})" class="text-success me-2" title="Edit"  wire:target="edit({{ $record->id }})"  wire:loading.attr="disabled"><i class="fa fa-edit fa-fw"></i></a>
-                                                <a href="javascript:void(0)" class="text-danger me-2" title="Delete" wire:click="delete({{ $record->id }})" wire:target="delete({{ $record->id }})"  wire:loading.attr="disabled"><i class="fa fa-times fa-fw fa-lg"></i></a>
-                                            </td>
-                                        </tr>
-                                        @endif
-                                         @empty
-                                            <tr>
-                                                <td colspan="4"> Record Not Found</td>                                           
-                                            </tr>
-                                             @endforelse 
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      
             <!-- end row -->
 
 

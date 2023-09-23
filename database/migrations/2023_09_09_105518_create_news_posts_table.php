@@ -15,7 +15,7 @@ class CreateNewsPostsTable extends Migration
     {
         Schema::create('news_posts', function (Blueprint $table) {
             $table->id();
-            $table->enum('news_type' , ['English','Punjabi','Hindi','Urdu'])->nullable();
+            $table->bigInteger('news_type')->nullable();
             $table->bigInteger('category_id')->comment('Menu');
             $table->bigInteger('subcategory_id')->comment('submenu')->nullable();
             $table->bigInteger('user_id')->comment('admin,reporter')->nullable();
