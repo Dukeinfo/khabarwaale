@@ -11,7 +11,7 @@
         <meta content="Pinegrove School, Subathu" name="keywords" />
         <meta content="Pinegrove School, Subathu" name="author" />
         <!-- App favicon -->
-            <!-- CK editor -->
+            <!-- CK editor cnd link-->
             {{-- <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script> --}}
        
         <link rel="shortcut icon" href="{{asset('admin_assets/images/faviconn.ico')}}">
