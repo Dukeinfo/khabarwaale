@@ -86,6 +86,7 @@ class CreateNews extends Component
     }
 
     public function createNews(){
+        dd( $this->news_description );
         $this->validate();
         if(!is_null($this->image)){
             $image =  $this->image;

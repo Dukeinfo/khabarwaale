@@ -1,7 +1,12 @@
 <div>
+    @push('ckscripts')
+
+    <script src="https://cdn.ckeditor.com/4.6.2/standard-all/ckeditor.js"></script>
+
+    @endpush
     <div class="page-content">
         <div class="container-fluid">
-            <script src="https://cdn.ckeditor.com/4.6.2/standard-all/ckeditor.js"></script>
+        
 
             <!-- start page title -->
             <div class="row">
@@ -349,16 +354,40 @@
                                             <label class="form-label"> News Description</label>
                                           
                                  
-                                            <div >
-                                                <textarea id="editor" wire:model="news_description" placeholder="Description of Event" class="form-control "></textarea>
-                                           
-       
-                                               </div>
+
+                                            <div wire:ignore>
+                                                  <textarea id="editor" wire:model="news_description" placeholder="Description of Event" class="form-control xtra-cat"></textarea>
+                                             </div>
+                               
                      
-                                                 @error('news_description') <span class="error">{{ $message }}</span> @enderror
-                                         
-                                        </div>
+                                             
+                                             @error('news_description') <span class="error">{{ $message }}</span> @enderror
+                                            </div>
                                     </div>
+                                    <script>
+                                        
+                                            // CKEDITOR.replace('editor'); 
+                                            const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');        
+                                            CKEDITOR.replace('editor', {
+                                                    // filebrowserUploadUrl: '{{ route("image.upload") }}', // Set the image upload endpoint URL
+                                                    filebrowserUploadUrl: "{{route('image.upload', ['_token' => csrf_token() ])}}",
+                                                    filebrowserUploadMethod: 'form', // Use form-based file upload (default is XMLHttpRequest)
+                                                    filebrowserBrowseUrl: '/ckfinder/ckfinder.html', // Set the CKFinder browse server URL
+                                                    filebrowserImageBrowseUrl: '/ckfinder/ckfinder.html?type=Images', // Set the CKFinder image browse server URL
+                                                    headers: {
+                                                        'X-CSRF-TOKEN': csrfToken // Pass the CSRF token with the request headers
+                                                    },
+                                                    
+                                                });
+                                                    
+                                                CKEDITOR.instances.editor.on('change', function () {
+                                                    @this.set('news_description', CKEDITOR.instances.editor.getData());
+                                                });
+                                                // Livewire.on('formSubmitted', function () {
+                                                                CKEDITOR.instances.editor.setData(''); // Reset CKEditor content
+                                                    // });
+                                           
+                                    </script>
                                     <!-- Slider -->
                                     <div class="col-md-4 mb-3">
                                             <div class="form-check ">
