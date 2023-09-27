@@ -2,4 +2,4 @@
 deployment:
  tasks:
  - export DEPLOYPATH=/home/juriskart/public_html/boldapunjab/
- - /bin/cp -a * $DEPLOYPATH #copy all from root
+ - /bin/cp -a * $DEPLOYPATH 
