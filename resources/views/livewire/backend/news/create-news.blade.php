@@ -1,9 +1,5 @@
 <div>
-    @push('ckscripts')
 
-    <script src="https://cdn.ckeditor.com/4.6.2/standard-all/ckeditor.js"></script>
-
-    @endpush
     <div class="page-content">
         <div class="container-fluid">
         
@@ -39,8 +35,10 @@
                                     </div>
                                 </div>
                             </div>
+              
                         </div>
                         <div class="card-body">
+                            <span class="badge bg-success p-2  fs-4">Total news : {{ $totalrecords ?? '0'}} </span>
                             <div class="table-responsive">
                                 <table class="table table-bordered table-striped datatable-- table-hover">
                                     <thead>
@@ -59,7 +57,10 @@
                                          @forelse ( $records as $key => $record )
                                          @if($record->role_id != 1)
                                          <tr>
-                                            <td> {{ $key+1}}</td>
+                                            <td> 
+                                                {{-- $records->firstitem()+$loop->index ?? --}}
+                                                {{ $key+1}} 
+                                            </td>
                                             <td> 
                                                 <img src="{{ isset($record->thumbnail) ? getThumbnail($record->thumbnail) : asset('no_image.jpg')}}" alt=".." class="img-size-50  img-bordered-sm rounded-circle" width="50">
                                             </td>
@@ -105,66 +106,10 @@
 
   
                                         <!-- Modal -->
-                                        <div class="modal fade" id="exampleModal{{$record->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog modal-lg">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                <h1 class="modal-title fs-5" id="exampleModalLabel">News Detail</h1>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <h4> <span class="text-success "> User Name: </span>
-                                                        <span class="text-primary "> {{$record->user['name'] ?? 'NA' }} </span>
-                                                    </h4>
-                                                    <h4> <span class="text-success ">Category (Menu): </span>
-                                                        <span class="badge bg-dark p-1"> {{ $record->getmenu['category_en'] ?? 'NA'  }}</span>
-                                                   </h4>
-                                                 
-                                                    <h4> <span class="text-success">News Title :</span> </h4>
-                                                     <p> {{ ucwords($record->title) ?? 'NA' }}  </p>
 
-                                                    <h4> <span class="text-success">News Heading :</span> </h4>
-                                                     <p> {{ ucwords($record->heading) ?? 'NA' }}  </p> 
-                        
+                                        @include('livewire.backend.news.model')
+                                        <!-- Modal -->
 
-                                                     <h4> <span class="text-success">News Description :</span> </h4>
-                                                      <p> {{ ucwords($record->news_description) ?? 'NA' }}  </p> 
-                                                    <h4> <span class="text-success">News Type :</span>
-                                                        {{ ucwords($record->newstype['name']) ?? 'NA' }}
-                                                    </h4>
-                                                
-                                              
-                                                <div class="row">
-                                                    <div class="col-md-2">
-                                                        <h6> <span class="text-success"> Slider  :</span> </h6>
-                                                        <p> {{ ucwords($record->slider) ?? 'NA' }}  </p> 
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        <h6> <span class="text-success"> Breaking top  :</span> </h6>
-                                                        <p> {{ ucwords($record->breaking_top) ?? 'NA' }}  </p> 
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        <h6> <span class="text-success"> Breaking side  :</span> </h6>
-                                                        <p> {{ ucwords($record->breaking_side) ?? 'NA' }}  </p> 
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        <h6> <span class="text-success"> Top stories  :</span> </h6>
-                                                        <p> {{ ucwords($record->top_stories) ?? 'NA' }}  </p> 
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        <h6> <span class="text-success">  Gallery  :</span> </h6>
-                                                        <p> {{ ucwords($record->gallery) ?? 'NA' }}  </p> 
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        <h6> <span class="text-success"> More  :</span> </h6>
-                                                        <p> {{ ucwords($record->more) ?? 'NA' }}  </p> 
-                                                    </div>
-                                                </div>
-                                                </div>
-
-                                            </div>
-                                            </div>
-                                        </div>
                                         @endif
                                          @empty
                                             <tr  class="text-center ">
@@ -203,17 +148,21 @@
                                             
                                                         <button class="btn btn-sm btn-danger" wire:click="restore({{ $trash->id }})" wire:target="restore({{ $trash->id }})"  wire:loading.attr="disabled">
                                                             Restore</button>
-                            
+                                                            <button class="btn btn-sm btn-warning" onclick="confirm('Are you sure you want to Peramanetly remove  this News ?') || event.stopImmediatePropagation()" wire:click="paramDelete({{ $trash->id }})" wire:target="paramDelete({{ $trash->id }})"  wire:loading.attr="disabled">
+                                                                Peramanet Delete</button>
                                                     {{-- <a  href="javascript:void(0)" wire:click="edit({{$record->id}})" class="text-success me-2" title="Edit"  ><i class="fa fa-edit fa-fw"></i></a> --}}
                                                     {{-- <a href="javascript:void(0)" class="text-danger me-2" title="Delete" ><i class="fa fa-times fa-fw fa-lg"></i></a> --}}
                                                 </td>
                                             </tr>
                                              @empty
-                                                 
-                                             @endforelse
+                                                                   
+                                             @endforelse       
                                              @endif
                                     </tbody>
+
                                 </table>
+                    {{-- {{ $records->links() }} --}}
+
                             </div>
                         </div>
                      </div>
@@ -282,7 +231,7 @@
                                                 <option value=""> Select User</option>
 
                                             @forelse ($gerUsers as $user )
-                                            <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                            <option value="{{ $user->id }}">{{ $user->name }} || {{ $user->name_hin}} || {{$user->name_pbi}} || {{$user->name_urdu}}</option>
                                                 
                                             @empty
                                                     not found 
@@ -352,42 +301,13 @@
                                     <div class="col-md-12">
                                         <div class="mb-3" >
                                             <label class="form-label"> News Description</label>
-                                          
-                                 
-
                                             <div wire:ignore>
                                                   <textarea id="editor" wire:model="news_description" placeholder="Description of Event" class="form-control xtra-cat"></textarea>
                                              </div>
-                               
-                     
-                                             
                                              @error('news_description') <span class="error">{{ $message }}</span> @enderror
-                                            </div>
+                                         </div>
                                     </div>
-                                    <script>
-                                        
-                                            // CKEDITOR.replace('editor'); 
-                                            const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');        
-                                            CKEDITOR.replace('editor', {
-                                                    // filebrowserUploadUrl: '{{ route("image.upload") }}', // Set the image upload endpoint URL
-                                                    filebrowserUploadUrl: "{{route('image.upload', ['_token' => csrf_token() ])}}",
-                                                    filebrowserUploadMethod: 'form', // Use form-based file upload (default is XMLHttpRequest)
-                                                    filebrowserBrowseUrl: '/ckfinder/ckfinder.html', // Set the CKFinder browse server URL
-                                                    filebrowserImageBrowseUrl: '/ckfinder/ckfinder.html?type=Images', // Set the CKFinder image browse server URL
-                                                    headers: {
-                                                        'X-CSRF-TOKEN': csrfToken // Pass the CSRF token with the request headers
-                                                    },
-                                                    
-                                                });
-                                                    
-                                                CKEDITOR.instances.editor.on('change', function () {
-                                                    @this.set('news_description', CKEDITOR.instances.editor.getData());
-                                                });
-                                                // Livewire.on('formSubmitted', function () {
-                                                                CKEDITOR.instances.editor.setData(''); // Reset CKEditor content
-                                                    // });
-                                           
-                                    </script>
+
                                     <!-- Slider -->
                                     <div class="col-md-4 mb-3">
                                             <div class="form-check ">
@@ -513,10 +433,11 @@
                                     <div class="row mt-3">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <button type="submit" wire:target="createNews" wire:loading.attr="disabled"  class="btn btn-primary">Create News</button>
+                                                <button type="submit"   wire:target="createNews" wire:loading.attr="disabled"  class="btn btn-primary">Create News</button>
                                                 <div wire:loading wire:target="createNews">
                                                     <i class="fas fa-1x fa-sync-alt fa-spin"></i>
                                                  </div>
+                                            
                                             </div>
                                         </div>
                                     </div>
@@ -529,7 +450,35 @@
             
       
             <!-- end row -->
+            <script>
+            document.addEventListener('livewire:initialized', () => {
+            // CKEDITOR.replace('editor'); 
+            const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');        
+                CKEDITOR.replace('editor', {
+                // filebrowserUploadUrl: '{{ route("image.upload") }}', // Set the image upload endpoint URL
+                filebrowserUploadUrl: "{{route('image.upload', ['_token' => csrf_token() ])}}",
+                filebrowserUploadMethod: 'form', // Use form-based file upload (default is XMLHttpRequest)
+                filebrowserBrowseUrl: '/ckfinder/ckfinder.html', // Set the CKFinder browse server URL
+                filebrowserImageBrowseUrl: '/ckfinder/ckfinder.html?type=Images', // Set the CKFinder image browse server URL
+                headers: {
+                'X-CSRF-TOKEN': csrfToken // Pass the CSRF token with the request headers
+                },
 
+                });
+
+            CKEDITOR.instances.editor.on('change', function () {
+                @this.set('news_description', CKEDITOR.instances.editor.getData());
+            });
+            // Livewire.on('post-created', function () {
+            //     });
+
+            Livewire.on('formSubmitted', function () {
+                 CKEDITOR.instances.editor.setData(''); // Reset CKEditor content
+
+            });
+
+            }); 
+            </script>
 
             
         </div>

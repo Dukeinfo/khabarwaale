@@ -16,4 +16,10 @@ class Category extends Model
     {
         return $this->hasMany(AssigneMenu::class, 'category_id');
     }
+
+
+    public function catwiseNews()
+    {
+        return $this->hasMany(NewsPost::class,'id', 'category_id');
+    }
 }

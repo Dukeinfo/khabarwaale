@@ -9,16 +9,19 @@ use App\Models\User;
 use App\Models\WebsiteType;
 use App\Traits\UploadTrait;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Livewire\Attributes\On;
 use Livewire\Attributes\Rule;
 use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Livewire\WithPagination;
 
 class CreateNews extends Component
 {
     use WithFileUploads;
     use UploadTrait;
     use LivewireAlert;
+    use WithPagination;
     public $gerUsers = [];
     #[Rule('required' , message: 'News type field is required')] 
     public $news_type;
@@ -68,25 +71,37 @@ class CreateNews extends Component
     public $search = '';
     protected $queryString = ['search'];
 
+
+  
     public function render()
     {
-        $search =  trim($this->search);
-        $records = NewsPost::where('news_type', 'like', '%'.$search.'%')
-        ->orwhere('title', 'like', '%'.$search.'%')
-        ->orwhere('user_id', 'like', '%'.$search.'%')
-        ->orwhere('heading', 'like', '%'.$search.'%')
-        ->orwhere('post_month', 'like', '%'.$search.'%')
-        ->get();
+
+        $search = trim($this->search);
+        $records = NewsPost::with(['newstype', 'user', 'getmenu'])
+        ->where(function ($query) use ($search) {
+            $query->whereHas('newstype', function ($subquery) use ($search) {
+                $subquery->where('name', 'like', '%' . $search . '%')
+                        ->orWhere('title', 'like', '%' . $search . '%');
+            })->orWhereHas('user', function ($subquery) use ($search) {
+                $subquery->where('name', 'like', '%' . $search . '%');
+            })->orWhereHas('getmenu', function ($subquery) use ($search) {
+                $subquery->where('category_en', 'like', '%' . $search . '%')
+                        ->orwhere('heading', 'like', '%' . $search . '%')
+                        ->orWhere('post_month', 'like', '%' . $search . '%');
+            });
+        })->get();
+    
+        $totalrecords = NewsPost::count();
         $getRoles =  Role::get();
         $getCategory=  Category::where('status' ,'Active')->get();
         $getwebsite_type =  WebsiteType::where('status' ,'Active')->get();
         $trashdata = NewsPost::onlyTrashed()->get();
 
-        return view('livewire.backend.news.create-news' ,['getwebsite_type' => $getwebsite_type, 'getCategory' =>$getCategory,    'records' =>$records , 'trashdata' => $trashdata]);
+        return view('livewire.backend.news.create-news' ,['totalrecords' => $totalrecords,'getwebsite_type' => $getwebsite_type, 'getCategory' =>$getCategory,    'records' =>$records , 'trashdata' => $trashdata]);
     }
 
     public function createNews(){
-        dd( $this->news_description );
+        // dd( $this->news_description );
         $this->validate();
         if(!is_null($this->image)){
             $image =  $this->image;
@@ -108,15 +123,13 @@ class CreateNews extends Component
         $createNews->old_parm = $this->old_parm ?? null ;
         $createNews->title = $this->title ?? null ;
         $createNews->slug = createSlug($this->title);
-
         $createNews->heading = $this->heading ?? null ;
         $createNews->heading2 = $this->heading2 ?? null ;
         $createNews->image = $newsimage['file_name'] ?? null ;
         $createNews->thumbnail = $newsimage['thumbnail_name'] ?? null ;
         $createNews->caption = $this->caption ?? null ;
         $createNews->pdf_file =  $pdffile  ?? null ;
-        $createNews->news_description = $this->news_description ?? null ;
-
+        $createNews->news_description = trim($this->news_description) ?? null ;
         $createNews->slider =$this->slider ? 'Show' : Null ;
         $createNews->breaking_top = $this->breaking_top ? 'Show' : Null ; 
         $createNews->breaking_side = $this->breaking_side ? 'Show' : Null ;
@@ -124,28 +137,45 @@ class CreateNews extends Component
         $createNews->gallery = $this->gallery ? 'Show' : Null ;
         $createNews->more = $this->more ? 'Show' : Null ;
         $createNews->send_noti = $this->send_noti ? 'Show' : Null  ;
-        
         $createNews->metatags = $this->metatags ?? null ;
         $createNews->description = $this->description ?? null ;
         $createNews->keywords = $this->keywords ?? null ;
-
         $createNews->reject_reason = $this->reject_reason ?? null ;
-        
         $createNews->post_date = $this->post_date ?? null ;
         $createNews->post_month = $this->post_month ?? null ;
-        
         $createNews->status =  $this->status ?? null ;
         $createNews->ip_address =getUserIp();
         $createNews->login = authUserId();
         $createNews->save();
-        $this->alert('success', 'News Created successfully!');
         $this->reset();
-        
+        $this->alert('success', 'News Created successfully!');
+        // return redirect()->route('admin.create_news')->with();
+        $this->dispatch('formSubmitted');
+
+       
     }
+
     public function handleChange()
     {
-        if ($this->news_type) {
+        if ($this->news_type  ) {
+            if ($this->news_type == 1 ) {
+
             $this->gerUsers = User::where('website_type_id', $this->news_type)->get();
+            }
+            elseif($this->news_type == 1){
+            $this->gerUsers = User::where('website_type_id', $this->news_type)->get();
+
+            }
+            elseif($this->news_type == 3){
+                $this->gerUsers = User::where('website_type_id', $this->news_type)->get();
+    
+                }
+
+                else{
+                    $this->gerUsers = User::where('website_type_id', $this->news_type)->get();
+        
+                    }
+
         } else {
             // Clear the user list if no news_type is selected
             $this->gerUsers = [];
@@ -211,5 +241,16 @@ class CreateNews extends Component
 
         }
     }
+
+public function paramDelete($id){
+    try {
+   NewsPost::onlyTrashed()->find($id)->forceDelete(); 
+    $this->alert('success', 'NewsPost Deleted successfully!');
+} catch (\Exception $e) {
+    dd($e->getMessage());
+
+}
+
+}
 
 }

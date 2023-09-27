@@ -64,6 +64,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(AssigneMenu::class, 'user_id');
     }
+
+ 
     public function role()
     {
         return $this->belongsTo(Role::class, 'role_id');
@@ -71,5 +73,11 @@ class User extends Authenticatable
     public function websiteType()
     {
         return $this->belongsTo(WebsiteType::class, 'website_type_id');
+    }
+
+
+    public function getNewspost()
+    {
+        return $this->hasMany(NewsPost::class, 'id' ,'user_id');
     }
 }

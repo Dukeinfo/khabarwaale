@@ -52,6 +52,7 @@
 
 	   <i class='bx bx-news'></i>
 	   <span>Add News</span>
+	   <span class="badge bg-danger">New</span>
    </a>
    
 </li>
