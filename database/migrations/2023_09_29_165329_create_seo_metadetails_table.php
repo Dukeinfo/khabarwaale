@@ -4,22 +4,21 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSeoSettingsTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('seo_settings', function (Blueprint $table) {
+        Schema::create('seo_metadetails', function (Blueprint $table) {
             $table->id();
-            $table->string('meta_author')->nullable();
+            $table->bigInteger('category_id')->nullable(); 
             $table->string('slug')->nullable();
             $table->string('meta_title')->nullable();
             $table->string('meta_keyword')->nullable();
             $table->text('meta_description')->nullable();
+            $table->string('meta_author')->nullable();
             $table->text('google_analytics')->nullable();
             $table->string('google_verification')->nullable();
             $table->text('alexa_analytics')->nullable();
@@ -34,11 +33,9 @@ class CreateSeoSettingsTable extends Migration
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down()
+    public function down(): void
     {
-        Schema::dropIfExists('seo_settings');
+        Schema::dropIfExists('seo_metadetails');
     }
-}
+};

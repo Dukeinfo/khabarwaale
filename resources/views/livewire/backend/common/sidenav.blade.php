@@ -99,7 +99,7 @@
 					<span>SEO Markups</span>
 				</a>
 				<ul class="sub-menu" aria-expanded="false">
-					<li><a href="">Meta Details</a></li>
+					<li><a href="{{route('admin.createMetadetail')}}">Meta Details</a></li>
 					<li><a href="">Header Snippets</a></li>
 					<li><a href="">Footer Snippets</a></li>
 				</ul>
