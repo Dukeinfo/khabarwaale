@@ -50,10 +50,14 @@ use LivewireAlert;
     public function render()
     {
         $search =  trim($this->search);
-                $records = User::where('name', 'like', '%'.$search.'%')
-                ->orwhere('username', 'like', '%'.$search.'%')
-                ->orwhere('email', 'like', '%'.$search.'%')
-                ->get();
+            $records = User::with(['websiteType' ,'assignedMenus'])
+                    ->where(function ($query) use ($search) {
+                         $query->whereHas('websiteType', function ($subquery) use ($search) {
+                        $subquery->where('name', 'like', '%' . $search . '%');
+                    })->orwhere('name', 'like', '%'.$search.'%')
+                    ->orwhere('username', 'like', '%'.$search.'%')
+                    ->orwhere('email', 'like', '%'.$search.'%');
+                    })->get();
              $getRoles =  Role::get();
              $getCategory=  Category::where('status' ,'Active')->get();
              $getwebsite_type =  WebsiteType::where('status' ,'Active')->get();

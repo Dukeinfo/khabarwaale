@@ -313,7 +313,9 @@
                                             <td> {{ $key+1}}</td>
                                             <td>  <img src="{{asset('storage/'.$record->profile_photo_path)}}" alt=".." class="img-size-50 img-circle img-bordered-sm" width="50"></td>
 
-                                            <td>{{$record->name ?? 'NA' }}</td>
+                                            <td>{{$record->name ?? 'NA' }} <br>
+                                                <span class="badge bg-primary" >  {{ ucwords($record->role['name'] ?? "NA") }} </span>
+                                            </td>
                                   
                                             <td> {{$record->email ?? 'NA' }}</td>
                                             <td> {{$record->websiteType['name'] ?? 'NA' }} </td>
@@ -342,15 +344,19 @@
 
                                            @endif
                                                 <td>   
-                                        
-                                                <a  href="javascript:void(0)" wire:click="edit({{$record->id}})" class="text-success me-2" title="Edit"  wire:target="edit({{ $record->id }})"  wire:loading.attr="disabled"><i class="fa fa-edit fa-fw"></i></a>
-                                                <a href="javascript:void(0)" class="text-danger me-2" title="Delete" wire:click="delete({{ $record->id }})" wire:target="delete({{ $record->id }})"  wire:loading.attr="disabled"><i class="fa fa-times fa-fw fa-lg"></i></a>
+                                                    <button class="btn btn-sm btn-success" disabled data-bs-toggle="modal" data-bs-target="#usermodel{{$record->id}}">
+                                                        <i class="fa fa-eye fa-fw"></i></button>
+                                                <button   wire:click="edit({{$record->id}})" class="btn btn-sm btn-primary" title="Edit"  wire:target="edit({{ $record->id }})"  wire:loading.attr="disabled"><i class="fa fa-edit fa-fw"></i></button>
+                                                <button   class="btn btn-sm btn-danger" title="Delete" wire:click="delete({{ $record->id }})" wire:target="delete({{ $record->id }})"  wire:loading.attr="disabled"><i class="fa fa-times fa-fw fa-lg"></i></button>
                                             </td>
 
 
 
+                                            @include('livewire.backend.add-users.usermodel')
                                         </tr>
+
                                         @endif
+
                                          @empty
                                             <tr>
                                                 <td colspan="4"> Record Not Found</td>                                           

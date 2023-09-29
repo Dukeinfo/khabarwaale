@@ -43,4 +43,20 @@ function getGallerydetail($image)
 
     return   asset('storage/uploads/gallery/'.$image);
 }
+  
 
+
+function getAddImage($image)
+{
+ 
+    return   asset('storage/mainAdd/'.$image);
+}
+  
+
+
+function getNewsImage($image)
+{
+ 
+    return   asset('storage/news_gallery/'.$image);
+}
+  

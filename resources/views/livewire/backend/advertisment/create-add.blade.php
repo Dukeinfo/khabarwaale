@@ -229,14 +229,14 @@
                                          @if($record->role_id != 1)
                                          <tr>
                                             <td> {{ $key+1}}</td>
-                                            <td> 
+                                            <td>   
                                                 
-                                                <img src="{{getThumbnail($record->thumbnail) ?? ''}}" alt=".." class="img-size-50 img-circle img-bordered-sm" width="50">
+                                                <img src="{{getThumbnail($record->thumbnail) ?? ''}}" alt=".." class="img-size-50  img-bordered-sm rounded-circle" width="100">
                                             
                                             </td>
                                             <td>
                                                 @if($record->image_add)
-                                                <img src="{{ asset('storage/addpic/'. $record->image_add)}}" alt=".." class="img-size-50 img-circle img-bordered-sm" width="50">
+                                                <img src="{{ asset('storage/image/'. $record->image_add)}}" alt=".." class="img-size-50  img-bordered-sm" width="100">
                                                 
                                                 @else
                                                 <a href="{{$record->link_add?? '#'}}" target="_blank"> Link add</a>
@@ -259,10 +259,22 @@
 
                                            @endif
                                                 <td>   
-                                                <a  href="javascript:void(0)" wire:click="edit({{$record->id}})" class="text-success me-2" title="Edit"  wire:target="edit({{ $record->id }})"  wire:loading.attr="disabled"><i class="fa fa-edit fa-fw"></i></a>
-                                                <a href="javascript:void(0)" class="text-danger me-2" title="Delete" wire:click="delete({{ $record->id }})" wire:target="delete({{ $record->id }})"  wire:loading.attr="disabled"><i class="fa fa-times fa-fw fa-lg"></i></a>
+                                         
+                                                    <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal{{$record->id}}">
+                                                        <i class="fa fa-eye fa-fw"></i></button>
+                                                    <button class="btn btn-sm btn-primary"  wire:click="edit({{$record->id}})"  wire:target="edit({{ $record->id }})"  wire:loading.attr="disabled">
+                                                        <i class="fa fa-edit fa-fw"></i>
+                                                    </button>
+                                                
+                                                    <button class="btn btn-sm btn-danger"  wire:click="delete({{ $record->id }})" wire:target="delete({{ $record->id }})"  wire:loading.attr="disabled">
+
+                                                        <i class="fa fa-times fa-fw fa-lg"></i>
+                                                    </button>
+                                        
                                             </td>
                                         </tr>
+                                        @include('livewire.backend.advertisment.add-model')
+
                                         @endif
                                          @empty
                                             <tr>

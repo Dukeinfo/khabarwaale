@@ -22,6 +22,7 @@ class CreateAdvertismentsTable extends Migration
             $table->string('thumbnail')->nullable();
             $table->string('type')->nullable();
             $table->string('image_add')->nullable();
+            $table->string('thumbnail2')->nullable();
             $table->string('link_add')->nullable();
             $table->string('from_date')->nullable();
             $table->string('to_date')->nullable();

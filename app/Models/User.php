@@ -75,9 +75,18 @@ class User extends Authenticatable
         return $this->belongsTo(WebsiteType::class, 'website_type_id');
     }
 
+    public function getmenu()
+    {
+        return $this->belongsTo(Category::class, 'category_id');
+    }
 
     public function getNewspost()
     {
         return $this->hasMany(NewsPost::class, 'id' ,'user_id');
     }
+
+
+
+
+
 }

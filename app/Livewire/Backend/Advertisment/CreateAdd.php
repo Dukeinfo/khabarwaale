@@ -63,30 +63,32 @@ class CreateAdd extends Component
     }
 
     public function CreateAdd(){
-     
         $this->validate();
-        if(!is_null($this->image_add)){
-            $image =  $this->image_add;
-            // Define folder path
-            $folder = '/image';
-            $image_add = $this->uploadOne($image, $folder);
-    
-          } 
-          if(!is_null($this->image)){
-            $image =  $this->image;
-            // Define folder path
-            $folder = '/addpic';
-            $imageadd = $this->uploadOne($image, $folder);
-    
-          } 
+ 
+   
+       //  if user select image 
+       if(!is_null($this->image_add)){
+            $addimage =  $this->image_add;
+            $addfolder = '/image';
+            $image_add = $this->uploadOne($addimage, $addfolder);
+
+        }
+      // main image 
+      if(!is_null($this->image)){
+        $image =  $this->image;
+        $folder = '/mainAdd';
+        $mainImg = $this->uploadOne($image, $folder);
+    } 
         $model = new Advertisment();
         $model->page_name = $this->page_name;
         $model->slug = createSlug($this->page_name);
         $model->location = $this->location;
-        $model->image = $imageadd['file_name'] ?? NUll;
-        $model->thumbnail = $imageadd['thumbnail_name'] ?? NUll;
+        $model->image = $mainImg['file_name'] ?? NUll;
+        $model->thumbnail = $mainImg['thumbnail_name'] ?? NUll;
         $model->type = $this->type ?? Null;
         $model->image_add = $image_add['file_name'] ?? NUll;
+        $model->thumbnail2 = $image_add['thumbnail_name'] ?? Null;
+
         $model->link_add = $this->link_add ?? Null;
         $model->from_date = $this->from_date;
         $model->to_date = $this->to_date;
@@ -95,10 +97,10 @@ class CreateAdd extends Component
         $model->status = $this->status ;
         $model->ip_address =getUserIp();
         $model->login = authUserId();
-    
         // Save the model to the database
         $model->save();
         $this->alert('success', 'Add Created successfully!');
+        $this->reset();
 
 
     }
