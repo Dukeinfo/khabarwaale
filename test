@@ -1,5 +1,0 @@
----
-deployment:
- tasks:
- - export DEPLOYPATH=/home/juriskart/public_html/boldapunjab/
- - /bin/cp -a * $DEPLOYPATH 
