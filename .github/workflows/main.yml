@@ -7,6 +7,8 @@ jobs:
   web-deploy:
     name: Deploy
     runs-on: ubuntu-latest
+    env:
+      LARAVEL_BYPASS_ENV_CHECK: 1  # Set the environment variable
     steps:
       - name: Get the latest code
         uses: actions/checkout@v2.3.2
@@ -21,6 +23,8 @@ jobs:
         run: php artisan storage:link
       - name: Directory Permissions
         run: chmod -R 777 storage bootstrap/cache
+      - name: Clear Application Cache
+        run: php artisan cache:clear
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@4.0.0
         with:
