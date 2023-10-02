@@ -15,7 +15,9 @@ function authUserId(){
 
 function createSlug($val)
 {
-    $slug = preg_replace('/[\s.]+/', '-', $val);
+    // $slug = preg_replace('/[\s.]+/', '-', $val);
+    //for  space slash 
+    $slug = preg_replace('/[\s.\/]+/', '-', $val);
     // Convert to lowercase
     $slug = strtolower($slug);
     return $slug;

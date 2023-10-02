@@ -106,7 +106,7 @@
             <div class="mb-3">
                 <label class="form-label">Password</label>
                 <input type="password" id="password" class="form-control" wire:model.live="password" placeholder="Mew Password" required>
-                @error('password') <span>{{ $message }}</span> @enderror
+                @error('password') <span class="text-danger">{{ $message }}</span> @enderror
             </div>
         </div>
 
@@ -114,7 +114,7 @@
             <div class="mb-3">
                 <label class="form-label">Confirm Password</label>
                 <input type="password" class="form-control" id="password_confirmation" placeholder="Confirm Password" wire:model.live="password_confirmation" required>
-                @error('password_confirmation') <span>{{ $message }}</span> @enderror
+                @error('password_confirmation') <span class="text-danger">{{ $message }}</span> @enderror
             </div>
         </div>
 

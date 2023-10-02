@@ -17,11 +17,15 @@
     <link rel="stylesheet" type="text/css" href="{{asset('assets/vendor/animsition/css/animsition.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/util.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/main.css')}}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body class="animsition">
     <header>
-        @include('layouts/header')
+
+
+        @include('layouts/header' ,['$getMenus' => $getMenus] )
+      
     </header>
     <section class="bg-white">
         <div class="container">
@@ -80,5 +84,11 @@
     <script src="{{asset('assets/vendor/bootstrap/js/popper.js')}}"></script>
     <script src="{{asset('assets/vendor/bootstrap/js/bootstrap.min.js')}}"></script>
     <script src="{{asset('assets/js/main.js')}}"></script>
+    {{-- <script type="text/javascript">
+        var url = "{{ route('changeLang') }}";
+        $(".changeLang").change(function(){
+            window.location.href = url + "?lang="+ $(this).val();
+        });
+    </script> --}}
 </body>
 </html>

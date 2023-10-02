@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AdminLogoutController;
 use App\Http\Controllers\CkImageUploadController;
+use App\Http\Controllers\Frontend\FronendController;
+use App\Http\Controllers\Frontend\LanguageController;
 use App\Livewire\Backend\AddUsers\CreateUsers;
 use App\Livewire\Backend\AddUsers\EditUser;
 use App\Livewire\Backend\AdminDashboard;
@@ -31,17 +33,20 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+// Route::get('lang/change', [LanguageController::class, 'change'])->name('changeLang');
+Route::controller(LanguageController::class)->group(function () {
+    Route::get('/language/english',  'english')->name('english.language');
+    Route::get('/language/hindi',  'Hindi')->name('hindi.language');
+    Route::get('/language/punjabi',  'punjabi')->name('punjabi.language');
+    Route::get('/language/urdu',  'urdu')->name('urdu.language');
+});
 
+Route::controller(FronendController::class)->group(function () {
+    Route::get('/',     'index')->name('home.homepage');
+    Route::get('/category/{id}/{slug}',  'category_page')->name('home.category');
+    Route::get('/inner',  'inner_page')->name('home.inner');
+});
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home.homepage');
-Route::get('/category', function () {
-    return view('category');
-})->name('home.category');
-Route::get('/inner', function () {
-    return view('inner');
-})->name('home.inner');;
 
 
 Route::middleware([

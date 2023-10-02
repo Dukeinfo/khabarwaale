@@ -8,7 +8,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <p class="text-uppercase text-center small pb-2">Advertisement</p>
+                <p class="text-uppercase text-center small pb-2"> {{GoogleTranslate::trans('Advertisement', app()->getLocale())}}</p>
                 <a href="javascript:void()">
                     <img src="{{asset('assets')}}/images/ads/h-ad1.png" class="img-fluid" alt="">
                 </a>
@@ -24,17 +24,20 @@
                     <div class="col-lg-12 mb-4">
                         <div class="how2 how2-cl5 flex-sb-c mb-4 bg-white">
                             <h3 class="f1-m-2 cl17 tab01-title">
-                                Latest News
+
+                                {{GoogleTranslate::trans('Latest News', app()->getLocale())}}
                             </h3>
                         </div>
                         <div class="card border-0 shadow-sm">
                             <div class="card-body">
+                                {{--start  Latest News --}}
                                 <div class="mb-3">
                                     <div class="border border-top-0 border-left-0 border-right-0 pb-3">
                                         <h5 class="p-b-5">
                                             <a href="javascript:void();" class="f1-s-5 cl3 hov-cl10 trans-03">
-                                                <span class="text-danger mr-1">Chandigarh:</span>
-                                                ED arrests woman IAS officer Ranu Sahu in alleged coal levy case in Chandigarh
+                                                <span class="text-danger mr-1"> {{GoogleTranslate::trans('Chandigarh:', app()->getLocale())}}</span>
+                                                {{ GoogleTranslate::trans(' ED arrests woman IAS officer Ranu Sahu in alleged coal levy case in Chandigarh', app()->getLocale()) }}
+                                               
                                             </a>
                                         </h5>
                                         <span class="cl8">
@@ -44,68 +47,11 @@
                                         </span>
                                     </div>
                                 </div>
-                                <div class="mb-3">
-                                    <div class="border border-top-0 border-left-0 border-right-0 pb-3">
-                                        <h5 class="p-b-5">
-                                            <a href="javascript:void();" class="f1-s-5 cl3 hov-cl10 trans-03">
-                                                <span class="text-danger mr-1">Manipur Live:</span>
-                                                Smriti Irani versus Mahua Moitra over Cong's 'FAILED' report card on Manipur
-                                            </a>
-                                        </h5>
-                                        <span class="cl8">
-                                            <span class="f1-s-3">
-                                                Jul 22, 2023
-                                            </span>
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="mb-3">
-                                    <div class="border border-top-0 border-left-0 border-right-0 pb-3">
-                                        <h5 class="p-b-5">
-                                            <a href="javascript:void();" class="f1-s-5 cl3 hov-cl10 trans-03">
-                                                <span class="text-danger mr-1">Watch |</span>
-                                                Bus carrying over 24 passengers gets stuck in water in UP's Bijnor
-                                            </a>
-                                        </h5>
-                                        <span class="cl8">
-                                            <span class="f1-s-3">
-                                                Jul 22, 2023
-                                            </span>
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="mb-3">
-                                    <div class="border border-top-0 border-left-0 border-right-0 pb-3">
-                                        <h5 class="p-b-5">
-                                            <a href="javascript:void();" class="f1-s-5 cl3 hov-cl10 trans-03">
-                                                <span class="text-danger mr-1">Ludhiana:</span>
-                                                Punjab CM: 'Unfortunate' governor doesn't know if special assembly session was legal
-                                            </a>
-                                        </h5>
-                                        <span class="cl8">
-                                            <span class="f1-s-3">
-                                                Jul 22, 2023
-                                            </span>
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="mb-3">
-                                    <div class="border border-top-0 border-left-0 border-right-0 pb-3">
-                                        <h5 class="p-b-5">
-                                            <a href="javascript:void();" class="f1-s-5 cl3 hov-cl10 trans-03">
-                                                <span class="text-danger mr-1">Maharashtra Live:</span>
-                                                Nandini milk price likely to go up by Rs. 3 starting from August 1
-                                            </a>
-                                        </h5>
-                                        <span class="cl8">
-                                            <span class="f1-s-3">
-                                                Jul 22, 2023
-                                            </span>
-                                        </span>
-                                    </div>
-                                </div>
+                                {{--end Latest News --}}
+                 
+
                                 <div class="text-center">
-                                    <a href="javascript:void()" class="btn btn-primary px-5">View All</a>
+                                    <a href="javascript:void()" class="btn btn-primary px-5">  {{GoogleTranslate::trans('View All', app()->getLocale())}}</a>
                                 </div>
                             </div>
                         </div>
@@ -115,7 +61,7 @@
                             <div class="card-body">
                                 <p class="text-uppercase text-center small pb-2">Advertisement</p>
                                 <a href="javascript:void()">
-                                    <img src="{{asset('assets')}}/images/ads/v-ad1.gif" class="img-fluid" alt="">
+                                    <img src="{{asset('assets/images/ads/v-ad1.gif')}}" class="img-fluid" alt="">
                                 </a>
                             </div>
                         </div>
@@ -131,6 +77,8 @@
                                 Top News
                             </h3>
                         </div>
+                        {{-- start Top News --}}
+
                         <div class="card border-0 shadow-sm mb-3">
                             <div class="card-body">
                                 <div class="p-b-20">
@@ -156,6 +104,7 @@
                                 </a>
                             </div>
                         </div>
+
                         <div class="card border-0 shadow-sm mb-3">
                             <div class="card-body">
                                 <div class="flex-wr-sb-s">
@@ -183,145 +132,12 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card border-0 shadow-sm mb-3">
-                            <div class="card-body">
-                                <div class="flex-wr-sb-s">
-                                    <div class="size-w-2">
-                                        <h5 class="p-b-5">
-                                            <a href="javascript:void();" class="f1-s-5 cl3 hov-cl10 trans-03">
-                                                ED arrests woman IAS officer Ranu Sahu in alleged coal levy case in Chandigarh
-                                            </a>
-                                        </h5>
-                                        <span class="cl8">
-                                            <a href="javascript:void();" class="f1-s-4 cl10 hov-cl10 trans-03">
-                                                Chandigarh
-                                            </a>
-                                            <span class="f1-s-3 m-rl-3">
-                                                -
-                                            </span>
-                                            <span class="f1-s-3">
-                                                Jul 22, 2023
-                                            </span>
-                                        </span>
-                                    </div>
-                                    <a href="javascript:void()" class="size-w-1 wrap-pic-w hov1 trans-03">
-                                        <img src="{{asset('assets')}}/images/post-05.jpg" alt="" class="img-fluid rounded">
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card border-0 shadow-sm mb-3">
-                            <div class="card-body">
-                                <div class="flex-wr-sb-s">
-                                    <div class="size-w-2">
-                                        <h5 class="p-b-5">
-                                            <a href="javascript:void();" class="f1-s-5 cl3 hov-cl10 trans-03">
-                                                Centre sent 'consequence' notice to Twitter for not blocking URLs amid farm stir
-                                            </a>
-                                        </h5>
-                                        <span class="cl8">
-                                            <a href="javascript:void();" class="f1-s-4 cl10 hov-cl10 trans-03">
-                                                Punjab
-                                            </a>
-                                            <span class="f1-s-3 m-rl-3">
-                                                -
-                                            </span>
-                                            <span class="f1-s-3">
-                                                Jul 22, 2023
-                                            </span>
-                                        </span>
-                                    </div>
-                                    <a href="javascript:void()" class="size-w-1 wrap-pic-w hov1 trans-03">
-                                        <img src="{{asset('assets')}}/images/post-08.jpg" alt="" class="img-fluid rounded">
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card border-0 shadow-sm mb-3">
-                            <div class="card-body">
-                                <div class="flex-wr-sb-s">
-                                    <div class="size-w-2">
-                                        <h5 class="p-b-5">
-                                            <a href="javascript:void();" class="f1-s-5 cl3 hov-cl10 trans-03">
-                                                ED arrests woman IAS officer Ranu Sahu in alleged coal levy case in Chandigarh
-                                            </a>
-                                        </h5>
-                                        <span class="cl8">
-                                            <a href="javascript:void();" class="f1-s-4 cl10 hov-cl10 trans-03">
-                                                Chandigarh
-                                            </a>
-                                            <span class="f1-s-3 m-rl-3">
-                                                -
-                                            </span>
-                                            <span class="f1-s-3">
-                                                Jul 22, 2023
-                                            </span>
-                                        </span>
-                                    </div>
-                                    <a href="javascript:void()" class="size-w-1 wrap-pic-w hov1 trans-03">
-                                        <img src="{{asset('assets')}}/images/post-07.jpg" alt="" class="img-fluid rounded">
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card border-0 shadow-sm mb-3">
-                            <div class="card-body">
-                                <div class="flex-wr-sb-s">
-                                    <div class="size-w-2">
-                                        <h5 class="p-b-5">
-                                            <a href="javascript:void();" class="f1-s-5 cl3 hov-cl10 trans-03">
-                                                ED arrests woman IAS officer Ranu Sahu in alleged coal levy case in Chandigarh
-                                            </a>
-                                        </h5>
-                                        <span class="cl8">
-                                            <a href="javascript:void();" class="f1-s-4 cl10 hov-cl10 trans-03">
-                                                Chandigarh
-                                            </a>
-                                            <span class="f1-s-3 m-rl-3">
-                                                -
-                                            </span>
-                                            <span class="f1-s-3">
-                                                Jul 22, 2023
-                                            </span>
-                                        </span>
-                                    </div>
-                                    <a href="javascript:void()" class="size-w-1 wrap-pic-w hov1 trans-03">
-                                        <img src="{{asset('assets')}}/images/post-04.jpg" alt="" class="img-fluid rounded">
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card border-0 shadow-sm mb-3">
-                            <div class="card-body">
-                                <div class="flex-wr-sb-s">
-                                    <div class="size-w-2">
-                                        <h5 class="p-b-5">
-                                            <a href="javascript:void();" class="f1-s-5 cl3 hov-cl10 trans-03">
-                                                ED arrests woman IAS officer Ranu Sahu in alleged coal levy case in Chandigarh
-                                            </a>
-                                        </h5>
-                                        <span class="cl8">
-                                            <a href="javascript:void();" class="f1-s-4 cl10 hov-cl10 trans-03">
-                                                Chandigarh
-                                            </a>
-                                            <span class="f1-s-3 m-rl-3">
-                                                -
-                                            </span>
-                                            <span class="f1-s-3">
-                                                Jul 22, 2023
-                                            </span>
-                                        </span>
-                                    </div>
-                                    <a href="javascript:void()" class="size-w-1 wrap-pic-w hov1 trans-03">
-                                        <img src="{{asset('assets')}}/images/post-10.jpg" alt="" class="img-fluid rounded">
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+                        {{-- end Top News --}}
+       
                         <div class="text-center">
                             <p class="text-uppercase text-center small pb-2">Advertisement</p>
                             <a href="javascript:void()">
-                                <img src="{{asset('assets')}}/images/ads/ad2.jpg" class="img-fluid" alt="">
+                                <img src="{{asset('assets/images/ads/ad2.jpg')}}" class="img-fluid" alt="">
                             </a>
                         </div>
                     </div>

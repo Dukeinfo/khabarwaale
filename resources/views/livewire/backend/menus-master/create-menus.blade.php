@@ -121,23 +121,16 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="category_en">name (English)</label>
+                                            <label for="category_en">Name (English)</label>
                                             <input wire:model.live="menuform.category_en" type="text" class="form-control" id="category_en" placeholder="English Category">
                                             @error('menuform.category_en') <span class="error">{{ $message }}</span> @enderror
                                        
                                         </div>
                                     </div>
+                        
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="category_en">name (Hini)</label>
-                                            <input wire:model.live="menuform.category_en" type="text" class="form-control" id="category_en" placeholder="English Category">
-                                            @error('menuform.category_en') <span class="error">{{ $message }}</span> @enderror
-                                       
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="category_hin">User Name (Hindi)</label>
+                                            <label for="category_hin"> Name (Hindi)</label>
                                             <input wire:model.live="menuform.category_hin" type="text" class="form-control" id="category_hin" placeholder="Hindi Category">
                                             @error('menuform.category_hin') <span class="error">{{ $message }}</span> @enderror
                                         
@@ -145,7 +138,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="category_pbi">Category (Punjabi)</label>
+                                            <label for="category_pbi">Name (Punjabi)</label>
                                             <input wire:model.live="menuform.category_pbi" type="text" class="form-control" id="category_pbi" placeholder="Punjabi Category">
                                         
                                             @error('menuform.category_pbi') <span class="error">{{ $message }}</span> @enderror
@@ -157,7 +150,7 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="category_urdu">Category (Urdu)</label>
+                                            <label for="category_urdu">Name (Urdu)</label>
                                             <input wire:model.live="menuform.category_urdu" type="text" class="form-control" id="category_urdu" placeholder="Urdu Category">
                                             @error('menuform.category_urdu') <span class="error">{{ $message }}</span> @enderror
                                         
