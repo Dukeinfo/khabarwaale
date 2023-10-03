@@ -31,7 +31,7 @@ use Illuminate\Support\Facades\Route;
 | Here is where you can register web routes for your application. These
 | routes are loaded by the RouteServiceProvider and all of them will
 | be assigned to the "web" middleware group. Make something great!
-|
+|      "masbug/flysystem-google-drive-ext": "^2.2",
 */
 // Route::get('lang/change', [LanguageController::class, 'change'])->name('changeLang');
 Route::controller(LanguageController::class)->group(function () {
