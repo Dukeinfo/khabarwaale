@@ -15,6 +15,11 @@ jobs:
       - uses: actions/setup-node@master
       - name: Copy .env
         run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+      - name: Set DB_DATABASE, DB_USERNAME, and DB_PASSWORD
+        run: |
+          sed -i "s/DB_DATABASE=.*/DB_DATABASE=${{ secrets.DB_DATABASE }}/" .env
+          sed -i "s/DB_USERNAME=.*/DB_USERNAME=${{ secrets.DB_USERNAME }}/" .env
+          sed -i "s/DB_PASSWORD=.*/DB_PASSWORD=${{ secrets.DB_PASSWORD }}/" .env
       - name: Install Dependencies
         run: composer update --ignore-platform-reqs
       - name: Generate key
@@ -25,7 +30,9 @@ jobs:
         run: chmod -R 777 storage bootstrap/cache
       - name: Clear Application Cache
         run: php artisan cache:clear
-      - name: 📂 Sync files
+      - name: Compile Assets (npm run dev)
+        run: npm install && npm run build
+      - name: Sync files
         uses: SamKirkland/FTP-Deploy-Action@4.0.0
         with:
           server: ${{ secrets.FTP_SERVER }}

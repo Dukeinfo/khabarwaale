@@ -42,7 +42,9 @@
                                         </h5>
                                         <span class="cl8">
                                             <span class="f1-s-3">
-                                                Jul 22, 2023
+                                      
+
+                                                {{GoogleTranslate::trans('Jul 22, 2023', app()->getLocale())}}
                                             </span>
                                         </span>
                                     </div>
@@ -59,7 +61,8 @@
                     <div class="col-lg-12 mb-4">
                         <div class="card bg-white shadow-sm text-center border-0">
                             <div class="card-body">
-                                <p class="text-uppercase text-center small pb-2">Advertisement</p>
+                                                {{GoogleTranslate::trans('Advertisement', app()->getLocale()) ?? "NA"}}
+                                                <p class="text-uppercase text-center small pb-2"> </p>
                                 <a href="javascript:void()">
                                     <img src="{{asset('assets/images/ads/v-ad1.gif')}}" class="img-fluid" alt="">
                                 </a>
@@ -74,7 +77,10 @@
                     <div class="col-lg-12">
                         <div class="how2 how2-cl5 flex-sb-c mb-4 bg-white">
                             <h3 class="f1-m-2 cl17 tab01-title">
-                                Top News
+                      
+
+                                {{GoogleTranslate::trans(' Top News ', app()->getLocale()) ?? "NA"}}
+
                             </h3>
                         </div>
                         {{-- start Top News --}}
@@ -135,7 +141,7 @@
                         {{-- end Top News --}}
        
                         <div class="text-center">
-                            <p class="text-uppercase text-center small pb-2">Advertisement</p>
+                            <p class="text-uppercase text-center small pb-2">Advertisement </p>
                             <a href="javascript:void()">
                                 <img src="{{asset('assets/images/ads/ad2.jpg')}}" class="img-fluid" alt="">
                             </a>
@@ -148,7 +154,10 @@
                     <div class="col-lg-12 mb-4">
                         <div class="card bg-white shadow-sm text-center border-0">
                             <div class="card-body">
-                                <p class="text-uppercase text-center small pb-2">Advertisement</p>
+                                <p class="text-uppercase text-center small pb-2">
+                                {{GoogleTranslate::trans('Advertisement', app()->getLocale()) ?? "NA"}}
+
+                                </p>
                                 <a href="javascript:void()">
                                     <img src="{{asset('assets')}}/images/ads/ad1.jpg" class="img-fluid" alt="">
                                 </a>
@@ -158,7 +167,7 @@
                     <div class="col-lg-12 mb-4">
                         <div class="card bg-white shadow-sm text-center border-0">
                             <div class="card-body">
-                                <p class="text-uppercase text-center small pb-2">Advertisement</p>
+                                <p class="text-uppercase text-center small pb-2">{{GoogleTranslate::trans('Advertisement', app()->getLocale()) ?? "NA"}}</p>
                                 <a href="javascript:void()">
                                     <img src="{{asset('assets')}}/images/ads/ad2.jpg" class="img-fluid" alt="">
                                 </a>
@@ -283,7 +292,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <p class="text-uppercase text-center small pb-2">Advertisement</p>
+                <p class="text-uppercase text-center small pb-2">{{GoogleTranslate::trans('Advertisement', app()->getLocale()) ?? "NA"}}</p>
                 <a href="javascript:void()">
                     <img src="{{asset('assets')}}/images/ads/ad3.jpg" class="img-fluid" alt="">
                 </a>
@@ -810,9 +819,9 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <p class="text-uppercase text-center small pb-2">Advertisement</p>
+                <p class="text-uppercase text-center small pb-2">{{GoogleTranslate::trans('Advertisement', app()->getLocale()) ?? "NA"}}</p>
                 <a href="javascript:void()">
-                    <img src="{{asset('assets')}}/images/ads/ad4.jpg" class="img-fluid" alt="">
+                    <img src="{{asset('assets/images/ads/ad4.jpg')}}" class="img-fluid" alt="">
                 </a>
             </div>
         </div>
@@ -956,7 +965,7 @@
                     <div class="card border-0 shadow-sm mb-3">
                         <div class="card-body">
                             <a href="javascript:void();" class="wrap-pic-w hov1 trans-03">
-                                <img src="{{asset('assets')}}/images/post-34.jpg" alt="IMG" class="img-fluid rounded">
+                                <img src="{{asset('assets/images/post-34.jpg')}}" alt="IMG" class="img-fluid rounded">
                             </a>
                             <div class="p-t-20">
                                 <h5 class="p-b-5">

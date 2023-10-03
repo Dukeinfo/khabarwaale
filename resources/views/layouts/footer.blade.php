@@ -14,7 +14,8 @@
                     </p>
                     <div class="size-h-3 flex-s-c">
                         <h5 class="f1-m-7 cl0">
-                            We're social, connect with us
+                            
+                            {{GoogleTranslate::trans("We're social, connect with us", app()->getLocale()) ?? "NA"}}
                         </h5>
                     </div>
                     <div>
@@ -39,7 +40,9 @@
             <div class="col-sm-6 col-lg-5 p-b-20">
                 <div class="size-h-3 flex-s-c">
                     <h5 class="f1-m-7 cl0">
-                        Get Connected
+                        
+                        {{GoogleTranslate::trans("Get Connected", app()->getLocale()) ?? "NA"}}
+
                     </h5>
                 </div>
                 <address class="cl11">
@@ -51,7 +54,9 @@
 
                 <div class="size-h-3 flex-s-c">
                     <h5 class="f1-m-7 cl0">
-                        Download Our App
+                        
+                        {{GoogleTranslate::trans("Download Our App", app()->getLocale()) ?? "NA"}}
+
                     </h5>
                 </div>
                 <div>
@@ -64,7 +69,9 @@
             <div class="col-sm-6 col-lg-3 p-b-20">
                 <div class="size-h-3 flex-s-c">
                     <h5 class="f1-m-7 cl0">
-                        Category
+                        
+                        {{GoogleTranslate::trans("Category", app()->getLocale()) ?? "NA"}}
+
                     </h5>
                 </div>
                 <ul class="m-t--12">
@@ -118,18 +125,26 @@
         <div class="row">
             <div class="col-lg-4">
                 <a href="javascript:void()" class="f1-s-1 cl10 hov-link1">
-                    About Us
+                    
+                    {{GoogleTranslate::trans("About Us", app()->getLocale()) ?? "NA"}}
+
                 </a>
                 <span>|</span>
                 <a href="javascript:void()" class="f1-s-1 cl10 hov-link1">
-                    Privacy Policy
+                    
+                    {{GoogleTranslate::trans("Privacy Policy", app()->getLocale()) ?? "NA"}}
+
                 </a>
             </div>
             <div class="col-lg-8">
                 <span class="f1-s-1 cl0 txt-center">
-                    Copyright &copy;<script>
+{{GoogleTranslate::trans("Copyright", app()->getLocale()) ?? "NA"}}
+ &copy;<script>
                         document.write(new Date().getFullYear());
-                    </script> All rights reserved
+                    </script> 
+
+{{GoogleTranslate::trans("All rights reserved", app()->getLocale()) ?? "NA"}}
+
                     <a href="javascript:void()" class="f1-s-1 cl10 hov-link1">
                         Khabarwaale.com
                     </a>

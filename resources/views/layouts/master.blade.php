@@ -32,7 +32,7 @@
             <div class="bg0 flex-wr-sb-c p-rl-20 p-tb-8">
                 <div class="f2-s-1 p-r-30 size-w-0 m-tb-6 flex-wr-s-c">
                     <span class="text-uppercase cl2 p-r-20">
-                        <p class="breaking_tag"><i class="fa fa-circle"></i><span class="blink">Breaking News</span></p>
+                        <p class="breaking_tag"><i class="fa fa-circle"></i><span class="blink">{{GoogleTranslate::trans('Breaking News', app()->getLocale()) ?? "NA"}}</span></p>
                     </span>
                     <span class="dis-inline-block cl6 slide100-txt pos-relative size-w-0" data-in="fadeInDown" data-out="fadeOutDown">
                         <span class="dis-inline-block slide100-txt-item animated visible-false">
