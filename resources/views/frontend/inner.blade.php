@@ -8,7 +8,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <p class="text-uppercase text-center small pb-2">Advertisement</p>
+                <p class="text-uppercase text-center small pb-2">{{GoogleTranslate::trans('Advertisement', app()->getLocale()) ?? "NA"}}</p>
                 <a href="javascript:void()">
                     <img src="{{asset('assets')}}/images/ads/h-ad1.png" class="img-fluid" alt="">
                 </a>
@@ -337,7 +337,7 @@
                         <div class="col-lg-12 mb-4">
                             <div class="card bg-white shadow-sm text-center border-0">
                                 <div class="card-body">
-                                    <p class="text-uppercase text-center small pb-2">Advertisement</p>
+                                    <p class="text-uppercase text-center small pb-2">{{GoogleTranslate::trans('Advertisement', app()->getLocale()) ?? "NA"}}</p>
                                     <a href="javascript:void()">
                                         <img src="{{asset('assets')}}/images/ads/ad1.jpg" class="img-fluid" alt="">
                                     </a>
@@ -347,7 +347,7 @@
                         <div class="col-lg-12 mb-4">
                             <div class="card bg-white shadow-sm text-center border-0">
                                 <div class="card-body">
-                                    <p class="text-uppercase text-center small pb-2">Advertisement</p>
+                                    <p class="text-uppercase text-center small pb-2">{{GoogleTranslate::trans('Advertisement', app()->getLocale()) ?? "NA"}}</p>
                                     <a href="javascript:void()">
                                         <img src="{{asset('assets')}}/images/ads/ad2.jpg" class="img-fluid" alt="">
                                     </a>

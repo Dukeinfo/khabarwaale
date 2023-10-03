@@ -31,6 +31,8 @@ class CreateNewsPostsTable extends Migration
             $table->string('caption')->nullable();
             $table->string('pdf_file')->nullable();
             $table->longText('news_description')->nullable();
+            $table->bigInteger('sort_id')->nullable(); 
+
             // checkbox
             $table->string('slider', 255)->comment('Slider path')->nullable();
             $table->string('breaking_top', 255)->comment('Breaking news top')->nullable();

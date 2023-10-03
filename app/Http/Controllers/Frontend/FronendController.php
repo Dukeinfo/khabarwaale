@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\NewsPost;
 use Illuminate\Http\Request;
 
 class FronendController extends Controller
@@ -15,6 +16,19 @@ class FronendController extends Controller
     {
         // 
         $data['getMenus']  =  Category::orderby('sort_id')->where('status' ,'Active')->where('deleted_at',Null)->get();
+       
+        $data['latestNewsData'] = NewsPost::with('getmenu', 'newstype', 'user') 
+                                            ->where('status', 'Approved') ->whereNull('deleted_at')
+                                            ->where(function ($query) { $query->whereIn('breaking_side', ['Show']);})
+                                            ->orderBy('created_at', 'desc')->get();        
+        $data['topNewsData'] = NewsPost::with('getmenu', 'newstype', 'user') 
+                                        ->where('status', 'Approved') ->whereNull('deleted_at')
+                                        ->where(function ($query) { $query->whereIn('breaking_top', ['Show']);})
+                                        ->orderBy('created_at', 'desc')->get();                                    
+        // ->orWhereIn('other_column_name', ['value1', 'value2']); // Add more columns as needed
+        $data['centerNewsCat'] = NewsPost::with('getmenu', 'newstype', 'user') 
+                                         ->where('status', 'Approved')->whereNull('deleted_at')
+                                         ->orderBy('created_at', 'desc')->get();                                   
         return view('frontend.welcome' ,$data);
 
     }
