@@ -22,6 +22,7 @@ use App\Livewire\Backend\Settings\SocialAppsManager;
 use App\Livewire\Backend\Videos\CreateVideos;
 use App\Livewire\Backend\Videos\EditVideos;
 use Illuminate\Support\Facades\Route;
+use Livewire\Livewire;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,6 +63,9 @@ Route::middleware([
 
 Route::group(['middleware' => 'auth'],function(){
     Route::prefix('admin')->group(function(){
+        Livewire::setScriptRoute(function ($handle) {
+            return Route::get('/boldpunjab/livewire/livewire.js', $handle);
+        });
         Route::post('ckeditor/image_upload', [CkImageUploadController::class, 'upload'])->name('image.upload');
 
 Route::get('/dashboard', AdminDashboard::class)->name('admin_dashboard');
