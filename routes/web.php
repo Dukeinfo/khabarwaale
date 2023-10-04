@@ -52,6 +52,10 @@ Route::controller(FronendController::class)->group(function () {
 Livewire::setScriptRoute(function ($handle) {
     return Route::get('/boldpunjab/livewire/livewire.js', $handle);
 });
+Livewire::setUpdateRoute(function ($handle) {
+    return Route::post('/boldpunjab/livewire/update', $handle)
+        ->middleware(['auth']); 
+});
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
