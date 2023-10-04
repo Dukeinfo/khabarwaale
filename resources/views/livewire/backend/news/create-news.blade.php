@@ -365,7 +365,7 @@
 
                                             <!-- Breaking Side -->
                                             <div class="form-check">
-                                                <input class="form-check-input border border-dark" type="checkbox" wire:model="breaking_side value="Show"" id="breaking_side">
+                                                <input class="form-check-input border border-dark" type="checkbox" wire:model="breaking_side" value="Show" id="breaking_side">
                                                 <label class="form-check-label" for="breaking_side">Breaking Side</label>
                                                 @error('breaking_side') <span class="error">{{ $message }}</span> @enderror
 
