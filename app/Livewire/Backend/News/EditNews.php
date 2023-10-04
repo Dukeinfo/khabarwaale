@@ -84,6 +84,13 @@ class EditNews extends Component
         $this->status =  $newspoat->status ?? null ;
         if ($this->news_type) {
             $this->gerUsers = User::where('website_type_id', $this->news_type)->get();
+            $adminUser = User::where('id', authUserId())->where('role_id', 1)->get();
+            if ($adminUser->isNotEmpty()) {
+                $this->gerUsers = $adminUser->concat( $this->gerUsers );
+            } else {
+                // Admin user not found with the specified role_id
+                $this->gerUsers =  $this->gerUsers ;
+            }
         } 
         else {
             // Clear the user list if no news_type is selected

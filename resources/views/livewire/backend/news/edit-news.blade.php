@@ -87,22 +87,27 @@
                                     
                                             @forelse ($gerUsers as $user)
                                             @php
-                                                $userName = '';
-                                    
-                                                if ($user->website_type_id == 1) {
-                                                    $userName = $user->name_hin;
-                                                } elseif ($user->website_type_id == 2) {
-                                                    $userName = $user->name;
-                                                } elseif ($user->website_type_id == 3) {
-                                                    $userName = $user->name_pbi;
-                                                } elseif ($user->website_type_id == 4) {
-                                                    $userName = $user->name_urdu;
-                                                }
+                                            $userName = '';
+                                            
+                                            if ($user->role_id === 1) {
+                                                $userName = 'Admin'; // Display "Admin" for admin users
+                                            } elseif ($user->website_type_id == 1) {
+                                                $userName = $user->name_hin;
+                                            } elseif ($user->website_type_id == 2) {
+                                                $userName = $user->name;
+                                            } elseif ($user->website_type_id == 3) {
+                                                $userName = $user->name_pbi;
+                                            } elseif ($user->website_type_id == 4) {
+                                                $userName = $user->name_urdu;
+                                            }
+
+                                            $roleName = $user->role ? $user->role->name : ''; // Assuming the role name is in a 'name' attribute
+
                                             @endphp
                                     
-                                            <option value="{{ $user->id }}" class="{{ $user->role_id === 1 ? 'bg-success text-white' : '' }}">
-                                                {{ $userName  }}
-                                            </option>
+                                    <option value="{{ $user->id }}" class="{{ $user->role_id === 1 ? 'bg-success text-white' : ($user->role_id === 3 ? 'bg-dark text-white' : '') }}">
+                                        {{ $userName  }}    ({{ ucwords($roleName) }})
+                                    </option>
                                         @empty
                                             <option value="" disabled>No users found</option>
                                         @endforelse
