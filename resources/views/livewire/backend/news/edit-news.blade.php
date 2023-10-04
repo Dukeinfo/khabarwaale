@@ -84,14 +84,28 @@
                                             <label for="user_id">User </label>
                                             <select name="user_id" wire:model.live="user_id" id="user_id" class="form-control">
                                                 <option value=""> Select User</option>
-
-                                            @forelse ($gerUsers as $user )
-                                            <option value="{{ $user->id }}">{{ $user->name }}</option>
-                                                
-                                            @empty
-                                                    not found 
-                                            @endforelse
                                     
+                                            @forelse ($gerUsers as $user)
+                                            @php
+                                                $userName = '';
+                                    
+                                                if ($user->website_type_id == 1) {
+                                                    $userName = $user->name_hin;
+                                                } elseif ($user->website_type_id == 2) {
+                                                    $userName = $user->name;
+                                                } elseif ($user->website_type_id == 3) {
+                                                    $userName = $user->name_pbi;
+                                                } elseif ($user->website_type_id == 4) {
+                                                    $userName = $user->name_urdu;
+                                                }
+                                            @endphp
+                                    
+                                            <option value="{{ $user->id }}" class="{{ $user->role_id === 1 ? 'bg-success text-white' : '' }}">
+                                                {{ $userName  }}
+                                            </option>
+                                        @empty
+                                            <option value="" disabled>No users found</option>
+                                        @endforelse
                                             </select>
                                             @error('user_id') <span class="error">{{ $message }}</span> @enderror
                                         </div>

@@ -97,6 +97,7 @@ class CreateNews extends Component
         $getwebsite_type =  WebsiteType::where('status' ,'Active')->get();
         $trashdata = NewsPost::onlyTrashed()->get();
 
+
         return view('livewire.backend.news.create-news' ,['totalrecords' => $totalrecords,'getwebsite_type' => $getwebsite_type, 'getCategory' =>$getCategory,    'records' =>$records , 'trashdata' => $trashdata]);
     }
 
@@ -157,29 +158,24 @@ class CreateNews extends Component
 
     public function handleChange()
     {
-        if ($this->news_type  ) {
-            if ($this->news_type == 1 ) {
+        $validNewsTypes = [1, 2, 3, 4];
 
-            $this->gerUsers = User::where('website_type_id', $this->news_type)->get();
-            }
-            elseif($this->news_type == 1){
-            $this->gerUsers = User::where('website_type_id', $this->news_type)->get();
+     // Check if $this->news_type is a valid news type
+     if (in_array($this->news_type, $validNewsTypes)) {
+        $regularUsers = User::where('website_type_id', $this->news_type)->get();
+        $adminUser = User::where('id', authUserId())->where('role_id', 1)->get();
 
-            }
-            elseif($this->news_type == 3){
-                $this->gerUsers = User::where('website_type_id', $this->news_type)->get();
-    
-                }
-
-                else{
-                    $this->gerUsers = User::where('website_type_id', $this->news_type)->get();
-        
-                    }
-
+        // Include admin user in all conditions and check role_id
+        if ($adminUser->isNotEmpty()) {
+            $this->gerUsers = $adminUser->concat($regularUsers);
         } else {
-            // Clear the user list if no news_type is selected
-            $this->gerUsers = [];
+            // Admin user not found with the specified role_id
+            $this->gerUsers = $regularUsers;
         }
+    } else {
+        // Clear the user list if no news_type is selected or an invalid value is provided
+        $this->gerUsers = [];
+    }
   
     }
 

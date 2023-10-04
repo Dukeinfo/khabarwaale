@@ -71,7 +71,17 @@
                                                 <span class="badge bg-dark p-1"> {{ $record->getmenu['category_en'] ?? 'NA'  }}</span>
                                             
                                             </td>
-                                            <td> {{$record->user['name'] ?? 'NA' }}</td>
+                                            <td> 
+                                                @if($record->user['role_id']  == 1)
+                                                      
+                                                <span class="badge bg-success p-1"> {{$record->user['name'] ?? 'NA' }}  </span>
+
+                                                @else 
+                                                {{$record->user['name'] ?? 'NA' }}    
+                                            
+                                                @endif
+                                                
+                                            </td>
 
 
                                             <td>
@@ -139,7 +149,17 @@
                                                     <span class="badge bg-dark p-1"> {{ $trash->getmenu['category_en'] ?? 'NA'  }}</span>
                                                 
                                                 </td>
-                                                <td> {{$trash->user['name'] ?? 'NA' }}</td>
+                                                <td> 
+                                                    @if($trash->user['role_id']  == 1)
+                                                      
+                                                    <span class="badge bg-success p-1"> {{$trash->user['name'] ?? 'NA' }}  </span>
+
+                                                    @else 
+                                                    {{$trash->user['name'] ?? 'NA' }}    
+                                                
+                                                    @endif
+                                                </td>
+                                                    
     
     
                                       
@@ -229,14 +249,28 @@
                                             <label for="user_id">User </label>
                                             <select name="user_id" wire:model.live="user_id" id="user_id" class="form-control">
                                                 <option value=""> Select User</option>
+                                                    @forelse ($gerUsers as $user)
+                                                    @php
+                                                        $userName = '';
+                                            
+                                                        if ($user->website_type_id == 1) {
+                                                            $userName = $user->name_hin;
+                                                        } elseif ($user->website_type_id == 2) {
+                                                            $userName = $user->name;
+                                                        } elseif ($user->website_type_id == 3) {
+                                                            $userName = $user->name_pbi;
+                                                        } elseif ($user->website_type_id == 4) {
+                                                            $userName = $user->name_urdu;
+                                                        }
+                                                    @endphp
+                                                     
 
-                                            @forelse ($gerUsers as $user )
-                                            <option value="{{ $user->id }}">{{ $user->name }} || {{ $user->name_hin}} || {{$user->name_pbi}} || {{$user->name_urdu}}</option>
-                                                
-                                            @empty
-                                                    not found 
-                                            @endforelse
-                                    
+                                                    <option value="{{ $user->id }}" class="{{ $user->role_id === 1 ? 'bg-success text-white' : ($user->role_id === 3 ? 'bg-dark text-white' : '') }}">
+                                                        {{ $userName  }}
+                                                    </option>
+                                                @empty
+                                                    <option value="" disabled>No users found</option>
+                                                @endforelse
                                             </select>
                                             @error('user_id') <span class="error">{{ $message }}</span> @enderror
                                         </div>

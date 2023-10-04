@@ -22,6 +22,9 @@ class DatabaseSeeder extends Seeder
         $this->call(RoleSeeder::class);
         $this->call(CategorySeeder::class);
         $this->call(AddLocationSeeder::class);
+        $this->call(WebsiteTypeSeeder::class);
+
+        
 
         
     }

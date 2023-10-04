@@ -99,14 +99,28 @@ class EditNews extends Component
     }
     public function handleChange()
     {
-        if ($this->news_type) {
-            $this->gerUsers = User::where('website_type_id', $this->news_type)->get();
+        $validNewsTypes = [1, 2, 3, 4];
+
+     // Check if $this->news_type is a valid news type
+     if (in_array($this->news_type, $validNewsTypes)) {
+        $regularUsers = User::where('website_type_id', $this->news_type)->get();
+        $adminUser = User::where('id', authUserId())->where('role_id', 1)->get();
+
+        // Include admin user in all conditions and check role_id
+        if ($adminUser->isNotEmpty()) {
+            $this->gerUsers = $adminUser->concat($regularUsers);
         } else {
-            // Clear the user list if no news_type is selected
-            $this->gerUsers = [];
+            // Admin user not found with the specified role_id
+            $this->gerUsers = $regularUsers;
         }
+    } else {
+        // Clear the user list if no news_type is selected or an invalid value is provided
+        $this->gerUsers = [];
+    }
   
     }
+
+    
 
     public function updateNews(){
         if(!is_null($this->image)){
