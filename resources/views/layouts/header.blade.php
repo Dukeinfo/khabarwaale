@@ -35,7 +35,8 @@
                         </span>
                         <a href="javascript:void()" class="left-topbar-item">
                        
-                            {{GoogleTranslate::trans("Monday, Jul 24, 2023", app()->getLocale())}}
+                            {!! GoogleTranslate::trans(\Carbon\Carbon::now()->format('d  M, Y'), app()->getLocale()) ?? "NA" !!}
+
                         </a>
                         <a href="javascript:void()" class="left-topbar-item">
                              {{GoogleTranslate::trans("Editor's Desk", app()->getLocale())}}
@@ -148,9 +149,31 @@
                             <img src="{{asset('assets')}}/images/logo.png" alt="LOGO">
                         </a>
                         <ul class="main-menu justify-content-center">
-                 
+                            <li class="main-menu-active">
+                                <a href="{{route('home.homepage')}}">
+                                    @switch(session()->get('language'))
+                                    @case('hindi')
+                                            {!! 'होम '!!}
+                                    @break
+                                    @case('punjabi')
+                                            {!! 'ਹੋਮ '!!}    
+                                    @break
+                                    @case('urdu')
+                                            {!! 'گھر '!!}
+                                     
+                                    @break
+                                    @case('english')
+                                            Home
+                                    @break
+                                    @default
+                                            Home
+                                    @endswitch
+                                    
+                                </a>
+                            </li>
                             @forelse ($getMenus as $key => $menu )
-                            <li class="@if(  $key == 0) main-menu-active @else ''  @endif" >
+                         
+                            <li>
                                 <a href="{{route('home.category', ['id' => $menu->id, 'slug' => createSlug($menu->category_en)])}}">
                                     @switch(session()->get('language'))
                                     @case('hindi')

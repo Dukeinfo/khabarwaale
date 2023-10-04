@@ -9,18 +9,26 @@
         <div class="bg0 flex-wr-sb-c p-rl-20 p-tb-8">
             <div class="f2-s-1 p-r-30 size-w-0 m-tb-6 flex-wr-s-c">
                 <span class="text-uppercase cl2 p-r-20">
-                    <p class="breaking_tag"><i class="fa fa-circle"></i><span class="blink">{{GoogleTranslate::trans('Breaking News', app()->getLocale()) ?? "NA"}}</span></p>
+                    <p class="breaking_tag"><i class="fa fa-circle"></i><span class="blink">{{GoogleTranslate::trans('Breaking News', app()->getLocale()) ?? "NA"}}
+                    </span>
+                    </p>
                 </span>
                 <span class="dis-inline-block cl6 slide100-txt pos-relative size-w-0" data-in="fadeInDown" data-out="fadeOutDown">
+                  @forelse ($flashNewsData  as  $key => $flashNews )
                     <span class="dis-inline-block slide100-txt-item animated visible-false">
-                        <a href="javascript:void()" class="cl6">Smriti Irani versus Mahua Moitra over Cong's 'FAILED' report card on Manipur</a>
+                        <a href="javascript:void()" class="cl6">
+                           ({{$key+1}})  {!!  GoogleTranslate::trans( Str::limit($flashNews->title, 60), app()->getLocale()) !!}
+                        </a>
                     </span>
-                    <span class="dis-inline-block slide100-txt-item animated visible-false">
-                        <a href="javascript:void()" class="cl6">Rain turns Jodhpur roads into waterways. Man washed away with bike</a>
-                    </span>
-                    <span class="dis-inline-block slide100-txt-item animated visible-false">
-                        <a href="javascript:void()" class="cl6">This scientist from Prayagraj was part of the team that launched Chandrayaan-3</a>
-                    </span>
+                  @empty
+                  <span class="dis-inline-block slide100-txt-item animated visible-false">
+                    <a href="javascript:void()" class="cl6">
+                     {{"NA"}}
+                    </a>
+                </span>
+                  @endforelse
+                
+             
                 </span>
             </div>
             <div class="pos-relative size-a-2 bo-1-rad-22 of-hidden bocl11 m-tb-6">
