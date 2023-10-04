@@ -49,7 +49,9 @@ Route::controller(FronendController::class)->group(function () {
 });
 
 
-
+Livewire::setScriptRoute(function ($handle) {
+    return Route::get('/boldpunjab/livewire/livewire.js', $handle);
+});
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -63,9 +65,7 @@ Route::middleware([
 
 Route::group(['middleware' => 'auth'],function(){
     Route::prefix('admin')->group(function(){
-        Livewire::setScriptRoute(function ($handle) {
-            return Route::get('/boldpunjab/livewire/livewire.js', $handle);
-        });
+
         Route::post('ckeditor/image_upload', [CkImageUploadController::class, 'upload'])->name('image.upload');
 
 Route::get('/dashboard', AdminDashboard::class)->name('admin_dashboard');
