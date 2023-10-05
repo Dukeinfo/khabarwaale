@@ -28,15 +28,21 @@ class FronendController extends Controller
         $data['latestNewsData'] = NewsPost::with('getmenu', 'newstype', 'user') 
                                             ->where('status', 'Approved') ->whereNull('deleted_at')
                                             ->where(function ($query) { $query->whereIn('breaking_side', ['Show']);})
-                                            ->orderBy('created_at', 'desc')->get();        
+                                            ->orderBy('created_at', 'desc')
+                                            ->limit(6)
+                                            ->get();        
         $data['topNewsData'] = NewsPost::with('getmenu', 'newstype', 'user') 
                                         ->where('status', 'Approved') ->whereNull('deleted_at')
                                         ->where(function ($query) { $query->whereIn('breaking_top', ['Show']);})
-                                        ->orderBy('created_at', 'desc')->get();                                    
+                                        ->orderBy('created_at', 'desc')
+                                        ->limit(8)
+                                        ->get();                                    
         // ->orWhereIn('other_column_name', ['value1', 'value2']); // Add more columns as needed
         $data['centerNewsCat'] = NewsPost::with('getmenu', 'newstype', 'user') 
                                          ->where('status', 'Approved')->whereNull('deleted_at')
-                                         ->orderBy('created_at', 'desc')->get();                                   
+                                         ->orderBy('created_at', 'desc')
+                                         ->limit(10)
+                                         ->get();                                   
         return view('frontend.welcome' ,$data);
 
     }

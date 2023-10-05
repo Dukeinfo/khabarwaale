@@ -13,47 +13,47 @@ class LanguageController extends Controller
 
     
     public function english(){
-        session()->get('language');
-        session()->forget('language');
-        session()->forget('locale');
+        // session()->get('language');
+        // session()->forget('language');
+        // session()->forget('locale');
 
         
-        Session::put('language','english');
-        App::setLocale('en');
+        // Session::put('language','english');
+        // App::setLocale('en');
         session()->put('locale', 'en');
         return redirect()->back();
     }
     public function Hindi(){
-        session()->get('language');
-        session()->forget('language');
-        session()->forget('locale');
+        // session()->get('language');
+        // session()->forget('language');
+        // session()->forget('locale');
 
-        Session::put('language','hindi');
-        App::setLocale('hi');
+        // Session::put('language','hindi');
+        // App::setLocale('hi');
         session()->put('locale', 'hi');
         return redirect()->back();
     }
  
   public function punjabi(){
-        session()->get('language');
-        session()->forget('language');
-        session()->forget('locale');
+        // session()->get('language');
+        // session()->forget('language');
+        // session()->forget('locale');
 
-        Session::put('language','punjabi');
-        App::setLocale('pa');
+        // Session::put('language','punjabi');
+        // App::setLocale('pa');
         session()->put('locale', 'pa');
         return redirect()->back();
     }
 
 
     public function urdu(){
-        session()->get('language');
-        session()->forget('language');
-        session()->forget('locale');
+        // session()->get('language');
+        // session()->forget('language');
+        // session()->forget('locale');
 
-        Session::put('language','urdu');
+        // Session::put('language','urdu');
 
-        App::setLocale('ur');
+        // App::setLocale('ur');
         session()->put('locale', 'ur');
         return redirect()->back();
     }

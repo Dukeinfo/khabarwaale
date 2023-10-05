@@ -360,6 +360,7 @@
         </div>
     </div>
 </section>
+                {{--  =============================== Category wise news  Punjab id =1   ===============================--}}
 <section class="p-t-70">
     <div class="container">
         <div class="row justify-content-center">
@@ -369,7 +370,7 @@
                         
                      @if($menu->sort_id == 1)
 
-
+                
                         <div class="p-b-20">
                             <div class="how2 how2-cl5 mb-4 flex-sb-c bg-white">
                                 <h3 class="f1-m-2 cl17 tab01-title">
@@ -383,121 +384,107 @@
                                     <i class="fs-12 m-l-5 fa fa-caret-right"></i>
                                 </a>
                             </div>
-                            <div class="row">
-
+                            @php
                                 
+
+                        
+                            $catWiseNews = \App\Models\NewsPost::with('getmenu', 'newstype', 'user')
+                                                ->where(function ($query) use ($menu) {
+                                                    $query->where('status', 'Approved')
+                                                        ->whereNull('deleted_at')
+                                                        ->where('category_id', $menu->id)
+                                                        ->orWhere(function ($subquery) {
+                                                            $subquery->where('category_id', '<=', 4)
+                                                                ->orWhereNull('category_id');
+                                                        });
+                                                })
+                                                ->orderByRaw('RAND()')
+                                                ->limit(4)
+                                                ->get();
+                                                
+                         @endphp
+                            <div class="row">
+                                @forelse ( $catWiseNews as $key =>  $catwise)
+                                    @if( $key == 0 )
+                                        <div class="col-sm-6">
+                                            <!-- Item post -->
+                                            <div class="m-b-30">
+                                                <div class="card border-0 shadow-sm mb-3">
+                                                    <div class="card-body">
+                                                        <a href="javascript:void();" class="wrap-pic-w hov1 trans-03">
+
+                                                            <img src="{{ isset($catwise->image)? getNewsImage($catwise->image)  : asset('assets/images/post-05.jpg')}}" alt="IMG" class="img-fluid rounded">
+                                                        </a>
+                                                        <div class="p-t-20">
+                                                            <h5 class="p-b-5">
+                                                                <a href="javascript:void();" class="f1-s-5 cl2 hov-cl10 trans-03">
+                                                                
+                                                                    {!! GoogleTranslate::trans( Str::limit($catwise->title, 85), app()->getLocale()) ?? "NA" !!}
+                                                                </a>
+                                                            </h5>
+                                                            <span class="cl8">
+                                                                <a href="javascript:void();" class="f1-s-4 cl10 hov-cl10 trans-03">
+                                                                    
+                                                                    {!!GoogleTranslate::trans($catwise['getmenu']['category_en'], app()->getLocale()) ?? "NA"  !!}
+                                                                </a>
+                                                                <span class="f1-s-3 m-rl-3">
+                                                                    -
+                                                                </span>
+                                                                <span class="f1-s-3">
+                                                                    {!! GoogleTranslate::trans( carbon\Carbon::parse($catwise->post_date)->format('M d, Y'), app()->getLocale()) ?? "NA" !!}
+                                                                </span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @else 
+                                    @endif
+                                @empty
+                                    
+                                @endforelse
                                 <div class="col-sm-6">
-                                    <!-- Item post -->
-                                    <div class="m-b-30">
-                                        <div class="card border-0 shadow-sm mb-3">
-                                            <div class="card-body">
-                                                <a href="javascript:void();" class="wrap-pic-w hov1 trans-03">
-                                                    <img src="{{asset('assets')}}/images/post-05.jpg" alt="IMG" class="img-fluid rounded">
-                                                </a>
-                                                <div class="p-t-20">
-                                                    <h5 class="p-b-5">
-                                                        <a href="javascript:void();" class="f1-s-5 cl2 hov-cl10 trans-03">
-                                                            American live music lorem ipsum dolor sit amet consectetur
+                                    @forelse ( $catWiseNews as $key =>  $catwise)
+                                        @if( $key > 0 )
+                                            <div class="card border-0 shadow-sm mb-3">
+                                                <div class="card-body">
+                                                    <div class="flex-wr-sb-s">
+                                                        <div class="size-w-2">
+                                                            <h5 class="p-b-5">
+                                                                <a href="javascript:void();" class="f1-s-5 cl3 hov-cl10 trans-03">
+                                                                    {!! GoogleTranslate::trans( Str::limit($catwise->title, 65), app()->getLocale()) ?? "NA" !!}
+
+                                                                </a>
+                                                            </h5>
+                                                            <span class="cl8">
+                                                                <a href="javascript:void();" class="f1-s-4 cl10 hov-cl10 trans-03">
+                                                                    {!!GoogleTranslate::trans($catwise['getmenu']['category_en'], app()->getLocale()) ?? "NA"  !!}
+
+                                                                </a>
+                                                                <span class="f1-s-3 m-rl-3">
+                                                                    -
+                                                                </span>
+                                                                <span class="f1-s-3">
+                                                                    {!! GoogleTranslate::trans( carbon\Carbon::parse($catwise->post_date)->format('M d, Y'), app()->getLocale()) ?? "NA" !!}
+
+                                                                </span>
+                                                            </span>
+                                                        </div>
+                                                        <a href="javascript:void()" class="size-w-1 wrap-pic-w hov1 trans-03">
+                                                            <img src="{{ isset($catwise->image)? getNewsImage($catwise->image)  : asset('assets/images/post-06.jpg')}}" alt="" class="img-fluid rounded">
                                                         </a>
-                                                    </h5>
-                                                    <span class="cl8">
-                                                        <a href="javascript:void();" class="f1-s-4 cl10 hov-cl10 trans-03">
-                                                            National
-                                                        </a>
-                                                        <span class="f1-s-3 m-rl-3">
-                                                            -
-                                                        </span>
-                                                        <span class="f1-s-3">
-                                                            Jul 22, 2023
-                                                        </span>
-                                                    </span>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="card border-0 shadow-sm mb-3">
-                                        <div class="card-body">
-                                            <div class="flex-wr-sb-s">
-                                                <div class="size-w-2">
-                                                    <h5 class="p-b-5">
-                                                        <a href="javascript:void();" class="f1-s-5 cl3 hov-cl10 trans-03">
-                                                            Boss revokes employee's WFH status, threatens to fire them
-                                                        </a>
-                                                    </h5>
-                                                    <span class="cl8">
-                                                        <a href="javascript:void();" class="f1-s-4 cl10 hov-cl10 trans-03">
-                                                            Punjab
-                                                        </a>
-                                                        <span class="f1-s-3 m-rl-3">
-                                                            -
-                                                        </span>
-                                                        <span class="f1-s-3">
-                                                            Jul 22, 2023
-                                                        </span>
-                                                    </span>
-                                                </div>
-                                                <a href="javascript:void()" class="size-w-1 wrap-pic-w hov1 trans-03">
-                                                    <img src="{{asset('assets')}}/images/post-06.jpg" alt="" class="img-fluid rounded">
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card border-0 shadow-sm mb-3">
-                                        <div class="card-body">
-                                            <div class="flex-wr-sb-s">
-                                                <div class="size-w-2">
-                                                    <h5 class="p-b-5">
-                                                        <a href="javascript:void();" class="f1-s-5 cl3 hov-cl10 trans-03">
-                                                            Boss revokes employee's WFH status, threatens to fire them
-                                                        </a>
-                                                    </h5>
-                                                    <span class="cl8">
-                                                        <a href="javascript:void();" class="f1-s-4 cl10 hov-cl10 trans-03">
-                                                            Punjab
-                                                        </a>
-                                                        <span class="f1-s-3 m-rl-3">
-                                                            -
-                                                        </span>
-                                                        <span class="f1-s-3">
-                                                            Jul 22, 2023
-                                                        </span>
-                                                    </span>
-                                                </div>
-                                                <a href="javascript:void()" class="size-w-1 wrap-pic-w hov1 trans-03">
-                                                    <img src="{{asset('assets')}}/images/post-07.jpg" alt="" class="img-fluid rounded">
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card border-0 shadow-sm mb-3">
-                                        <div class="card-body">
-                                            <div class="flex-wr-sb-s">
-                                                <div class="size-w-2">
-                                                    <h5 class="p-b-5">
-                                                        <a href="javascript:void();" class="f1-s-5 cl3 hov-cl10 trans-03">
-                                                            Boss revokes employee's WFH status, threatens to fire them
-                                                        </a>
-                                                    </h5>
-                                                    <span class="cl8">
-                                                        <a href="javascript:void();" class="f1-s-4 cl10 hov-cl10 trans-03">
-                                                            Punjab
-                                                        </a>
-                                                        <span class="f1-s-3 m-rl-3">
-                                                            -
-                                                        </span>
-                                                        <span class="f1-s-3">
-                                                            Jul 22, 2023
-                                                        </span>
-                                                    </span>
-                                                </div>
-                                                <a href="javascript:void()" class="size-w-1 wrap-pic-w hov1 trans-03">
-                                                    <img src="{{asset('assets')}}/images/post-10.jpg" alt="" class="img-fluid rounded">
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    
+                                            @else 
+                                        @endif
+                                    @empty
+                                        
+                                    @endforelse
+                           
+
                                 </div>
                             </div>
                         </div>
@@ -506,256 +493,228 @@
                         
                     @endforelse
                     <!-- Other -->
+                        {{--  =============================== 2nd Category wise news    ===============================--}}
+
                     <div class="row">
-                    @forelse ($getMenus  as $menu )
-                @if($menu->sort_id == 2 )
-                        <div class="col-sm-6 p-b-25">
-                            <div class="how2 how2-cl5 flex-sb-c mb-4 bg-white">
-                                <h3 class="f1-m-2 cl17 tab01-title">
-                                    {{GoogleTranslate::trans($menu->category_en  , app()->getLocale()) ?? "NA"}}
+                        @forelse ($getMenus  as $menu )
+                           @if($menu->sort_id == 2 )
+                        
+                            <div class="col-sm-6 p-b-25">
+                                <div class="how2 how2-cl5 flex-sb-c mb-4 bg-white">
+                                    <h3 class="f1-m-2 cl17 tab01-title">
+                                        {{GoogleTranslate::trans($menu->category_en  , app()->getLocale()) ?? "NA"}}
+                                    
+                                    </h3>
+                                    <a href="javascript:void();" class="tab01-link f1-s-1 cl9 hov-cl10 trans-03">
+                                        {{GoogleTranslate::trans("View all" , app()->getLocale()) ?? "NA"}}
 
-                                </h3>
-                                <a href="javascript:void();" class="tab01-link f1-s-1 cl9 hov-cl10 trans-03">
-                                    {{GoogleTranslate::trans("View all" , app()->getLocale()) ?? "NA"}}
+                                        <i class="fs-12 m-l-5 fa fa-caret-right"></i>
+                                    </a>
+                                </div>
+                                @php
+                                $secondCatWiseNews = \App\Models\NewsPost::with('getmenu', 'newstype')
+                                    ->where(function ($query) use ($menu) {
+                                        $query->where('status', 'Approved')
+                                            ->whereNull('deleted_at')
+                                            ->where('category_id', $menu->id);
+                                
+                                        if ($menu->sort_id == 2) {
+                                            $query->orderByRaw('RAND()');
+                                        } else {
+                                            $query->orWhere(function ($subquery) {
+                                                $subquery->where('category_id', '<=', 4)
+                                                    ->orWhereNull('category_id');
+                                            });
+                                        }
+                                    })
+                                    ->orderBy('created_at', 'desc')
+                                    ->orderBy('updated_at', 'desc') 
+                                    ->limit(4)
+                                    ->get();
+                                
+                                @endphp
+                                <!-- Main Item post -->
+                                @forelse ($secondCatWiseNews as $key => $secondCatNews )
+                                    @if( $key == 0 )
 
-                                    <i class="fs-12 m-l-5 fa fa-caret-right"></i>
-                                </a>
-                            </div>
-                            <!-- Main Item post -->
-                            <div class="mb-3">
+                                <div class="mb-3">
+                                    <div class="card border-0 shadow-sm mb-3">
+                                        <div class="card-body">
+                                            <a href="javascript:void();" class="wrap-pic-w hov1 trans-03">
+                                                <img src="{{   isset($secondCatNews->image)? getNewsImage($secondCatNews->image)  : asset('assets/images/post-10.jpg')}}" alt="IMG" class="img-fluid rounded">
+                                            </a>
+                                            <div class="p-t-20">
+                                                <h5 class="p-b-5">
+                                                    <a href="javascript:void();" class="f1-s-5 cl2 hov-cl10 trans-03">
+                                                    {!! GoogleTranslate::trans( Str::limit($secondCatNews->title, 75), app()->getLocale()) ?? "NA" !!}
+                                                    </a>
+                                                </h5>
+                                                <span class="cl8">
+                                                    <a href="javascript:void();" class="f1-s-4 cl10 hov-cl10 trans-03">
+                                                        
+                                                        
+                                                    {!!GoogleTranslate::trans($secondCatNews['getmenu']['category_en'], app()->getLocale()) ?? "NA"  !!}
+                                                    </a>
+                                                    <span class="f1-s-3 m-rl-3">
+                                                        -
+                                                    </span>
+                                                    <span class="f1-s-3">
+                                                        {!! GoogleTranslate::trans( carbon\Carbon::parse($secondCatNews->post_date)->format('M d, Y'), app()->getLocale()) ?? "NA" !!}
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                @else
                                 <div class="card border-0 shadow-sm mb-3">
                                     <div class="card-body">
-                                        <a href="javascript:void();" class="wrap-pic-w hov1 trans-03">
-                                            <img src="{{asset('assets')}}/images/post-10.jpg" alt="IMG" class="img-fluid rounded">
-                                        </a>
-                                        <div class="p-t-20">
-                                            <h5 class="p-b-5">
-                                                <a href="javascript:void();" class="f1-s-5 cl2 hov-cl10 trans-03">
-                                                    American live music lorem ipsum dolor sit amet consectetur
-                                                </a>
-                                            </h5>
-                                            <span class="cl8">
-                                                <a href="javascript:void();" class="f1-s-4 cl10 hov-cl10 trans-03">
-                                                    National
-                                                </a>
-                                                <span class="f1-s-3 m-rl-3">
-                                                    -
-                                                </span>
-                                                <span class="f1-s-3">
-                                                    Jul 22, 2023
-                                                </span>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card border-0 shadow-sm mb-3">
-                                <div class="card-body">
-                                    <div class="flex-wr-sb-s">
-                                        <div class="size-w-2">
-                                            <h5 class="p-b-5">
-                                                <a href="javascript:void();" class="f1-s-5 cl3 hov-cl10 trans-03">
-                                                    Boss revokes employee's WFH status, threatens to fire them
-                                                </a>
-                                            </h5>
-                                            <span class="cl8">
-                                                <a href="javascript:void();" class="f1-s-4 cl10 hov-cl10 trans-03">
-                                                    Punjab
-                                                </a>
-                                                <span class="f1-s-3 m-rl-3">
-                                                    -
-                                                </span>
-                                                <span class="f1-s-3">
-                                                    Jul 22, 2023
-                                                </span>
-                                            </span>
-                                        </div>
-                                        <a href="javascript:void()" class="size-w-1 wrap-pic-w hov1 trans-03">
-                                            <img src="{{asset('assets')}}/images/post-11.jpg" alt="" class="img-fluid rounded">
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card border-0 shadow-sm mb-3">
-                                <div class="card-body">
-                                    <div class="flex-wr-sb-s">
-                                        <div class="size-w-2">
-                                            <h5 class="p-b-5">
-                                                <a href="javascript:void();" class="f1-s-5 cl3 hov-cl10 trans-03">
-                                                    Boss revokes employee's WFH status, threatens to fire them
-                                                </a>
-                                            </h5>
-                                            <span class="cl8">
-                                                <a href="javascript:void();" class="f1-s-4 cl10 hov-cl10 trans-03">
-                                                    Punjab
-                                                </a>
-                                                <span class="f1-s-3 m-rl-3">
-                                                    -
-                                                </span>
-                                                <span class="f1-s-3">
-                                                    Jul 22, 2023
-                                                </span>
-                                            </span>
-                                        </div>
-                                        <a href="javascript:void()" class="size-w-1 wrap-pic-w hov1 trans-03">
-                                            <img src="{{asset('assets')}}/images/post-12.jpg" alt="" class="img-fluid rounded">
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card border-0 shadow-sm mb-3">
-                                <div class="card-body">
-                                    <div class="flex-wr-sb-s">
-                                        <div class="size-w-2">
-                                            <h5 class="p-b-5">
-                                                <a href="javascript:void();" class="f1-s-5 cl3 hov-cl10 trans-03">
-                                                    Boss revokes employee's WFH status, threatens to fire them
-                                                </a>
-                                            </h5>
-                                            <span class="cl8">
-                                                <a href="javascript:void();" class="f1-s-4 cl10 hov-cl10 trans-03">
-                                                    Punjab
-                                                </a>
-                                                <span class="f1-s-3 m-rl-3">
-                                                    -
-                                                </span>
-                                                <span class="f1-s-3">
-                                                    Jul 22, 2023
-                                                </span>
-                                            </span>
-                                        </div>
-                                        <a href="javascript:void()" class="size-w-1 wrap-pic-w hov1 trans-03">
-                                            <img src="{{asset('assets')}}/images/post-38.jpg" alt="" class="img-fluid rounded">
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        @endif
-                @if($menu->sort_id == 3 )
-                        <div class="col-sm-6 p-b-25">
-                            <div class="how2 how2-cl5 flex-sb-c mb-4 bg-white">
-                                <h3 class="f1-m-2 cl17 tab01-title">
-                                    {{GoogleTranslate::trans($menu->category_en  , app()->getLocale()) ?? "NA"}}
+                                        <div class="flex-wr-sb-s">
+                                            <div class="size-w-2">
+                                                <h5 class="p-b-5">
+                                                    <a href="javascript:void();" class="f1-s-5 cl3 hov-cl10 trans-03">
+                                                        {!! GoogleTranslate::trans( Str::limit($secondCatNews->title, 50), app()->getLocale()) ?? "NA" !!}
 
-                                </h3>
-                                <a href="javascript:void();" class="tab01-link f1-s-1 cl9 hov-cl10 trans-03">
-                                    {{GoogleTranslate::trans("View all" , app()->getLocale()) ?? "NA"}}
+                                                    </a>
+                                                </h5>
+                                                <span class="cl8">
+                                                    <a href="javascript:void();" class="f1-s-4 cl10 hov-cl10 trans-03">
+                                                        {!!GoogleTranslate::trans($secondCatNews['getmenu']['category_en'], app()->getLocale()) ?? "NA"  !!}
 
-                                    <i class="fs-12 m-l-5 fa fa-caret-right"></i>
-                                </a>
-                            </div>
-                            <!-- Main Item post -->
-                            <div class="mb-3">
-                                <div class="card border-0 shadow-sm mb-3">
-                                    <div class="card-body">
-                                        <a href="javascript:void();" class="wrap-pic-w hov1 trans-03">
-                                            <img src="{{asset('assets')}}/images/post-34.jpg" alt="IMG" class="img-fluid rounded">
-                                        </a>
-                                        <div class="p-t-20">
-                                            <h5 class="p-b-5">
-                                                <a href="javascript:void();" class="f1-s-5 cl2 hov-cl10 trans-03">
-                                                    American live music lorem ipsum dolor sit amet consectetur
-                                                </a>
-                                            </h5>
-                                            <span class="cl8">
-                                                <a href="javascript:void();" class="f1-s-4 cl10 hov-cl10 trans-03">
-                                                    National
-                                                </a>
-                                                <span class="f1-s-3 m-rl-3">
-                                                    -
+                                                    </a>
+                                                    <span class="f1-s-3 m-rl-3">
+                                                        -
+                                                    </span>
+                                                    <span class="f1-s-3">
+                                                        {!! GoogleTranslate::trans( carbon\Carbon::parse($secondCatNews->post_date)->format('M d, Y'), app()->getLocale()) ?? "NA" !!}
+
+                                                    </span>
                                                 </span>
-                                                <span class="f1-s-3">
-                                                    Jul 22, 2023
-                                                </span>
-                                            </span>
+                                            </div>
+                                            <a href="javascript:void()" class="size-w-1 wrap-pic-w hov1 trans-03">
+                                                <img src="{{ isset($secondCatNews->image)? getNewsImage($secondCatNews->image)   : asset('assets/images/post-11.jpg')}}" alt="" class="img-fluid rounded">
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
+                                @endif
+
+                                @empty
+                                        
+                                @endforelse
+                            
+
                             </div>
-                            <div class="card border-0 shadow-sm mb-3">
-                                <div class="card-body">
-                                    <div class="flex-wr-sb-s">
-                                        <div class="size-w-2">
-                                            <h5 class="p-b-5">
-                                                <a href="javascript:void();" class="f1-s-5 cl3 hov-cl10 trans-03">
-                                                    Boss revokes employee's WFH status, threatens to fire them
-                                                </a>
-                                            </h5>
-                                            <span class="cl8">
-                                                <a href="javascript:void();" class="f1-s-4 cl10 hov-cl10 trans-03">
-                                                    Punjab
-                                                </a>
-                                                <span class="f1-s-3 m-rl-3">
-                                                    -
-                                                </span>
-                                                <span class="f1-s-3">
-                                                    Jul 22, 2023
-                                                </span>
-                                            </span>
-                                        </div>
-                                        <a href="javascript:void()" class="size-w-1 wrap-pic-w hov1 trans-03">
-                                            <img src="{{asset('assets')}}/images/post-35.jpg" alt="" class="img-fluid rounded">
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card border-0 shadow-sm mb-3">
-                                <div class="card-body">
-                                    <div class="flex-wr-sb-s">
-                                        <div class="size-w-2">
-                                            <h5 class="p-b-5">
-                                                <a href="javascript:void();" class="f1-s-5 cl3 hov-cl10 trans-03">
-                                                    Boss revokes employee's WFH status, threatens to fire them
-                                                </a>
-                                            </h5>
-                                            <span class="cl8">
-                                                <a href="javascript:void();" class="f1-s-4 cl10 hov-cl10 trans-03">
-                                                    Punjab
-                                                </a>
-                                                <span class="f1-s-3 m-rl-3">
-                                                    -
-                                                </span>
-                                                <span class="f1-s-3">
-                                                    Jul 22, 2023
-                                                </span>
-                                            </span>
-                                        </div>
-                                        <a href="javascript:void()" class="size-w-1 wrap-pic-w hov1 trans-03">
-                                            <img src="{{asset('assets')}}/images/post-36.jpg" alt="" class="img-fluid rounded">
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card border-0 shadow-sm mb-3">
-                                <div class="card-body">
-                                    <div class="flex-wr-sb-s">
-                                        <div class="size-w-2">
-                                            <h5 class="p-b-5">
-                                                <a href="javascript:void();" class="f1-s-5 cl3 hov-cl10 trans-03">
-                                                    Boss revokes employee's WFH status, threatens to fire them
-                                                </a>
-                                            </h5>
-                                            <span class="cl8">
-                                                <a href="javascript:void();" class="f1-s-4 cl10 hov-cl10 trans-03">
-                                                    Punjab
-                                                </a>
-                                                <span class="f1-s-3 m-rl-3">
-                                                    -
-                                                </span>
-                                                <span class="f1-s-3">
-                                                    Jul 22, 2023
-                                                </span>
-                                            </span>
-                                        </div>
-                                        <a href="javascript:void()" class="size-w-1 wrap-pic-w hov1 trans-03">
-                                            <img src="{{asset('assets')}}/images/post-37.jpg" alt="" class="img-fluid rounded">
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                         @endif
+                        {{--  =============================== 3rd Category wise news    ===============================--}}
+
+                        @if($menu->sort_id == 3 )
+                            <div class="col-sm-6 p-b-25">
+                                <div class="how2 how2-cl5 flex-sb-c mb-4 bg-white">
+                                    <h3 class="f1-m-2 cl17 tab01-title">
+                                        {{GoogleTranslate::trans($menu->category_en  , app()->getLocale()) ?? "NA"}}
+
+                                    </h3>
+                                    <a href="javascript:void();" class="tab01-link f1-s-1 cl9 hov-cl10 trans-03">
+                                        {{GoogleTranslate::trans("View all" , app()->getLocale()) ?? "NA"}}
+
+                                        <i class="fs-12 m-l-5 fa fa-caret-right"></i>
+                                    </a>
+                                </div>
+
+                                @php
+                                $thirdCatWiseNews = \App\Models\NewsPost::with('getmenu', 'newstype')
+                                    ->where(function ($query) use ($menu) {
+                                        $query->where('status', 'Approved')
+                                            ->whereNull('deleted_at')
+                                            ->where('category_id', $menu->id);
+                                
+                                        if ($menu->sort_id == 3) {
+                                            $query->orderByRaw('RAND()');
+                                        } else {
+                                            $query->orWhere(function ($subquery) {
+                                                $subquery->where('category_id', '<=', 4)
+                                                    ->orWhereNull('category_id');
+                                            });
+                                        }
+                                    })
+                                    ->orderBy('created_at', 'desc')
+                                    ->orderBy('updated_at', 'desc') 
+                                    ->limit(4)
+                                    ->get();
+                                
+                                @endphp
+                                <!-- Main Item post -->
+                                @forelse ($thirdCatWiseNews as $index => $thirdcatNews )
+                                    @if($index == 0 )
+
+                                        <div class="mb-3">
+                                            <div class="card border-0 shadow-sm mb-3">
+                                                <div class="card-body">
+                                                    <a href="javascript:void();" class="wrap-pic-w hov1 trans-03">
+                                                        <img src="{{  isset($thirdcatNews->image)? getNewsImage($thirdcatNews->image)  : asset('assets/images/post-34.jpg')}}" alt="IMG" class="img-fluid rounded">
+                                                    </a>
+                                                    <div class="p-t-20">
+                                                        <h5 class="p-b-5">
+                                                            <a href="javascript:void();" class="f1-s-5 cl2 hov-cl10 trans-03">
+                                                                {!! GoogleTranslate::trans( Str::limit($thirdcatNews->title, 75), app()->getLocale()) ?? "NA" !!}
+
+                                                            </a>
+                                                        </h5>
+                                                        <span class="cl8">
+                                                            <a href="javascript:void();" class="f1-s-4 cl10 hov-cl10 trans-03">
+                                                                {!!GoogleTranslate::trans($thirdcatNews['getmenu']['category_en'], app()->getLocale()) ?? "NA"  !!}
+                                                            </a>
+                                                            <span class="f1-s-3 m-rl-3">
+                                                                -
+                                                            </span>
+                                                            <span class="f1-s-3">
+                                                                {!! GoogleTranslate::trans( carbon\Carbon::parse($thirdcatNews->post_date)->format('M d, Y'), app()->getLocale()) ?? "NA" !!}
+                                                            </span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @else
+                                        <div class="card border-0 shadow-sm mb-3">
+                                            <div class="card-body">
+                                                <div class="flex-wr-sb-s">
+                                                    <div class="size-w-2">
+                                                        <h5 class="p-b-5">
+                                                            <a href="javascript:void();" class="f1-s-5 cl3 hov-cl10 trans-03">
+                                                        
+                                                                {!! GoogleTranslate::trans( Str::limit($thirdcatNews->title, 65), app()->getLocale()) ?? "NA" !!}
+                                                            </a>
+                                                        </h5>
+                                                        <span class="cl8">
+                                                            <a href="javascript:void();" class="f1-s-4 cl10 hov-cl10 trans-03">
+                                                                
+                                                            {!!GoogleTranslate::trans($thirdcatNews['getmenu']['category_en'], app()->getLocale()) ?? "NA"  !!}
+                                                            </a>
+                                                            <span class="f1-s-3 m-rl-3">
+                                                                -
+                                                            </span>
+                                                            <span class="f1-s-3">
+                                                                
+                                                                {!! GoogleTranslate::trans( carbon\Carbon::parse($thirdcatNews->post_date)->format('M d, Y'), app()->getLocale()) ?? "NA" !!}
+                                                            </span>
+                                                        </span>
+                                                    </div>
+                                                    <a href="javascript:void()" class="size-w-1 wrap-pic-w hov1 trans-03">
+                                                        <img src="{{  isset($thirdcatNews->image)? getNewsImage($thirdcatNews->image)  :  asset('assets/images/post-35.jpg')}}" alt="" class="img-fluid rounded">
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
+                                @empty
+                                    
+                                @endforelse
+
+                            </div>
+                            @endif
                         @empty
                         
                         @endforelse
@@ -766,6 +725,8 @@
                 <div class="p-b-20">
                     @forelse ($getMenus  as $menu )
                     @if($menu->sort_id == 4 )
+                        {{--  =============================== 4th  right side Category wise news    ===============================--}}
+
                     <div class="p-b-30">
                         <div class="how2 how2-cl5 mb-4 flex-s-c bg-white">
                             <h3 class="f1-m-2 cl17 tab01-title">
@@ -774,114 +735,96 @@
 
                             </h3>
                         </div>
+                        @php
+             
+
+                        $fourthCatWiseNews = \App\Models\NewsPost::with('getmenu', 'newstype')
+                            ->where(function ($query) use ($menu) {
+                                $query->where('status', 'Approved')
+                                    ->whereNull('deleted_at')
+                                    ->where('category_id', $menu->id);
+
+                                if ($menu->sort_id == 4) {
+                                    $query->orderByRaw('RAND()');
+                                } elseif ($menu->sort_id == 3) {
+                                    // Add conditions for sort_id == 3
+                                } elseif ($menu->sort_id == 2) {
+                                    // Add conditions for sort_id == 2
+                                } elseif ($menu->sort_id == 1) {
+                                    // Add conditions for sort_id == 1
+                                } else {
+                                    $query->orWhere(function ($subquery) {
+                                        $subquery->where('category_id', '<=', 4)
+                                            ->orWhereNull('category_id');
+                                    });
+                                }
+                            })
+                            ->orderBy('created_at', 'desc')
+                            ->orderBy('updated_at', 'desc')
+                            ->limit(4)
+                            ->get();
+
+                        
+                        @endphp
                         <div class="card border-0 shadow-sm mb-3">
                             <div class="card-body">
+                                @forelse ($fourthCatWiseNews as $index2 =>  $fourthCatnews)
+                                    @if($index2 == 0)
+                        
                                 <div class="mb-3">
                                     <div class="border border-top-0 border-left-0 border-right-0 pb-3">
                                         <div class="p-b-10">
                                             <h5 class="p-b-5">
                                                 <a href="javascript:void();" class="f1-s-5 cl3 hov-cl10 trans-03">
-                                                    Ashok Gehlot slams PM for calling Manipur 'his govt' in 'few secs' of speech
+
+                                                    {!! GoogleTranslate::trans( Str::limit($fourthCatnews->title, 90), app()->getLocale()) ?? "NA" !!}
                                                 </a>
                                             </h5>
                                             <span class="cl8">
                                                 <span class="f1-s-3">
-                                                    Jul 22, 2023
+                                                    
+                                                    {!! GoogleTranslate::trans( carbon\Carbon::parse($fourthCatnews->post_date)->format('M d, Y'), app()->getLocale()) ?? "NA" !!}
                                                 </span>
                                             </span>
                                         </div>
                                         <a href="javascript:void();" class="wrap-pic-w hov1 trans-03">
-                                            <img src="{{asset('assets')}}/images/post-36.jpg" alt="IMG" class="img-fluid rounded">
+                                            <img src="{{  isset($fourthCatnews->image)? getNewsImage($fourthCatnews->image)  : asset('assets/images/post-36.jpg')}}" alt="IMG" class="img-fluid rounded">
                                         </a>
                                     </div>
                                 </div>
+                                @else
                                 <div class="mb-3">
                                     <div class="border border-top-0 border-left-0 border-right-0 pb-3">
                                         <div class="flex-wr-sb-s">
                                             <div class="size-w-2">
                                                 <h5 class="p-b-5">
                                                     <a href="javascript:void();" class="f1-s-5 cl3 hov-cl10 trans-03">
-                                                        ED arrests woman IAS officer Ranu Sahu in alleged coal levy case in Chandigarh
+                                                    {!! GoogleTranslate::trans( Str::limit($fourthCatnews->title, 75), app()->getLocale()) ?? "NA" !!}
+
                                                     </a>
                                                 </h5>
                                                 <span class="cl8">
                                                     <span class="f1-s-3">
-                                                        Jul 22, 2023
+                                                        
+                                                    {!!GoogleTranslate::trans($fourthCatnews['getmenu']['category_en'], app()->getLocale()) ?? "NA"  !!}
                                                     </span>
                                                 </span>
                                             </div>
                                             <a href="javascript:void()" class="size-w-1 wrap-pic-w hov1 trans-03">
-                                                <img src="{{asset('assets')}}/images/post-01.jpg" alt="" class="img-fluid rounded">
+                                                <img src="{{  isset($fourthCatnews->image)? getThumbnail($fourthCatnews->thumbnail)  : asset('assets/images/post-01.jpg')}}" alt="" class="img-fluid rounded">
                                             </a>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="mb-3">
-                                    <div class="border border-top-0 border-left-0 border-right-0 pb-3">
-                                        <div class="flex-wr-sb-s">
-                                            <div class="size-w-2">
-                                                <h5 class="p-b-5">
-                                                    <a href="javascript:void();" class="f1-s-5 cl3 hov-cl10 trans-03">
-                                                        ED arrests woman IAS officer Ranu Sahu in alleged coal levy case in Chandigarh
-                                                    </a>
-                                                </h5>
-                                                <span class="cl8">
-                                                    <span class="f1-s-3">
-                                                        Jul 22, 2023
-                                                    </span>
-                                                </span>
-                                            </div>
-                                            <a href="javascript:void()" class="size-w-1 wrap-pic-w hov1 trans-03">
-                                                <img src="{{asset('assets')}}/images/post-06.jpg" alt="" class="img-fluid rounded">
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="mb-3">
-                                    <div class="border border-top-0 border-left-0 border-right-0 pb-3">
-                                        <div class="flex-wr-sb-s">
-                                            <div class="size-w-2">
-                                                <h5 class="p-b-5">
-                                                    <a href="javascript:void();" class="f1-s-5 cl3 hov-cl10 trans-03">
-                                                        ED arrests woman IAS officer Ranu Sahu in alleged coal levy case in Chandigarh
-                                                    </a>
-                                                </h5>
-                                                <span class="cl8">
-                                                    <span class="f1-s-3">
-                                                        Jul 22, 2023
-                                                    </span>
-                                                </span>
-                                            </div>
-                                            <a href="javascript:void()" class="size-w-1 wrap-pic-w hov1 trans-03">
-                                                <img src="{{asset('assets')}}/images/post-03.jpg" alt="" class="img-fluid rounded">
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="mb-3">
-                                    <div class="border border-top-0 border-left-0 border-right-0 pb-3">
-                                        <div class="flex-wr-sb-s">
-                                            <div class="size-w-2">
-                                                <h5 class="p-b-5">
-                                                    <a href="javascript:void();" class="f1-s-5 cl3 hov-cl10 trans-03">
-                                                        ED arrests woman IAS officer Ranu Sahu in alleged coal levy case in Chandigarh
-                                                    </a>
-                                                </h5>
-                                                <span class="cl8">
-                                                    <span class="f1-s-3">
-                                                        Jul 22, 2023
-                                                    </span>
-                                                </span>
-                                            </div>
-                                            <a href="javascript:void()" class="size-w-1 wrap-pic-w hov1 trans-03">
-                                                <img src="{{asset('assets')}}/images/post-04.jpg" alt="" class="img-fluid rounded">
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
+                                @endif
+                                @empty
+                                    <p class="text-center">
+                                        Record Not Found
+                                    </p> 
+                                @endforelse
                                 <div class="mb-3 mt-4 text-center">
                                     <a href="javascript:void();" class="btn btn-primary px-5">
-                              {{GoogleTranslate::trans("View all" , app()->getLocale()) ?? "NA"}}
+                                        {{GoogleTranslate::trans("View all" , app()->getLocale()) ?? "NA"}}
                                         
                                        </a>
                                 </div>

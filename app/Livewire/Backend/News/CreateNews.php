@@ -76,6 +76,14 @@ class CreateNews extends Component
     public function render()
     {
 
+        if (empty($this->post_date)) {
+            $this->post_date = now()->format('Y-m-d'); // Set to current date
+        }
+
+        if (empty($this->post_month)) {
+            $this->post_month = now()->format('Y-m-d'); // Set to current month
+        }
+
         $search = trim($this->search);
         $records = NewsPost::with(['newstype', 'user', 'getmenu'])
         ->where(function ($query) use ($search) {
@@ -89,7 +97,7 @@ class CreateNews extends Component
                         ->orwhere('heading', 'like', '%' . $search . '%')
                         ->orWhere('post_month', 'like', '%' . $search . '%');
             });
-        })->get();
+        })->orderby('category_id')->get();
     
         $totalrecords = NewsPost::count();
         $getRoles =  Role::get();
