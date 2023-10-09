@@ -24,12 +24,13 @@
     <header>
 
 
-        @include('layouts/header' ,['$getMenus' => $getMenus] )
+
+        @livewire('frontend.homepage.header')
+
       
     </header>
   
 
-    @yield('content')
 
     <footer>
         @include('layouts/footer')

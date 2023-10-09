@@ -21,6 +21,8 @@ use App\Livewire\Backend\Settings\ContactusView;
 use App\Livewire\Backend\Settings\SocialAppsManager;
 use App\Livewire\Backend\Videos\CreateVideos;
 use App\Livewire\Backend\Videos\EditVideos;
+use App\Livewire\Frontend\Category\ViewCategory;
+use App\Livewire\Frontend\Homepage\ViewHomepage;
 use Illuminate\Support\Facades\Route;
 use Livewire\Livewire;
 
@@ -43,19 +45,26 @@ Route::controller(LanguageController::class)->group(function () {
 });
 
 Route::controller(FronendController::class)->group(function () {
-    Route::get('/',     'index')->name('home.homepage');
-    Route::get('/category/{id}/{slug}',  'category_page')->name('home.category');
+    // Route::get('/',     'index')->name('home.homepage');
+    // Route::get('/category/{id}/{slug}',  'category_page')->name('home.category');
     Route::get('/inner',  'inner_page')->name('home.inner');
 });
 
 
-Livewire::setScriptRoute(function ($handle) {
-    return Route::get('/boldpunjab/livewire/livewire.js', $handle);
-});
-Livewire::setUpdateRoute(function ($handle) {
-    return Route::post('/boldpunjab/livewire/update', $handle)
-        ->middleware(['auth']); 
-});
+
+
+Route::get('/', ViewHomepage::class)->name('home.homepage');
+Route::get('/category/{id}/{slug}', ViewCategory::class)->name('home.category');
+
+
+
+// Livewire::setScriptRoute(function ($handle) {
+//     return Route::get('/boldpunjab/livewire/livewire.js', $handle);
+// });
+// Livewire::setUpdateRoute(function ($handle) {
+//     return Route::post('/boldpunjab/livewire/update', $handle);
+        
+// });
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),

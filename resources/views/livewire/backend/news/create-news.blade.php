@@ -462,7 +462,7 @@
                                             <label for="status">Status</label>
                                             <select wire:model="status" class="form-select">
                                                 <option value="">Select</option>
-                                                <option value="Approved">Approved</option>
+                                                <option value="Approved"  selected>Approved</option>
                                                 <option value="Rejected">Rejected</option>
                                                 <option value="Pending">Pending</option>
                                             </select>

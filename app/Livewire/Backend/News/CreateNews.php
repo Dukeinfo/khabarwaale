@@ -49,17 +49,17 @@ class CreateNews extends Component
     #[Rule('required' , message: 'News Description field is required')] 
     public $news_description;
 
-    public $slider;
-    public $breaking_top;
-    public $breaking_side;
-    public $top_stories;
-    public $gallery;
-    public $more;
-    public $send_noti;
+    public $slider = true;
+    public $breaking_top  = true;
+    public $breaking_side  = true;
+    public $top_stories  = true;
+    public $gallery  = true;
+    public $more  = true;
+    public $send_noti  = true;
     public $metatags;
     public $description;
     public $keywords;
-    public $Approved;
+    public $Approved ;
     public $reject_reason;
     #[Rule('required' , message: 'Post date field is required')] 
     public $post_date;

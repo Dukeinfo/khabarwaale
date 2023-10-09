@@ -17,14 +17,7 @@ class FronendController extends Controller
         // 
         $data['getMenus']  =  Category::orderby('sort_id','ASC')->where('status' ,'Active')->where('deleted_at',Null)->get();
        
-        $data['flashNewsData'] = NewsPost::with('getmenu', 'newstype', 'user') 
-                                        ->where('status', 'Approved') ->whereNull('deleted_at')
-                                        ->where(function ($query) { $query->whereIn('breaking_side', ['Show'])
-                                                 ->orWhereIn('breaking_top', ['Show'])
-                                                 ->orWhereIn('slider', ['Show']);
-                                        })
-                                        ->orderBy('created_at', 'desc')->get(); 
-
+   
         $data['latestNewsData'] = NewsPost::with('getmenu', 'newstype', 'user') 
                                             ->where('status', 'Approved') ->whereNull('deleted_at')
                                             ->where(function ($query) { $query->whereIn('breaking_side', ['Show']);})
