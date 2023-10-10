@@ -142,7 +142,7 @@
                                     </span>
                                 </div>
                                 <a href="javascript:void();" class="wrap-pic-w hov1 trans-03">
-                                    <img src="{{ isset($topNews->thumbnail)?getThumbnail($topNews->thumbnail)  :  asset('assets/images/news/n1.jpg')}}" alt="IMG" class="img-fluid rounded">
+                                    <img src="{{ isset($topNews->image)?getNewsImage($topNews->image)  :  asset('assets/images/news/n1.jpg')}}" alt="IMG" class="img-fluid rounded">
                                 </a>
                             </div>
                         </div>
