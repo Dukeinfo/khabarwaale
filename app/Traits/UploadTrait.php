@@ -30,10 +30,20 @@ trait UploadTrait
             if (!File::exists($directory)) {
                 File::makeDirectory($directory, 0755, true, true);
             }
+            $image = Image::make($uploadedFile);
+               // Calculate the new height to maintain the aspect ratio
+            $thumbnailWidth = 100;
+            $thumbnailHeight = ($image->height() * $thumbnailWidth) / $image->width();
+
+            // Resize the image to the thumbnail size
+            $image->resize($thumbnailWidth, $thumbnailHeight);
+
 
             // Generate a thumbnail and save it to the specified directory
             $thumbnailName = 'thumb_'.$file_name;
-            Image::make($uploadedFile)->fit(100, 80)->save($directory.'/'.$thumbnailName);
+            $image->save($directory.'/'. $thumbnailName);
+
+            // Image::make($uploadedFile)->fit(100, 80)->save($directory.'/'.$thumbnailName);
             return ['file_name' => $file_name, 'thumbnail_name' => $thumbnailName];
 
           
