@@ -30,7 +30,7 @@
                 
             </a>
 
-            <a href="{{url('/category')}}" class="breadcrumb-item f1-s-3 cl9">
+            <a href="#" class="breadcrumb-item f1-s-3 cl9">
                 Category
             </a>
 
@@ -63,7 +63,7 @@
                                 <div class="mb-3">
                                     <div class="border border-top-0 border-left-0 border-right-0 pb-3">
                                         <h5 class="p-b-5">
-                                            <a href="javascript:void();" class="f1-s-5 cl3 hov-cl10 trans-03">
+                                            <a href="{{route('home.inner',['newsid' => $news->id , 'slug' => $news->slug ])}}" class="f1-s-5 cl3 hov-cl10 trans-03">
                                                 
                                                 <span class="text-danger mr-1"> 
                                                     {!!GoogleTranslate::trans($news['getmenu']['category_en'], app()->getLocale()) ?? "NA"  !!}:
@@ -120,7 +120,7 @@
                             <div class="card-body">
                                 <div class="p-b-20">
                                     <h5 class="p-b-5">
-                                        <a href="javascript:void();" class="f1-m-3 cl2 hov-cl10 trans-03 font-weight-bold">
+                                        <a href="{{route('home.inner',['newsid' => $topNews->id , 'slug' => $topNews->slug ])}}" class="f1-m-3 cl2 hov-cl10 trans-03 font-weight-bold">
                                         
                                            {!! GoogleTranslate::trans( Str::limit($topNews->title, 85), app()->getLocale()) !!}
 
@@ -155,7 +155,7 @@
                                 <div class="flex-wr-sb-s">
                                     <div class="size-w-2">
                                         <h5 class="p-b-5">
-                                            <a href="javascript:void();" class="f1-s-5 cl3 hov-cl10 trans-03">
+                                            <a href="{{route('home.inner',['newsid' => $topNews->id , 'slug' => $topNews->slug ])}}" class="f1-s-5 cl3 hov-cl10 trans-03">
                                            {!! GoogleTranslate::trans( Str::limit($topNews->title, 80), app()->getLocale()) !!}
 
                                             </a>
@@ -192,7 +192,7 @@
                         <div class="text-center my-5">
                             <p class="text-uppercase text-center small pb-2">{{GoogleTranslate::trans('Advertisement', app()->getLocale()) ?? "NA"}}</p>
                             <a href="javascript:void()">
-                                <img src="{{asset('assets')}}/images/ads/ad2.jpg" class="img-fluid" alt="">
+                                <img src="{{asset('assets/images/ads/ad2.jpg')}}" class="img-fluid" alt="">
                             </a>
                         </div>
                         @forelse ($catWiseNewsData as  $index => $topNews )
@@ -202,7 +202,7 @@
                                 <div class="flex-wr-sb-s">
                                     <div class="size-w-2">
                                         <h5 class="p-b-5">
-                                            <a href="javascript:void();" class="f1-s-5 cl3 hov-cl10 trans-03">
+                                            <a href="{{route('home.inner',['newsid' => $topNews->id , 'slug' => $topNews->slug ])}}" class="f1-s-5 cl3 hov-cl10 trans-03">
                                            {!! GoogleTranslate::trans( Str::limit($topNews->title, 80), app()->getLocale()) !!}
 
                                             </a>

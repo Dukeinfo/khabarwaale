@@ -16,12 +16,11 @@ public function placeholder(){
 
     public function render()
     {
-        sleep(3);
-        $topNewsData = NewsPost::with('getmenu', 'newstype', 'user') 
+        $topNewsData = NewsPost::with('getmenu', 'newstype') 
         ->where('status', 'Approved') ->whereNull('deleted_at')
         ->where(function ($query) { $query->whereIn('breaking_top', ['Show']);})
         ->orderBy('created_at', 'desc')
-        ->limit(8)
+        ->limit(6)
         ->get();     
         return view('livewire.frontend.news-sections.top-news' ,['topNewsData' =>$topNewsData]);
     }

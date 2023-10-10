@@ -6,7 +6,7 @@
                             <h3 class="f1-m-2 cl17 tab01-title">
                       
 
-                                {{GoogleTranslate::trans(' Top News ', app()->getLocale()) ?? "NA"}}
+                                {{GoogleTranslate::trans('Top News', app()->getLocale()) ?? "NA"}}
 
                             </h3>
                         </div>
@@ -15,11 +15,11 @@
                     @forelse ($topNewsData as  $key =>$topNews )
                         
                    @if($key == 0)
-                        <div class="card border-0 shadow-sm mb-3"  wire:loading.class="shimmer">
+                        <div class="card border-0 shadow-sm mb-3"  wire:loading.class="shimmer" wire:poll>
                             <div class="card-body">
                                 <div class="p-b-20">
                                     <h5 class="p-b-5">
-                                        <a href="javascript:void();" class="f1-m-3 cl2 hov-cl10 trans-03 font-weight-bold">
+                                        <a href="{{route('home.inner',['newsid' => $topNews->id , 'slug' => $topNews->slug ])}}"  target="_blank" class="f1-m-3 cl2 hov-cl10 trans-03 font-weight-bold">
                                         
                                            {!! GoogleTranslate::trans( Str::limit($topNews->title, 85), app()->getLocale()) !!}
 
@@ -49,18 +49,18 @@
                        
                         {{-- end Top News --}}
 
-                        <div class="card border-0 shadow-sm mb-3">
+                        <div class="card border-0 shadow-sm mb-3" wire:poll>
                             <div class="card-body">
                                 <div class="flex-wr-sb-s">
                                     <div class="size-w-2">
                                         <h5 class="p-b-5">
-                                            <a href="javascript:void();" class="f1-s-5 cl3 hov-cl10 trans-03">
+                                            <a href="{{route('home.inner',['newsid' => $topNews->id , 'slug' => $topNews->slug ])}}" class="f1-s-5 cl3 hov-cl10 trans-03">
                                            {!! GoogleTranslate::trans( Str::limit($topNews->title, 80), app()->getLocale()) !!}
 
                                             </a>
                                         </h5>
                                         <span class="cl8">
-                                            <a href="javascript:void();" class="f1-s-4 cl10 hov-cl10 trans-03">
+                                            <a href="{{route('home.inner',['newsid' => $topNews->id , 'slug' => $topNews->slug ])}}" class="f1-s-4 cl10 hov-cl10 trans-03">
                                                 {!!GoogleTranslate::trans($topNews['getmenu']['category_en'], app()->getLocale()) ?? "NA"  !!}
 
                                             </a>

@@ -1,6 +1,6 @@
 <div>
     <div class="row">
-<div class="col-md-8">
+<div class="col-md-12">
     <h3>Static page list</h3>
 
     <div class="card-body">
@@ -22,7 +22,7 @@
                 <tr>     
                     <td  class="fw-bold">  {{ str_replace('_' , ' ',$routeName)}} </td>
                      <td> 
-                     @if(in_array($route->getName(), ['home.homepage' ,'home.inner'])) 
+                     @if(in_array($route->getName(), ['home.homepage' ])) 
                     
                      <a class="fw-bold"href="{{ route($route->getName()) }}" target="_blank">  {{ str_replace('_' , ' ',$routeName)}}</a>
                     
@@ -44,9 +44,6 @@
     </div>
 </div>
 
-<div class="col-md-4"> <h3>Last Activity</h3>
-    <pre>{{ $lastActivity }}</pre>
-    <button wire:click="updateLastActivity" class="btn   btn-success">Refresh Last Activity</button></div>
-</div>
+
 
 </div>

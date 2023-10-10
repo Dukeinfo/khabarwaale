@@ -1,7 +1,7 @@
 <div>
 
 {{-- flash news  --}}
-@livewire('frontend.news-sections.flash-news' ,['Lazy' => true]) 
+@livewire('frontend.news-sections.flash-news') 
 {{-- end flash news  --}}
 <section class="p-t-30"  >
     <div class="container">

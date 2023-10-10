@@ -23,6 +23,7 @@ use App\Livewire\Backend\Videos\CreateVideos;
 use App\Livewire\Backend\Videos\EditVideos;
 use App\Livewire\Frontend\Category\ViewCategory;
 use App\Livewire\Frontend\Homepage\ViewHomepage;
+use App\Livewire\Frontend\Innerpage\ViewInnerPage;
 use Illuminate\Support\Facades\Route;
 use Livewire\Livewire;
 
@@ -45,9 +46,8 @@ Route::controller(LanguageController::class)->group(function () {
 });
 
 Route::controller(FronendController::class)->group(function () {
-    // Route::get('/',     'index')->name('home.homepage');
-    // Route::get('/category/{id}/{slug}',  'category_page')->name('home.category');
-    Route::get('/inner',  'inner_page')->name('home.inner');
+ 
+    // Route::get('/inner/{newsid}',  'inner_page')->name('home.inner');
 });
 
 
@@ -55,6 +55,8 @@ Route::controller(FronendController::class)->group(function () {
 
 Route::get('/', ViewHomepage::class)->name('home.homepage');
 Route::get('/category/{id}/{slug}', ViewCategory::class)->name('home.category');
+Route::get('/inner/{newsid}/{slug}', ViewInnerPage::class)->name('home.inner');
+
 
 
 

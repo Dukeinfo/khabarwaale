@@ -11,7 +11,7 @@
             <div class="mb-3">
                 <div class="border border-top-0 border-left-0 border-right-0 pb-3">
                     <h5 class="p-b-5">
-                        <a href="javascript:void();" class="f1-s-5 cl3 hov-cl10 trans-03">
+                        <a href="{{route('home.inner',['newsid' => $news->id , 'slug' => $news->slug ])}}" class="f1-s-5 cl3 hov-cl10 trans-03">
                             
                             <span class="text-danger mr-1"> 
                                 {!!GoogleTranslate::trans($news['getmenu']['category_en'], app()->getLocale()) ?? "NA"  !!}:

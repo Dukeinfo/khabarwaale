@@ -23,7 +23,7 @@
                         <div class="border border-top-0 border-left-0 border-right-0 pb-3">
                             <div class="p-b-10">
                                 <h5 class="p-b-5">
-                                    <a href="javascript:void();" class="f1-s-5 cl3 hov-cl10 trans-03">
+                                    <a href="{{route('home.inner',['newsid' => $fourthCatnews->id , 'slug' => $fourthCatnews->slug ])}}" class="f1-s-5 cl3 hov-cl10 trans-03">
 
                                         {!! GoogleTranslate::trans( Str::limit($fourthCatnews->title, 90), app()->getLocale()) ?? "NA" !!}
                                     </a>
@@ -35,7 +35,7 @@
                                     </span>
                                 </span>
                             </div>
-                            <a href="javascript:void();" class="wrap-pic-w hov1 trans-03">
+                            <a href="{{route('home.inner',['newsid' => $fourthCatnews->id , 'slug' => $fourthCatnews->slug ])}}" class="wrap-pic-w hov1 trans-03">
                                 <img src="{{  isset($fourthCatnews->image)? getNewsImage($fourthCatnews->image)  : asset('assets/images/post-36.jpg')}}" alt="IMG" class="img-fluid rounded">
                             </a>
                         </div>
@@ -46,7 +46,7 @@
                             <div class="flex-wr-sb-s">
                                 <div class="size-w-2">
                                     <h5 class="p-b-5">
-                                        <a href="javascript:void();" class="f1-s-5 cl3 hov-cl10 trans-03">
+                                        <a href="{{route('home.inner',['newsid' => $fourthCatnews->id , 'slug' => $fourthCatnews->slug ])}}" class="f1-s-5 cl3 hov-cl10 trans-03">
                                         {!! GoogleTranslate::trans( Str::limit($fourthCatnews->title, 75), app()->getLocale()) ?? "NA" !!}
 
                                         </a>

@@ -47,9 +47,8 @@ class FronendController extends Controller
      }
 
      public function inner_page(){
-        $data['getMenus']  =  Category::orderby('sort_id')->where('status' ,'Active')->where('deleted_at',Null)->get();
 
-        return view('frontend.inner'  ,$data);
+        return view('frontend.inner');
 
      }
 

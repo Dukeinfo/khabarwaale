@@ -4,5 +4,4 @@
 @section('keywords', 'Khabarwaale - News Portal')
 @section('content')
 
-
 @endsection

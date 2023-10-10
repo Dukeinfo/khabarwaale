@@ -30,7 +30,7 @@
       
     </header>
   
-
+    @yield('content')
 
     <footer>
         @include('layouts/footer')
@@ -58,11 +58,6 @@
     <script src="{{asset('assets/vendor/bootstrap/js/popper.js')}}"></script>
     <script src="{{asset('assets/vendor/bootstrap/js/bootstrap.min.js')}}"></script>
     <script src="{{asset('assets/js/main.js')}}"></script>
-    {{-- <script type="text/javascript">
-        var url = "{{ route('changeLang') }}";
-        $(".changeLang").change(function(){
-            window.location.href = url + "?lang="+ $(this).val();
-        });
-    </script> --}}
+
 </body>
 </html>

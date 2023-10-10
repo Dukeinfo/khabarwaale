@@ -6,7 +6,7 @@
             {{GoogleTranslate::trans($menu->category_en  , app()->getLocale()) ?? "NA"}}
 
         </h3>
-        <a href="javascript:void();" class="tab01-link f1-s-1 cl9 hov-cl10 trans-03">
+        <a href="{{route('home.category', ['id' => $menu->id, 'slug' => createSlug($menu->category_en)])}}" class="tab01-link f1-s-1 cl9 hov-cl10 trans-03">
         
       {{GoogleTranslate::trans("View all" , app()->getLocale()) ?? "NA"}}
              

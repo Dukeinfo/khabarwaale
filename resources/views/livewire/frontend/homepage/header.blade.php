@@ -109,7 +109,7 @@
                 <ul class="main-menu-m">
                     @forelse ($getMenus as $key => $menu )
                     <li>
-                        <a href="{{url('/category')}}" >
+                        <a href="{{route('home.category', ['id' => $menu->id, 'slug' => createSlug($menu->category_en)])}}" >
                             @switch(session()->get('language'))
                             @case('hindi')
                                 {{ $menu->category_hin ?? "NA" }}
@@ -146,7 +146,7 @@
                 <div class="main-nav">
                     <!-- Menu desktop -->
                     <nav class="menu-desktop">
-                        <a class="logo-stick" href="{{url('/')}}" wire:navigate>
+                        <a class="logo-stick" href="{{url('/')}}" >
                             <img src="{{asset('assets')}}/images/logo.png" alt="LOGO">
                         </a>
                         <ul class="main-menu justify-content-center">
