@@ -58,13 +58,13 @@ Route::get('/category/{id}/{slug}', ViewCategory::class)->name('home.category');
 
 
 
-// Livewire::setScriptRoute(function ($handle) {
-//     return Route::get('/boldpunjab/livewire/livewire.js', $handle);
-// });
-// Livewire::setUpdateRoute(function ($handle) {
-//     return Route::post('/boldpunjab/livewire/update', $handle);
+Livewire::setScriptRoute(function ($handle) {
+    return Route::get('/boldpunjab/livewire/livewire.js', $handle);
+});
+Livewire::setUpdateRoute(function ($handle) {
+    return Route::post('/boldpunjab/livewire/update', $handle);
         
-// });
+});
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
