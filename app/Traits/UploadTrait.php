@@ -41,9 +41,10 @@ trait UploadTrait
 
             // Generate a thumbnail and save it to the specified directory
             $thumbnailName = 'thumb_'.$file_name;
+            Image::make($uploadedFile)->fit(100, 80)->save($directory.'/'.$thumbnailName);
             $image->save($directory.'/'. $thumbnailName);
 
-            // Image::make($uploadedFile)->fit(100, 80)->save($directory.'/'.$thumbnailName);
+           
             return ['file_name' => $file_name, 'thumbnail_name' => $thumbnailName];
 
           
