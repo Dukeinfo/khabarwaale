@@ -3,7 +3,7 @@
         <div class="bg0 flex-wr-sb-c p-rl-20 p-tb-8">
             <div class="f2-s-1 p-r-30 size-w-0 m-tb-6 flex-wr-s-c">
                 <span class="text-uppercase cl2 p-r-20">
-                    <p class="breaking_tag"><i class="fa fa-circle"></i><span class="blink">{{GoogleTranslate::trans('Breaking News', app()->getLocale()) ?? "NA"}}
+                    <p  t class="breaking_tag"><i class="fa fa-circle"></i><span class="blink">{{GoogleTranslate::trans('Breaking News', app()->getLocale()) ?? "NA"}}
                     </span>
                     </p>
                 </span>
@@ -11,7 +11,7 @@
                 <span   class="dis-inline-block cl6 slide100-txt pos-relative size-w-0" data-in="fadeInDown" data-out="fadeOutDown">
                   @forelse ($this->flashNewsData  as  $key => $flashNews )
                     <span class="dis-inline-block slide100-txt-item animated visible-false" >
-                        <a href="{{route('home.inner',['newsid' => $flashNews->id , 'slug' =>  GoogleTranslate::trans($flashNews->slug, app()->getLocale()) ])}}" class="cl6">
+                        <a target="_blank" href="{{route('home.inner',['newsid' => $flashNews->id , 'slug' =>  GoogleTranslate::trans($flashNews->slug, app()->getLocale()) ])}}" class="cl6">
                            ({{$key+1}})  {!!  GoogleTranslate::trans( Str::limit($flashNews->title, 60), app()->getLocale()) !!}
                         </a>
                     </span>
