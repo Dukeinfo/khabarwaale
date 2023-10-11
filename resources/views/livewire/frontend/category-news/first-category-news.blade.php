@@ -64,7 +64,7 @@
                             <div class="flex-wr-sb-s">
                                 <div class="size-w-2">
                                     <h5 class="p-b-5">
-                                        <a  target="_blank"  href="{{route('home.inner',['newsid' => $catWise->id , 'slug' =>  GoogleTranslate::trans($catWise->slug  app()->getLocale()) ])}}" class="f1-s-5 cl3 hov-cl10 trans-03">
+                                        <a  target="_blank"  href="{{route('home.inner',['newsid' => $catWise->id , 'slug' =>  GoogleTranslate::trans($catWise->slug,  app()->getLocale()) ])}}" class="f1-s-5 cl3 hov-cl10 trans-03">
                                             {!! GoogleTranslate::trans( Str::limit($catWise->title, 65), app()->getLocale()) ?? "NA" !!}
 
                                         </a>
@@ -84,7 +84,7 @@
                                         </span>
                                     </span>
                                 </div>
-                                <a   target="_blank"  href="{{route('home.inner',['newsid' => $catWise->id , 'slug' =>  GoogleTranslate::trans($catWise->slug  app()->getLocale()) ])}}" class="size-w-1 wrap-pic-w hov1 trans-03">
+                                <a   target="_blank"  href="{{route('home.inner',['newsid' => $catWise->id , 'slug' =>  GoogleTranslate::trans($catWise->slug , app()->getLocale()) ])}}" class="size-w-1 wrap-pic-w hov1 trans-03">
                                     <img src="{{ isset($catWise->thumbnail)? getThumbnail($catWise->thumbnail)  : asset('assets/images/post-06.jpg')}}" alt="" class="img-fluid rounded">
                                 </a>
                             </div>

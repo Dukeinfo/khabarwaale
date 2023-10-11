@@ -153,12 +153,13 @@
                                                     </a>
                                                     <div class="p-t-20">
                                                         <h5 class="p-b-5">
-                                                            <a target="_blank" href="{{route('home.inner',['newsid' => $recmendNews->id , 'slug' => $recmendNews->slug ])}}" class="f1-s-5 cl2 hov-cl10 trans-03">
+                                                            <a target="_blank" href="{{route('home.inner',['newsid' => $recmendNews->id , 'slug' =>  GoogleTranslate::trans($recmendNews->slug , app()->getLocale()) ])}}" class="f1-s-5 cl2 hov-cl10 trans-03">
                                                                 {{GoogleTranslate::trans($recmendNews->title  , app()->getLocale()) ?? "NA"}}
                                                             </a>
                                                         </h5>
                                                         <span class="cl8">
-                                                            <a  target="_blank" href="javascript:void();" class="f1-s-4 cl10 hov-cl10 trans-03">
+                                                            <a  target="_blank" href="{{route('home.category', ['id' => $recmendNews->getmenu->id, 'slug' =>  GoogleTranslate::trans(createSlug($recmendNews->getmenu->category_en), app()->getLocale()) ])}}
+                                                                " class="f1-s-4 cl10 hov-cl10 trans-03">
                                                                 {!!GoogleTranslate::trans($recmendNews['getmenu']['category_en'], app()->getLocale()) ?? "NA"  !!}
                                                             </a>
                                                             <span class="f1-s-3 m-rl-3">

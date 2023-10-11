@@ -140,12 +140,12 @@
                     <div class="mb-3">
                         <div class="card border-0 shadow-sm mb-3">
                             <div class="card-body">
-                                <a href="{{route('home.inner',['newsid' => $thirdcatNews->id , 'slug' =>  GoogleTranslate::trans($thirdcatNews->slug  app()->getLocale()) ])}}" class="wrap-pic-w hov1 trans-03">
+                                <a href="{{route('home.inner',['newsid' => $thirdcatNews->id , 'slug' =>  GoogleTranslate::trans($thirdcatNews->slug,  app()->getLocale()) ])}}" class="wrap-pic-w hov1 trans-03">
                                     <img src="{{  isset($thirdcatNews->image)? getNewsImage($thirdcatNews->image)  : asset('assets/images/post-34.jpg')}}" alt="IMG" class="img-fluid rounded">
                                 </a>
                                 <div class="p-t-20">
                                     <h5 class="p-b-5">
-                                        <a  target="_blank" href="{{route('home.inner',['newsid' => $thirdcatNews->id , 'slug' =>  GoogleTranslate::trans($thirdcatNews->slug  app()->getLocale()) ])}}" class="f1-s-5 cl2 hov-cl10 trans-03">
+                                        <a  target="_blank" href="{{route('home.inner',['newsid' => $thirdcatNews->id , 'slug' =>  GoogleTranslate::trans($thirdcatNews->slug,  app()->getLocale()) ])}}" class="f1-s-5 cl2 hov-cl10 trans-03">
                                             {!! GoogleTranslate::trans( Str::limit($thirdcatNews->title, 75), app()->getLocale()) ?? "NA" !!}
 
                                         </a>
