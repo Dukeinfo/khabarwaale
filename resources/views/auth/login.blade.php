@@ -55,6 +55,13 @@
                                             </div>
                                         @endif
 
+                                        @if ($errors->any())
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li class="text-danger" >{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                       @endif
                                         <form class="form-horizontal" method="POST" action="{{ route('login') }}">
                                             @csrf
                                         <div class="mb-3">

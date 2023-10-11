@@ -45,10 +45,11 @@ Route::controller(LanguageController::class)->group(function () {
     Route::get('/language/urdu',  'urdu')->name('urdu.language');
 });
 
-Route::controller(FronendController::class)->group(function () {
+// Route::controller(FronendController::class)->group(function () {
+// Route::get('/', 'index')->name('home.homepage');
  
-    // Route::get('/inner/{newsid}',  'inner_page')->name('home.inner');
-});
+
+// });
 
 
 

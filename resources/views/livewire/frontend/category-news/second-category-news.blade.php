@@ -10,7 +10,8 @@
                 </h3>
 
         
-                <a href="{{route('home.category', ['id' => $menu->id, 'slug' => createSlug($menu->category_en)])}}" class="tab01-link f1-s-1 cl9 hov-cl10 trans-03">
+                <a  target="_blank"  href="{{route('home.category', ['id' => $menu->id, 'slug' => GoogleTranslate::trans( createSlug($menu->category_en), app()->getLocale())
+                   ])}}" class="tab01-link f1-s-1 cl9 hov-cl10 trans-03">
                     {{GoogleTranslate::trans("View all" , app()->getLocale()) ?? "NA"}}
 
                 </a>
@@ -23,17 +24,18 @@
                     <div class="mb-3">
                         <div class="card border-0 shadow-sm mb-3">
                             <div class="card-body">
-                                <a href="{{route('home.inner',['newsid' => $secondCatNews->id , 'slug' => $secondCatNews->slug ])}}" class="wrap-pic-w hov1 trans-03">
+                                <a  target="_blank" href="{{route('home.inner',['newsid' => $secondCatNews->id , 'slug' => GoogleTranslate::trans( $secondCatNews->slug, app()->getLocale())   ])}}" class="wrap-pic-w hov1 trans-03">
                                     <img src="{{   isset($secondCatNews->image)? getNewsImage($secondCatNews->image)  : asset('assets/images/post-10.jpg')}}" alt="IMG" class="img-fluid rounded">
                                 </a>
                                 <div class="p-t-20">
                                     <h5 class="p-b-5">
-                                        <a href="{{route('home.inner',['newsid' => $secondCatNews->id , 'slug' => $secondCatNews->slug ])}};" class="f1-s-5 cl2 hov-cl10 trans-03">
+                                        <a  target="_blank" href="{{route('home.inner',['newsid' => $secondCatNews->id , 'slug' => GoogleTranslate::trans( $secondCatNews->slug, app()->getLocale()) ])}};" class="f1-s-5 cl2 hov-cl10 trans-03">
                                         {!! GoogleTranslate::trans( Str::limit($secondCatNews->title, 75), app()->getLocale()) ?? "NA" !!}
                                         </a>
                                     </h5>
                                     <span class="cl8">
-                                        <a href="{{route('home.category', ['id' => $secondCatNews->getmenu->id, 'slug' => createSlug($secondCatNews->getmenu->category_en)])}}" class="f1-s-4 cl10 hov-cl10 trans-03">
+                                        <a  target="_blank" href="{{route('home.category', ['id' => $secondCatNews->getmenu->id, 'slug' => GoogleTranslate::trans(createSlug($secondCatNews->getmenu->category_en), app()->getLocale())
+                                            ])}}" class="f1-s-4 cl10 hov-cl10 trans-03">
                                             
                                             
                                         {!!GoogleTranslate::trans($secondCatNews['getmenu']['category_en'], app()->getLocale()) ?? "NA"  !!}
@@ -56,13 +58,13 @@
                         <div class="flex-wr-sb-s">
                             <div class="size-w-2">
                                 <h5 class="p-b-5">
-                                    <a href="{{route('home.inner',['newsid' => $secondCatNews->id , 'slug' => $secondCatNews->slug ])}}" class="f1-s-5 cl3 hov-cl10 trans-03">
+                                    <a  target="_blank" href="{{route('home.inner',['newsid' => $secondCatNews->id , 'slug' =>  GoogleTranslate::trans( $secondCatNews->slug, app()->getLocale())  ])}}" class="f1-s-5 cl3 hov-cl10 trans-03">
                                         {!! GoogleTranslate::trans( Str::limit($secondCatNews->title, 50), app()->getLocale()) ?? "NA" !!}
 
                                     </a>
                                 </h5>
                                 <span class="cl8">
-                                    <a href="{{route('home.category', ['id' => $secondCatNews->getmenu->id, 'slug' => createSlug($secondCatNews->getmenu->category_en)])}}" class="f1-s-4 cl10 hov-cl10 trans-03">
+                                    <a   target="_blank" href="{{route('home.category', ['id' => $secondCatNews->getmenu->id, 'slug' =>  GoogleTranslate::trans( createSlug($secondCatNews->getmenu->category_en), app()->getLocale()) ])}}" class="f1-s-4 cl10 hov-cl10 trans-03">
                                         {!!GoogleTranslate::trans($secondCatNews['getmenu']['category_en'], app()->getLocale()) ?? "NA"  !!}
 
                                     </a>
@@ -75,7 +77,7 @@
                                     </span>
                                 </span>
                             </div>
-                            <a href="{{route('home.inner',['newsid' => $secondCatNews->id , 'slug' => $secondCatNews->slug ])}}" class="size-w-1 wrap-pic-w hov1 trans-03">
+                            <a   target="_blank" href="{{route('home.inner',['newsid' => $secondCatNews->id , 'slug' =>  GoogleTranslate::trans( $secondCatNews->slug, app()->getLocale())  ])}}" class="size-w-1 wrap-pic-w hov1 trans-03">
                                 <img src="{{ isset($secondCatNews->thumbnail)? getThumbnail($secondCatNews->thumbnail)   : asset('assets/images/post-11.jpg')}}" alt="" class="img-fluid rounded">
                             </a>
                         </div>
@@ -102,7 +104,7 @@
                     {{GoogleTranslate::trans($menu->category_en  , app()->getLocale()) ?? "NA"}}
 
                 </h3>
-                <a href="{{route('home.category', ['id' => $menu->id, 'slug' => createSlug($menu->category_en)])}}" class="tab01-link f1-s-1 cl9 hov-cl10 trans-03">
+                <a  target="_blank"  href="{{route('home.category', ['id' => $menu->id, 'slug' =>  GoogleTranslate::trans( createSlug($menu->category_en), app()->getLocale())  ])}}" class="tab01-link f1-s-1 cl9 hov-cl10 trans-03">
                     {{GoogleTranslate::trans("View all" , app()->getLocale()) ?? "NA"}}
 
                     <i class="fs-12 m-l-5 fa fa-caret-right"></i>
@@ -138,18 +140,18 @@
                     <div class="mb-3">
                         <div class="card border-0 shadow-sm mb-3">
                             <div class="card-body">
-                                <a href="javascript:void();" class="wrap-pic-w hov1 trans-03">
+                                <a href="{{route('home.inner',['newsid' => $thirdcatNews->id , 'slug' =>  GoogleTranslate::trans($thirdcatNews->slug  app()->getLocale()) ])}}" class="wrap-pic-w hov1 trans-03">
                                     <img src="{{  isset($thirdcatNews->image)? getNewsImage($thirdcatNews->image)  : asset('assets/images/post-34.jpg')}}" alt="IMG" class="img-fluid rounded">
                                 </a>
                                 <div class="p-t-20">
                                     <h5 class="p-b-5">
-                                        <a href="javascript:void();" class="f1-s-5 cl2 hov-cl10 trans-03">
+                                        <a  target="_blank" href="{{route('home.inner',['newsid' => $thirdcatNews->id , 'slug' =>  GoogleTranslate::trans($thirdcatNews->slug  app()->getLocale()) ])}}" class="f1-s-5 cl2 hov-cl10 trans-03">
                                             {!! GoogleTranslate::trans( Str::limit($thirdcatNews->title, 75), app()->getLocale()) ?? "NA" !!}
 
                                         </a>
                                     </h5>
                                     <span class="cl8">
-                                        <a href="javascript:void();" class="f1-s-4 cl10 hov-cl10 trans-03">
+                                        <a   target="_blank" href="{{route('home.category', ['id' => $thirdcatNews->getmenu->id, 'slug' => createSlug($thirdcatNews->getmenu->category_en)])}}" class="f1-s-4 cl10 hov-cl10 trans-03">
                                             {!!GoogleTranslate::trans($thirdcatNews['getmenu']['category_en'], app()->getLocale()) ?? "NA"  !!}
                                         </a>
                                         <span class="f1-s-3 m-rl-3">
@@ -169,13 +171,13 @@
                             <div class="flex-wr-sb-s">
                                 <div class="size-w-2">
                                     <h5 class="p-b-5">
-                                        <a href="javascript:void();" class="f1-s-5 cl3 hov-cl10 trans-03">
+                                        <a  target="_blank"  href="javascript:void();" class="f1-s-5 cl3 hov-cl10 trans-03">
                                     
                                             {!! GoogleTranslate::trans( Str::limit($thirdcatNews->title, 65), app()->getLocale()) ?? "NA" !!}
                                         </a>
                                     </h5>
                                     <span class="cl8">
-                                        <a href="javascript:void();" class="f1-s-4 cl10 hov-cl10 trans-03">
+                                        <a  target="_blank" href="javascript:void();" class="f1-s-4 cl10 hov-cl10 trans-03">
                                             
                                         {!!GoogleTranslate::trans($thirdcatNews['getmenu']['category_en'], app()->getLocale()) ?? "NA"  !!}
                                         </a>
@@ -188,7 +190,7 @@
                                         </span>
                                     </span>
                                 </div>
-                                <a href="javascript:void()" class="size-w-1 wrap-pic-w hov1 trans-03">
+                                <a   target="_blank" href="javascript:void()" class="size-w-1 wrap-pic-w hov1 trans-03">
                                     <img src="{{  isset($thirdcatNews->thumbnail)? getThumbnail($thirdcatNews->thumbnail)   :  asset('assets/images/post-35.jpg')}}" alt="" class="img-fluid rounded">
                                 </a>
                             </div>

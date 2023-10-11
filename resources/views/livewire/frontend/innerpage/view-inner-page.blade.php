@@ -30,13 +30,14 @@
                                         Home
                                     </a>
 
-                                    <a href="{{url('/category')}}" class="breadcrumb-item f1-s-3 cl9">
-                                     {{GoogleTranslate::trans($GetNewsDetail->getmenu->category_en  , app()->getLocale()) ?? "NA"}}
+                                    <a  target="_blank"  href="{{route('home.category', ['id' => $GetNewsDetail->getmenu->id, 'slug' =>  GoogleTranslate::trans(createSlug($GetNewsDetail->getmenu->category_en, app()->getLocale()) )])}}
+                                    " class="breadcrumb-item f1-s-3 cl9">
+                                     {{ GoogleTranslate::trans( $GetNewsDetail->getmenu->category_en  , app()->getLocale()) ?? "NA"}}
 
                                     </a>
 
                                     <span class="breadcrumb-item f1-s-3 cl9">
-                                     {{GoogleTranslate::trans($GetNewsDetail->slug  , app()->getLocale()) ?? "NA"}}
+                                     {{GoogleTranslate::trans( Str::limit($GetNewsDetail->slug, 70) , app()->getLocale()) ?? "NA"}}
                                         
                                     </span>
                                 </div>
@@ -53,7 +54,7 @@
 
                                 <div class="flex-wr-s-s p-b-40">
                                     <span class="f1-s-3 cl8 m-r-15">
-                                        <a href="{{url('/')}}" class="f1-s-4 cl17 hov-cl10 trans-03">
+                                        <a target="_blank"  href="{{url('/')}}" class="f1-s-4 cl17 hov-cl10 trans-03">
                                             by 
                                             {{GoogleTranslate::trans($GetNewsDetail->user->name  , app()->getLocale()) ?? "NA"}}
 
@@ -147,17 +148,17 @@
                                         <div class="m-b-30">
                                             <div class="card border-0 shadow-sm mb-3">
                                                 <div class="card-body">
-                                                    <a href="{{route('home.inner',['newsid' => $recmendNews->id , 'slug' => $recmendNews->slug ])}}" class="wrap-pic-w hov1 trans-03">
+                                                    <a target="_blank" href="{{route('home.inner',['newsid' => $recmendNews->id , 'slug' =>  GoogleTranslate::trans($recmendNews->slug, app()->getLocale())  ])}}" class="wrap-pic-w hov1 trans-03">
                                                         <img src="{{ isset($recmendNews->image)? getNewsImage($recmendNews->image)  :  asset('assets/images/post-05.jpg')}}" alt="IMG" class="img-fluid rounded">
                                                     </a>
                                                     <div class="p-t-20">
                                                         <h5 class="p-b-5">
-                                                            <a href="{{route('home.inner',['newsid' => $recmendNews->id , 'slug' => $recmendNews->slug ])}}" class="f1-s-5 cl2 hov-cl10 trans-03">
+                                                            <a target="_blank" href="{{route('home.inner',['newsid' => $recmendNews->id , 'slug' => $recmendNews->slug ])}}" class="f1-s-5 cl2 hov-cl10 trans-03">
                                                                 {{GoogleTranslate::trans($recmendNews->title  , app()->getLocale()) ?? "NA"}}
                                                             </a>
                                                         </h5>
                                                         <span class="cl8">
-                                                            <a href="javascript:void();" class="f1-s-4 cl10 hov-cl10 trans-03">
+                                                            <a  target="_blank" href="javascript:void();" class="f1-s-4 cl10 hov-cl10 trans-03">
                                                                 {!!GoogleTranslate::trans($recmendNews['getmenu']['category_en'], app()->getLocale()) ?? "NA"  !!}
                                                             </a>
                                                             <span class="f1-s-3 m-rl-3">

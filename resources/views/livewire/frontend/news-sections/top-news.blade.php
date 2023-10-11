@@ -19,14 +19,15 @@
                             <div class="card-body">
                                 <div class="p-b-20">
                                     <h5 class="p-b-5">
-                                        <a href="{{route('home.inner',['newsid' => $topNews->id , 'slug' => $topNews->slug ])}}"  target="_blank" class="f1-m-3 cl2 hov-cl10 trans-03 font-weight-bold">
+                                        <a target="_blank" href="{{route('home.inner',['newsid' => $topNews->id , 'slug' => GoogleTranslate::trans($topNews->slug, app()->getLocale()) ])}}"  target="_blank" class="f1-m-3 cl2 hov-cl10 trans-03 font-weight-bold">
                                         
                                            {!! GoogleTranslate::trans( Str::limit($topNews->title, 85), app()->getLocale()) !!}
 
                                         </a>
                                     </h5>
                                     <span class="cl8">
-                                        <a href="javascript:void();" class="f1-s-4 cl10 hov-cl10 trans-03">
+                                        <a href="{{route('home.category', ['id' => $topNews->getmenu->id, 'slug' => createSlug($topNews->getmenu->category_en)])}}
+                                            " target="_blank"  class="f1-s-4 cl10 hov-cl10 trans-03">
                                         
                                             {!!GoogleTranslate::trans($topNews['getmenu']['category_en'], app()->getLocale()) ?? "NA"  !!}
                                         </a>
