@@ -1,6 +1,15 @@
 <div class="col-lg-4">
     <div class="row">
 
+        @php
+        $today = now()->toDateString();
+            $advertisements = \App\Models\Advertisment::where('from_date', '<=', $today)
+                               ->where('to_date', '>=', $today)
+                               ->where('location','Slider Right')
+                               ->where('status', 'Yes') // Assuming 'status' is used to enable/disable ads
+                               ->get();
+                            
+        @endphp
         @forelse ($advertisements as $advertisement)
         <div class="col-lg-12 mb-4" wire:poll>
             <div class="card bg-white shadow-sm text-center border-0">

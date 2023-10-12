@@ -15,6 +15,7 @@ class RightAdds extends Component
                            ->where('location','Slider Right')
                            ->where('status', 'Yes') // Assuming 'status' is used to enable/disable ads
                            ->get();
-        return view('livewire.frontend.advertisement.right-adds' ,['advertisements' =>$advertisements]);
+         dd(     $advertisements);                  
+        return view('livewire.frontend.advertisement.right-adds' ,['advertisements' => $advertisements]);
     }
 }
