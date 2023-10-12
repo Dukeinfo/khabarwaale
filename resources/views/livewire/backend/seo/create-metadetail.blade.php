@@ -11,7 +11,7 @@
                             <ol class="breadcrumb m-0">
                                 <li class="breadcrumb-item"><a href="{{url('admin/dashboard')}}">Dashboard</a></li>
                                 <li class="breadcrumb-item">Create Meta Details</li>
-                                <li class="breadcrumb-item active">News</li>
+                                <li class="breadcrumb-item active">Meta</li>
                             </ol>
                         </div>
                     </div>
@@ -36,7 +36,7 @@
               
                         </div>
                         <div class="card-body">
-                            <span class="badge bg-success p-2  fs-4">Total Meta : </span>
+                            <span class="badge bg-success p-2  fs-4">Total Meta : {{count( $records) ?? ""}} </span>
                             <div class="table-responsive">
                                 <table class="table table-bordered table-striped datatable-- table-hover">
                                     <thead>
@@ -82,8 +82,8 @@
                                             </td>
 
                                                 <td>   
-                                                    <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal{{$seoMetadetail->id}}">
-                                                        <i class="fa fa-eye fa-fw"></i></button>
+                                                    {{-- <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal{{$seoMetadetail->id}}">
+                                                        <i class="fa fa-eye fa-fw"></i></button> --}}
                                                     <button class="btn btn-sm btn-primary" wire:click="edit({{$seoMetadetail->id}})" wire:target="edit({{ $seoMetadetail->id }})"  wire:loading.attr="disabled">
                                                         <i class="fa fa-edit fa-fw" ></i></button>
                                                     <button class="btn btn-sm btn-danger" wire:click="delete({{ $seoMetadetail->id }})" wire:target="delete({{ $seoMetadetail->id }})"  wire:loading.attr="disabled">
@@ -130,7 +130,7 @@
                                             
                                                     <button class="btn btn-sm btn-danger" wire:click="restore({{ $trash->id }})" wire:target="restore({{ $trash->id }})"  wire:loading.attr="disabled">
                                                     Restore</button>
-                                                    <button class="btn btn-sm btn-warning" onclick="confirm('Are you sure you want to Peramanetly remove  this News ?') || event.stopImmediatePropagation()" wire:click="paramDelete({{ $trash->id }})" wire:target="paramDelete({{ $trash->id }})"  wire:loading.attr="disabled">
+                                                    <button class="btn btn-sm btn-warning" onclick="confirm('Are you sure you want to Peramanetly remove  this  ?') || event.stopImmediatePropagation()" wire:click="paramDelete({{ $trash->id }})" wire:target="paramDelete({{ $trash->id }})"  wire:loading.attr="disabled">
                                                     Peramanet Delete</button>
                                                     {{-- <a  href="javascript:void(0)" wire:click="edit({{$record->id}})" class="text-success me-2" title="Edit"  ><i class="fa fa-edit fa-fw"></i></a> --}}
                                                     {{-- <a href="javascript:void(0)" class="text-danger me-2" title="Delete" ><i class="fa fa-times fa-fw fa-lg"></i></a> --}}
@@ -154,7 +154,7 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header bg-transparent border-bottom py-3">
-                            <h4 class="card-title">Add News</h4>
+                            <h4 class="card-title">Add MetaDetail</h4>
                             <p class="card-title-desc mb-0">Fill out the particulars in order to add or update.</p>
                         </div>
                         <div class="card-body">
@@ -242,7 +242,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary mt-3">Submit</button>
+                        <button type="submit"  wire:loading.attr="disabled"  class="btn btn-primary mt-3">Submit</button>
                     </form>
                     
         
@@ -256,37 +256,7 @@
             </div>
             <!-- end row -->
             
-      
-            <!-- end row -->
-            <script>
-            document.addEventListener('livewire:initialized', () => {
-            // CKEDITOR.replace('editor'); 
-            const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');        
-                CKEDITOR.replace('editor', {
-                // filebrowserUploadUrl: '{{ route("image.upload") }}', // Set the image upload endpoint URL
-                filebrowserUploadUrl: "{{route('image.upload', ['_token' => csrf_token() ])}}",
-                filebrowserUploadMethod: 'form', // Use form-based file upload (default is XMLHttpRequest)
-                filebrowserBrowseUrl: '/ckfinder/ckfinder.html', // Set the CKFinder browse server URL
-                filebrowserImageBrowseUrl: '/ckfinder/ckfinder.html?type=Images', // Set the CKFinder image browse server URL
-                headers: {
-                'X-CSRF-TOKEN': csrfToken // Pass the CSRF token with the request headers
-                },
 
-                });
-
-            CKEDITOR.instances.editor.on('change', function () {
-                @this.set('news_description', CKEDITOR.instances.editor.getData());
-            });
-            // Livewire.on('post-created', function () {
-            //     });
-
-            Livewire.on('formSubmitted', function () {
-                 CKEDITOR.instances.editor.setData(''); // Reset CKEditor content
-
-            });
-
-            }); 
-            </script>
 
             
         </div>

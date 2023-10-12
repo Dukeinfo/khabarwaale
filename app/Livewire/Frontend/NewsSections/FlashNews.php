@@ -17,20 +17,13 @@ class FlashNews extends Component
                  ->orWhereIn('breaking_top', ['Show'])
                  ->orWhereIn('slider', ['Show']);
         })
-        ->orderBy('created_at', 'desc')->get();
+        ->orderBy('created_at', 'desc')
+        ->limit(5)
+        ->get();
     }
 
     public function render()
     {
-
-        // $flashNewsData = NewsPost::with('getmenu', 'newstype', 'user') 
-        // ->where('status', 'Approved') ->whereNull('deleted_at')
-        // ->where(function ($query) { $query->whereIn('breaking_side', ['Show'])
-        //          ->orWhereIn('breaking_top', ['Show'])
-        //          ->orWhereIn('slider', ['Show']);
-        // })
-        // ->orderBy('created_at', 'desc')->get(); 
-
         return view('livewire.frontend.news-sections.flash-news' );
     }
 }

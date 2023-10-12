@@ -4,5 +4,6 @@
 @section('keywords', 'Khabarwaale - News Portal')
 @section('content')
 
+@livewire('frontend.innerpage.view-inner-page')
 
 @endsection

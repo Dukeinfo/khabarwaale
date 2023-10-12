@@ -13,7 +13,12 @@ use App\Livewire\Backend\MenusMaster\CreateMenus;
 use App\Livewire\Backend\MenusMaster\EditMenus;
 use App\Livewire\Backend\News\CreateNews;
 use App\Livewire\Backend\News\EditNews;
+use App\Livewire\Backend\Seo\CreateFooterSnippets;
+use App\Livewire\Backend\Seo\CreateHeaderSnippets;
 use App\Livewire\Backend\Seo\CreateMetadetail;
+use App\Livewire\Backend\Seo\EditFooterSnippets;
+use App\Livewire\Backend\Seo\EditHeaderSnippets;
+use App\Livewire\Backend\Seo\EditMetadetail;
 use App\Livewire\Backend\Settings\AdminProfile;
 use App\Livewire\Backend\Settings\ContactMessages;
 use App\Livewire\Backend\Settings\ContactusEdit;
@@ -45,16 +50,18 @@ Route::controller(LanguageController::class)->group(function () {
     Route::get('/language/urdu',  'urdu')->name('urdu.language');
 });
 
-// Route::controller(FronendController::class)->group(function () {
-// Route::get('/', 'index')->name('home.homepage');
+Route::controller(FronendController::class)->group(function () {
+Route::get('/', 'index')->name('home.homepage');
+Route::get('//inner', 'inner_page');
+
  
 
-// });
+});
 
 
 
 
-Route::get('/', ViewHomepage::class)->name('home.homepage');
+// Route::get('/', ViewHomepage::class)->name('home.homepage');
 Route::get('/category/{id}/{slug}', ViewCategory::class)->name('home.category');
 Route::get('/inner/{newsid}/{slug}', ViewInnerPage::class)->name('home.inner');
 
@@ -108,6 +115,13 @@ Route::get('/create-news', CreateNews::class)->name('admin.create_news');
 Route::get('/edit-news/{news_id}', EditNews::class)->name('admin.edit_news');
 
 Route::get('/create-metadetail', CreateMetadetail::class)->name('admin.createMetadetail');
+Route::get('/edit-metadetail/{id}', EditMetadetail::class)->name('admin.editMetadetail');
+
+Route::get('/create-headerSnipped', CreateHeaderSnippets::class)->name('admin.createHeaderSnipped');
+Route::get('/edit-headerSnipped/{id}', EditHeaderSnippets::class)->name('admin.editeaderSnipped');
+
+Route::get('/create-footerSnipped', CreateFooterSnippets::class)->name('admin.createfooterSnipped');
+Route::get('/edit-footerSnipped/{id}', EditFooterSnippets::class)->name('admin.editfooterSnipped');
 
 
 

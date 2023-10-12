@@ -313,7 +313,7 @@
                                     <div class="row mt-3">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <button type="submit" wire:target="createNews" wire:loading.attr="disabled"  class="btn btn-primary">Create News</button>
+                                                <button type="submit" wire:loading.attr="disabled"  class="btn btn-primary">Create News</button>
                                                 <div wire:loading wire:target="createNews">
                                                     <i class="fas fa-1x fa-sync-alt fa-spin"></i>
                                                  </div>

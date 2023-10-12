@@ -90,13 +90,6 @@
         <script src="{{asset('assets/js/main.js')}}"></script>
         @stack('modals')
 
-
-        <script>
-            // Add a class to the body element before the page loads
-            document.addEventListener('DOMContentLoaded', function() {
-                document.body.classList.remove('animsition');
-            });
-        </script>
         @livewireScripts
 
     </body>

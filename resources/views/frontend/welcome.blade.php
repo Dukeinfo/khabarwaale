@@ -3,4 +3,7 @@
 @section('desc', 'Khabarwaale - News Portal')
 @section('keywords', 'Khabarwaale - News Portal')
 @section('content')
+
+
+@livewire('frontend.homepage.view-homepage')
 @endsection

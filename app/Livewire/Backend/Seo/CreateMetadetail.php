@@ -51,7 +51,6 @@ class CreateMetadetail extends Component
 
         $validatedData = $this->validate([
             'category_id' => 'nullable|integer',
-            'slug' => 'nullable|string',
             'meta_title' => 'required|string',
             'meta_keyword' => 'required|string',
             'meta_description' => 'required|string',
@@ -62,11 +61,25 @@ class CreateMetadetail extends Component
             'sort_id' => 'required|integer',
             'status' => 'required|in:Active,Inactive',
         ]);
-            if(  $validatedData){
 
-                SeoMetadetail::create($validatedData);
-                $this->reset();
+
+
+            if(  $validatedData){
+                $newSeoMetadetail = new SeoMetadetail();
+                $newSeoMetadetail->category_id = $this->category_id ?? null;
+                $newSeoMetadetail->slug = createSlug($this->meta_title);
+                $newSeoMetadetail->meta_title = $this->meta_title ?? null;
+                $newSeoMetadetail->meta_keyword = $this->meta_keyword ?? null;
+                $newSeoMetadetail->meta_description = $this->meta_description ?? null;
+                $newSeoMetadetail->meta_author = $this->meta_author ?? null;
+                $newSeoMetadetail->google_analytics = $this->google_analytics ?? null;
+                $newSeoMetadetail->google_verification = $this->google_verification ?? null;
+                $newSeoMetadetail->alexa_analytics = $this->alexa_analytics ?? null;
+                $newSeoMetadetail->sort_id = $this->sort_id ?? null;
+                $newSeoMetadetail->status = $this->status ?? null;
+                $newSeoMetadetail->save();
                 $this->alert('success', 'SeoMeta Created successfully!');
+                $this->reset();
             }else{
                 $this->alert('error', 'Something went wrong while storing the data');
 
@@ -105,7 +118,7 @@ class CreateMetadetail extends Component
 
             public function edit($id){
                     try {
-                        return redirect()->route('edit_menus',['id' =>$id ]);
+                        return redirect()->route('admin.editMetadetail',['id' =>$id ]);
                     } catch (\Exception $e) {
                         dd($e->getMessage());
                     }

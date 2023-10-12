@@ -18,16 +18,13 @@
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/util.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/main.css')}}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    @livewireStyles
+
 </head>
 
 <body class="animsition">
     <header>
-
-
-
         @livewire('frontend.homepage.header')
-
-      
     </header>
   
     @yield('content')
@@ -58,6 +55,7 @@
     <script src="{{asset('assets/vendor/bootstrap/js/popper.js')}}"></script>
     <script src="{{asset('assets/vendor/bootstrap/js/bootstrap.min.js')}}"></script>
     <script src="{{asset('assets/js/main.js')}}"></script>
+    @livewireScripts
 
 </body>
 </html>

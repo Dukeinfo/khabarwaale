@@ -48,7 +48,7 @@ class FronendController extends Controller
 
      public function inner_page(){
 
-        return view('frontend.inner');
+        return view('frontend.inner',compact('newsid'));
 
      }
 
