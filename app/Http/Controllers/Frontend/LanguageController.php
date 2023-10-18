@@ -15,33 +15,33 @@ class LanguageController extends Controller
     public function english(){
         session()->get('language');
         session()->forget('language');
-        session()->forget('locale');
+        // session()->forget('locale');
 
         
         Session::put('language','english');
-        App::setLocale('en');
-        session()->put('locale', 'en');
+        // App::setLocale('en');
+        // session()->put('locale', 'en');
         return redirect()->back();
     }
     public function Hindi(){
         session()->get('language');
         session()->forget('language');
-        session()->forget('locale');
+        // session()->forget('locale');
 
         Session::put('language','hindi');
-        App::setLocale('hi');
-        session()->put('locale', 'hi');
+        // App::setLocale('hi');
+        // session()->put('locale', 'hi');
         return redirect()->back();
     }
  
   public function punjabi(){
         session()->get('language');
         session()->forget('language');
-        session()->forget('locale');
+        // session()->forget('locale');
 
         Session::put('language','punjabi');
-        App::setLocale('pa');
-        session()->put('locale', 'pa');
+        // App::setLocale('pa');
+        // session()->put('locale', 'pa');
         return redirect()->back();
     }
 
@@ -49,15 +49,20 @@ class LanguageController extends Controller
     public function urdu(){
         session()->get('language');
         session()->forget('language');
-        session()->forget('locale');
+        // session()->forget('locale');
 
         Session::put('language','urdu');
 
-        App::setLocale('ur');
-        session()->put('locale', 'ur');
+        // App::setLocale('ur');
+        // session()->put('locale', 'ur');
         return redirect()->back();
     }
-
+    public function clear_all_Lang(){
+        session()->get('language');
+        session()->forget('language');
+        Session::put('language','english');       
+        return redirect()->back();
+    }
     // public function change(Request $request){
     //     App::setLocale($request->lang);
     //     session()->forget('locale');

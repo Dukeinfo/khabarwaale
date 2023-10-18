@@ -10,12 +10,61 @@ class LatestNews extends Component
     public function render()
     {
 
-        $latestNewsData = NewsPost::with('getmenu', 'newstype', 'user') 
-        ->where('status', 'Approved') ->whereNull('deleted_at')
-        ->where(function ($query) { $query->whereIn('breaking_side', ['Show']);})
-        ->orderBy('created_at', 'desc')
-        ->limit(6)
-        ->get(); 
-        return view('livewire.frontend.news-sections.latest-news' ,['latestNewsData' =>$latestNewsData]);
+                    $latestHinNewsData = NewsPost::with('getmenu', 'newstype' )
+                            ->where('status', 'Approved')
+                            ->whereNull('deleted_at')
+                            ->where(function ($query) {
+                                $query->whereIn('breaking_side', ['Show']);
+                            })
+                            ->take(6) // Limit the number of results to 6
+                            ->orderBy('created_at', 'desc')
+                            ->where('news_type' ,1)
+                            ->get();
+
+                    $latestEngNewsData = NewsPost::with('getmenu', 'newstype' )
+                            ->where('status', 'Approved')
+                            ->whereNull('deleted_at')
+                            ->where(function ($query) {
+                                $query->whereIn('breaking_side', ['Show']);
+                            })
+                            ->take(6) // Limit the number of results to 6
+                            ->orderBy('created_at', 'desc')
+                            ->where('news_type' ,2)
+                            ->get();
+                    $latestPbiNewsData = NewsPost::with('getmenu', 'newstype' )
+                            ->where('status', 'Approved')
+                            ->whereNull('deleted_at')
+                            ->where(function ($query) {
+                                $query->whereIn('breaking_side', ['Show']);
+                            })
+                            ->take(6) // Limit the number of results to 6
+                            ->orderBy('created_at', 'desc')
+                            ->where('news_type' ,3)
+                            ->get();
+                    $latestUrduNewsData = NewsPost::with('getmenu', 'newstype' )
+                            ->where('status', 'Approved')
+                            ->whereNull('deleted_at')
+                            ->where(function ($query) {
+                                $query->whereIn('breaking_side', ['Show']);
+                            })
+                            ->take(6) // Limit the number of results to 6
+                            ->orderBy('created_at', 'desc')
+                            ->where('news_type' ,4)
+                            ->get();
+                  $latestAllNewsData = NewsPost::with('getmenu', 'newstype' )
+                            ->where('status', 'Approved')
+                            ->whereNull('deleted_at')
+                            ->where(function ($query) {
+                                $query->whereIn('breaking_side', ['Show']);
+                            })
+                            ->orderBy('created_at', 'desc')
+                            ->get();
+        return view('livewire.frontend.news-sections.latest-news' ,[
+                'latestHinNewsData' =>$latestHinNewsData,
+                'latestEngNewsData'  => $latestEngNewsData,
+                'latestPbiNewsData' => $latestPbiNewsData,
+                'latestUrduNewsData' => $latestUrduNewsData,
+                'latestAllNewsData' => $latestAllNewsData,
+    ]);
     }
 }

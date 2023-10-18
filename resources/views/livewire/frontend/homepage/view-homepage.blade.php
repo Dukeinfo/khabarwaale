@@ -3,13 +3,30 @@
 {{-- flash news  --}}
 @livewire('frontend.news-sections.flash-news') 
 {{-- end flash news  --}}
+
 <section class="p-t-30"  >
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <p class="text-uppercase text-center small pb-2"> {{GoogleTranslate::trans('Advertisement', app()->getLocale())}}</p>
+                <p class="text-uppercase text-center small pb-2">     
+                    @switch(session()->get('language'))
+                    @case('hindi')
+                        विज्ञापन
+                        @break
+                    @case('english')
+                        Advertisement
+                        @break
+                    @case('punjabi')
+                        ਇਸ਼ਤਿਹਾਰ
+                        @break
+                    @case('urdu')
+                        اشتہار
+                        @break
+                    @default
+                        Advertisement
+                    @endswitch </p>
                 <a href="javascript:void()">
-                    <img src="{{asset('assets/images/ads/h-ad1.png')}}" class="img-fluid" alt="">
+                    <img src="{{ isset($advertisement->image) ? getAddImage($advertisement->image) :asset('assets/images/ads/h-ad1.png')}}" class="img-fluid" alt="">
                 </a>
             </div>
         </div>
@@ -31,7 +48,22 @@
                     <div class="col-lg-12 mb-4">
                         <div class="card bg-white shadow-sm text-center border-0">
                             <div class="card-body">
-                                                {{GoogleTranslate::trans('Advertisement', app()->getLocale()) ?? "NA"}}
+                                @switch(session()->get('language'))
+                                @case('hindi')
+                                    विज्ञापन
+                                    @break
+                                @case('english')
+                                    Advertisement
+                                    @break
+                                @case('punjabi')
+                                    ਇਸ਼ਤਿਹਾਰ
+                                    @break
+                                @case('urdu')
+                                    اشتہار
+                                    @break
+                                @default
+                                    Advertisement
+                                @endswitch 
                                                 <p class="text-uppercase text-center small pb-2"> </p>
                                 <a href="javascript:void()">
                                     <img src="{{asset('assets/images/ads/v-ad1.gif')}}" class="img-fluid" alt="">
@@ -61,7 +93,24 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <p class="text-uppercase text-center small pb-2">{{GoogleTranslate::trans('Advertisement', app()->getLocale()) ?? "NA"}}</p>
+                <p class="text-uppercase text-center small pb-2">
+                    @switch(session()->get('language'))
+                    @case('hindi')
+                        विज्ञापन
+                        @break
+                    @case('english')
+                        Advertisement
+                        @break
+                    @case('punjabi')
+                        ਇਸ਼ਤਿਹਾਰ
+                        @break
+                    @case('urdu')
+                        اشتہار
+                        @break
+                    @default
+                        Advertisement
+                    @endswitch 
+                </p>
                 <a href="javascript:void()">
                     <img src="{{asset('assets')}}/images/ads/ad3.jpg" class="img-fluid" alt="">
                 </a>
@@ -101,7 +150,23 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <p class="text-uppercase text-center small pb-2">{{GoogleTranslate::trans('Advertisement', app()->getLocale()) ?? "NA"}}</p>
+                <p class="text-uppercase text-center small pb-2">     
+                     @switch(session()->get('language'))
+                    @case('hindi')
+                        विज्ञापन
+                        @break
+                    @case('english')
+                        Advertisement
+                        @break
+                    @case('punjabi')
+                        ਇਸ਼ਤਿਹਾਰ
+                        @break
+                    @case('urdu')
+                        اشتہار
+                        @break
+                    @default
+                        Advertisement
+                    @endswitch </p>
                 <a href="javascript:void()">
                     <img src="{{asset('assets/images/ads/ad4.jpg')}}" class="img-fluid" alt="">
                 </a>

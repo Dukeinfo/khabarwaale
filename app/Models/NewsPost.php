@@ -22,6 +22,8 @@ class NewsPost extends Model
 
     public function newstype()
     {
-        return $this->belongsTo(WebsiteType::class, 'news_type');
+        return $this->belongsTo(WebsiteType::class, 'news_type', 'id');
+        
     }
+
 }

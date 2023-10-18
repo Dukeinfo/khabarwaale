@@ -14,4 +14,10 @@ class WebsiteType extends Model
     {
         return $this->hasMany(User::class, 'website_type_id');
     }
+    
+
+    public function newsPosts()
+    {
+        return $this->hasMany(NewsPost::class, 'id' ,'news_type');
+    }
 }

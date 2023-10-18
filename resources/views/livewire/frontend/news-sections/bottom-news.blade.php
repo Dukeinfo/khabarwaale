@@ -1,268 +1,310 @@
-<section class="p-t-50"  >
+<section class="p-t-50">
     <div class="container">
         <div class="row">
-            @forelse ($getBottomMenus  as $menu )
-            @if($menu->sort_id == 5 )
+            {{-- narional  --}}
             <div class="col-sm-4 p-b-25">
                 <div class="how2 how2-cl5 flex-sb-c mb-4 bg-white">
                     <h3 class="f1-m-2 cl17 tab01-title">
-                        {{GoogleTranslate::trans($menu->category_en  , app()->getLocale()) ?? "NA"}}
-
+                        @if (session()->get('language') === 'hindi')
+                                    {{ $get_bottom1_Menus->category_hin  ?? "NA"}}
+                        @elseif (session()->get('language') === 'english')
+                                    {{ $get_bottom1_Menus->category_en  ?? "NA"}}
+                        @elseif (session()->get('language') === 'punjabi')
+                                    {{ $get_bottom1_Menus->category_pbi ?? "NA"}}
+                        @elseif (session()->get('language') === 'urdu')
+                                    {{ $get_bottom1_Menus->category_urdu ?? "NA"}}
+                        @else   
+                                    {{ $get_bottom1_Menus->category_en  ?? "NA"}}
+                        @endif
                     </h3>
-                    <a target="_blank"  href="{{route('home.category', ['id' => $menu->id, 'slug' =>   GoogleTranslate::trans( createSlug($menu->category_en, app()->getLocale()))])}}" class="tab01-link f1-s-1 cl9 hov-cl10 trans-03">
-                        {{GoogleTranslate::trans("View all" , app()->getLocale()) ?? "NA"}}
+                    <a href="{{route('home.category', ['id' => $get_bottom1_Menus->id, 'slug' => createSlug($get_bottom1_Menus->category_en)  ])}}" class="tab01-link f1-s-1 cl9 hov-cl10 trans-03">
+                        @if (session()->get('language') === 'hindi')
+                                सभी को देखें
+                       @elseif (session()->get('language') === 'english')
+                                View All
+                       @elseif (session()->get('language') === 'punjabi')
+                                ਸਭ ਦੇਖੋ
+                       @elseif (session()->get('language') === 'urdu')
+                            سب دیکھیں     
+                        @else   
 
+                        @endif
                         <i class="fs-12 m-l-5 fa fa-caret-right"></i>
                     </a>
                 </div>
                 <!-- Main Item post -->
-                @forelse ( $fivthatWiseNews as $key  => $fivthnewscat )
-                        @if($key == 0 )
-                        <div class="mb-3" wire:poll >
+
+          
+        
+                @if (session()->get('language') == "hindi" )
+                    @forelse ($five_CatWise_HindiNews  as $key => $cat_Hin_News )
+                        @if($key  == 0 )
+                            <div class="mb-3">
+                                <div class="card border-0 shadow-sm mb-3">
+                                    <div class="card-body">
+                                        <a target="_blank"  href="{{route('home.inner',['newsid' => $cat_Hin_News->id , 'slug' =>  $cat_Hin_News->slug  ])}}" class="wrap-pic-w hov1 trans-03">
+                                            <img src="{{  isset($cat_Hin_News->image)? getNewsImage($cat_Hin_News->image)  : asset('assets/images/post-10.jpg')}}" alt="IMG" class="img-fluid rounded">
+                                        </a>
+                                        <div class="p-t-20">
+                                            <h5 class="p-b-5">
+                                                <a target="_blank"  href="{{route('home.inner',['newsid' => $cat_Hin_News->id , 'slug' =>  $cat_Hin_News->slug  ])}}" class="f1-s-5 cl2 hov-cl10 trans-03">
+                                                    {!!  Str::limit($cat_Hin_News->title, 85) ?? "NA" !!}
+                                                </a>
+                                            </h5>
+                                            <span class="cl8">
+                                                <a  target="_blank" href="{{ route('home.category', ['id' => $cat_Hin_News->getmenu->id, 'slug' => createSlug($cat_Hin_News->getmenu->category_en)  ])}}" class="f1-s-4 cl10 hov-cl10 trans-03">
+                                                    {!!  $cat_Hin_News['getmenu']['category_hin'] ?? "NA"  !!}
+                                                </a>
+                                                <span class="f1-s-3 m-rl-3">
+                                                    -
+                                                </span>
+                                                <span class="f1-s-3">
+                                                    {!! carbon\Carbon::parse($cat_Hin_News->post_date)->format('M d, Y') ?? "NA" !!}
+                                                </span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                         @else       
                             <div class="card border-0 shadow-sm mb-3">
                                 <div class="card-body">
-                                    <a target="_blank"  href="{{route('home.inner',['newsid' => $fivthnewscat->id , 'slug' => GoogleTranslate::trans($fivthnewscat->slug, app()->getLocale())])}}" class="wrap-pic-w hov1 trans-03">
-                                        <img src="{{ isset($fivthnewscat->image)? getNewsImage($fivthnewscat->image)  : asset('assets/images/post-10.jpg')}}" alt="IMG" class="img-fluid rounded">
-                                    </a>
-                                    <div class="p-t-20">
-                                        <h5 class="p-b-5">
-                                            <a href="{{route('home.inner',['newsid' => $fivthnewscat->id , 'slug' =>  GoogleTranslate::trans($fivthnewscat->slug, app()->getLocale()) ])}}" class="f1-s-5 cl2 hov-cl10 trans-03">
-                                                {!! GoogleTranslate::trans( Str::limit($fivthnewscat->title, 85), app()->getLocale()) ?? "NA" !!}
-                                            </a>
-                                        </h5>
-                                        <span class="cl8">
-                                            <a target="_blank"  href="{{route('home.category', ['id' => $fivthnewscat->getmenu->id, 'slug' =>  GoogleTranslate::trans(createSlug($fivthnewscat->getmenu->category_en), app()->getLocale()) ])}}" class="f1-s-4 cl10 hov-cl10 trans-03">
-                                                {!!GoogleTranslate::trans($fivthnewscat['getmenu']['category_en'], app()->getLocale()) ?? "NA"  !!}
-                                            </a>
-                                            <span class="f1-s-3 m-rl-3">
-                                                -
+                                    <div class="flex-wr-sb-s">
+                                        <div class="size-w-2">
+                                            <h5 class="p-b-5">
+                                                <a target="_blank"  href="{{route('home.inner',['newsid' => $cat_Hin_News->id , 'slug' =>  $cat_Hin_News->slug  ])}}" class="f1-s-5 cl3 hov-cl10 trans-03">
+                                                    {!!  Str::limit($cat_Hin_News->title, 60) ?? "NA" !!}
+                                                </a>
+                                            </h5>
+                                            <span class="cl8">
+                                                <a target="_blank"  href="{{ route('home.category', ['id' => $cat_Hin_News->getmenu->id, 'slug' => createSlug($cat_Hin_News->getmenu->category_en)  ])}}" class="f1-s-4 cl10 hov-cl10 trans-03">
+                                                    {!!  $cat_Hin_News['getmenu']['category_hin'] ?? "NA"  !!}
+                                                </a>
+                                                <span class="f1-s-3 m-rl-3">
+                                                    -
+                                                </span>
+                                                <span class="f1-s-3">
+                                                    {!! carbon\Carbon::parse($cat_Hin_News->post_date)->format('M d, Y') ?? "NA" !!}
+                                                </span>
                                             </span>
-                                            <span class="f1-s-3">
-                                                {!! GoogleTranslate::trans( carbon\Carbon::parse($fivthnewscat->post_date)->format('M d, Y'), app()->getLocale()) ?? "NA" !!}
-                                            </span>
-                                        </span>
+                                        </div>
+                                        <a  target="_blank"  href="{{route('home.inner',['newsid' => $cat_Hin_News->id , 'slug' =>  $cat_Hin_News->slug  ])}}" class="size-w-1 wrap-pic-w hov1 trans-03">
+                                            <img src="{{   isset($cat_Hin_News->thumbnail)? getThumbnail($cat_Hin_News->thumbnail)  : asset('assets/images/post-11.jpg')}}" alt="" class="img-fluid rounded">
+                                        </a>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        @else 
-                        <div class="card border-0 shadow-sm mb-3" wire:poll>
-                            <div class="card-body">
-                                <div class="flex-wr-sb-s">
-                                    <div class="size-w-2">
-                                        <h5 class="p-b-5">
-                                            <a target="_blank"  href="{{route('home.inner',['newsid' => $fivthnewscat->id , 'slug' =>  GoogleTranslate::trans($fivthnewscat->slug,  app()->getLocale()) ])}}" class="f1-s-5 cl3 hov-cl10 trans-03">
-                                                {!! GoogleTranslate::trans( Str::limit($fivthnewscat->title, 75), app()->getLocale()) ?? "NA" !!}
+                        @endif
+                    @empty
+                    @endforelse
+                @endif
+                {{--======================== english news ======================== --}}
 
-                                            </a>
-                                        </h5>
-                                        <span class="cl8">
-                                            <a target="_blank"  href="{{route('home.category', ['id' => $fivthnewscat->getmenu->id, 'slug' =>  GoogleTranslate::trans(createSlug($fivthnewscat->getmenu->category_en), app()->getLocale())  ])}}" class="f1-s-4 cl10 hov-cl10 trans-03">
-                                                {!!GoogleTranslate::trans($fivthnewscat['getmenu']['category_en'], app()->getLocale()) ?? "NA"  !!}
+                 @if (session()->get('language') == "english" )
 
-                                            </a>
-                                            <span class="f1-s-3 m-rl-3">
-                                                -
+                 @forelse ($five_CatWise_EngNews  as $key => $cat_eng_News )
+                 @if($key  == 0 )
+                     <div class="mb-3">
+                         <div class="card border-0 shadow-sm mb-3">
+                             <div class="card-body">
+                                 <a target="_blank"  href="{{route('home.inner',['newsid' => $cat_eng_News->id , 'slug' =>  $cat_eng_News->slug  ])}}" class="wrap-pic-w hov1 trans-03">
+                                     <img src="{{  isset($cat_eng_News->image)? getNewsImage($cat_eng_News->image)  : asset('assets/images/post-10.jpg')}}" alt="IMG" class="img-fluid rounded">
+                                 </a>
+                                 <div class="p-t-20">
+                                     <h5 class="p-b-5">
+                                         <a target="_blank"  href="{{route('home.inner',['newsid' => $cat_eng_News->id , 'slug' =>  $cat_eng_News->slug  ])}}" class="f1-s-5 cl2 hov-cl10 trans-03">
+                                             {!!  Str::limit($cat_eng_News->title, 85) ?? "NA" !!}
+                                         </a>
+                                     </h5>
+                                     <span class="cl8">
+                                         <a  target="_blank" href="{{ route('home.category', ['id' => $cat_eng_News->getmenu->id, 'slug' => createSlug($cat_eng_News->getmenu->category_en)  ])}}" class="f1-s-4 cl10 hov-cl10 trans-03">
+                                             {!!  $cat_eng_News['getmenu']['category_hin'] ?? "NA"  !!}
+                                         </a>
+                                         <span class="f1-s-3 m-rl-3">
+                                             -
+                                         </span>
+                                         <span class="f1-s-3">
+                                             {!! carbon\Carbon::parse($cat_eng_News->post_date)->format('M d, Y') ?? "NA" !!}
+                                         </span>
+                                     </span>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                  @else       
+                     <div class="card border-0 shadow-sm mb-3">
+                         <div class="card-body">
+                             <div class="flex-wr-sb-s">
+                                 <div class="size-w-2">
+                                     <h5 class="p-b-5">
+                                         <a target="_blank"  href="{{route('home.inner',['newsid' => $cat_eng_News->id , 'slug' =>  $cat_eng_News->slug  ])}}" class="f1-s-5 cl3 hov-cl10 trans-03">
+                                             {!!  Str::limit($cat_eng_News->title, 60) ?? "NA" !!}
+                                         </a>
+                                     </h5>
+                                     <span class="cl8">
+                                         <a target="_blank"  href="{{ route('home.category', ['id' => $cat_eng_News->getmenu->id, 'slug' => createSlug($cat_eng_News->getmenu->category_en)  ])}}" class="f1-s-4 cl10 hov-cl10 trans-03">
+                                             {!!  $cat_eng_News['getmenu']['category_hin'] ?? "NA"  !!}
+                                         </a>
+                                         <span class="f1-s-3 m-rl-3">
+                                             -
+                                         </span>
+                                         <span class="f1-s-3">
+                                             {!! carbon\Carbon::parse($cat_eng_News->post_date)->format('M d, Y') ?? "NA" !!}
+                                         </span>
+                                     </span>
+                                 </div>
+                                 <a  target="_blank"  href="{{route('home.inner',['newsid' => $cat_eng_News->id , 'slug' =>  $cat_eng_News->slug  ])}}" class="size-w-1 wrap-pic-w hov1 trans-03">
+                                     <img src="{{   isset($cat_eng_News->thumbnail)? getThumbnail($cat_eng_News->thumbnail)  : asset('assets/images/post-11.jpg')}}" alt="" class="img-fluid rounded">
+                                 </a>
+                             </div>
+                         </div>
+                     </div>
+                 @endif
+             @empty
+             @endforelse
+                @endif
+                {{--======================== punjabi news ======================== --}}
+
+                 @if (session()->get('language') == "punjabi" )
+
+                 @forelse ($five_CatWise_PbiNews  as $key => $cat_Pbi_News )
+                 @if($key  == 0 )
+                     <div class="mb-3">
+                         <div class="card border-0 shadow-sm mb-3">
+                             <div class="card-body">
+                                 <a target="_blank"  href="{{route('home.inner',['newsid' => $cat_Pbi_News->id , 'slug' =>  $cat_Pbi_News->slug  ])}}" class="wrap-pic-w hov1 trans-03">
+                                     <img src="{{  isset($cat_Pbi_News->image)? getNewsImage($cat_Pbi_News->image)  : asset('assets/images/post-10.jpg')}}" alt="IMG" class="img-fluid rounded">
+                                 </a>
+                                 <div class="p-t-20">
+                                     <h5 class="p-b-5">
+                                         <a target="_blank"  href="{{route('home.inner',['newsid' => $cat_Pbi_News->id , 'slug' =>  $cat_Pbi_News->slug  ])}}" class="f1-s-5 cl2 hov-cl10 trans-03">
+                                             {!!  Str::limit($cat_Pbi_News->title, 85) ?? "NA" !!}
+                                         </a>
+                                     </h5>
+                                     <span class="cl8">
+                                         <a  target="_blank" href="{{ route('home.category', ['id' => $cat_Pbi_News->getmenu->id, 'slug' => createSlug($cat_Pbi_News->getmenu->category_en)  ])}}" class="f1-s-4 cl10 hov-cl10 trans-03">
+                                             {!!  $cat_Pbi_News['getmenu']['category_hin'] ?? "NA"  !!}
+                                         </a>
+                                         <span class="f1-s-3 m-rl-3">
+                                             -
+                                         </span>
+                                         <span class="f1-s-3">
+                                             {!! carbon\Carbon::parse($cat_Pbi_News->post_date)->format('M d, Y') ?? "NA" !!}
+                                         </span>
+                                     </span>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                  @else       
+                     <div class="card border-0 shadow-sm mb-3">
+                         <div class="card-body">
+                             <div class="flex-wr-sb-s">
+                                 <div class="size-w-2">
+                                     <h5 class="p-b-5">
+                                         <a target="_blank"  href="{{route('home.inner',['newsid' => $cat_Pbi_News->id , 'slug' =>  $cat_Pbi_News->slug  ])}}" class="f1-s-5 cl3 hov-cl10 trans-03">
+                                             {!!  Str::limit($cat_Pbi_News->title, 60) ?? "NA" !!}
+                                         </a>
+                                     </h5>
+                                     <span class="cl8">
+                                         <a target="_blank"  href="{{ route('home.category', ['id' => $cat_Pbi_News->getmenu->id, 'slug' => createSlug($cat_Pbi_News->getmenu->category_en)  ])}}" class="f1-s-4 cl10 hov-cl10 trans-03">
+                                             {!!  $cat_Pbi_News['getmenu']['category_hin'] ?? "NA"  !!}
+                                         </a>
+                                         <span class="f1-s-3 m-rl-3">
+                                             -
+                                         </span>
+                                         <span class="f1-s-3">
+                                             {!! carbon\Carbon::parse($cat_Pbi_News->post_date)->format('M d, Y') ?? "NA" !!}
+                                         </span>
+                                     </span>
+                                 </div>
+                                 <a  target="_blank"  href="{{route('home.inner',['newsid' => $cat_Pbi_News->id , 'slug' =>  $cat_Pbi_News->slug  ])}}" class="size-w-1 wrap-pic-w hov1 trans-03">
+                                     <img src="{{   isset($cat_Pbi_News->thumbnail)? getThumbnail($cat_Pbi_News->thumbnail)  : asset('assets/images/post-11.jpg')}}" alt="" class="img-fluid rounded">
+                                 </a>
+                             </div>
+                         </div>
+                     </div>
+                 @endif
+             @empty
+             @endforelse
+                @endif
+                {{--======================== urdu news ======================== --}}
+                 @if (session()->get('language') == "urdu" )
+                    @forelse ($five_CatWise_UrduNews  as $key => $cat_urdu_News )
+                        @if($key  == 0 )
+                            <div class="mb-3">
+                                <div class="card border-0 shadow-sm mb-3">
+                                    <div class="card-body">
+                                        <a target="_blank"  href="{{route('home.inner',['newsid' => $cat_urdu_News->id , 'slug' =>  $cat_urdu_News->slug  ])}}" class="wrap-pic-w hov1 trans-03">
+                                            <img src="{{  isset($cat_urdu_News->image)? getNewsImage($cat_urdu_News->image)  : asset('assets/images/post-10.jpg')}}" alt="IMG" class="img-fluid rounded">
+                                        </a>
+                                        <div class="p-t-20">
+                                            <h5 class="p-b-5">
+                                                <a target="_blank"  href="{{route('home.inner',['newsid' => $cat_urdu_News->id , 'slug' =>  $cat_urdu_News->slug  ])}}" class="f1-s-5 cl2 hov-cl10 trans-03">
+                                                    {!!  Str::limit($cat_urdu_News->title, 85) ?? "NA" !!}
+                                                </a>
+                                            </h5>
+                                            <span class="cl8">
+                                                <a  target="_blank" href="{{ route('home.category', ['id' => $cat_urdu_News->getmenu->id, 'slug' => createSlug($cat_urdu_News->getmenu->category_en)  ])}}" class="f1-s-4 cl10 hov-cl10 trans-03">
+                                                    {!!  $cat_urdu_News['getmenu']['category_urdu'] ?? "NA"  !!}
+                                                </a>
+                                                <span class="f1-s-3 m-rl-3">
+                                                    -
+                                                </span>
+                                                <span class="f1-s-3">
+                                                    {!! carbon\Carbon::parse($cat_urdu_News->post_date)->format('M d, Y') ?? "NA" !!}
+                                                </span>
                                             </span>
-                                            <span class="f1-s-3">
-                                                {!! GoogleTranslate::trans( carbon\Carbon::parse($fivthnewscat->post_date)->format('M d, Y'), app()->getLocale()) ?? "NA" !!}
-
-                                            </span>
-                                        </span>
+                                        </div>
                                     </div>
-                                    <a href="javascript:void()" class="size-w-1 wrap-pic-w hov1 trans-03">
-                                        <img src="{{isset($fivthnewscat->thumbnail)?  getThumbnail($fivthnewscat->thumbnail)  : asset('assets/images/post-11.jpg')}}" alt="" class="img-fluid rounded">
-                                    </a>
                                 </div>
                             </div>
-                        </div>
-                    @endif
-                @empty
-            @endforelse
-         
-            </div>
-            @endif
-            @empty
-            
-            @endforelse
-
-            @forelse ($getBottomMenus  as $menu )
-            @if($menu->sort_id == 6  )
-            <div class="col-sm-4 p-b-25"  >
-                <div class="how2 how2-cl5 flex-sb-c mb-4 bg-white">
-                    <h3 class="f1-m-2 cl17 tab01-title">
-                        {{GoogleTranslate::trans($menu->category_en  , app()->getLocale()) ?? "NA"}}
-
-                    </h3>
-                    <a target="_blank"  href="{{route('home.category', ['id' => $menu->id, 'slug' =>  GoogleTranslate::trans(createSlug($menu->category_en), app()->getLocale()) ])}}" class="tab01-link f1-s-1 cl9 hov-cl10 trans-03">
-                        {{GoogleTranslate::trans("View all" , app()->getLocale()) ?? "NA"}}
-
-                        <i class="fs-12 m-l-5 fa fa-caret-right"></i>
-                    </a>
-                </div>
-                <!-- Main Item post -->
-                @forelse ($sixCatWiseNews as $index => $sixCatNews )
-                    @if($index  == 0 )
-           
-                <div class="mb-3"   wire:poll>
-                    <div class="card border-0 shadow-sm mb-3">
-                        <div class="card-body">
-                            <a target="_blank"  href="{{route('home.inner',['newsid' => $sixCatNews->id , 'slug' =>  GoogleTranslate::trans($sixCatNews->slug, app()->getLocale())  ])}}" class="wrap-pic-w hov1 trans-03">
-                                <img src="{{ isset($sixCatNews->image)? getNewsImage($sixCatNews->image)  : asset('assets/images/post-34.jpg')}}" alt="IMG" class="img-fluid rounded">
-                            </a>
-                            <div class="p-t-20">
-                                <h5 class="p-b-5">
-                                    <a target="_blank"  href="{{route('home.inner',['newsid' => $sixCatNews->id , 'slug' =>  GoogleTranslate::trans($sixCatNews->slug, app()->getLocale())  ])}}" class="f1-s-5 cl2 hov-cl10 trans-03">
-                                        {!! GoogleTranslate::trans( Str::limit($sixCatNews->title, 85), app()->getLocale()) ?? "NA" !!}
-                                    </a>
-                                </h5>
-                                <span class="cl8">
-                                    <a href="{{route('home.category', ['id' => $sixCatNews->getmenu->id, 'slug' =>  GoogleTranslate::trans(createSlug($sixCatNews->getmenu->category_en), app()->getLocale()) ])}}" class="f1-s-4 cl10 hov-cl10 trans-03">
-                                        {!!GoogleTranslate::trans($sixCatNews['getmenu']['category_en'], app()->getLocale()) ?? "NA"  !!}
-                                    </a>
-                                    <span class="f1-s-3 m-rl-3">
-                                        -
-                                    </span>
-                                    <span class="f1-s-3">
-                                        {!! GoogleTranslate::trans( carbon\Carbon::parse($sixCatNews->post_date)->format('M d, Y'), app()->getLocale()) ?? "NA" !!}
-                                    </span>
-                                </span>
+                        @else       
+                            <div class="card border-0 shadow-sm mb-3">
+                                <div class="card-body">
+                                    <div class="flex-wr-sb-s">
+                                        <div class="size-w-2">
+                                            <h5 class="p-b-5">
+                                                <a target="_blank"  href="{{route('home.inner',['newsid' => $cat_urdu_News->id , 'slug' =>  $cat_urdu_News->slug  ])}}" class="f1-s-5 cl3 hov-cl10 trans-03">
+                                                    {!!  Str::limit($cat_urdu_News->title, 60) ?? "NA" !!}
+                                                </a>
+                                            </h5>
+                                            <span class="cl8">
+                                                <a target="_blank"  href="{{ route('home.category', ['id' => $cat_urdu_News->getmenu->id, 'slug' => createSlug($cat_urdu_News->getmenu->category_en)  ])}}" class="f1-s-4 cl10 hov-cl10 trans-03">
+                                                    {!!  $cat_urdu_News['getmenu']['category_urdu'] ?? "NA"  !!}
+                                                </a>
+                                                <span class="f1-s-3 m-rl-3">
+                                                    -
+                                                </span>
+                                                <span class="f1-s-3">
+                                                    {!! carbon\Carbon::parse($cat_urdu_News->post_date)->format('M d, Y') ?? "NA" !!}
+                                                </span>
+                                            </span>
+                                        </div>
+                                        <a  target="_blank"  href="{{route('home.inner',['newsid' => $cat_urdu_News->id , 'slug' =>  $cat_urdu_News->slug  ])}}" class="size-w-1 wrap-pic-w hov1 trans-03">
+                                            <img src="{{   isset($cat_urdu_News->thumbnail)? getThumbnail($cat_urdu_News->thumbnail)  : asset('assets/images/post-11.jpg')}}" alt="" class="img-fluid rounded">
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                @else 
-
-                <div class="card border-0 shadow-sm mb-3" wire:poll>
-                    <div class="card-body">
-                        <div class="flex-wr-sb-s">
-                            <div class="size-w-2">
-                                <h5 class="p-b-5">
-                                    <a target="_blank"  href="{{route('home.inner',['newsid' => $sixCatNews->id , 'slug' =>  GoogleTranslate::trans($sixCatNews->slug, app()->getLocale())  ])}}" class="f1-s-5 cl3 hov-cl10 trans-03">
-                                        {!! GoogleTranslate::trans( Str::limit($sixCatNews->title, 75), app()->getLocale()) ?? "NA" !!}
-
-                                    </a>
-                                </h5>
-                                <span class="cl8">
-                                    <a href="{{route('home.category', ['id' => $sixCatNews->getmenu->id, 'slug' =>  GoogleTranslate::trans( createSlug($sixCatNews->getmenu->category_en), app()->getLocale())])}}" class="f1-s-4 cl10 hov-cl10 trans-03">
-                                        {!!GoogleTranslate::trans($sixCatNews['getmenu']['category_en'], app()->getLocale()) ?? "NA"  !!}
-
-                                    </a>
-                                    <span class="f1-s-3 m-rl-3">
-                                        -
-                                    </span>
-                                    <span class="f1-s-3">
-                                        {!! GoogleTranslate::trans( carbon\Carbon::parse($sixCatNews->post_date)->format('M d, Y'), app()->getLocale()) ?? "NA" !!}
-
-                                    </span>
-                                </span>
-                            </div>
-                            <a target="_blank"  href="javascript:void()" class="size-w-1 wrap-pic-w hov1 trans-03">
-                                <img src="{{ isset($sixCatNews->thumbnail)? getThumbnail($sixCatNews->thumbnail)  : asset('assets/images/post-35.jpg')}}" alt="" class="img-fluid rounded">
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                        @endif
+                    @empty
+                    @endforelse
                 @endif
-                @empty
-                    
-                @endforelse
-          
+                {{--======================== end urdu news ======================== --}}
+
 
             </div>
-            @endif
-            @empty
-            
-            @endforelse
-            
-            @forelse ($getBottomMenus  as $menu )
-            @if($menu->sort_id == 7 )
-            <div class="col-sm-4 p-b-25">
-                <div class="how2 how2-cl5 flex-sb-c mb-4 bg-white">
-                    <h3 class="f1-m-2 cl17 tab01-title">
-                        {{GoogleTranslate::trans($menu->category_en  , app()->getLocale()) ?? "NA"}}
+            {{-- end narional  --}}
 
-                    </h3>
-                    <a target="_blank"  href="{{route('home.category', ['id' => $menu->id, 'slug' =>  GoogleTranslate::trans(createSlug($menu->category_en), app()->getLocale()) ])}}" class="tab01-link f1-s-1 cl9 hov-cl10 trans-03">
-                        {{GoogleTranslate::trans("View all" , app()->getLocale()) ?? "NA"}}
+            {{-- worlds --}}
+            @livewire('frontend.news-sections.bottomnews2')
+            {{-- end worlds --}}
 
-                        <i class="fs-12 m-l-5 fa fa-caret-right"></i>
-                    </a>
-                </div>
-                <!-- Main Item post -->
-                @forelse ($SevenCatWiseNews  as $key => $sevenCatnews )
-                    @if( $key == 0  )
-               
-                    <div class="mb-3 " wire:poll  >
-                        <div class="card border-0 shadow-sm mb-3">
-                            <div class="card-body">
-                                <a target="_blank"   href="{{route('home.inner',['newsid' => $sevenCatnews->id , 'slug' =>  GoogleTranslate::trans($sevenCatnews->slug, app()->getLocale())])}}" class="wrap-pic-w hov1 trans-03">
-                                    <img src="{{ isset($sevenCatnews->image)? getNewsImage($sevenCatnews->image)  : asset('assets/images/post-40.jpg')}}" alt="IMG" class="img-fluid rounded">
-                                </a>
-                                <div class="p-t-20">
-                                    <h5 class="p-b-5">
-                                        <a href="{{route('home.inner',['newsid' => $sevenCatnews->id , 'slug' =>   GoogleTranslate::trans($sevenCatnews->slug, app()->getLocale())  ])}}" class="f1-s-5 cl2 hov-cl10 trans-03">
-                                            {!! GoogleTranslate::trans( Str::limit($sevenCatnews->title, 85), app()->getLocale()) ?? "NA" !!}
+            {{-- sporta --}}
+            @livewire('frontend.news-sections.bottomnews3')
+            {{-- end sporta --}}
 
-                                        </a>
-                                    </h5>
-                                    <span class="cl8">
-                                        <a target="_blank"  href="{{route('home.category', ['id' => $sevenCatnews->getmenu->id, 'slug' =>  GoogleTranslate::trans(createSlug($sevenCatnews->getmenu->category_en), app()->getLocale()) ])}}" class="f1-s-4 cl10 hov-cl10 trans-03">
-                                            {!!GoogleTranslate::trans($sevenCatnews['getmenu']['category_en'], app()->getLocale()) ?? "NA"  !!}
-
-                                        </a>
-                                        <span class="f1-s-3 m-rl-3">
-                                            -
-                                        </span>
-                                        <span class="f1-s-3">
-                                            {!! GoogleTranslate::trans( carbon\Carbon::parse($sevenCatnews->post_date)->format('M d, Y'), app()->getLocale()) ?? "NA" !!}
-                                        </span>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                @else 
-
-                    <div class="card border-0 shadow-sm mb-3" wire:poll>
-                        <div class="card-body">
-                            <div class="flex-wr-sb-s">
-                                <div class="size-w-2">
-                                    <h5 class="p-b-5">
-                                        <a target="_blank"  href="{{route('home.inner',['newsid' => $sevenCatnews->id , 'slug' =>  GoogleTranslate::trans($sevenCatnews->slug, app()->getLocale())  ])}}" class="f1-s-5 cl3 hov-cl10 trans-03">
-                                         {!! GoogleTranslate::trans( Str::limit($sevenCatnews->title, 75), app()->getLocale()) ?? "NA" !!}
-
-                                        </a>
-                                    </h5>
-                                    <span class="cl8">
-                                        <a target="_blank"  href="{{route('home.category', ['id' => $sevenCatnews->getmenu->id, 'slug' =>  GoogleTranslate::trans(createSlug($sevenCatnews->getmenu->category_en), app()->getLocale()) ])}}" class="f1-s-4 cl10 hov-cl10 trans-03">
-                                            {!!GoogleTranslate::trans($sevenCatnews['getmenu']['category_en'], app()->getLocale()) ?? "NA"  !!}
-
-                                        </a>
-                                        <span class="f1-s-3 m-rl-3">
-                                            -
-                                        </span>
-                                        <span class="f1-s-3">
-                                            {!! GoogleTranslate::trans( carbon\Carbon::parse($sevenCatnews->post_date)->format('M d, Y'), app()->getLocale()) ?? "NA" !!}
-
-                                        </span>
-                                    </span>
-                                </div>
-                                <a target="_blank"  href="{{route('home.inner',['newsid' => $sevenCatnews->id , 'slug' =>  GoogleTranslate::trans($sevenCatnews->slug, app()->getLocale())  ])}}" class="size-w-1 wrap-pic-w hov1 trans-03">
-                                    <img src="{{ isset($sevenCatnews->thumbnail)? getThumbnail($sevenCatnews->thumbnail)  : asset('assets/images/post-35.jpg')}}" alt="" class="img-fluid rounded">
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                @endif
-                @empty
-                    
-                @endforelse
-            </div>
-            @endif
-            @empty
-            
-            @endforelse
         </div>
     </div>
 </section>

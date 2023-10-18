@@ -48,11 +48,26 @@ Route::controller(LanguageController::class)->group(function () {
     Route::get('/language/hindi',  'Hindi')->name('hindi.language');
     Route::get('/language/punjabi',  'punjabi')->name('punjabi.language');
     Route::get('/language/urdu',  'urdu')->name('urdu.language');
+    Route::get('/language/clear',  'clear_all_Lang');
 });
 
+
+Route::get('/', function () {
+    return view('welcome');
+
+})->name('home.homepage');
+Route::get('/category/{id}/{slug}', function ($id, $slug) {
+    return view('category', compact('id', 'slug'));
+})->name('home.category');
+
+// Route::get('/inner', function () {
+//     return view('inner');
+// });
+
+
 Route::controller(FronendController::class)->group(function () {
-Route::get('/', 'index')->name('home.homepage');
-Route::get('//inner', 'inner_page');
+// Route::get('/', 'index')->name('home.homepage');
+// Route::get('/inner', 'inner_page');
 
  
 
@@ -61,8 +76,9 @@ Route::get('//inner', 'inner_page');
 
 
 
+
 // Route::get('/', ViewHomepage::class)->name('home.homepage');
-Route::get('/category/{id}/{slug}', ViewCategory::class)->name('home.category');
+// Route::get('/category/{id}/{slug}', ViewCategory::class)->name('home.category');
 Route::get('/inner/{newsid}/{slug}', ViewInnerPage::class)->name('home.inner');
 
 
@@ -87,10 +103,8 @@ Route::middleware([
 });
 
 Route::group(['middleware' => 'auth'],function(){
-    Route::prefix('admin')->group(function(){
-
-        Route::post('ckeditor/image_upload', [CkImageUploadController::class, 'upload'])->name('image.upload');
-
+Route::prefix('admin')->group(function(){
+Route::post('ckeditor/image_upload', [CkImageUploadController::class, 'upload'])->name('image.upload');
 Route::get('/dashboard', AdminDashboard::class)->name('admin_dashboard');
 Route::get('/profile', AdminProfile::class)->name('admin_profile');
 Route::get('/contact-view', ContactusView::class)->name('contact_view');

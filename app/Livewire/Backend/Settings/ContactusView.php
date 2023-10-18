@@ -64,7 +64,7 @@ class ContactusView extends Component
 
         }
         $contact = new ContactInfo();
-        $contact->footer_logo = $logoPathc?? Null;
+        $contact->footer_logo = $logoPath?? Null;
         $contact->email = $this->email;
         $contact->phone = $this->phone;
         $contact->alternate_phone = $this->alternate_phone;

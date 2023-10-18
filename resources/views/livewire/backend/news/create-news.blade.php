@@ -48,6 +48,7 @@
                                             <th>Add Type</th>
                                             <th>Category </th>
                                             <th>User Name </th>
+                                            <th>Post Date </th>
                                             <th>Status</th>    
                                             <th>Action</th>
                                         </tr>
@@ -83,6 +84,7 @@
                                                 
                                             </td>
 
+                                            <td>{{ \Carbon\Carbon::parse($record->post_date)->format('F j, Y') }}</td>
 
                                             <td>
                                                 @if($record->status  == "Approved")
@@ -100,6 +102,8 @@
                                             </td>
 
                                            @endif
+                                    
+
                                                 <td>   
                                                     <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal{{$record->id}}">
                                                         <i class="fa fa-eye fa-fw"></i></button>
@@ -451,9 +455,24 @@
                                     <div class="col-md-4">
                                         <!-- Post Month -->
                                         <div class="form-group">
-                                            <label for="post_month">Post Month</label>
-                                            <input type="date" class="form-control" wire:model="post_month" id="post_month">
+                                            <label for="post_month">Select Month</label>
+                                            <select wire:model="post_month" class="form-select" id="post_month">
+                                                <option value="">Select Month</option>
+                                                <option value="January">January</option>
+                                                <option value="February">February</option>
+                                                <option value="March">March</option>
+                                                <option value="April">April</option>
+                                                <option value="May">May</option>
+                                                <option value="June">June</option>
+                                                <option value="July">July</option>
+                                                <option value="August">August</option>
+                                                <option value="September">September</option>
+                                                <option value="October">October</option>
+                                                <option value="November">November</option>
+                                                <option value="December">December</option>
+                                            </select>
                                         </div>
+                                        
                                         @error('post_month') <span class="error">{{ $message }}</span> @enderror
                                     </div>
 

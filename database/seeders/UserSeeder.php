@@ -21,7 +21,6 @@ class UserSeeder extends Seeder
         $admin = new User();
         $admin->name = 'Admin';
         $admin->username = 'Admin';
-
         $admin->role_id = 1;
         $admin->email = 'admin@admin.com';
         $admin->email_verified_at = Carbon::now()->toDateTimeString();

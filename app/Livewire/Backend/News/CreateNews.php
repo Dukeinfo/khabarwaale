@@ -81,10 +81,24 @@ class CreateNews extends Component
         }
 
         if (empty($this->post_month)) {
-            $this->post_month = now()->format('Y-m-d'); // Set to current month
+            $this->post_month = date('F');
         }
 
         $search = trim($this->search);
+        // $records = NewsPost::with(['newstype', 'user', 'getmenu'])
+        // ->where(function ($query) use ($search) {
+        //     $query->whereHas('newstype', function ($subquery) use ($search) {
+        //         $subquery->where('name', 'like', '%' . $search . '%')
+        //                 ->orWhere('title', 'like', '%' . $search . '%');
+        //     })->orWhereHas('user', function ($subquery) use ($search) {
+        //         $subquery->where('name', 'like', '%' . $search . '%');
+        //     })->orWhereHas('getmenu', function ($subquery) use ($search) {
+        //         $subquery->where('category_en', 'like', '%' . $search . '%')
+        //                 ->orwhere('heading', 'like', '%' . $search . '%')
+        //                 ->orWhere('post_month', 'like', '%' . $search . '%');
+        //     });
+        // })->orderby('category_id')->get();
+
         $records = NewsPost::with(['newstype', 'user', 'getmenu'])
         ->where(function ($query) use ($search) {
             $query->whereHas('newstype', function ($subquery) use ($search) {
@@ -94,10 +108,23 @@ class CreateNews extends Component
                 $subquery->where('name', 'like', '%' . $search . '%');
             })->orWhereHas('getmenu', function ($subquery) use ($search) {
                 $subquery->where('category_en', 'like', '%' . $search . '%')
-                        ->orwhere('heading', 'like', '%' . $search . '%')
-                        ->orWhere('post_month', 'like', '%' . $search . '%');
+                        ->orWhere('heading', 'like', '%' . $search . '%')
+                        ->orWhere('post_month', 'like', '%' . $search . '%')
+                        ->orWhere(function ($monthSubquery) use ($search) {
+                            $monthName = strtolower($search);
+                            // You may need to adjust this mapping based on your localization.
+                            $monthNameToNumber = [
+                                'jan' => 1, 'feb' => 2, 'march' => 3, 'april' => 4,
+                                'may' => 5, 'june' => 6, 'july' => 7, 'aug' => 8,
+                                'sept' => 9, 'oct' => 10, 'nov' => 11, 'dec' => 12,
+                            ];
+                            if (array_key_exists($monthName, $monthNameToNumber)) {
+                                $monthNumber = $monthNameToNumber[$monthName];
+                                $monthSubquery->whereMonth('post_date', $monthNumber);
+                            }
+                        });
             });
-        })->orderby('category_id')->get();
+        })->orderBy('category_id')->get();
     
         $totalrecords = NewsPost::count();
         $getRoles =  Role::get();

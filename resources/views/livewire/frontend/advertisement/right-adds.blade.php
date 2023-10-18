@@ -15,7 +15,22 @@
             <div class="card bg-white shadow-sm text-center border-0">
                 <div class="card-body">
                     <p class="text-uppercase text-center small pb-2">
-                    {{GoogleTranslate::trans('Advertisement', app()->getLocale()) ?? "NA"}}
+                        @switch(session()->get('language'))
+                        @case('hindi')
+                            विज्ञापन
+                            @break
+                        @case('english')
+                            Advertisement
+                            @break
+                        @case('punjabi')
+                            ਇਸ਼ਤਿਹਾਰ
+                            @break
+                        @case('urdu')
+                            اشتہار
+                            @break
+                        @default
+                            Advertisement
+                        @endswitch 
 
                     </p>
                     <a href="{{$advertisement->link_add ?? "#"}}">
@@ -33,7 +48,15 @@
         <div class="col-lg-12 mb-4">
             <div class="how2 how2-cl5 flex-sb-c m-b-35 mb-3 bg-white">
                 <h3 class="f1-m-2 cl17 tab01-title">
-                    Editor's Desk
+                    @if (session()->get('language') === 'hindi')
+                          संपादक डेस्क
+                    @elseif (session()->get('language') === 'english')
+                        Editor's Desk
+                    @elseif (session()->get('language') === 'punjabi')
+                            ਸੰਪਾਦਕ ਦਾ ਡੈਸਕ
+                    @elseif (session()->get('language') === 'urdu')
+                        ایڈیٹر کی میز
+                    @endif
                 </h3>
             </div>
             <div class="card bg-white border-0">
@@ -51,6 +74,7 @@
                 </div>
             </div>
         </div>
+        
         <div class="col-lg-12">
             <!-- Video -->
             <div class="p-b-30">
@@ -79,7 +103,15 @@
             <div class="p-b-30">
                 <div class="how2 how2-cl5 mb-4 flex-s-c bg-white">
                     <h3 class="f1-m-2 cl17 tab01-title">
-                        Stay Connected
+                        @if (session()->get('language') === 'hindi')
+                                    जुड़े रहो
+                        @elseif (session()->get('language') === 'english')
+                                Stay Connected
+                        @elseif (session()->get('language') === 'punjabi')
+                                ਜੁੜੇ ਰਹੋ
+                        @elseif (session()->get('language') === 'urdu')
+                                جڑے رہیے
+                        @endif
                     </h3>
                 </div>
                 <ul class="bg-white p-4 shadow-sm rounded">
@@ -138,5 +170,6 @@
                 </ul>
             </div>
         </div>
+
     </div>
 </div>

@@ -45,8 +45,15 @@
                                             <h4 class="card-title">Update Contact </h4>
                                         </div>
                                         <div class="card-body">
-                                            <input type="search" class="form-control" wire:model.live="search" placeholder="Search here ..." >
-                
+                                            <div class="col-md-3 float-end">
+                                                <div class="form-group">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Search</label>
+                                                        <input type="search" class="form-control"  wire:model.live="search" placeholder="Search...">
+                                                         @error('Search') <span class="error">{{ $message }}</span> @enderror
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <table class="table">
                                                 <thead>
                                                     <tr>
@@ -64,7 +71,7 @@
                                                             <td>{{ $contact->email }}</td>
                                                             <td>{{ $contact->phone }}</td>
                                                             <td>{{ $contact->address }}</td>
-                                                            <td>
+                                                            <td class="bg-dark">
                                                                 @if ($contact->footer_logo)
                                                                     <img src="{{ asset('storage/' . $contact->footer_logo) }}" alt="Logo" width="100">
                                                                 @endif

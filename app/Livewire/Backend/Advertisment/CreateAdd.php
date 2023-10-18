@@ -48,6 +48,15 @@ class CreateAdd extends Component
     protected $queryString = ['search'];
     public function render()
     {
+
+    $today = now()->toDateString();
+    $sliderTops = Advertisment::where('from_date', '<=', $today)
+                       ->where('to_date', '>=', $today)
+                       ->where('location','Slider Top')
+                       ->where('status', 'Yes') // Assuming 'status' is used to enable/disable ads
+                       ->first();
+ 
+
         $getCategory=  Category::where('status' ,'Active')->get();
         $getAddLocation=  AddLocation::where('status' ,'Active')->orderby('name')->get();
 

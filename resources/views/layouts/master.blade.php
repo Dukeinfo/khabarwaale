@@ -26,6 +26,7 @@
     <header>
         @livewire('frontend.homepage.header')
     </header>
+    @livewire('frontend.news-sections.flash-news')
   
     @yield('content')
 

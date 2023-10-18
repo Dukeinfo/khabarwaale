@@ -1,17 +1,36 @@
 <div>
-    
-<section class="p-t-30 p-b-40">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <p class="text-uppercase text-center small pb-2">{{GoogleTranslate::trans('Advertisement', app()->getLocale()) ?? "NA"}}</p>
-                <a href="javascript:void()">
-                    <img src="{{asset('assets/images/ads/h-ad1.png')}}" class="img-fluid" alt="">
-                </a>
+
+
+        <section class="p-t-30 p-b-40">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <p class="text-uppercase text-center small pb-2">      
+                            @switch(session()->get('language'))
+                            @case('hindi')
+                                विज्ञापन
+                                @break
+                            @case('english')
+                                Advertisement
+                                @break
+                            @case('punjabi')
+                                ਇਸ਼ਤਿਹਾਰ
+                                @break
+                            @case('urdu')
+                                اشتہار
+                                @break
+                            @default
+                                Advertisement
+                            @endswitch </p>
+                        <a href="">
+                            <img src="{{  asset('assets/images/ads/h-ad1.png')}}" class="img-fluid" alt="">
+                        </a>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-</section>
+        </section>
+
+
 
 
 
@@ -27,17 +46,45 @@
                             <div class="flex-wr-sb-c p-tb-10">
                                 <div class="f2-s-1 m-tb-6">
                                     <a href="{{url('/')}}" class="breadcrumb-item f1-s-3 cl9">
-                                        Home
+                                        @switch(session()->get('language'))
+                                        @case('hindi')
+                                                {!! 'होम '!!}
+                                        @break
+                                        @case('punjabi')
+                                                {!! 'ਹੋਮ '!!}    
+                                        @break
+                                        @case('urdu')
+                                                {!! 'گھر '!!}
+                                         
+                                        @break
+                                        @case('english')
+                                                Home
+                                        @break
+                                        @default
+                                                Home
+                                        @endswitch
                                     </a>
 
                                     <a  target="_blank"  href="{{route('home.category', ['id' => $GetNewsDetail->getmenu->id, 'slug' =>  GoogleTranslate::trans(createSlug($GetNewsDetail->getmenu->category_en, app()->getLocale()) )])}}
                                     " class="breadcrumb-item f1-s-3 cl9">
-                                     {{ GoogleTranslate::trans( $GetNewsDetail->getmenu->category_en  , app()->getLocale()) ?? "NA"}}
+                                
+
+                                        @if (session()->get('language') === 'hindi')
+                                                  {{ $GetNewsDetail->category_hin  ?? "NA"}}
+                                        @elseif (session()->get('language') === 'english')
+                                                    {{ $GetNewsDetail->category_en  ?? "NA"}}
+                                        @elseif (session()->get('language') === 'punjabi')
+                                                    {{ $GetNewsDetail->category_pbi ?? "NA"}}
+                                        @elseif (session()->get('language') === 'urdu')
+                                                    {{ $GetNewsDetail->category_urdu ?? "NA"}}
+                                        @else   
+                                                    {{ $GetNewsDetail->category_en  ?? "NA"}}
+                                        @endif
 
                                     </a>
 
                                     <span class="breadcrumb-item f1-s-3 cl9">
-                                     {{GoogleTranslate::trans( Str::limit($GetNewsDetail->slug, 70) , app()->getLocale()) ?? "NA"}}
+                                     {{Str::limit($GetNewsDetail->slug, 70)  ?? "NA"}}
                                         
                                     </span>
                                 </div>
@@ -47,16 +94,24 @@
                             <!-- Blog Detail -->
                             <div class="p-b-70">
                                 <h3 class="f1-l-3 cl2 p-b-16 respon2">
-                                    {{GoogleTranslate::trans($GetNewsDetail->title  , app()->getLocale()) ?? "NA"}}
-
-
+                                    @if (session()->get('language') === 'hindi')
+                                        {{$GetNewsDetail->title   ?? "NA"}}
+                                    @elseif (session()->get('language') === 'english')
+                                        {{$GetNewsDetail->title   ?? "NA"}}
+                                    @elseif (session()->get('language') === 'punjabi')
+                                        {{$GetNewsDetail->title   ?? "NA"}}
+                                    @elseif (session()->get('language') === 'urdu')
+                                        {{$GetNewsDetail->title   ?? "NA"}}
+                                    @else   
+                                        {{$GetNewsDetail->title   ?? "NA"}}
+                                    @endif
                                 </h3>
 
                                 <div class="flex-wr-s-s p-b-40">
                                     <span class="f1-s-3 cl8 m-r-15">
                                         <a target="_blank"  href="{{url('/')}}" class="f1-s-4 cl17 hov-cl10 trans-03">
                                             by 
-                                            {{GoogleTranslate::trans($GetNewsDetail->user->name  , app()->getLocale()) ?? "NA"}}
+                                            {{$GetNewsDetail->user->name  ?? "NA"}}
 
                                         </a>
 
@@ -64,7 +119,7 @@
 
                                         <span>
 
-                                            {!! GoogleTranslate::trans( carbon\Carbon::parse($GetNewsDetail->post_date)->format('M d, Y h:i A' ), app()->getLocale()) ?? "NA" !!}
+                                            {!! carbon\Carbon::parse($GetNewsDetail->post_date)->format('M d, Y h:i A' ) ?? "NA" !!}
                                         </span>
                                     </span>
                                 </div>
@@ -74,12 +129,10 @@
                                 </div>
 
                                 <p class="f1-s-13 cl6 p-b-25">
-                                    {{GoogleTranslate::trans($GetNewsDetail->news_description  , app()->getLocale()) ?? "NA"}}
+                                    {!! $GetNewsDetail->news_description ?? "NA"!!}
                                 </p>
 
-                                <p class="f1-s-11 cl6 p-b-25">
-                                    When the Chair asked Chowdhury to raise a point of order, Union minister Piyush Goyal stood up and said he would not allow the Congress leader to speak in protest against the disruption of the external affairs minister's statement earlier in the day.
-                                </p>
+
 
             
 
@@ -154,19 +207,33 @@
                                                     <div class="p-t-20">
                                                         <h5 class="p-b-5">
                                                             <a target="_blank" href="{{route('home.inner',['newsid' => $recmendNews->id , 'slug' =>  GoogleTranslate::trans($recmendNews->slug , app()->getLocale()) ])}}" class="f1-s-5 cl2 hov-cl10 trans-03">
-                                                                {{GoogleTranslate::trans($recmendNews->title  , app()->getLocale()) ?? "NA"}}
+                                                            
+                                                                {!!  Str::limit($recmendNews->title, 70) ?? "NA" !!}
                                                             </a>
                                                         </h5>
                                                         <span class="cl8">
                                                             <a  target="_blank" href="{{route('home.category', ['id' => $recmendNews->getmenu->id, 'slug' =>  GoogleTranslate::trans(createSlug($recmendNews->getmenu->category_en), app()->getLocale()) ])}}
                                                                 " class="f1-s-4 cl10 hov-cl10 trans-03">
-                                                                {!!GoogleTranslate::trans($recmendNews['getmenu']['category_en'], app()->getLocale()) ?? "NA"  !!}
+                                                              
+
+
+                                                     @if (session()->get('language') === 'hindi')
+                                                        {!! $recmendNews['getmenu']['category_hin']  ?? "NA"  !!}
+                                                      @elseif (session()->get('language') === 'english')
+                                                        {!! $recmendNews['getmenu']['category_en']  ?? "NA"  !!}
+                                                      @elseif (session()->get('language') === 'punjabi')
+                                                        {!! $recmendNews['getmenu']['category_pbi']  ?? "NA"  !!}
+                                                      @elseif (session()->get('language') === 'urdu')
+                                                         {!! $recmendNews['getmenu']['category_urdu']  ?? "NA"  !!}
+                                                      @else   
+                                                          {{ $GetNewsDetail->category_en  ?? "NA"}}
+                                                      @endif
                                                             </a>
                                                             <span class="f1-s-3 m-rl-3">
                                                                 -
                                                             </span>
                                                             <span class="f1-s-3">
-                                                                {!! GoogleTranslate::trans( carbon\Carbon::parse($recmendNews->post_date)->format('M d, Y'), app()->getLocale()) ?? "NA" !!}
+                                                                {!!   carbon\Carbon::parse($recmendNews->post_date)->format('M d, Y')  ?? "NA" !!}
 
                                                             </span>
                                                         </span>
@@ -191,10 +258,27 @@
             <div class="col-md-10 col-lg-4 p-b-30">
                 <div class="p-rl-0-sr991">
                     <div class="row">
+
                         <div class="col-lg-12 mb-4">
                             <div class="card bg-white shadow-sm text-center border-0">
                                 <div class="card-body">
-                                    <p class="text-uppercase text-center small pb-2">{{GoogleTranslate::trans('Advertisement', app()->getLocale()) ?? "NA"}}</p>
+                                    <p class="text-uppercase text-center small pb-2">      
+                                        @switch(session()->get('language'))
+                                        @case('hindi')
+                                            विज्ञापन
+                                            @break
+                                        @case('english')
+                                            Advertisement
+                                            @break
+                                        @case('punjabi')
+                                            ਇਸ਼ਤਿਹਾਰ
+                                            @break
+                                        @case('urdu')
+                                            اشتہار
+                                            @break
+                                        @default
+                                            Advertisement
+                                        @endswitch </p>
                                     <a href="javascript:void()">
                                         <img src="{{asset('assets')}}/images/ads/ad1.jpg" class="img-fluid" alt="">
                                     </a>
@@ -204,7 +288,23 @@
                         <div class="col-lg-12 mb-4">
                             <div class="card bg-white shadow-sm text-center border-0">
                                 <div class="card-body">
-                                    <p class="text-uppercase text-center small pb-2">{{GoogleTranslate::trans('Advertisement', app()->getLocale()) ?? "NA"}}</p>
+                                    <p class="text-uppercase text-center small pb-2">     
+                                         @switch(session()->get('language'))
+                                        @case('hindi')
+                                            विज्ञापन
+                                            @break
+                                        @case('english')
+                                            Advertisement
+                                            @break
+                                        @case('punjabi')
+                                            ਇਸ਼ਤਿਹਾਰ
+                                            @break
+                                        @case('urdu')
+                                            اشتہار
+                                            @break
+                                        @default
+                                            Advertisement
+                                        @endswitch </p>
                                     <a href="javascript:void()">
                                         <img src="{{asset('assets')}}/images/ads/ad2.jpg" class="img-fluid" alt="">
                                     </a>
@@ -336,6 +436,7 @@
                                 </form>
                             </div>
                         </div>
+                        
                     </div>
 
                     <!-- Archive -->
