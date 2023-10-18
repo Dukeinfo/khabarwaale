@@ -14,7 +14,7 @@
                 </div>
                 <div>
                     <p class="f1-s-1 cl11 p-b-16">
-                        @if($getFooteraddress->disclaimer)
+                        @if(isset($getFooteraddress->disclaimer))
                         
                         {!!  Str::limit($getFooteraddress->disclaimer, 150) !!}
                         <a href="javascript:void()" class="cl17">read more</a>
