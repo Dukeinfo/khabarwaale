@@ -43,7 +43,7 @@
                 <div class="row">
 
                     {{-- latest nes  --}}
-                    @livewire('frontend.news-sections.latest-news' ,['Lazy' => true])
+                    @livewire('frontend.news-sections.latest-news' )
                     {{-- end latest news  --}}
                     <div class="col-lg-12 mb-4">
                         <div class="card bg-white shadow-sm text-center border-0">
@@ -76,12 +76,12 @@
             <!-- main news -->
         
             {{-- top news  --}}
-            @livewire('frontend.news-sections.top-news', ['Lazy' => true])
+            @livewire('frontend.news-sections.top-news')
             {{-- top news  --}}
 
 
           {{-- side add and stay connected  --}}
-            @include('livewire.frontend.advertisement.right-adds' ,['Lazy' => true])
+            @include('livewire.frontend.advertisement.right-adds' )
           {{-- side add and stay connected  --}}
 
 
@@ -125,12 +125,12 @@
             <div class="col-md-10 col-lg-8">
                 <div class="p-b-20">
                      {{-- Punjab  --}}
-                     @livewire('frontend.category-news.first-category-news', ['Lazy' => true])
+                     @livewire('frontend.category-news.first-category-news')
                     {{-- Punjab  --}}
 
             
                     {{-- second and 3rd  --}}
-                        @livewire('frontend.category-news.second-category-news' ,['Lazy' => true])
+                        @livewire('frontend.category-news.second-category-news' )
                     {{-- second and 3rd  --}}
 
 
@@ -138,7 +138,7 @@
             </div>
           
                 {{-- side barth category   --}}
-                @livewire('frontend.category-news.side-forth-cat-news', ['Lazy' => true])
+                @livewire('frontend.category-news.side-forth-cat-news')
                 {{-- side barth category   --}}
 
 

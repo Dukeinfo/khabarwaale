@@ -27,7 +27,7 @@
                     @endswitch 
                 </p>
                 <a href="javascript:void()">
-                    <img src="{{asset('assets')}}/images/ads/h-ad1.png" class="img-fluid" alt="">
+                    <img src="{{asset('assets/images/ads/h-ad1.png')}}" class="img-fluid" alt="">
                 </a>
             </div>
         </div>
@@ -36,9 +36,9 @@
 <section class="p-t-30">
     <div class="container">
         <div class="row">
-            @livewire('frontend.news-sections.latest-news')
+            @livewire('frontend.news-sections.latest-news' )
             <!-- main news -->
-            @livewire('frontend.news-sections.top-news')
+            <livewire:frontend.news-sections.top-news lazy />
             {{-- right side add and editor profile  --}}
             @include('livewire.frontend.advertisement.right-adds')
 
@@ -68,7 +68,7 @@
                     @endswitch 
                 </p>
                 <a href="javascript:void()">
-                    <img src="{{asset('assets')}}/images/ads/ad3.jpg" class="img-fluid" alt="">
+                    <img src="{{asset('assets/images/ads/ad3.jpg')}}" class="img-fluid" alt="">
                 </a>
             </div>
         </div>

@@ -10,27 +10,37 @@ class ViewInnerPage extends Component
 {
 
 // Declare a public property to store the $id parameter
-public $news_id;
-        public function mount($newsid){
-            $getNewdInfo=   NewsPost::findOrFail($newsid); 
-            $this->news_id = $getNewdInfo->id;
 
-            
-           
-        }
+public $news_id ,$category_en, $category_hin ,$category_pbi  ,$category_urdu;
+public $language_Val , $menuId ,$slug;
+
+public function mount(NewsPost $newsid)
+{
+
+    if ($newsid) {
+        $this->news_id = $newsid->id;
+        $this->menuId =  $newsid->getmenu->id;
+
+
+
+      
+    } else {
+        abort(404);
+
+    }
+}
+
     public function render()
     {
-        $recmendNewsData = NewsPost::with('getmenu', 'newstype') 
-        ->where('status', 'Approved') ->whereNull('deleted_at')
-        ->where(function ($query) {
-            $query->whereIn('breaking_top', ['Show'])
-            ->orwhere('id'  ,$this->news_id)
-            ;})
-        ->orderBy('created_at', 'desc')
-        ->limit(6)
-        ->get();    
-        $GetNewsDetail = NewsPost::with('getmenu', 'newstype')->where('id' ,  $this->news_id  )
+      
+        $getNewsDetail = NewsPost::with('getmenu', 'newstype')->where('id' ,  $this->news_id  )
         ->where('status', 'Approved') ->whereNull('deleted_at')->first();    
-        return view('livewire.frontend.innerpage.view-inner-page' ,[  'recmendNewsData' =>$recmendNewsData , 'GetNewsDetail' => $GetNewsDetail])->layout('layouts.app');
+    
+        return view('livewire.frontend.innerpage.view-inner-page' ,
+        [ 
+            //  'recmendNewsData' =>$recmendNewsData , 
+        
+        'getNewsDetail' => $getNewsDetail
+         ])->layout('layouts.app');
     }
 }

@@ -8,6 +8,8 @@ use App\Models\Role;
 use App\Models\User;
 use App\Models\WebsiteType;
 use App\Traits\UploadTrait;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Rule;
@@ -140,9 +142,15 @@ class CreateNews extends Component
         // dd( $this->news_description );
         $this->validate();
         if(!is_null($this->image)){
+
             $image =  $this->image;
             $folder = '/news_gallery';
             $newsimage = $this->uploadOne($image, $folder);
+            if( $this->gallery ){
+             
+                $this->image->storeAs('image_gallery',  $newsimage['file_name'] ,'public');
+            }
+
           } 
           if(!is_null($this->pdf_file)){
 
@@ -275,12 +283,30 @@ class CreateNews extends Component
 
 public function paramDelete($id){
     try {
-   NewsPost::onlyTrashed()->find($id)->forceDelete(); 
-    $this->alert('success', 'NewsPost Deleted successfully!');
-} catch (\Exception $e) {
-    dd($e->getMessage());
 
-}
+        $getimg  = NewsPost::onlyTrashed()->find($id);
+
+        $imagePath = Storage::path('public/news_gallery/'. $getimg->image);
+ 
+        if(File::exists($imagePath) && isset( $getimg->image)){
+         
+            unlink($imagePath);
+        }
+        if($getimg->thumbnail){
+            $thumbnailPath = public_path('uploads/thumbnail/' .$getimg->thumbnail);
+            if (file_exists($thumbnailPath)) {
+                // dd(  $thumbnailPath);
+                unlink($thumbnailPath);
+            }
+        }
+        
+
+        NewsPost::onlyTrashed()->find($id)->forceDelete(); 
+        $this->alert('success', 'NewsPost Deleted successfully!');
+    } catch (\Exception $e) {
+        dd($e->getMessage());
+
+    }
 
 }
 

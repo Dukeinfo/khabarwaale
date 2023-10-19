@@ -23,6 +23,21 @@ function createSlug($val)
     return $slug;
 }
 
+
+function md5createSlug($val)
+{
+    // $slug = preg_replace('/[\s.]+/', '-', $val);
+    //for  space slash 
+    $slug = preg_replace('/[\s.\/]+/', '-', $val);
+    // Convert to lowercase
+    $slug = strtolower($slug);
+
+    // Create an MD5 hash
+    $md5Hash = md5($slug);
+
+    return $md5Hash;
+}
+
 function getThumbnail($value) {
     if (str_starts_with($value, 'http')) {
         return $value;
@@ -52,6 +67,12 @@ function getAddImage($image)
 {
  
     return   asset('storage/mainAdd/'.$image);
+}
+  
+function get_pdf($pdf)
+{
+ 
+    return   asset('storage/pdf_files/'.$pdf);
 }
   
 

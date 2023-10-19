@@ -8,6 +8,8 @@ use App\Models\Role;
 use App\Models\User;
 use App\Models\WebsiteType;
 use App\Traits\UploadTrait;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
@@ -53,6 +55,8 @@ class EditNews extends Component
     public $status;
 
     public $news_Id;
+    public     $dbimage ;
+    public     $dbthumbnail ;
     public function mount(  $news_id){
         $newspoat = NewsPost::where('login' ,authUserId())->findOrFail($news_id);
         $this->news_Id = $newspoat->id ?? null ;
@@ -63,11 +67,12 @@ class EditNews extends Component
         $this->title = $newspoat->title ?? null ;
         $this->heading = $newspoat->heading ?? null ;
         $this->heading2 = $newspoat->heading2 ?? null ;
-        // $this->image = $newsimage['file_name'] ?? null ;
-        // $this->thumbnail = $newsimage['thumbnail_name'] ?? null ;
+
+        $this->dbimage = $newspoat->image ?? null ;
+        $this->dbthumbnail = $newspoat->thumbnail ?? null ;
+
         $this->caption = $newspoat->caption ?? null ;
         $this->news_description = $newspoat->news_description ?? null ;
-
         $this->slider =$newspoat->slider ? true : false ;
         $this->breaking_top = $newspoat->breaking_top ? true : false ; 
         $this->breaking_side = $newspoat->breaking_side ? true : false ;
@@ -134,6 +139,12 @@ class EditNews extends Component
             $image =  $this->image;
             $folder = '/news_gallery';
             $newsimage = $this->uploadOne($image, $folder);
+
+            if( $this->gallery ){
+             
+                $this->image->storeAs('image_gallery',  $newsimage['file_name'] ,'public');
+            }
+            
           } 
           if(!is_null($this->pdf_file)){
 
@@ -153,11 +164,31 @@ class EditNews extends Component
         $createNews->heading = $this->heading ?? null ;
         $createNews->heading2 = $this->heading2 ?? null ;
         if(isset($this->image)){
+            // unlink orld image 
+            $imagePath1 = Storage::path('public/news_gallery/'. $createNews->image);
+            if(File::exists($imagePath1)){
+                unlink($imagePath1);
+            }
+            if($createNews->thumbnail){
+                $thumbnailPath = public_path('uploads/thumbnail/' .$createNews->thumbnail);
+                if (file_exists($thumbnailPath)) {
+                    // dd(  $thumbnailPath);
+                    unlink($thumbnailPath);
+                }
+            }
+            // unlink orld image 
             $createNews->image = $newsimage['file_name'] ?? null ;
             $createNews->thumbnail = $newsimage['thumbnail_name'] ?? null ;
         }
         $createNews->caption = $this->caption ?? null ;
         if(isset($this->pdf_file)){
+
+            $pdfPath = Storage::path('public/pdf_files/'. $createNews->pdf_file);
+            if(File::exists($pdfPath)){
+                // dd( $pdfPath);
+                unlink($pdfPath);
+            }
+
             $createNews->pdf_file =  $pdffile  ?? null ;
         }
         $createNews->news_description = $this->news_description ?? null ;

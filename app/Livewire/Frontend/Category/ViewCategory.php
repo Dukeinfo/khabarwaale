@@ -18,11 +18,16 @@ public function mount( $id){
   
     $this->language_Val = session()->get('language');
     $getCategory  =  Category::where('id' ,$id)->orderby('sort_id','ASC')->where('status' ,'Active')->where('deleted_at',Null)->first();
+  if( $getCategory ){
     $this->categoryId = $getCategory->id;
     $this->category_en =  $getCategory->category_en;
     $this->category_hin =  $getCategory->category_hin;
     $this->category_pbi =  $getCategory->category_pbi;
     $this->category_urdu =  $getCategory->category_urdu;
+  }else{
+        abort(404);
+  }
+    
   
 }
 

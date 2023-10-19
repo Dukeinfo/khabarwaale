@@ -25,9 +25,16 @@
                   <h4> <span class="text-success">News Type :</span>
                       {{ ucwords($record->newstype['name']) ?? 'NA' }}
                   </h4>
+                  <h4> <span class="text-success">Pdf file :</span>
+                            <a href="{{ isset($record->pdf_file )?  get_pdf($record->pdf_file)  : '' }}" download=""> {{ ucwords($record->pdf_file) ?? 'NA' }} </a>
+                </h4>
+                <h4> <span class="text-success"> Posted date:</span>
+                    {{ \Carbon\Carbon::parse($record->post_date)->format('F j, Y') }}
+                 </h4>
+                  
                 </div>
                 <div class="col-md-6 border">
-                    <h4> <span class="text-success">News Image :</span> </h4>
+                    <h4> <span class="text-success">News Large Image :</span> </h4>
 
                     <img src="{{ isset($record->image) ? getNewsImage($record->image) : asset('no_image.jpg')}}" alt=".." class="img-fluid" >
 

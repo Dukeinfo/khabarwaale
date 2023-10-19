@@ -7,6 +7,7 @@ use App\Models\AddLocation;
 use App\Models\Advertisment;
 use App\Models\Category;
 use App\Traits\UploadTrait;
+use Carbon\Carbon;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Attributes\Url;
 use Livewire\Component;
@@ -48,7 +49,17 @@ class CreateAdd extends Component
     protected $queryString = ['search'];
     public function render()
     {
+        if (empty($this->from_date)) {
+            $this->from_date = now()->format('Y-m-d'); // Set to current date
+        }
 
+        if (empty($this->to_date)) {
+            $this->to_date = Carbon::now()->addDays(6)->format('Y-m-d');
+        }
+     
+        if (empty($this->post_month)) {
+            $this->post_month = date('F');
+        }
     $today = now()->toDateString();
     $sliderTops = Advertisment::where('from_date', '<=', $today)
                        ->where('to_date', '>=', $today)

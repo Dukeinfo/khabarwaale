@@ -60,9 +60,9 @@ Route::get('/category/{id}/{slug}', function ($id, $slug) {
     return view('category', compact('id', 'slug'));
 })->name('home.category');
 
-// Route::get('/inner', function () {
-//     return view('inner');
-// });
+Route::get('/inner/{newsid}/{slug}', function ($newsid , $slug) {
+    return view('inner',compact('newsid','slug'));
+})->name('home.inner');
 
 
 Route::controller(FronendController::class)->group(function () {
@@ -79,7 +79,7 @@ Route::controller(FronendController::class)->group(function () {
 
 // Route::get('/', ViewHomepage::class)->name('home.homepage');
 // Route::get('/category/{id}/{slug}', ViewCategory::class)->name('home.category');
-Route::get('/inner/{newsid}/{slug}', ViewInnerPage::class)->name('home.inner');
+// Route::get('/inner/{newsid}/{slug}', ViewInnerPage::class)->name('home.inner');
 
 
 

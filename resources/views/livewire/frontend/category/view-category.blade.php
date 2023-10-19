@@ -24,10 +24,27 @@
     <div class="flex-wr-sb-c justify-content-center p-tb-10">
         <div class="f2-s-1 m-tb-6">
             <a href="{{url('/')}}" class="breadcrumb-item f1-s-3 cl9">
-                Home
+                @switch(session()->get('language'))
+                @case('hindi')
+                        {!! 'होम '!!}
+                @break
+                @case('punjabi')
+                        {!! 'ਹੋਮ '!!}    
+                @break
+                @case('urdu')
+                        {!! 'گھر '!!}
+                 
+                @break
+                @case('english')
+                        Home
+                @break
+                @default
+                        Home
+                @endswitch
             </a>
 
-            <a href="" class="breadcrumb-item f1-s-3 cl9">
+            <a target="_blank" href="{{route('home.category', ['id' => $categoryId, 'slug' => createSlug($category_en)
+                ])}}"  target="_blank"  class="breadcrumb-item f1-s-3 cl9">
                       @if (session()->get('language') === 'hindi')
                          {{ $category_hin  ?? "NA"}}
                     @elseif (session()->get('language') === 'english')
@@ -42,7 +59,7 @@
             </a>
 
             <span class="breadcrumb-item f1-s-3 cl9">
-                Punjab
+                    Category
             </span>
         </div>
     </div>
@@ -91,7 +108,17 @@
                                                 <a target="_blank" href="{{route('home.category', ['id' => $catNewsData->getmenu->id, 'slug' => createSlug($catNewsData->getmenu->category_en)
                                                     ])}}" class="f1-s-4 cl10 hov-cl10 trans-03">
                                                 
-                                                    {{$catNewsData['getmenu']['category_hin'] ?? "NA"}}
+                                                    @if (session()->get('language') === 'hindi')
+                                                            {{$catNewsData['getmenu']['category_hin'] ?? "NA"}}
+                                                    @elseif (session()->get('language') === 'english')
+                                                        {{$catNewsData['getmenu']['category_en'] ?? "NA"}}
+                                                    @elseif (session()->get('language') === 'punjabi')
+                                                        {{$catNewsData['getmenu']['category_pbi'] ?? "NA"}}
+                                                    @elseif (session()->get('language') === 'urdu')
+                                                            {{$catNewsData['getmenu']['category_urdu'] ?? "NA"}}
+                                                    @else   
+                                                            {{$catNewsData['getmenu']['category_en'] ?? "NA"}}
+                                                    @endif
                                                 </a>
                                                 <span class="f1-s-3 m-rl-3">
                                                     -
