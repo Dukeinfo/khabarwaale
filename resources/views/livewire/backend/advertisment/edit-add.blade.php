@@ -107,13 +107,13 @@
                                                 @endif 
                                                 <div class="col-md-4">
                                                     <label for="from_date">From Date</label>
-                                                    <input wire:model="from_date" type="date" class="form-control" id="from_date">
+                                                    <input wire:model="from_date" type="date" min="{{ Carbon\Carbon::now()->format('Y-m-d') }}"  class="form-control" id="from_date">
                                                     @error('from_date') <span class="error">{{ $message }}</span> @enderror
                                                
                                                 </div>
                                                 <div class="col-md-4">
                                                     <label for="to_date">To Date</label>
-                                                    <input wire:model="to_date" type="date" class="form-control" id="to_date">
+                                                    <input wire:model="to_date" type="date" min="{{ Carbon\Carbon::now()->format('Y-m-d') }}" class="form-control" id="to_date">
                                                     @error('to_date') <span class="error">{{ $message }}</span> @enderror
                                               
                                                 </div>

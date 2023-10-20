@@ -41,16 +41,7 @@
         </span>
     </div>
     <!-- Modal Video 01-->
-    <div class="modal fade" id="modal-video-01" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog" role="document" data-dismiss="modal">
-            <div class="close-mo-video-01 trans-0-4" data-dismiss="modal" aria-label="Close">&times;</div>
-            <div class="wrap-video-mo-01">
-                <div class="video-mo-01">
-                    <iframe src="https://www.youtube.com/embed/rMVarSeBOrI?rel=0" allowfullscreen></iframe>
-                </div>
-            </div>
-        </div>
-    </div>
+    @livewire('frontend.homepage.tv.live-tv')
     <script src="{{asset('assets/vendor/jquery/jquery-3.2.1.min.js')}}"></script>
     <script src="{{asset('assets/vendor/animsition/js/animsition.min.js')}}"></script>
     <script src="{{asset('assets/vendor/bootstrap/js/popper.js')}}"></script>

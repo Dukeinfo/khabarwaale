@@ -319,9 +319,16 @@
                         Advertisement
                     @endswitch 
                 </p>
-                <a href="javascript:void()">
-                    <img src="{{asset('assets/images/ads/ad2.jpg')}}" class="img-fluid" alt="">
+                @if(isset($topNewsCentertAds))
+                
+                <a href="{{$topNewsCentertAds->link_add  ?? '#'}}">
+                    <img src="{{ getAddImage($topNewsCentertAds->image) }}" class="img-fluid" alt="">
                 </a>
+                @else
+                {{-- <a href="javascript:void()">
+                    <img src="{{asset('assets/images/ads/ad2.jpg')}}" class="img-fluid" alt="">
+                </a> --}}
+                @endif
             </div>
         </div>
     </div>

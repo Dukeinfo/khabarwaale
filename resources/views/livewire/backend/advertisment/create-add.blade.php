@@ -61,6 +61,7 @@
                                                 <div class="col-md-4">
                                                     <label for="location">Location</label>
                                                     <select wire:model="location" class="form-control" id="location">
+                                                       <option value="">Select Location </option>
                                                         @forelse ( $get_add_location as  $addLocation)
                                                         
                                                         <option value="{{$addLocation->name}}">{{$addLocation->name}}</option>
@@ -107,13 +108,13 @@
                                                 @endif 
                                                 <div class="col-md-4">
                                                     <label for="from_date">From Date</label>
-                                                    <input wire:model="from_date" type="date" class="form-control" id="from_date">
+                                                    <input wire:model="from_date" type="date" min="{{ Carbon\Carbon::now()->format('Y-m-d') }}"  class="form-control" id="from_date">
                                                     @error('from_date') <span class="error">{{ $message }}</span> @enderror
                                                
                                                 </div>
                                                 <div class="col-md-4">
                                                     <label for="to_date">To Date</label>
-                                                    <input wire:model="to_date" type="date" class="form-control" id="to_date">
+                                                    <input wire:model="to_date" type="date" min="{{ Carbon\Carbon::now()->format('Y-m-d') }}" class="form-control" id="to_date">
                                                     @error('to_date') <span class="error">{{ $message }}</span> @enderror
                                               
                                                 </div>
@@ -217,7 +218,9 @@
                                         
                                             <th> image</th>
                                             <th>Add Type</th>
-                                            <th> Name </th>
+                                            <th> Date </th>
+
+                                            <th>Page  Name </th>
                                             <th> location </th>
                                             <th>Status</th>    
                                             <th>Action</th>
@@ -231,7 +234,7 @@
                                             <td> {{ $key+1}}</td>
                                             <td>   
                                                 
-                                                <img src="{{getThumbnail($record->thumbnail) ?? ''}}" alt=".." class="img-size-50  img-bordered-sm rounded-circle" width="100">
+                                                <img src="{{getThumbnail($record->thumbnail) ?? ''}}" alt=".." class="img-size-50  img-bordered-sm rounded" width="100" height="100">
                                             
                                             </td>
                                             <td>
@@ -241,6 +244,37 @@
                                                 @else
                                                 <a href="{{$record->link_add?? '#'}}" target="_blank"> Link add</a>
                                                 @endif
+                                            </td>
+                                            <td> 
+                                                @php
+                                                $formattedFromDate = isset($record->from_date) ? date('M d, Y', strtotime($record->from_date)) : 'NA';
+                                                $formattedToDate = isset($record->to_date) ? date('M d, Y', strtotime($record->to_date)) : 'NA';
+                                            
+                                                $fromDate = isset($record->from_date) ? new DateTime($formattedFromDate) : null;
+                                                $toDate = isset($record->to_date) ? new DateTime($formattedToDate) : null;
+                                            
+                                                if ($fromDate !== null && $toDate !== null) {
+                                                    if ($fromDate < $toDate) {
+                                                        $interval = $fromDate->diff($toDate);
+                                                        $days = $interval->format("%a");
+                                                        $daysLeft = max(0, $days);
+                                                    } else {
+                                                        $daysLeft = 0; // Handle case where from_date is later than to_date
+                                                    }
+                                                } else {
+                                                    $daysLeft = 0; // Default to 0 days left if either date is missing
+                                                }
+                                            @endphp
+                                            
+                                            {{ $formattedFromDate }} to {{ $formattedToDate }}
+                                            @if ($daysLeft > 0)
+                                                <span class="text-warning fw-bold">
+                                                    (for {{ $daysLeft }} day{{ $daysLeft != 1 ? 's' : '' }} )
+                                                </span>
+                                            @else
+                                                <span class="text-danger fw-bold">(Expired )</span>
+                                            @endif
+                                            
                                             </td>
                                             <td>{{ ucwords(str_replace('home.','',$record->page_name)) ?? 'NA' }}</td>
                                   
@@ -255,9 +289,9 @@
                                                 <a href="javascript:void(0)" wire:click="active({{$record->id}})">
                                                     <span class="badge bg-danger" >  Inactive </span>
                                                 </a> 
+                                                @endif
                                             </td>
 
-                                           @endif
                                                 <td>   
                                          
                                                     <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal{{$record->id}}">

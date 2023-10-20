@@ -23,9 +23,48 @@
              <img src="{{ asset('storage/image/'. $record->image_add)}}" alt=".." class="img-fluid " >
              
              @else
-             <a href="{{$record->link_add?? '#'}}" target="_blank"> Link add</a>
+             <h4> <span class="text-success">Link   :</span>             
+
+             <a href="{{$record->link_add?? '#'}}" target="_blank"> Link add</a>  </h4> 
              @endif
         
+             <h4> <span class="text-success">Expiry  :</span>               
+                <h4><span class="text-success">Expiry Date:</span>
+                    @php
+                    $formattedFromDate = isset($record->from_date) ? date('M d, Y', strtotime($record->from_date)) : 'NA';
+                    $formattedToDate = isset($record->to_date) ? date('M d, Y', strtotime($record->to_date)) : 'NA';
+                
+                    $fromDate = isset($record->from_date) ? new DateTime($formattedFromDate) : null;
+                    $toDate = isset($record->to_date) ? new DateTime($formattedToDate) : null;
+                
+                    if ($fromDate !== null && $toDate !== null) {
+                        if ($fromDate < $toDate) {
+                            $interval = $fromDate->diff($toDate);
+                            $days = $interval->format("%a");
+                            $daysLeft = max(0, $days);
+                        } else {
+                            $daysLeft = 0; // Handle case where from_date is later than to_date
+                        }
+                    } else {
+                        $daysLeft = 0; // Default to 0 days left if either date is missing
+                    }
+                @endphp
+                
+                {{ $formattedFromDate }} to {{ $formattedToDate }}
+                @if ($daysLeft > 0)
+                    <span class="text-warning">
+                        ( for {{ $daysLeft }} day{{ $daysLeft != 1 ? 's' : '' }} )
+                    </span>
+                @else
+                    <span class="text-danger">(Expired)</span>
+                @endif
+                
+                
+                
+                    </h4>
+                    
+        
+        </h4>
         
  
         </div>

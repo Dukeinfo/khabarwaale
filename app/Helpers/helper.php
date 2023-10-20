@@ -82,4 +82,10 @@ function getNewsImage($image)
  
     return   asset('storage/news_gallery/'.$image);
 }
-  
+
+
+function get_video_image($image)
+{
+ 
+    return   asset('storage/video/'.$image);
+}

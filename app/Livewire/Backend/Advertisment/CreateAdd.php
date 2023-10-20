@@ -60,12 +60,8 @@ class CreateAdd extends Component
         if (empty($this->post_month)) {
             $this->post_month = date('F');
         }
-    $today = now()->toDateString();
-    $sliderTops = Advertisment::where('from_date', '<=', $today)
-                       ->where('to_date', '>=', $today)
-                       ->where('location','Slider Top')
-                       ->where('status', 'Yes') // Assuming 'status' is used to enable/disable ads
-                       ->first();
+
+
  
 
         $getCategory=  Category::where('status' ,'Active')->get();

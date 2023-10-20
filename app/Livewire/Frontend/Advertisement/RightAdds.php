@@ -3,6 +3,7 @@
 namespace App\Livewire\Frontend\Advertisement;
 
 use App\Models\Advertisment;
+use App\Models\VideoGallery;
 use Livewire\Component;
 
 class RightAdds extends Component
@@ -10,12 +11,22 @@ class RightAdds extends Component
     public function render()
     {
         $today = now()->toDateString();
-        $advertisements = Advertisment::where('from_date', '<=', $today)
+        $rightAdvertisements = Advertisment::where('from_date', '<=', $today)
                            ->where('to_date', '>=', $today)
                            ->where('location','Slider Right')
+                           ->where('page_name' ,'Home')
+
                            ->where('status', 'Yes') // Assuming 'status' is used to enable/disable ads
                            ->get();
                
-        return view('livewire.frontend.advertisement.right-adds' ,['advertisements' => $advertisements]);
+                           
+        $homelivetvnews = VideoGallery::orderBy('created_at', 'desc') 
+                        ->where('status', 'Active')
+                        ->whereNull('deleted_at')
+                        ->first();
+        return view('livewire.frontend.advertisement.right-adds' ,[
+            'rightAdvertisements' => $rightAdvertisements,
+            'homelivetvnews' =>$homelivetvnews,
+        ]);
     }
 }

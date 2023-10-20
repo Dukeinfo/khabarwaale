@@ -173,7 +173,7 @@
 
                                             </td>
                                   
-                                                <td> <a href="{{$record->video_url  }}" target="_blank"> {{$record->video_title_en ?? "NA"}}</a> </td>
+                                                <td> <a href="{{$record->video_url ?? '#'}}" target="_blank" title="{{$record->video_url }}"> {{$record->video_title_en ?? "NA"}}</a> </td>
                                                 <td> 
                                                     {{ \Carbon\Carbon::parse($record->post_date )->format('d-M-y') ?? ''}}
 

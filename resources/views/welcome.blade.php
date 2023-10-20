@@ -4,35 +4,7 @@
 @section('keywords', 'Khabarwaale - News Portal')
 @section('content')
 
-<section class="p-t-30">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <p class="text-uppercase text-center small pb-2">          
-                    @switch(session()->get('language'))
-                    @case('hindi')
-                        विज्ञापन
-                        @break
-                    @case('english')
-                        Advertisement
-                        @break
-                    @case('punjabi')
-                        ਇਸ਼ਤਿਹਾਰ
-                        @break
-                    @case('urdu')
-                        اشتہار
-                        @break
-                    @default
-                        Advertisement
-                    @endswitch 
-                </p>
-                <a href="javascript:void()">
-                    <img src="{{asset('assets/images/ads/h-ad1.png')}}" class="img-fluid" alt="">
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
+@livewire('frontend.homepage.home-top-add')
 <section class="p-t-30">
     <div class="container">
         <div class="row">
@@ -40,40 +12,13 @@
             <!-- main news -->
             <livewire:frontend.news-sections.top-news lazy />
             {{-- right side add and editor profile  --}}
-            @include('livewire.frontend.advertisement.right-adds')
+            @livewire('frontend.advertisement.right-adds')
 
         </div>
     </div>
 </section>
-<section class="">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <p class="text-uppercase text-center small pb-2">
-                    @switch(session()->get('language'))
-                    @case('hindi')
-                        विज्ञापन
-                        @break
-                    @case('english')
-                        Advertisement
-                        @break
-                    @case('punjabi')
-                        ਇਸ਼ਤਿਹਾਰ
-                        @break
-                    @case('urdu')
-                        اشتہار
-                        @break
-                    @default
-                        Advertisement
-                    @endswitch 
-                </p>
-                <a href="javascript:void()">
-                    <img src="{{asset('assets/images/ads/ad3.jpg')}}" class="img-fluid" alt="">
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
+ {{-- center add of home page  --}}
+        @livewire('frontend.homepage.home-center-add')
 <section class="p-t-70">
     <div class="container">
         <div class="row justify-content-center">
@@ -96,34 +41,7 @@
         </div>
     </div>
 </section>
-<section class="">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <p class="text-uppercase text-center small pb-2">             
-                    @switch(session()->get('language'))
-                    @case('hindi')
-                        विज्ञापन
-                        @break
-                    @case('english')
-                        Advertisement
-                        @break
-                    @case('punjabi')
-                        ਇਸ਼ਤਿਹਾਰ
-                        @break
-                    @case('urdu')
-                        اشتہار
-                        @break
-                    @default
-                        Advertisement
-                    @endswitch 
-                </p>
-                <a href="javascript:void()">
-                    <img src="{{asset('assets/images/ads/ad4.jpg')}}" class="img-fluid" alt="">
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
+        @livewire('frontend.homepage.home-bottom-add')
+
         @livewire('frontend.news-sections.bottom-news')
 @stop

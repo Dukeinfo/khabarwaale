@@ -206,11 +206,19 @@
                         @endswitch 
 
                     </p>
+                    @if(isset($latestRightAds))
+
                     <a href="javascript:void()">
-                        <img src="{{asset('assets/images/ads/v-ad1.gif')}}" class="img-fluid" alt="">
+                        <img src="{{getAddImage($latestRightAds->image) }}" class="img-fluid" alt="">
                     </a>
+                    @else
+                    {{-- <a href="javascript:void()">
+                        <img src="{{asset('assets/images/ads/v-ad1.gif')}}" class="img-fluid" alt="">
+                    </a> --}}
+                    @endif
                 </div>
             </div>
         </div>
+
     </div>
 </div>

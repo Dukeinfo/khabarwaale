@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Frontend\NewsSections;
 
+use App\Models\Advertisment;
 use App\Models\NewsPost;
 use Livewire\Component;
 
@@ -59,12 +60,23 @@ class LatestNews extends Component
                             })
                             ->orderBy('created_at', 'desc')
                             ->get();
+
+                            $today = now()->toDateString();
+                            $latestRightAds = Advertisment::where('from_date', '<=', $today)
+                                               ->where('to_date', '>=', $today)
+                                               ->where('location','Slider Left')
+                                               ->where('page_name' ,'Home')
+                    
+                                               ->where('status', 'Yes') // Assuming 'status' is used to enable/disable ads
+                                               ->first();
+                                          
         return view('livewire.frontend.news-sections.latest-news' ,[
                 'latestHinNewsData' =>$latestHinNewsData,
                 'latestEngNewsData'  => $latestEngNewsData,
                 'latestPbiNewsData' => $latestPbiNewsData,
                 'latestUrduNewsData' => $latestUrduNewsData,
                 'latestAllNewsData' => $latestAllNewsData,
+                'latestRightAds' =>$latestRightAds,
     ]);
     }
 }

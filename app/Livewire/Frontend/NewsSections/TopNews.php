@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Frontend\NewsSections;
 
+use App\Models\Advertisment;
 use App\Models\NewsPost;
 use Livewire\Attributes\Lazy;
 use Livewire\Component;
@@ -49,11 +50,21 @@ class TopNews extends Component
                         ->where('news_type' ,4)
                         ->limit(7)
                         ->get();      
+
+                        $today = now()->toDateString();
+                        $topNewsCentertAds = Advertisment::where('from_date', '<=', $today)
+                                           ->where('to_date', '>=', $today)
+                                           ->where('location','News Center')
+                                           ->where('page_name' ,'Home')
+                
+                                           ->where('status', 'Yes') // Assuming 'status' is used to enable/disable ads
+                                           ->first();
             return view('livewire.frontend.news-sections.top-news' ,[
                 'topHinNewsData' => $topHinNewsData,
                 'topEngNewsData' => $topEngNewsData,
                 'topPbiNewsData' => $topPbiNewsData,
                 'topUrduNewsData' => $topUrduNewsData,
+                'topNewsCentertAds' => $topNewsCentertAds,
             ]);
     }
 }

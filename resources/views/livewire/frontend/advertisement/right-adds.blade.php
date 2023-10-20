@@ -1,16 +1,9 @@
 <div class="col-lg-4">
     <div class="row">
 
-        @php
-        $today = now()->toDateString();
-            $advertisements = \App\Models\Advertisment::where('from_date', '<=', $today)
-                               ->where('to_date', '>=', $today)
-                               ->where('location','Slider Right')
-                               ->where('status', 'Yes') // Assuming 'status' is used to enable/disable ads
-                               ->get();
-                            
-        @endphp
-        @forelse ($advertisements as $advertisement)
+  
+
+        @forelse ($rightAdvertisements as $advertisement)
         <div class="col-lg-12 mb-4" wire:poll>
             <div class="card bg-white shadow-sm text-center border-0">
                 <div class="card-body">
@@ -33,9 +26,12 @@
                         @endswitch 
 
                     </p>
+             @if(isset($advertisement->image))
+
                     <a href="{{$advertisement->link_add ?? "#"}}">
-                        <img src="{{  isset($advertisement->image) ? getAddImage($advertisement->image) :asset('assets/images/ads/ad1.jpg')}}" class="img-fluid" alt="">
+                        <img src="{{  getAddImage($advertisement->image) }}" class="img-fluid" alt="">
                     </a>
+                    @endif
                 </div>
             </div>
         </div>
@@ -80,7 +76,7 @@
             <div class="p-b-30">
                 <div class="position-relative">
                     <div class="wrap-pic-w pos-relative">
-                        <img src="{{asset('assets')}}/images/video-01.jpg" alt="IMG">
+                        <img src="{{ isset($homelivetvnews->video_image) ?  get_video_image($homelivetvnews->video_image): asset('assets/images/video-01.jpg')}}" alt="IMG">
                         <button class="s-full ab-t-l flex-c-c fs-32 cl0 hov-cl10 trans-03" data-toggle="modal" data-target="#modal-video-01">
                             <span class="fab fa-youtube"></span>
                         </button>
