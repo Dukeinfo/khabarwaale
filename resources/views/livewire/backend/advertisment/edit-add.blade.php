@@ -42,18 +42,15 @@
                                                     <label for="page_name">Page Name</label>
                                                     <select name="page_name" wire:model="page_name" id="page_name"  class="form-control">
                                                      <option value="" >Select page</option>          
-                                                        {{-- @foreach(Route::getRoutes() as $route)
-                                                             @if (str_starts_with($route->getName(), 'home.') )
-                                                            @php
-                                                                $routeName   = ucwords(str_replace('home.','',$route->getName() )  )
-                                                             @endphp
-                                                              <option value="{{ $route->getName() }}"  class="form-control">{{ str_replace('_' , ' ',$routeName)}}
-                                                                </option>
-               
-                                                            @endif
-                                                        @endforeach --}}
-                                                        <option value="Home">Home</option>
-                                                        <option value="Others">Others</option>
+                                                     @foreach(Route::getRoutes() as $route)
+                                                     @if (str_starts_with($route->getName(), 'home.') )
+                                                        @php
+                                                            $routeName   = ucwords(str_replace('home.','',$route->getName() )  )
+                                                        @endphp
+                                                        <option value="{{  $routeName }}"  class="form-control">{{ str_replace('_' , ' ',$routeName)}}  </option>
+       
+                                                    @endif
+                                                    @endforeach
                                                     </select>
                                                     @error('page_name') <span class="error">{{ $message }}</span> @enderror
                                                 

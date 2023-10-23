@@ -3,6 +3,7 @@
 namespace App\Livewire\Frontend\Homepage\Subscribe;
 
 use App\Models\Subscription;
+use App\Models\VideoGallery;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 
@@ -12,7 +13,11 @@ class SubscribeForm extends Component
  public $email;
     public function render()
     {
-        return view('livewire.frontend.homepage.subscribe.subscribe-form');
+        $rightlivetvnews = VideoGallery::orderBy('created_at', 'desc') 
+        ->where('status', 'Active')
+        ->whereNull('deleted_at')
+        ->first();
+        return view('livewire.frontend.homepage.subscribe.subscribe-form' ,['rightlivetvnews' => $rightlivetvnews ]);
     }
 
 

@@ -20,9 +20,12 @@
                         Advertisement
                     @endswitch 
                 </p>
-                <a href="javascript:void()">
-                    <img src="{{asset('assets')}}/images/ads/h-ad1.png" class="img-fluid" alt="">
+                @if(isset($categoryTopAdd->image))
+                <a href="{{$categoryTopAdd->link_add ?? "#"}}">
+                    <img src="{{  getAddImage($categoryTopAdd->image)}}" class="img-fluid" alt="Advertisement">
                 </a>
+                @else
+             @endif
             </div>
         </div>
     </div>

@@ -14,7 +14,7 @@ class HomeTopAdd extends Component
         $homeTopAdd = Advertisment::where('from_date', '<=', $today)
                            ->where('to_date', '>=', $today)
                            ->where('location','Top Header')
-                           ->where('page_name' ,'Home')
+                           ->where('page_name' ,'Homepage')
                            ->where('status', 'Yes') // Assuming 'status' is used to enable/disable ads
                            ->first();
                        

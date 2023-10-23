@@ -99,9 +99,16 @@
                         @default
                             Advertisement
                         @endswitch </p>
-                    <a href="javascript:void()">
-                        <img src="{{asset('assets/images/ads/v-ad1.gif')}}" class="img-fluid" alt="">
-                    </a>
+                        @if(isset($categorylatestleftAds))
+
+                        <a href="javascript:void()" wire:poll>
+                            <img src="{{getAddImage($categorylatestleftAds->image) }}" class="img-fluid" alt="">
+                        </a>
+                        @else
+                        {{-- <a href="javascript:void()">
+                            <img src="{{asset('assets/images/ads/v-ad1.gif')}}" class="img-fluid" alt="">
+                        </a> --}}
+                        @endif
                 </div>
             </div>
         </div>

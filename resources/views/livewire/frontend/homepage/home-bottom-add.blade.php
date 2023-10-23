@@ -28,9 +28,7 @@
                     <img src="{{ getAddImage($homeBottomAdd->image)  }}" class="img-fluid" alt="">
                 </a>
                 @else
-                {{-- <a href="javascript:void()">
-                    <img src="{{asset('assets/images/ads/ad4.jpg')}}" class="img-fluid" alt="">
-                </a> --}}
+       
                 @endif
             </div>
         </div>

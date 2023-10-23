@@ -26,9 +26,7 @@
                     <img src="{{ getAddImage($homeCenterLongAdd->image)  }}" class="img-fluid" alt="">
                 </a>
                 @else
-                {{-- <a href="javascript:void()">
-                    <img src="{{asset('assets/images/ads/ad3.jpg')}}" class="img-fluid" alt="">
-                </a> --}}
+    
                 @endif
             </div>
         </div>

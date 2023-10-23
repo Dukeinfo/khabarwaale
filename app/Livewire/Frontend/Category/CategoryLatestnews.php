@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Frontend\Category;
 
+use App\Models\Advertisment;
 use App\Models\NewsPost;
 use Livewire\Component;
 
@@ -53,6 +54,15 @@ public $languageVal;
     
     $catWiselatest_eng_News = $catWiselatest_eng_News->limit(6)->get();
 
-        return view('livewire.frontend.category.category-latestnews' , ['catWiselatest_eng_News' =>$catWiselatest_eng_News]);
+    $today = now()->toDateString();
+    $categorylatestleftAds = Advertisment::where('from_date', '<=', $today)
+                       ->where('to_date', '>=', $today)
+                       ->where('location','Slider Left')
+                       ->where('page_name' ,'category')
+                       ->where('status', 'Yes') // Assuming 'status' is used to enable/disable ads
+                       ->first();
+        return view('livewire.frontend.category.category-latestnews' , [
+         'categorylatestleftAds' => $categorylatestleftAds,
+         'catWiselatest_eng_News' =>$catWiselatest_eng_News]);
     }
 }
