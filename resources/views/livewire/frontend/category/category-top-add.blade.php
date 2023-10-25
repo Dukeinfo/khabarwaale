@@ -1,32 +1,36 @@
 <section class="p-t-30">
     <div class="container">
         <div class="row">
-            <div class="col-lg-12 text-center">
-                <p class="text-uppercase text-center small pb-2">                
-                @switch(session()->get('language'))
-                    @case('hindi')
-                        विज्ञापन
-                        @break
-                    @case('english')
-                        Advertisement
-                        @break
-                    @case('punjabi')
-                        ਇਸ਼ਤਿਹਾਰ
-                        @break
-                    @case('urdu')
-                        اشتہار
-                        @break
-                    @default
-                        Advertisement
-                    @endswitch 
-                </p>
-                @if(isset($categoryTopAdd->image))
-                <a href="{{$categoryTopAdd->link_add ?? "#"}}">
-                    <img src="{{  getAddImage($categoryTopAdd->image)}}" class="img-fluid" alt="Advertisement">
-                </a>
-                @else
-             @endif
-            </div>
+            @forelse ($categoryTopAdd as  $catTopAdd)
+                <div class="col-lg-4 text-center">
+                    <p class="text-uppercase text-center small pb-2">                
+                    @switch(session()->get('language'))
+                        @case('hindi')
+                            विज्ञापन
+                            @break
+                        @case('english')
+                            Advertisement
+                            @break
+                        @case('punjabi')
+                            ਇਸ਼ਤਿਹਾਰ
+                            @break
+                        @case('urdu')
+                            اشتہار
+                            @break
+                        @default
+                            Advertisement
+                        @endswitch 
+                    </p>
+                    @if(isset($catTopAdd->image))
+                    <a href="{{$catTopAdd->link_add ?? "#"}}">
+                        <img src="{{  getAddImage($catTopAdd->image)}}" class="img-fluid" alt="Advertisement">
+                    </a>
+                    @else
+                    @endif
+                </div>
+            @empty
+                
+            @endforelse
         </div>
     </div>
 </section>

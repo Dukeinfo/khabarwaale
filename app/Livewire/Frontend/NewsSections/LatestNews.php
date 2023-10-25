@@ -64,9 +64,10 @@ class LatestNews extends Component
                             $today = now()->toDateString();
                             $latestRightAds = Advertisment::where('from_date', '<=', $today)
                                                ->where('to_date', '>=', $today)
-                                               ->where('location','Slider Left')
+                                               ->where('location','Left Add')
                                                ->where('page_name' ,'Homepage')
                                                ->where('status', 'Yes') // Assuming 'status' is used to enable/disable ads
+                                               ->orderBy('created_at', 'desc')
                                                ->first();
                                           
         return view('livewire.frontend.news-sections.latest-news' ,[

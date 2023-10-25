@@ -35,7 +35,7 @@
                         @elseif ($flashNews->news_type == 3 && session()->get('language') === 'punjabi')
                             <!-- Display Punjabi news -->
                             <span class="dis-inline-block slide100-txt-item animated visible-false" >
-                                <a  target="_blank" href="{{route('home.inner',['newsid' => $flashNews->id , 'slug' =>  $flashNews->slug  ])}}" class="cl6">
+                                <a  target="_blank" href="{{route('home.inner',['newsid' => $flashNews->id , 'slug' =>   $flashNews->slug  ])}}" class="cl6">
                                     {!! Str::limit($flashNews->title, 60)!!} 
                                 </a>
                             </span>

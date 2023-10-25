@@ -17,19 +17,13 @@ class AddLocationSeeder extends Seeder
         AddLocation::truncate();
 
         $locations = [
-            'Top Header',
-            'Slider Top',
-            'Slider Down',
-            'Slider Left',
-            'Slider Right',
-            'Slider Down Left',
-            'Slider Down Right',
-            'News Sidebar',
-            'News Down',
-            'News Center',
+            'Top Banner',
+            'Right Add',
+            'Left Add',
             'Under Top News',
-            'Under World News',
-            'Under More News',
+            'Center Banner',
+            'Bottom Banner',
+
         ];
 
         foreach ($locations as $location) {

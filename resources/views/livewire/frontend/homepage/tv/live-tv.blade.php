@@ -4,10 +4,11 @@
         <div class="wrap-video-mo-01">
             <div class="video-mo-01">
                 @if(isset($livetvnews))
-                <iframe src="{{$livetvnews->video_url }}" allowfullscreen></iframe>
-               @else
-               {{-- <iframe src="https://www.youtube.com/embed/rMVarSeBOrI?rel=0" allowfullscreen></iframe> --}}
-            
+                <iframe src="https://www.youtube.com/embed/{{$livetvnews->video_url}}?rel=0" allowfullscreen></iframe>
+                 @else
+                    <p>
+                        Sorry, there is currently no live TV news available. Please check back later for updates.
+                    </p>            
                 @endif
             </div>
         </div>

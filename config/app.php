@@ -165,6 +165,8 @@ return [
         /*
          * Application Service Providers...
          */
+        Jorenvh\Share\Providers\ShareServiceProvider::class,
+        Kudashevs\ShareButtons\Providers\ShareButtonsServiceProvider::class,
         App\Providers\LanguageServiceProvider::class,
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
@@ -189,7 +191,9 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
         'Image' => Intervention\Image\Facades\Image::class,
-        'GoogleTranslate' => Stichoza\GoogleTranslate\GoogleTranslate::class
+        'GoogleTranslate' => Stichoza\GoogleTranslate\GoogleTranslate::class,
+        'Share' => Jorenvh\Share\ShareFacade::class,
+        'ShareButtons' => Kudashevs\ShareButtons\Facades\ShareButtonsFacade::class,
     ])->toArray(),
 
 ];

@@ -13,10 +13,11 @@ class RightAdds extends Component
         $today = now()->toDateString();
         $rightAdvertisements = Advertisment::where('from_date', '<=', $today)
                            ->where('to_date', '>=', $today)
-                           ->where('location','Slider Right')
+                           ->where('location','Right Add')
                            ->where('page_name' ,'Homepage')
-
+                           ->orderBy('created_at', 'desc')
                            ->where('status', 'Yes') // Assuming 'status' is used to enable/disable ads
+                            ->limit(3)
                            ->get();
                
                            

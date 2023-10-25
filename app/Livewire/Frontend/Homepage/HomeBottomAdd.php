@@ -12,9 +12,10 @@ class HomeBottomAdd extends Component
         $today = now()->toDateString();
         $homeBottomAdd  = Advertisment::where('from_date', '<=', $today)
                            ->where('to_date', '>=', $today)
-                           ->where('location','Under More News')
+                           ->where('location','Bottom Banner')
                            ->where('page_name' ,'Homepage')
                            ->where('status', 'Yes') // Assuming 'status' is used to enable/disable ads
+                           ->orderBy('created_at', 'desc')
                            ->first();
         return view('livewire.frontend.homepage.home-bottom-add' ,['homeBottomAdd' => $homeBottomAdd]);
     }

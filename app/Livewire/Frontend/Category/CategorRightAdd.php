@@ -13,9 +13,10 @@ class CategorRightAdd extends Component
         $today = now()->toDateString();
         $categoryRightAdd = Advertisment::where('from_date', '<=', $today)
                            ->where('to_date', '>=', $today)
-                           ->where('location','Slider Right')
+                           ->where('location','Right Add')
                            ->where('page_name' ,'category')
                            ->where('status', 'Yes') // Assuming 'status' is used to enable/disable ads
+                           ->orderBy('created_at', 'desc')
                            ->get();
         $categorylivetvnews = VideoGallery::orderBy('created_at', 'desc') 
         ->where('status', 'Active')

@@ -30,6 +30,6 @@ class LanguageServiceProvider extends ServiceProvider
     public function clearAllLang()
     {
         session()->forget('language');
-        session()->put('language', 'english');
+        session()->put('language', 'punjabi');
     }
 }

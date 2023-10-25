@@ -103,12 +103,35 @@
                     <span class="f1-s-12 cl5 p-t-1 m-r-15">
                         Share:
                     </span>
+                    {{-- <link rel="stylesheet" href="{{ asset('css/share-buttons.css') }}"> --}}
+                    {{-- <script src="{{ asset('js/share-buttons.js') }}"></script> --}}
 
+                <script src="{{ asset('js/share.js') }}"></script>
+
+                <style>
+                    div#social-links {
+                        margin: 0 left;
+                        max-width: 500px;
+                    }
+                    div#social-links ul li {
+                        display: inline-block;
+                    }          
+                    div#social-links ul li a {
+                        padding: 20px;
+                        border: 1px solid #ccc;
+                        margin: 1px;
+                        font-size: 30px;
+                        color: #222;
+                        background-color: #ccc;
+                    }
+                </style>
+                    
                     <div class="flex-wr-s-s size-w-0">
-                        <a href="#" class="dis-block f1-s-13 cl0 bg-facebook borad-3 p-tb-4 p-rl-18 hov-btn1 m-r-3 m-b-3 trans-03">
+                        {!! $shareComponent !!}
+                        {{-- <a href="#" class="dis-block f1-s-13 cl0 bg-facebook borad-3 p-tb-4 p-rl-18 hov-btn1 m-r-3 m-b-3 trans-03">
                             <i class="fab fa-facebook-f"></i>
-                        </a>
-
+                        </a> --}}
+{{-- 
                         <a href="#" class="dis-block f1-s-13 cl0 bg-twitter borad-3 p-tb-4 p-rl-18 hov-btn1 m-r-3 m-b-3 trans-03">
                             <i class="fab fa-twitter"></i>
                         </a>
@@ -119,7 +142,7 @@
 
                         <a href="#" class="dis-block f1-s-13 cl0 bg-pinterest borad-3 p-tb-4 p-rl-18 hov-btn1 m-r-3 m-b-3 trans-03">
                             <i class="fab fa-pinterest-p"></i>
-                        </a>
+                        </a> --}}
                     </div>
                 </div>
             </div>

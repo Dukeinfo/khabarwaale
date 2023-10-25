@@ -19,179 +19,9 @@
                     </div>
                 </div>
             </div>
+
             <!-- end page title -->
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="card">
-                        <div class="card-header bg-transparent border-bottom py-3">
-                            <h4 class="card-title">Manage News</h4>
-                            <p class="card-title-desc mb-0">Manage the content by clicking on action accrodingly.</p>
-                            <div class="col-md-3 float-end">
-                                <div class="form-group">
-                                    <div class="mb-3">
-                                        <label class="form-label">Search</label>
-                                        <input type="search" class="form-control"  wire:model.live="search" placeholder="Search...">
-                                         @error('Search') <span class="error">{{ $message }}</span> @enderror
-                                    </div>
-                                </div>
-                            </div>
-              
-                        </div>
-                        <div class="card-body">
-                            <span class="badge bg-success p-2  fs-4">Total news : {{ $totalrecords ?? '0'}} </span>
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-striped datatable-- table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>image</th>
-                                            <th>Add Type</th>
-                                            <th>Category </th>
-                                            <th>User Name </th>
-                                            <th>Post Date </th>
-                                            <th>Status</th>    
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                                      
-                                         @forelse ( $records as $key => $record )
-                                         @if($record->role_id != 1)
-                                         <tr>
-                                            <td> 
-                                                {{-- $records->firstitem()+$loop->index ?? --}}
-                                                {{ $key+1}} 
-                                            </td>
-                                            <td> 
-                                                <img src="{{ isset($record->thumbnail) ? getThumbnail($record->thumbnail) : asset('no_image.jpg')}}" alt=".." class="img-size-50  img-bordered-sm rounded-circle" width="50">
-                                            </td>
 
-                                            <td>{{ ucwords($record->newstype['name']) ?? 'NA' }}</td>
-                                  
-                                            <td>
-                                                <span class="badge bg-dark p-1"> {{ $record->getmenu['category_en'] ?? 'NA'  }}</span>
-                                            
-                                            </td>
-                                            <td> 
-                                                @if($record->user['role_id']  == 1)
-                                                      
-                                                <span class="badge bg-success p-1"> {{$record->user['name'] ?? 'NA' }}  </span>
-
-                                                @else 
-                                                {{$record->user['name'] ?? 'NA' }}    
-                                            
-                                                @endif
-                                                
-                                            </td>
-
-                                            <td>{{ \Carbon\Carbon::parse($record->post_date)->format('F j, Y') }}</td>
-
-                                            <td>
-                                                @if($record->status  == "Approved")
-                                                <a href="javascript:void(0)" wire:click="rejected({{$record->id}})">
-                                                    <span class="badge bg-success" > Approved</span>
-                                                </a> 
-                                            @elseif($record->status  == "Rejected")
-                                            <a href="javascript:void(0)" wire:click="approved({{$record->id}})">
-                                                <span class="badge bg-danger" >Rejected   </span>
-                                            </a> 
-                                            @else
-                                                <a href="javascript:void(0)" wire:click="pending({{$record->id}})">
-                                                    <span class="badge bg-warning" >  Pending </span>
-                                                </a> 
-                                            </td>
-
-                                           @endif
-                                    
-
-                                                <td>   
-                                                    <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal{{$record->id}}">
-                                                        <i class="fa fa-eye fa-fw"></i></button>
-                                                    <button class="btn btn-sm btn-primary" wire:click="edit({{$record->id}})" wire:target="edit({{ $record->id }})"  wire:loading.attr="disabled">
-                                                        <i class="fa fa-edit fa-fw" ></i></button>
-                                                    <button class="btn btn-sm btn-danger" wire:click="delete({{ $record->id }})" wire:target="delete({{ $record->id }})"  wire:loading.attr="disabled">
-                                                        <i class="fa fa-times fa-fw fa-lg"></i></button>
-                        
-                                                {{-- <a  href="javascript:void(0)" wire:click="edit({{$record->id}})" class="text-success me-2" title="Edit"  ><i class="fa fa-edit fa-fw"></i></a> --}}
-                                                {{-- <a href="javascript:void(0)" class="text-danger me-2" title="Delete" ><i class="fa fa-times fa-fw fa-lg"></i></a> --}}
-                                            </td>
-                                        </tr>
-                                    <!-- Button trigger modal -->
-
-  
-                                        <!-- Modal -->
-
-                                        @include('livewire.backend.news.model')
-                                        <!-- Modal -->
-
-                                        @endif
-                                         @empty
-                                            <tr  class="text-center ">
-                                                <td colspan="7" class="text-danger fw-bold"> Record Not Found</td>                                           
-                                            </tr>
-                             
-                                             @endforelse 
-
-        {{-- ========================= trash data =========================== --}}
-     
-                                             @if(isset($trashdata) & count($trashdata) > 0 )
-                                             <tr> <th colspan="7">
-                                                <h3>  Trash data </h3>
-                                                 </th></tr>
-                                             @forelse ($trashdata  as $keys => $trash )
-                                             <tr>
-                                                <td> {{  $trash->id}}</td>
-
-                                                
-                                                <td> 
-                                                    <img src="{{ isset($trash->thumbnail) ? getThumbnail($trash->thumbnail) : asset('no_image.jpg')}}" alt=".." class="img-size-50  img-bordered-sm rounded-circle" width="50">
-                                                </td>
-    
-                                                <td>{{ ucwords($trash->newstype['name']) ?? 'NA' }}</td>
-                                      
-                                                <td>
-                                                    <span class="badge bg-dark p-1"> {{ $trash->getmenu['category_en'] ?? 'NA'  }}</span>
-                                                
-                                                </td>
-                                                <td> 
-                                                    @if($trash->user['role_id']  == 1)
-                                                      
-                                                    <span class="badge bg-success p-1"> {{$trash->user['name'] ?? 'NA' }}  </span>
-
-                                                    @else 
-                                                    {{$trash->user['name'] ?? 'NA' }}    
-                                                
-                                                    @endif
-                                                </td>
-                                                    
-    
-    
-                                      
-    
-                                                    <td colspan="2" class="text-center">   
-                                            
-                                                        <button class="btn btn-sm btn-danger" wire:click="restore({{ $trash->id }})" wire:target="restore({{ $trash->id }})"  wire:loading.attr="disabled">
-                                                            Restore</button>
-                                                            <button class="btn btn-sm btn-warning" onclick="confirm('Are you sure you want to Peramanetly remove  this News ?') || event.stopImmediatePropagation()" wire:click="paramDelete({{ $trash->id }})" wire:target="paramDelete({{ $trash->id }})"  wire:loading.attr="disabled">
-                                                                Peramanet Delete</button>
-                                                    {{-- <a  href="javascript:void(0)" wire:click="edit({{$record->id}})" class="text-success me-2" title="Edit"  ><i class="fa fa-edit fa-fw"></i></a> --}}
-                                                    {{-- <a href="javascript:void(0)" class="text-danger me-2" title="Delete" ><i class="fa fa-times fa-fw fa-lg"></i></a> --}}
-                                                </td>
-                                            </tr>
-                                             @empty
-                                                                   
-                                             @endforelse       
-                                             @endif
-                                    </tbody>
-
-                                </table>
-                    {{-- {{ $records->links() }} --}}
-
-                            </div>
-                        </div>
-                     </div>
-                </div>
-            </div>
             <div class="row">
                 <div class="col-lg-12">
                     <div class="card">
@@ -504,43 +334,214 @@
                         </form>
                     </div>
                 </div>
+                </div>
+                     <!-- end row -->
+                <script>
+                    document.addEventListener('livewire:initialized', () => {
+                    // CKEDITOR.replace('editor'); 
+                    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');        
+                    CKEDITOR.replace('editor', {
+                    // filebrowserUploadUrl: '{{ route("image.upload") }}', // Set the image upload endpoint URL
+                    filebrowserUploadUrl: "{{route('image.upload', ['_token' => csrf_token() ])}}",
+                    filebrowserUploadMethod: 'form', // Use form-based file upload (default is XMLHttpRequest)
+                    filebrowserBrowseUrl: '/ckfinder/ckfinder.html', // Set the CKFinder browse server URL
+                    filebrowserImageBrowseUrl: '/ckfinder/ckfinder.html?type=Images', // Set the CKFinder image browse server URL
+                    headers: {
+                    'X-CSRF-TOKEN': csrfToken // Pass the CSRF token with the request headers
+                    },
+
+                    });
+
+                    CKEDITOR.instances.editor.on('change', function () {
+                        @this.set('news_description', CKEDITOR.instances.editor.getData());
+                    });
+                    // Livewire.on('post-created', function () {
+                    //     });
+
+                    Livewire.on('formSubmitted', function () {
+                        CKEDITOR.instances.editor.setData(''); // Reset CKEditor content
+
+                    });
+
+                    }); 
+                </script>
+
+            
             </div>
-            <!-- end row -->
+            {{-- Table row start  --}}
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header bg-transparent border-bottom py-3">
+                            <h4 class="card-title">Manage News</h4>
+                            <p class="card-title-desc mb-0">Manage the content by clicking on action accrodingly.</p>
+                            <div class="col-md-3 float-end">
+                                <div class="form-group">
+                                    <div class="mb-3">
+                                        <label class="form-label">Search</label>
+                                        <input type="search" class="form-control"  wire:model.live="search" placeholder="Search...">
+                                         @error('Search') <span class="error">{{ $message }}</span> @enderror
+                                    </div>
+                                </div>
+                            </div>
+              
+                        </div>
+                        <div class="card-body">
+                            <span class="badge bg-success p-2  fs-4">Total news : {{ $totalrecords ?? '0'}} </span>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped datatable-- table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>image</th>
+                                            <th>Add Type</th>
+                                            <th>Category </th>
+                                            <th>User Name </th>
+                                            <th>Post Date </th>
+                                            <th>Status</th>    
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                                      
+                                         @forelse ( $records as $key => $record )
+                                         @if($record->role_id != 1)
+                                         <tr>
+                                            <td> 
+                                                {{-- $records->firstitem()+$loop->index ?? --}}
+                                                {{ $key+1}} 
+                                            </td>
+                                            <td> 
+                                                <img src="{{ isset($record->thumbnail) ? getThumbnail($record->thumbnail) : asset('no_image.jpg')}}" alt=".." class="img-size-50  img-bordered-sm rounded-circle" width="50">
+                                            </td>
+
+                                            <td>{{ ucwords($record->newstype['name']) ?? 'NA' }}</td>
+                                  
+                                            <td>
+                                                <span class="badge bg-dark p-1"> {{ $record->getmenu['category_en'] ?? 'NA'  }}</span>
+                                            
+                                            </td>
+                                            <td> 
+                                                @if($record->user['role_id']  == 1)
+                                                      
+                                                <span class="badge bg-success p-1"> {{$record->user['name'] ?? 'NA' }}  </span>
+
+                                                @else 
+                                                {{$record->user['name'] ?? 'NA' }}    
+                                            
+                                                @endif
+                                                
+                                            </td>
+
+                                            <td>{{ \Carbon\Carbon::parse($record->post_date)->format('F j, Y') }}</td>
+
+                                            <td>
+                                                @if($record->status  == "Approved")
+                                                <a href="javascript:void(0)" wire:click="rejected({{$record->id}})">
+                                                    <span class="badge bg-success" > Approved</span>
+                                                </a> 
+                                            @elseif($record->status  == "Rejected")
+                                            <a href="javascript:void(0)" wire:click="approved({{$record->id}})">
+                                                <span class="badge bg-danger" >Rejected   </span>
+                                            </a> 
+                                            @else
+                                                <a href="javascript:void(0)" wire:click="pending({{$record->id}})">
+                                                    <span class="badge bg-warning" >  Pending </span>
+                                                </a> 
+                                            </td>
+
+                                           @endif
+                                    
+
+                                                <td>   
+                                                    <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal{{$record->id}}">
+                                                        <i class="fa fa-eye fa-fw"></i></button>
+                                                    <button class="btn btn-sm btn-primary" wire:click="edit({{$record->id}})" wire:target="edit({{ $record->id }})"  wire:loading.attr="disabled">
+                                                        <i class="fa fa-edit fa-fw" ></i></button>
+                                                    <button class="btn btn-sm btn-danger" wire:click="delete({{ $record->id }})" wire:target="delete({{ $record->id }})"  wire:loading.attr="disabled">
+                                                        <i class="fa fa-times fa-fw fa-lg"></i></button>
+                        
+                                                {{-- <a  href="javascript:void(0)" wire:click="edit({{$record->id}})" class="text-success me-2" title="Edit"  ><i class="fa fa-edit fa-fw"></i></a> --}}
+                                                {{-- <a href="javascript:void(0)" class="text-danger me-2" title="Delete" ><i class="fa fa-times fa-fw fa-lg"></i></a> --}}
+                                            </td>
+                                        </tr>
+                                    <!-- Button trigger modal -->
+
+  
+                                        <!-- Modal -->
+
+                                        @include('livewire.backend.news.model')
+                                        <!-- Modal -->
+
+                                        @endif
+                                         @empty
+                                            <tr  class="text-center ">
+                                                <td colspan="7" class="text-danger fw-bold"> Record Not Found</td>                                           
+                                            </tr>
+                             
+                                             @endforelse 
+
+                     {{-- ========================= trash data =========================== --}}
+     
+                                             @if(isset($trashdata) & count($trashdata) > 0 )
+                                             <tr> <th colspan="7">
+                                                <h3>  Trash data </h3>
+                                                 </th></tr>
+                                             @forelse ($trashdata  as $keys => $trash )
+                                             <tr>
+                                                <td> {{  $trash->id}}</td>
+
+                                                
+                                                <td> 
+                                                    <img src="{{ isset($trash->thumbnail) ? getThumbnail($trash->thumbnail) : asset('no_image.jpg')}}" alt=".." class="img-size-50  img-bordered-sm rounded-circle" width="50">
+                                                </td>
+    
+                                                <td>{{ ucwords($trash->newstype['name']) ?? 'NA' }}</td>
+                                      
+                                                <td>
+                                                    <span class="badge bg-dark p-1"> {{ $trash->getmenu['category_en'] ?? 'NA'  }}</span>
+                                                
+                                                </td>
+                                                <td> 
+                                                    @if($trash->user['role_id']  == 1)
+                                                      
+                                                    <span class="badge bg-success p-1"> {{$trash->user['name'] ?? 'NA' }}  </span>
+
+                                                    @else 
+                                                    {{$trash->user['name'] ?? 'NA' }}    
+                                                
+                                                    @endif
+                                                </td>
+                                                    
+    
+    
+                                      
+    
+                                                    <td colspan="2" class="text-center">   
+                                            
+                                                        <button class="btn btn-sm btn-danger" wire:click="restore({{ $trash->id }})" wire:target="restore({{ $trash->id }})"  wire:loading.attr="disabled">
+                                                            Restore</button>
+                                                            <button class="btn btn-sm btn-warning" onclick="confirm('Are you sure you want to Peramanetly remove  this News ?') || event.stopImmediatePropagation()" wire:click="paramDelete({{ $trash->id }})" wire:target="paramDelete({{ $trash->id }})"  wire:loading.attr="disabled">
+                                                                Peramanet Delete</button>
+                                                    {{-- <a  href="javascript:void(0)" wire:click="edit({{$record->id}})" class="text-success me-2" title="Edit"  ><i class="fa fa-edit fa-fw"></i></a> --}}
+                                                    {{-- <a href="javascript:void(0)" class="text-danger me-2" title="Delete" ><i class="fa fa-times fa-fw fa-lg"></i></a> --}}
+                                                </td>
+                                            </tr>
+                                             @empty
+                                                                   
+                                             @endforelse       
+                                             @endif
+                                    </tbody>
+
+                                </table>
+                    {{-- {{ $records->links() }} --}}
+
+                            </div>
+                        </div>
+                     </div>
+                </div>
+            </div>
             
-      
-            <!-- end row -->
-            <script>
-            document.addEventListener('livewire:initialized', () => {
-            // CKEDITOR.replace('editor'); 
-            const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');        
-                CKEDITOR.replace('editor', {
-                // filebrowserUploadUrl: '{{ route("image.upload") }}', // Set the image upload endpoint URL
-                filebrowserUploadUrl: "{{route('image.upload', ['_token' => csrf_token() ])}}",
-                filebrowserUploadMethod: 'form', // Use form-based file upload (default is XMLHttpRequest)
-                filebrowserBrowseUrl: '/ckfinder/ckfinder.html', // Set the CKFinder browse server URL
-                filebrowserImageBrowseUrl: '/ckfinder/ckfinder.html?type=Images', // Set the CKFinder image browse server URL
-                headers: {
-                'X-CSRF-TOKEN': csrfToken // Pass the CSRF token with the request headers
-                },
-
-                });
-
-            CKEDITOR.instances.editor.on('change', function () {
-                @this.set('news_description', CKEDITOR.instances.editor.getData());
-            });
-            // Livewire.on('post-created', function () {
-            //     });
-
-            Livewire.on('formSubmitted', function () {
-                 CKEDITOR.instances.editor.setData(''); // Reset CKEditor content
-
-            });
-
-            }); 
-            </script>
-
-            
-        </div>
         <!-- container-fluid -->
     </div>
 

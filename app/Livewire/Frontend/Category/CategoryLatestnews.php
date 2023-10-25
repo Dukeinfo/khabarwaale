@@ -57,9 +57,10 @@ public $languageVal;
     $today = now()->toDateString();
     $categorylatestleftAds = Advertisment::where('from_date', '<=', $today)
                        ->where('to_date', '>=', $today)
-                       ->where('location','Slider Left')
+                       ->where('location','Left Add')
                        ->where('page_name' ,'category')
                        ->where('status', 'Yes') // Assuming 'status' is used to enable/disable ads
+                       ->orderBy('created_at', 'desc')
                        ->first();
         return view('livewire.frontend.category.category-latestnews' , [
          'categorylatestleftAds' => $categorylatestleftAds,

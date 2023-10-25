@@ -1,6 +1,7 @@
 
 <div class="col-lg-12">
     <!-- Video -->
+
     <div class="p-b-30">
         <div class="position-relative">
             <div class="wrap-pic-w pos-relative">
@@ -88,7 +89,7 @@
     </div>
 
     <!-- Subscribe -->
-    <div class="bg10 p-rl-35 p-t-28 p-b-30 m-b-55">
+    <div class="bg10 p-rl-35 p-t-28 p-b-30 m-b-55"  @if(request()->routeIs('home.homepage')) style="display: none" @endif>
         <h5 class="f1-m-5 cl0 p-b-10">
             Subscribe
         </h5>

@@ -13,9 +13,10 @@ class HomeCenterAdd extends Component
         $today = now()->toDateString();
         $homeCenterLongAdd  = Advertisment::where('from_date', '<=', $today)
                            ->where('to_date', '>=', $today)
-                           ->where('location','News Down')
+                           ->where('location','Center Banner')
                            ->where('page_name' ,'Homepage')
                            ->where('status', 'Yes') // Assuming 'status' is used to enable/disable ads
+                           ->orderBy('created_at', 'desc')
                            ->first();
         return view('livewire.frontend.homepage.home-center-add' , ['homeCenterLongAdd' =>$homeCenterLongAdd]);
     }

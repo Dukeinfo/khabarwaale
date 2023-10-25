@@ -55,7 +55,6 @@
                                         <div class="form-group">
                                             <label for="category_pbi">Category (Punjabi)</label>
                                             <input wire:model.live="menuform.category_pbi" type="text" class="form-control" id="category_pbi" placeholder="Punjabi Category">
-                                        
                                             @error('menuform.category_pbi') <span class="error">{{ $message }}</span> @enderror
                                         </div>
                                     </div>

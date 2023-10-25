@@ -4,10 +4,14 @@ namespace App\Livewire\Frontend\CategoryNews;
 
 use App\Models\Category;
 use App\Models\NewsPost;
+use App\Models\Subscription;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 
 class SideForthCatNews extends Component
 {
+    use LivewireAlert;
+    public $email;
     public function render()
     {
         $getMenus = Category::orderBy('sort_id', 'ASC')
@@ -66,5 +70,23 @@ class SideForthCatNews extends Component
                     'getMenus' => $getMenus
             ]
          );
+    }
+
+    public function subscribe()
+    {
+        $this->validate([
+            'email' => 'required|email|unique:subscriptions',
+        ]);
+
+        Subscription::create([
+            'email' => $this->email,
+            'ip' => getUserIp(),
+            'status' => 'subscribed',
+        ]);
+
+        // Send a confirmation email
+        session()->flash('success', 'Subscribed successfully!');
+        $this->alert('success', 'Subscribed successfully!!');
+
     }
 }

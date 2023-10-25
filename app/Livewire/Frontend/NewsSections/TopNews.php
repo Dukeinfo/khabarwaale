@@ -54,10 +54,10 @@ class TopNews extends Component
                         $today = now()->toDateString();
                         $topNewsCentertAds = Advertisment::where('from_date', '<=', $today)
                                            ->where('to_date', '>=', $today)
-                                           ->where('location','News Center')
+                                           ->where('location','Under Top News')
                                            ->where('page_name' ,'Homepage')
-                
                                            ->where('status', 'Yes') // Assuming 'status' is used to enable/disable ads
+                                           ->orderBy('created_at', 'desc')
                                            ->first();
             return view('livewire.frontend.news-sections.top-news' ,[
                 'topHinNewsData' => $topHinNewsData,
