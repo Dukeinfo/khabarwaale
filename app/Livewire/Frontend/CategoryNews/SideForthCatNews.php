@@ -2,9 +2,12 @@
 
 namespace App\Livewire\Frontend\CategoryNews;
 
+use App\Mail\Websitemail;
 use App\Models\Category;
 use App\Models\NewsPost;
 use App\Models\Subscription;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 
@@ -74,19 +77,37 @@ class SideForthCatNews extends Component
 
     public function subscribe()
     {
-        $this->validate([
-            'email' => 'required|email|unique:subscriptions',
-        ]);
+        try {
+            $this->validate([
+                'email' => 'required|email|unique:subscriptions,email',
+            ]);
 
-        Subscription::create([
-            'email' => $this->email,
-            'ip' => getUserIp(),
-            'status' => 'subscribed',
-        ]);
+            $token = hash('sha256', time());
 
-        // Send a confirmation email
-        session()->flash('success', 'Subscribed successfully!');
-        $this->alert('success', 'Subscribed successfully!!');
+            $subscriber = new Subscription();
+            $subscriber->email = $this->email;
+            $subscriber->token = $token;
+            $subscriber->status = 'Pending';
+            $subscriber->ip = getUserIp();
+
+            if ($subscriber->save()) {
+                $subject = 'Please Confirm Subscription';
+                $verification_link = url('subscriber/verify/' . $token . '/' . $this->email);
+                $message = 'Please click on the following link in order to verify as a subscriber:<br><br>';
+                $message .= '<a href="' . $verification_link . '">' .'Verify Email Address '. '</a><br><br>';
+                $message .= 'If you received this email by mistake, simply delete it. You will not be subscribed if you do not click the confirmation link above.';
+                Mail::to($this->email)->send(new Websitemail($subject, $message));
+                session()->flash('success', 'Thanks, please check your inbox to confirm the subscription');
+            } else {
+                session()->flash('error', 'Something went wrong, please try again.');
+            }
+        } catch (\Exception $e) {
+            // Handle any exceptions that occur during the subscription process
+            session()->flash('error', 'An error occurred. Please try again later.');
+            // You can log the error for debugging purposes if needed
+            Log::error($e);
+        }
+               
 
     }
 }

@@ -130,6 +130,7 @@
                                         <th>Name</th>
                                         <th>Link</th>
                                         <th>Logo</th>
+                                        <th>Icons </th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -142,6 +143,9 @@
                                 @if ($socialApp->logo)
                                     <img src="{{ asset('storage/' . $socialApp->logo) }}" alt="Logo" width="50">
                                 @endif
+                            </td>
+                            <td>
+                                <span class="{{$socialApp->icon}}"></span>
                             </td>
                             <td>
                                 <button wire:click="edit({{ $socialApp->id }})" class="btn btn-sm btn-primary">Edit</button>

@@ -50,7 +50,7 @@ Route::controller(LanguageController::class)->group(function () {
     Route::get('/language/urdu',  'urdu')->name('urdu.language');
     Route::get('/language/clear',  'clear_all_Lang');
 });
-
+Route::get('/subscriber/verify/{token}/{email}', [FronendController::class, 'verify'])->name('subscriber_verify');
 
 Route::get('/', function () {
     return view('welcome');

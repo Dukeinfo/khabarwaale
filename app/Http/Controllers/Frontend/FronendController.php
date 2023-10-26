@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\NewsPost;
+use App\Models\Subscription;
 use Illuminate\Http\Request;
 
 class FronendController extends Controller
@@ -98,5 +99,28 @@ class FronendController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+
+    public function verify($token,$email)
+    {
+
+        // Helpers::read_json();
+        
+        $subscriber_data = Subscription::where('token',$token)->where('email',$email)->first();
+        if($subscriber_data) 
+
+        
+        {
+            $subscriber_data->token = '';
+            $subscriber_data->status = 'Active';
+            $subscriber_data->update();
+
+            return redirect()->back()->with('success', 'You are successfully verified as a subscribe to this system');
+        } 
+        else 
+        {
+            return redirect()->route('home.homepage');
+        }
     }
 }

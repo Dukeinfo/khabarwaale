@@ -61,22 +61,21 @@
                     @endif
                 </a>
             </div>
+            @php
+                  $getsocialApps = \App\Models\SocialApp::where('status' , 'Active')->get();
+             @endphp
+
             <div class="right-topbar">
-                <a href="javascript:void()">
-                    <span class="fab fa-facebook-f"></span>
-                </a>
-                <a href="javascript:void()">
+                @forelse ($getsocialApps  as $socialApps )
+                <a href="{{$socialApps->link ?? '' }}" target="_blank" >
+                    <span class="{{$socialApps->icon ?? '' }}"></span>
+                </a> 
+                @empty
+                    
+                @endforelse
+                {{-- <a href="javascript:void()">
                     <span class="fab fa-instagram"></span>
-                </a>
-                <a href="javascript:void()">
-                    <span class="fab fa-twitter"></span>
-                </a>
-                <a href="javascript:void()">
-                    <span class="fab fa-linkedin-in"></span>
-                </a>
-                <a href="javascript:void()">
-                    <span class="fab fa-youtube"></span>
-                </a>
+                </a>  --}}
             </div>
         </div>
     </div>

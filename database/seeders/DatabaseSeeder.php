@@ -24,7 +24,9 @@ class DatabaseSeeder extends Seeder
         $this->call(AddLocationSeeder::class);
         $this->call(WebsiteTypeSeeder::class);
         $this->call(ContactInfoSeeder::class);
+        $this->call(SocialAppSeeder::class);
 
+        
 
         
 

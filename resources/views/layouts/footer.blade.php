@@ -37,22 +37,19 @@
                        @endif
                         </h5>
                     </div>
+                    @php
+                          $getsocialApps = \App\Models\SocialApp::where('status' , 'Active')->get();
+                    @endphp
                     <div>
-                        <a href="javascript:void()" class="fs-18 cl11 hov-cl10 trans-03 m-r-10">
-                            <span class="fab fa-facebook-f social-element"></span>
-                        </a>
-                        <a href="javascript:void()" class="fs-18 cl11 hov-cl10 trans-03 m-r-10">
-                            <span class="fab fa-twitter social-element"></span>
-                        </a>
-                        <a href="javascript:void()" class="fs-18 cl11 hov-cl10 trans-03 m-r-10">
-                            <span class="fab fa-instagram social-element"></span>
-                        </a>
-                        <a href="javascript:void()" class="fs-18 cl11 hov-cl10 trans-03 m-r-10">
-                            <span class="fab fa-linkedin-in social-element"></span>
-                        </a>
-                        <a href="javascript:void()" class="fs-18 cl11 hov-cl10 trans-03 m-r-10">
-                            <span class="fab fa-youtube social-element"></span>
-                        </a>
+                        @forelse ($getsocialApps  as $socialApps )
+                        <a href="{{$socialApps->link ?? '' }}" target="_blank" class="fs-18 cl11 hov-cl10 trans-03 m-r-10">
+                            <span class="{{$socialApps->icon ?? '' }}"></span>
+                        </a> 
+                        @empty
+                            
+                        @endforelse
+                    
+              
                     </div>
                 </div>
             </div>
