@@ -27,11 +27,11 @@ class SubscribeForm extends Component
 
     public function subscribe()
     {
-        try {
+       
             $this->validate([
                 'email' => 'required|email|unique:subscriptions,email',
             ]);
-
+            try {
             $token = hash('sha256', time());
 
             $subscriber = new Subscription();
