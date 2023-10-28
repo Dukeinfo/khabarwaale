@@ -102,25 +102,20 @@ class FronendController extends Controller
     }
 
 
-    public function verify($token,$email)
-    {
-
-        // Helpers::read_json();
-        
-        $subscriber_data = Subscription::where('token',$token)->where('email',$email)->first();
-        if($subscriber_data) 
-
-        
-        {
-            $subscriber_data->token = '';
-            $subscriber_data->status = 'Active';
-            $subscriber_data->update();
-
-            return redirect()->back()->with('success', 'You are successfully verified as a subscribe to this system');
-        } 
-        else 
-        {
-            return redirect()->route('home.homepage');
+    public function verify($token, $email) {
+    $subscriber_data = Subscription::where('token', $token)->where('email', $email)->first();
+    if ($subscriber_data) {
+        if ($subscriber_data->status === 'Active') {
+            return redirect()->back()->with('warning', 'Your email is already verified.');
         }
+        $subscriber_data->token = '';
+        $subscriber_data->status = 'Active';
+        $subscriber_data->update();
+
+        return redirect()->back()->with('success', 'You are successfully verified as a subscriber to this system.');
+    } else {
+        return redirect()->route('home.homepage');
     }
+}
+
 }
