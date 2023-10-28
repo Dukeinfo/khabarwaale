@@ -52,37 +52,20 @@ Route::controller(LanguageController::class)->group(function () {
 });
 Route::get('/subscriber/verify/{token}/{email}', [FronendController::class, 'verify'])->name('subscriber_verify');
 
-Route::get('/', function () {
-    return view('welcome');
-
+Route::get('/', function () {return view('welcome');
 })->name('home.homepage');
-Route::get('/category/{id}/{slug}', function ($id, $slug) {
-    return view('category', compact('id', 'slug'));
+
+Route::get('/category/{id}/{slug}', function ($id, $slug) {  return view('category', compact('id', 'slug'));
 })->name('home.category');
 
-Route::get('/inner/{newsid}/{slug}', function ($newsid , $slug) {
-    return view('inner',compact('newsid','slug'));
+Route::get('/inner/{newsid}/{slug}', function ($newsid , $slug) { return view('inner',compact('newsid','slug'));
 })->name('home.inner');
 
 
 Route::controller(FronendController::class)->group(function () {
-// Route::get('/', 'index')->name('home.homepage');
-// Route::get('/inner', 'inner_page');
 
- 
 
 });
-
-
-
-
-
-// Route::get('/', ViewHomepage::class)->name('home.homepage');
-// Route::get('/category/{id}/{slug}', ViewCategory::class)->name('home.category');
-// Route::get('/inner/{newsid}/{slug}', ViewInnerPage::class)->name('home.inner');
-
-
-
 
 Livewire::setScriptRoute(function ($handle) {
     return Route::get('/boldpunjab/livewire/livewire.js', $handle);
