@@ -68,10 +68,10 @@ Route::controller(FronendController::class)->group(function () {
 });
 
 Livewire::setScriptRoute(function ($handle) {
-    return Route::get('/boldpunjab/livewire/livewire.js', $handle);
+    return Route::get('/khabarwaale/livewire/livewire.js', $handle);
 });
 Livewire::setUpdateRoute(function ($handle) {
-    return Route::post('/boldpunjab/livewire/update', $handle);
+    return Route::post('/khabarwaale/livewire/update', $handle);
         
 });
 Route::middleware([
