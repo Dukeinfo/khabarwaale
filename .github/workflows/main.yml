@@ -15,11 +15,15 @@ jobs:
       - uses: actions/setup-node@master
       - name: Copy .env
         run: php -r "file_exists('.env') || copy('.env.example', '.env');"
-      - name: Set DB_DATABASE, DB_USERNAME, and DB_PASSWORD
+      - name: Set DB_DATABASE, DB_USERNAME, DB_PASSWORD, MAIL_HOST, MAIL_USERNAME and MAIL_PASSWORD
         run: |
           sed -i "s/DB_DATABASE=.*/DB_DATABASE=${{ secrets.DB_DATABASE }}/" .env
           sed -i "s/DB_USERNAME=.*/DB_USERNAME=${{ secrets.DB_USERNAME }}/" .env
           sed -i "s/DB_PASSWORD=.*/DB_PASSWORD=${{ secrets.DB_PASSWORD }}/" .env
+          sed -i "s/MAIL_HOST=.*/MAIL_HOST=${{ secrets.MAIL_HOST }}/" .env
+          sed -i "s/MAIL_USERNAME=.*/MAIL_USERNAME=${{ secrets.MAIL_USERNAME }}/" .env
+          sed -i "s/MAIL_PASSWORD=.*/MAIL_PASSWORD=${{ secrets.MAIL_PASSWORD }}/" .env
+
       - name: Install Dependencies
         run: composer update --ignore-platform-reqs
       - name: Generate key
