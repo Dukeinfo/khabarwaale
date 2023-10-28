@@ -116,7 +116,7 @@ class FronendController extends Controller
     
             return redirect()->back()->with('success', 'You are successfully verified as a subscriber to this system.');
         } else {
-            return redirect()->back()->with('error', 'Invalid verification link. Please make sure the link is correct or try resubscribing.');
+            return redirect()->route('home.homepage')->with('error', 'Invalid verification link. Please make sure the link is correct or try resubscribing.');
         }
     }
     
