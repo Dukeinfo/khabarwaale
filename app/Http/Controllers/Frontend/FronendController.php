@@ -102,7 +102,9 @@ class FronendController extends Controller
     }
 
 
-    public function verify($token, $email) {
+
+
+public function verify($token, $email) {
     $subscriber_data = Subscription::where('token', $token)->where('email', $email)->first();
     if ($subscriber_data) {
         if ($subscriber_data->status === 'Active') {
@@ -114,8 +116,9 @@ class FronendController extends Controller
 
         return redirect()->back()->with('success', 'You are successfully verified as a subscriber to this system.');
     } else {
-        return redirect()->route('home.homepage');
+        return redirect()->back()->with('error', 'Invalid verification link. Please make sure the link is correct or try resubscribing.');
     }
 }
+
 
 }
