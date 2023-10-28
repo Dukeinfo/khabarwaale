@@ -46,7 +46,6 @@
                             <div class="row">
                                     <div class="col-md-4 mb-3">
                                         <!-- News Type -->
-
                                         <div class="form-group">
                                             <label for="news_type">News Type</label>
                                             <select name="news_type" wire:model="news_type" id="news_type" class="form-control" wire:change="handleChange">
@@ -58,9 +57,6 @@
                                             </select>
                                             @error('news_type') <span class="error">{{ $message }}</span> @enderror
                                         </div>
-
-
-
                                     </div>
                                     <div class="col-md-4 mb-3">
                                         <!-- Category ID -->
@@ -375,6 +371,52 @@
                         <div class="card-header bg-transparent border-bottom py-3">
                             <h4 class="card-title">Manage News</h4>
                             <p class="card-title-desc mb-0">Manage the content by clicking on action accrodingly.</p>
+                            
+                <div class="row">
+                    <div class="col-md-2">
+                        <!-- News Type -->
+                        <div class="form-group">
+                            <label for="type_search">News Type</label>
+                            <select name="type_search" wire:model="type_search" id="type_search" class="form-control" wire:change="filterByType">
+                                <option value="">Select type</option>
+                                @forelse ($getwebsite_type as $type)
+                                    <option value="{{ $type->name }}">{{ $type->name }}</option>
+                                @empty
+                                @endforelse
+                            </select>
+                            @error('type_search') <span class="error">{{ $message }}</span> @enderror
+                        </div>
+                    </div>
+                    
+
+                    <div class="col-md-2 ">
+                        <!-- Category ID -->
+                        <div class="form-group">
+                            <label for="category_search">Category </label>
+                            <select name="category_search" wire:model="category_search" id="category_search" class="form-control">
+                                    <option value=""> Select type</option>
+                                    @forelse ($getCategory as $category )
+                                        <option value="{{$category->category_en}}">{{$category->category_en}}</option>
+                                    @empty
+                                    @endforelse
+                            </select>
+                            @error('category_search') <span class="error">{{ $message }}</span> @enderror
+                        </div>
+                    </div>
+                    {{-- date --}}
+                    <div class="col-md-2 ">
+                        <!-- News Type -->
+                        <div class="form-group">
+                            <label for="type_search">Date wise</label>
+                            <input type="date" class="form-control" wire:model="date_search" id="post_date">
+                            @error('date_search') <span class="error">{{ $message }}</span> @enderror
+                        </div>
+                    </div>
+
+                
+
+                </div>
+
                             <div class="col-md-3 float-end">
                                 <div class="form-group">
                                     <div class="mb-3">
@@ -433,7 +475,7 @@
                                                 
                                             </td>
 
-                                            <td>{{ \Carbon\Carbon::parse($record->post_date)->format('F j, Y') }}</td>
+                                            <td>{{ \Carbon\Carbon::parse($record->created_at)->format('F j, Y') }}</td>
 
                                             <td>
                                                 @if($record->status  == "Approved")
@@ -454,11 +496,22 @@
                                     
 
                                                 <td>   
-                                                    <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal{{$record->id}}">
+                                                    
+                                                    @if($record->archived_at  != Null)
+                                                      
+                                                    <button class="btn btn-sm btn-info" title="Un-Archive" wire:click="unarchiveNewsPost({{$record->id}})" wire:target="unarchiveNewsPost({{ $record->id }})"  wire:loading.attr="disabled">
+                                                        <i class="fa fa-archive fa-fw"></i>
+                                                    </button>
+                                                    @else 
+                                                    <button class="btn btn-sm btn-dark" title="Add Archive" wire:click="archiveNewsPost({{$record->id}})" wire:target="archiveNewsPost({{ $record->id }})"  wire:loading.attr="disabled">
+                                                        <i class="fa fa-archive fa-fw"></i>
+                                                    </button>
+                                                    @endif
+                                                    <button class="btn btn-sm btn-success" title="View news" data-bs-toggle="modal" data-bs-target="#exampleModal{{$record->id}}">
                                                         <i class="fa fa-eye fa-fw"></i></button>
-                                                    <button class="btn btn-sm btn-primary" wire:click="edit({{$record->id}})" wire:target="edit({{ $record->id }})"  wire:loading.attr="disabled">
+                                                    <button class="btn btn-sm btn-primary" title="Edit News" wire:click="edit({{$record->id}})" wire:target="edit({{ $record->id }})"  wire:loading.attr="disabled">
                                                         <i class="fa fa-edit fa-fw" ></i></button>
-                                                    <button class="btn btn-sm btn-danger" wire:click="delete({{ $record->id }})" wire:target="delete({{ $record->id }})"  wire:loading.attr="disabled">
+                                                    <button class="btn btn-sm btn-danger" title="Delete News" wire:click="delete({{ $record->id }})" wire:target="delete({{ $record->id }})"  wire:loading.attr="disabled">
                                                         <i class="fa fa-times fa-fw fa-lg"></i></button>
                         
                                                 {{-- <a  href="javascript:void(0)" wire:click="edit({{$record->id}})" class="text-success me-2" title="Edit"  ><i class="fa fa-edit fa-fw"></i></a> --}}

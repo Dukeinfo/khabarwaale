@@ -29,7 +29,7 @@
                             <a href="{{ isset($record->pdf_file )?  get_pdf($record->pdf_file)  : '' }}" download=""> {{ ucwords($record->pdf_file) ?? 'NA' }} </a>
                 </h4>
                 <h4> <span class="text-success"> Posted date:</span>
-                    {{ \Carbon\Carbon::parse($record->post_date)->format('F j, Y') }}
+                    {{ \Carbon\Carbon::parse($record->created_at)->format('F j, Y') }}
                  </h4>
                   
                 </div>

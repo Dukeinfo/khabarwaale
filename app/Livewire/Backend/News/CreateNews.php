@@ -73,8 +73,14 @@ class CreateNews extends Component
     public $search = '';
     protected $queryString = ['search'];
 
+ public $type_search;
+ public $selectedNewsType; // Add this property
 
-  
+
+ public function filterByType()
+ {
+     $this->search = $this->type_search; // Store the selected news type
+ }
     public function render()
     {
 
@@ -87,6 +93,10 @@ class CreateNews extends Component
         }
 
         $search = trim($this->search);
+ 
+
+   // Store the selected news type
+
         // $records = NewsPost::with(['newstype', 'user', 'getmenu'])
         // ->where(function ($query) use ($search) {
         //     $query->whereHas('newstype', function ($subquery) use ($search) {
@@ -102,15 +112,17 @@ class CreateNews extends Component
         // })->orderby('category_id')->get();
 
         $records = NewsPost::with(['newstype', 'user', 'getmenu'])
-        ->where(function ($query) use ($search) {
-            $query->whereHas('newstype', function ($subquery) use ($search) {
+        ->where(function ($query) use ($search ) {
+            $query->whereHas('newstype', function ($subquery) use ($search ) {
                 $subquery->where('name', 'like', '%' . $search . '%')
                         ->orWhere('title', 'like', '%' . $search . '%');
+
+                        
             })->orWhereHas('user', function ($subquery) use ($search) {
                 $subquery->where('name', 'like', '%' . $search . '%');
             })->orWhereHas('getmenu', function ($subquery) use ($search) {
                 $subquery->where('category_en', 'like', '%' . $search . '%')
-                        ->orWhere('heading', 'like', '%' . $search . '%')
+                    
                         ->orWhere('post_month', 'like', '%' . $search . '%')
                         ->orWhere(function ($monthSubquery) use ($search) {
                             $monthName = strtolower($search);
@@ -309,5 +321,34 @@ public function paramDelete($id){
     }
 
 }
+        public function archiveNewsPost($id)
+        {
+            $newsPost = NewsPost::find($id);
+
+            if ($newsPost) {
+                $newsPost->update(['archived_at' => now()]);
+                $this->alert('success', 'News post archived successfully.');
+
+            } else {
+                $this->alert('success', 'News post not found');
+                
+            }
+        }
+
+
+        public function unarchiveNewsPost($id)
+        {
+            $newsPost = NewsPost::find($id);
+
+            if ($newsPost) {
+                $newsPost->update(['archived_at' => null]);
+                $this->alert('success', 'News post unarchived successfully.');
+
+            } else {
+                $this->alert('success', 'News post not found.');
+
+            }
+        }
+
 
 }
