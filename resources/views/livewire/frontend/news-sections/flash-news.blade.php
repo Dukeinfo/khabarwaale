@@ -1,5 +1,6 @@
 <section class="bg-white" >
     <div class="container">
+ 
         <div class="bg0 flex-wr-sb-c p-rl-20 p-tb-8">
             <div class="f2-s-1 p-r-30 size-w-0 m-tb-6 flex-wr-s-c">
                 <span class="text-uppercase cl2 p-r-20">
@@ -77,6 +78,31 @@
                 </span>
             </div>
       @livewire('frontend.homepage.search-component')
+
+      
         </div>
+        @if (session()->has('success'))
+            <div class="alert alert-success alert-dismissible">
+                {{ session('success') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @elseif (session()->has('error'))
+            <div class="alert alert-danger alert-dismissible">
+                {{ session('error') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @elseif (session('warning'))
+            <div class="alert alert-warning alert-dismissible">
+                {{ session('warning') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @else
+        @endif
     </div>
 </section>

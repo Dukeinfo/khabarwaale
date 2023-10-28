@@ -108,13 +108,13 @@ class FronendController extends Controller
         $subscriber_data = Subscription::where('token', $token)->where('email', $email)->first();
         if ($subscriber_data) {
             if ($subscriber_data->status === 'Active') {
-                return redirect()->back()->with('info', 'Your email is already verified.');
+                return redirect()->route('home.homepage')->with('info', 'Your email is already verified.');
             }
             $subscriber_data->token = '';
             $subscriber_data->status = 'Active';
             $subscriber_data->update();
     
-            return redirect()->back()->with('success', 'You are successfully verified as a subscriber to this system.');
+            return redirect()->route('home.homepage')->with('success', 'You are successfully verified as a subscriber to this system.');
         } else {
             return redirect()->route('home.homepage')->with('error', 'Invalid verification link. Please make sure the link is correct or try resubscribing.');
         }
