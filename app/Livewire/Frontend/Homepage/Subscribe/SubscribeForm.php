@@ -47,6 +47,7 @@ class SubscribeForm extends Component
                 $message .= '<a href="' . $verification_link . '">' .'Verify Email Address '. '</a><br><br>';
                 $message .= 'If you received this email by mistake, simply delete it. You will not be subscribed if you do not click the confirmation link above.';
                 Mail::to($this->email)->send(new Websitemail($subject, $message));
+                Log::info('Subscription Mail send successfull');
                 session()->flash('success', 'Thanks, please check your inbox to confirm the subscription');
             } else {
                 session()->flash('error', 'Something went wrong, please try again.');
