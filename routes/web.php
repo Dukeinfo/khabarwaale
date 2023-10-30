@@ -9,6 +9,8 @@ use App\Livewire\Backend\AddUsers\EditUser;
 use App\Livewire\Backend\AdminDashboard;
 use App\Livewire\Backend\Advertisment\CreateAdd;
 use App\Livewire\Backend\Advertisment\EditAdd;
+use App\Livewire\Backend\Archive\AddArchiveNews;
+use App\Livewire\Backend\Archive\EditArchiveNews;
 use App\Livewire\Backend\MenusMaster\CreateMenus;
 use App\Livewire\Backend\MenusMaster\EditMenus;
 use App\Livewire\Backend\News\CreateNews;
@@ -119,9 +121,8 @@ Route::get('/edit-headerSnipped/{id}', EditHeaderSnippets::class)->name('admin.e
 
 Route::get('/create-footerSnipped', CreateFooterSnippets::class)->name('admin.createfooterSnipped');
 Route::get('/edit-footerSnipped/{id}', EditFooterSnippets::class)->name('admin.editfooterSnipped');
-
-
-
+Route::get('/add-Archive', AddArchiveNews::class)->name('admin.Add_Archive_News');
+Route::get('/edit-Archive/{archiveId}', EditArchiveNews::class)->name('admin.edit_Archive_News');
 
 
 

@@ -114,7 +114,7 @@ class FronendController extends Controller
             $subscriber_data->status = 'Active';
             $subscriber_data->update();
     
-            return redirect()->route('home.homepage')->with('success', 'You are successfully verified as a subscriber to this system.');
+            return redirect()->route('home.homepage')->with('success', 'You are successfully verified as a subscriber with us');
         } else {
             return redirect()->route('home.homepage')->with('error', 'Invalid verification link. Please make sure the link is correct or try resubscribing.');
         }

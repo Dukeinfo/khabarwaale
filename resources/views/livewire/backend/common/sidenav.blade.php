@@ -56,6 +56,17 @@
    </a>
    
 </li>
+
+<li>
+	<a href="{{route('admin.Add_Archive_News')}}"  class="waves-effect"> 
+
+		<i class='bx bx-archive'></i>
+	   <span>Add Archive News</span>
+	   <span class="badge bg-danger">New</span>
+   </a>
+   
+</li>
+
 {{-- ================== --}}
 <li>
 	<a href="{{route('admin.create_add')}}"  class="waves-effect"> 
