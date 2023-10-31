@@ -8,6 +8,7 @@ use App\Models\Role;
 use App\Models\User;
 use App\Models\WebsiteType;
 use App\Traits\UploadTrait;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
@@ -69,20 +70,35 @@ class CreateNews extends Component
     public $post_month;
     #[Rule('required' )] 
     public $status;
-    #[Url(as: 'q')]
+    #[Url(as: 'q', keep: true)]
     public $search = '';
-    protected $queryString = ['search'];
 
  public $type_search;
- public $selectedNewsType; // Add this property
+ public $category_search; // Add this property
+ public $date_search; // Add this property
+ public $queryTime; 
+ 
+
 
 
  public function filterByType()
  {
      $this->search = $this->type_search; // Store the selected news type
  }
+
+ public function filterByCategpry(){
+    $this->search = $this->category_search; // Store the selected news type
+
+ }
+ public function filterByDate(){
+    $this->search = $this->date_search; // Store the selected news type
+
+ }
+ 
     public function render()
     {
+
+        DB::enableQueryLog();
 
         if (empty($this->post_date)) {
             $this->post_date = now()->format('Y-m-d'); // Set to current date
@@ -91,63 +107,37 @@ class CreateNews extends Component
         if (empty($this->post_month)) {
             $this->post_month = date('F');
         }
-
-        $search = trim($this->search);
- 
-
-   // Store the selected news type
-
-        // $records = NewsPost::with(['newstype', 'user', 'getmenu'])
-        // ->where(function ($query) use ($search) {
-        //     $query->whereHas('newstype', function ($subquery) use ($search) {
-        //         $subquery->where('name', 'like', '%' . $search . '%')
-        //                 ->orWhere('title', 'like', '%' . $search . '%');
-        //     })->orWhereHas('user', function ($subquery) use ($search) {
-        //         $subquery->where('name', 'like', '%' . $search . '%');
-        //     })->orWhereHas('getmenu', function ($subquery) use ($search) {
-        //         $subquery->where('category_en', 'like', '%' . $search . '%')
-        //                 ->orwhere('heading', 'like', '%' . $search . '%')
-        //                 ->orWhere('post_month', 'like', '%' . $search . '%');
-        //     });
-        // })->orderby('category_id')->get();
-
-        $records = NewsPost::with(['newstype', 'user', 'getmenu'])
-        ->where(function ($query) use ($search ) {
-            $query->whereHas('newstype', function ($subquery) use ($search ) {
-                $subquery->where('name', 'like', '%' . $search . '%')
-                        ->orWhere('title', 'like', '%' . $search . '%');
-
-                        
-            })->orWhereHas('user', function ($subquery) use ($search) {
-                $subquery->where('name', 'like', '%' . $search . '%');
-            })->orWhereHas('getmenu', function ($subquery) use ($search) {
-                $subquery->where('category_en', 'like', '%' . $search . '%')
-                    
-                        ->orWhere('post_month', 'like', '%' . $search . '%')
-                        ->orWhere(function ($monthSubquery) use ($search) {
-                            $monthName = strtolower($search);
-                            // You may need to adjust this mapping based on your localization.
-                            $monthNameToNumber = [
-                                'jan' => 1, 'feb' => 2, 'march' => 3, 'april' => 4,
-                                'may' => 5, 'june' => 6, 'july' => 7, 'aug' => 8,
-                                'sept' => 9, 'oct' => 10, 'nov' => 11, 'dec' => 12,
-                            ];
-                            if (array_key_exists($monthName, $monthNameToNumber)) {
-                                $monthNumber = $monthNameToNumber[$monthName];
-                                $monthSubquery->whereMonth('post_date', $monthNumber);
-                            }
-                        });
-            });
-        })->orderBy('category_id')->get();
-    
         $totalrecords = NewsPost::count();
         $getRoles =  Role::get();
         $getCategory=  Category::where('status' ,'Active')->get();
         $getwebsite_type =  WebsiteType::where('status' ,'Active')->get();
         $trashdata = NewsPost::onlyTrashed()->get();
 
+        $search = trim($this->search);
+ 
 
-        return view('livewire.backend.news.create-news' ,['totalrecords' => $totalrecords,'getwebsite_type' => $getwebsite_type, 'getCategory' =>$getCategory,    'records' =>$records , 'trashdata' => $trashdata]);
+   // Store the selected news type
+
+            $records = NewsPost::with(['newstype', 'user', 'getmenu'])
+            ->where(function ($query) use ($search) {
+                $query->whereHas('newstype', function ($typequery) use ($search) {
+                    $typequery->where('name',  '=', $search) ;
+                })->orWhereHas('user', function ($userquery) use ($search) {
+                    $userquery->where('name',  '=', $search);
+                })->orWhereHas('getmenu', function ($catquery) use ($search) {
+                                $catquery->where('category_en', '=', $search);
+                });
+            })
+            ->orWhereDate('post_date', $search) // Add this condition to filter by post_date
+            ->orWhere('post_month', $search) //
+            ->orWhere('title', 'like', '%' . $search . '%') 
+            ->orderBy('category_id')
+            ->get();
+        $this->queryTime = collect(DB::getQueryLog())->sum('time');
+        return view('livewire.backend.news.create-news' ,['totalrecords' => $totalrecords,
+         'getwebsite_type' => $getwebsite_type,
+          'getCategory' =>$getCategory,  
+            'records' =>$records , 'trashdata' => $trashdata]);
     }
 
     public function createNews(){
@@ -197,7 +187,7 @@ class CreateNews extends Component
         $createNews->description = $this->description ?? null ;
         $createNews->keywords = $this->keywords ?? null ;
         $createNews->reject_reason = $this->reject_reason ?? null ;
-        $createNews->post_date = $this->post_date ?? null ;
+        $createNews->post_date =$this->post_date  ?? null ;
         $createNews->post_month = $this->post_month ?? null ;
         $createNews->status =  $this->status ?? null ;
         $createNews->ip_address =getUserIp();

@@ -13,9 +13,11 @@ class SearchComponent extends Component
     public $records;
     // protected $queryString = ['search'];
     public $languageVal;
- public function mount(){
-    $this->languageVal = session()->get('language');
- }
+
+    public function mount(){
+            $this->languageVal = session()->get('language');
+        }
+        
     protected $queryString = ['search'];
     public function render()
     {

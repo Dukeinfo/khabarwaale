@@ -7,7 +7,8 @@ use App\Models\Category;
 use App\Models\NewsPost;
 use App\Models\Subscription;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Log;
+use Spatie\Browsershot\Browsershot;
 class FronendController extends Controller
 {
     /**
@@ -120,6 +121,18 @@ class FronendController extends Controller
         }
     }
     
+
+    public function captureScreenshot()
+    {
+        try {
+        Browsershot::url('https://example.com')
+            ->save('screenshot.png');
+            
+            dd("Done");
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+        }
+    }
 
 
 }

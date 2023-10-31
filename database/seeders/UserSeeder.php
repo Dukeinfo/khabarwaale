@@ -22,9 +22,18 @@ class UserSeeder extends Seeder
         $admin->name = 'Admin';
         $admin->username = 'Admin';
         $admin->role_id = 1;
-        $admin->email = 'admin@admin.com';
+        $admin->email = 'admin@khabarwaale.com';
         $admin->email_verified_at = Carbon::now()->toDateTimeString();
-        $admin->password = Hash::make('12345678');
+        $admin->password = Hash::make('admin@12345678');
         $admin->save();
+
+        $reporter = new User();
+        $reporter->name = 'Reposter';
+        $reporter->username = 'Reporter';
+        $reporter->role_id = 2;
+        $reporter->email = 'Reporter@khabarwaale.com';
+        $reporter->email_verified_at = Carbon::now()->toDateTimeString();
+        $reporter->password = Hash::make('reporter@12345678');
+        $reporter->save();
     }
 }

@@ -25,12 +25,7 @@
             <div class="row">
                 <div class="col-lg-12">
 
-                    <select style="display:none;" id="multSelect">
-                        <option value="te_1" data-search="arsenal">Arsenal</option>
-                        <option value="te_3" data-search="Tottenham Hotspur Spurs">Spurs</option>
-                        <option value="te_3" data-search="Manchester City">Man City</option>
-                    
-                    </select>
+          
                     <div class="card">
                         <div class="card-header bg-transparent border-bottom py-3">
                             <h4 class="card-title">Add Archive</h4>
@@ -97,16 +92,7 @@
                         <div class="card-header bg-transparent border-bottom py-3">
                             <h4 class="card-title">Manage Archive</h4>
                             <p class="card-title-desc mb-0">Manage the content by clicking on action accrodingly.</p>
-                            <div class="col-md-3 float-end">
-                                <div class="form-group">
-    
-                                    <div class="mb-3">
-                                        <label class="form-label">Search</label>
-                                        <input type="search" class="form-control"  wire:model.live="search" placeholder="Search...">
-                                         @error('Search') <span class="error">{{ $message }}</span> @enderror
-                                    </div>
-                                </div>
-                                </div>
+                   
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -115,7 +101,6 @@
                                         <tr>
                                             <th>#</th>
                                             <td>Date</td>
-
                                             <th>Status</th>    
                                             <th>Action</th>
                                         </tr>
@@ -125,16 +110,10 @@
                                          @forelse ( $records as $key => $record )
                                      
                                          <tr>
-                                            <td> {{ $key+1}}</td>
-                                                              
+                                            <td> {{ $key+1}}</td>              
                                             <td>
-
-
                                                 {{ \Carbon\Carbon::parse($record->archived_at)->format('F j, Y') }}
-
-
                                             </td>
-                                      
                                             <td>
                                                 @if($record->status  == "Active")
                                                     <a href="javascript:void(0)" >
@@ -145,13 +124,9 @@
                                                         <span class="badge bg-danger p-2" >  In-active </span>
                                                     </a> 
                                                 @endif
-    
                                             </td>
-
                                                 <td>   
-                                                    @if($record->status   == 'Active')    
-                                                    
-                                                      
+                                                    @if($record->status   == 'Active')         
                                                     <button class="btn btn-sm btn-info" title="In-Active" wire:click="inactive({{$record->id}})" wire:target="unarchiveNewsPost({{ $record->id }})"  wire:loading.attr="disabled">
                                                         <i class="fa fa-archive fa-fw"></i>
                                                     </button>
@@ -167,21 +142,13 @@
                                                     <i class="fa fa-times fa-fw fa-lg"></i>
                                                 </button>
                                             </td>
-                                            
-
-
-
                                         </tr>
-
-
                                          @empty
                                             <tr>
                                                 <td colspan="4"> Record Not Found</td>                                           
                                             </tr>
                                              @endforelse 
-
                                                      {{-- ========================= trash data =========================== --}}
-     
                                                      @if(isset($trashdata) & count($trashdata) > 0 )
                                                      <tr> <th colspan="7">
                                                         <h3>  Trash data </h3>

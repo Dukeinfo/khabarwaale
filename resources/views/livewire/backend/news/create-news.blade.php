@@ -393,7 +393,7 @@
                         <!-- Category ID -->
                         <div class="form-group">
                             <label for="category_search">Category </label>
-                            <select name="category_search" wire:model="category_search" id="category_search" class="form-control">
+                            <select name="category_search" wire:model="category_search" id="category_search" class="form-control"  wire:change="filterByCategpry">
                                     <option value=""> Select type</option>
                                     @forelse ($getCategory as $category )
                                         <option value="{{$category->category_en}}">{{$category->category_en}}</option>
@@ -408,7 +408,7 @@
                         <!-- News Type -->
                         <div class="form-group">
                             <label for="type_search">Date wise</label>
-                            <input type="date" class="form-control" wire:model="date_search" id="post_date">
+                            <input type="date" class="form-control" wire:model="date_search" id="post_date"  wire:change="filterByDate">
                             @error('date_search') <span class="error">{{ $message }}</span> @enderror
                         </div>
                     </div>
@@ -429,6 +429,8 @@
               
                         </div>
                         <div class="card-body">
+                             <p class="text-success fw-bold">      Query took {{ $queryTime }} seconds.</p>
+
                             <span class="badge bg-success p-2  fs-4">Total news : {{ $totalrecords ?? '0'}} </span>
                             <div class="table-responsive">
                                 <table class="table table-bordered table-striped datatable-- table-hover">
@@ -440,6 +442,8 @@
                                             <th>Category </th>
                                             <th>User Name </th>
                                             <th>Post Date </th>
+                                            <th>Post Month </th>
+
                                             <th>Status</th>    
                                             <th>Action</th>
                                         </tr>
@@ -475,7 +479,9 @@
                                                 
                                             </td>
 
-                                            <td>{{ \Carbon\Carbon::parse($record->created_at)->format('F j, Y') }}</td>
+                                            <td>{{ $record->post_date }}</td>
+                                            <td>{{ $record->post_month }}</td>
+
 
                                             <td>
                                                 @if($record->status  == "Approved")

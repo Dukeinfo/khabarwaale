@@ -33,6 +33,7 @@ use App\Livewire\Frontend\Homepage\ViewHomepage;
 use App\Livewire\Frontend\Innerpage\ViewInnerPage;
 use Illuminate\Support\Facades\Route;
 use Livewire\Livewire;
+use Spatie\Browsershot\Browsershot;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,11 +64,22 @@ Route::get('/category/{id}/{slug}', function ($id, $slug) {  return view('catego
 Route::get('/inner/{newsid}/{slug}', function ($newsid , $slug) { return view('inner',compact('newsid','slug'));
 })->name('home.inner');
 
+Route::get('/archive', function () {return view('archive');
+})->name('home.archive');
+
+
+Route::get('/reporter-news', function () {return view('reporter_news');
+})->name('home.reporter_news');
 
 Route::controller(FronendController::class)->group(function () {
 
 
 });
+
+Route::get('/screenshot', [FronendController::class, 'captureScreenshot']);
+
+
+
 
 Livewire::setScriptRoute(function ($handle) {
     return Route::get('/khabarwaale/livewire/livewire.js', $handle);
