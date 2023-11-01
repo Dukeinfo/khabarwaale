@@ -38,7 +38,7 @@
         @endforelse
 
         <!-- Editor's Desk -->
-        @livewire('frontend.advertisement.editor-profile')
+             @livewire('frontend.advertisement.editor-profile')
 
    
 

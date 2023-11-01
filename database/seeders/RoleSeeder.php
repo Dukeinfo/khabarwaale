@@ -21,12 +21,16 @@ class RoleSeeder extends Seeder
         $create = new Role();
         $create->name = "admin";
         $create->save();
-        $reporter = new Role();
 
+        $editor = new Role();
+        $editor->name = "editor";
+        $editor->save();
+
+        $reporter = new Role();
         $reporter->name = "reporter";
         $reporter->save();
-        $dataentery = new Role();
 
+        $dataentery = new Role();
         $dataentery->name = "dataentery";
         $dataentery->save();
     }

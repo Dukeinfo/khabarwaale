@@ -468,14 +468,14 @@
                                             
                                             </td>
                                             <td> 
-                                                @if($record->user['role_id']  == 1)
+                                                {{-- @if($record->user['role_id']  === '1') --}}
                                                       
                                                 <span class="badge bg-success p-1"> {{$record->user['name'] ?? 'NA' }}  </span>
 
-                                                @else 
-                                                {{$record->user['name'] ?? 'NA' }}    
+                                                {{-- @else  --}}
+                                                {{-- {{$record->user['name'] ?? 'NA' }}     --}}
                                             
-                                                @endif
+                                                {{-- @endif --}}
                                                 
                                             </td>
 

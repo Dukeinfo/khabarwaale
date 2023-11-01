@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Category;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
@@ -10,6 +11,11 @@ function authUserId(){
  function getMenuName($id){
     $menuName = Category::where('id', $id)->first();
     return $menuName->category_en;
+}
+
+function getEditorId(){
+    $editorId = User::where('role_id', 2)->first();
+    return $editorId->id;
 }
 
 
@@ -89,3 +95,11 @@ function get_video_image($image)
  
     return   asset('storage/video/'.$image);
 }
+
+
+function get_user_profile($profile)
+{
+ 
+    return   asset('storage/'.$profile);
+}
+

@@ -18,8 +18,8 @@ class CreateNewsPostsTable extends Migration
             $table->bigInteger('news_type')->nullable();
             $table->bigInteger('category_id')->comment('Menu');
             $table->bigInteger('subcategory_id')->comment('submenu')->nullable();
-            $table->bigInteger('user_id')->comment('admin,reporter')->nullable();
-            $table->bigInteger('role_id')->comment('reporter = 2')->nullable();
+            $table->bigInteger('user_id')->comment('admin,editor')->nullable();
+            $table->bigInteger('role_id')->comment('editor = 2')->nullable();
             $table->bigInteger('reporter_id')->comment('user id')->nullable();
             $table->string('old_parm')->comment('Old parameter')->nullable();
             $table->text('title')->nullable();

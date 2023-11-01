@@ -148,7 +148,25 @@
                                                 <span class="cl8">
                                                     <a target="_blank"  href="{{route('home.category', ['id' => $catNewsData->getmenu->id, 'slug' => createSlug($catNewsData->getmenu->category_en)
                                                         ])}}" class="f1-s-4 cl10 hov-cl10 trans-03">
+                                                      
+
+                                            @if (session()->get('language') === 'hindi')
                                                         {{$catNewsData['getmenu']['category_hin'] ?? "NA"}}
+                                               @elseif (session()->get('language') === 'english')
+                                                       {{$catNewsData['getmenu']['category_en'] ?? "NA"}}
+
+                                               @elseif (session()->get('language') === 'punjabi')
+                                                       {{$catNewsData['getmenu']['category_pbi'] ?? "NA"}}
+
+                                               @elseif (session()->get('language') === 'urdu')
+                                                       {{$catNewsData['getmenu']['category_urdu'] ?? "NA"}}
+
+                                               @else   
+                                                       {{ $category_en  ?? "NA"}}
+                                                       
+                                               @endif
+
+
                                                     </a>
                                                     <span class="f1-s-3 m-rl-3">
                                                         -
@@ -168,7 +186,7 @@
                         
                             @php $articleCount++ @endphp
                         
-                            @if ($showAds && $articleCount <= $loop->last )
+                            @if ($showAds && $key == 7 )
                                 <!-- Advertisement div after 6 articles -->
                                 <div class="text-center my-5">
                                     <p class="text-uppercase text-center small pb-2">
@@ -221,7 +239,6 @@
                             </a>
                         </div>
                         <P class="text-danger text-center"> No News Found</P>
-
                         @endforelse
                       
                         

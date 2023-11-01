@@ -28,8 +28,8 @@ class UserSeeder extends Seeder
         $admin->save();
 
         $reporter = new User();
-        $reporter->name = 'Reposter';
-        $reporter->username = 'Reporter';
+        $reporter->name = 'Parminder Singh Jatpuri';
+        $reporter->username = 'Parminder Singh Jatpuri';
         $reporter->role_id = 2;
         $reporter->email = 'Reporter@khabarwaale.com';
         $reporter->email_verified_at = Carbon::now()->toDateTimeString();
