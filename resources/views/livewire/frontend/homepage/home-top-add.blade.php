@@ -31,7 +31,7 @@
                 @endif
             </div>
         @empty
-            
+
         @endforelse
         </div>
     </div>

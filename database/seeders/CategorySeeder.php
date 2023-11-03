@@ -28,7 +28,7 @@ class CategorySeeder extends Seeder
           );
           
           foreach ( $categories as $key => $name) {
-            DB::table('categories')->create($name);
+            DB::table('categories')->insert($name);
         }
  
     }

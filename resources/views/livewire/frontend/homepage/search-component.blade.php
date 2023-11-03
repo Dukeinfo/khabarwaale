@@ -15,7 +15,19 @@
             {!! Str::limit(  $post->title, 25)!!} 
         </a></li>
         @endforeach
-        <li>No Results Found</li>
+
+                @if (session()->get('language') == "hindi" )
+                     <li class='text-danger text-center'>कोई परिणाम नहीं मिला</li>
+                @endif
+                @if (session()->get('language') == "english" )
+                     <li class="text-danger text-center">No Results Found</li>
+                @endif
+                @if (session()->get('language') == "punjabi" )
+                     <li class="text-danger text-center">ਕੋਈ ਨਤੀਜੇ ਨਹੀਂ ਮਿਲੇ</li>
+                @endif
+                @if (session()->get('language') == "urdu" )
+                     <li class="text-danger text-center">  کوئی نتیجہ نہیں</li>
+                @endif
         @endif
      
     </ul>

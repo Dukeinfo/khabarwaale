@@ -169,7 +169,24 @@
                     <img src="{{ asset('assets/images/ads/ad2.jpg') }}" class="img-fluid" alt="">
                 </a>
             </div>
-            <P class="text-danger text-center"> No News Found</P>
+
+            @switch(session()->get('language'))
+            @case('hindi')
+                    <p class="text-center text-danger"> {!! "कोई खबर नहीं मिली" !!}     </p>
+                @break
+            @case('punjabi')
+                    <p class="text-center text-danger">   {!! 'ਕੋਈ ਖ਼ਬਰ ਨਹੀਂ ਮਿਲੀ' !!}</p>
+                @break
+            @case('urdu')
+                <p class="text-center text-danger">   {!! 'کوئی خبر نہیں ملی' !!}</p>
+                @break
+            @case('english')
+                <p class="text-center text-danger">   {{" No news found"}}</p>
+            @break
+            @default
+                <p class="text-center text-danger">   {{" No news found"}}</p>
+            @endswitch
+            
             @endforelse
           
             

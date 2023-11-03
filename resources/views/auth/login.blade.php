@@ -49,6 +49,12 @@
                                 </div>
 
                                 <div class="p-2">
+                                    @if(session('error'))
+                                        <div class="alert alert-danger">
+                                            {{ session('error') }}
+                                        </div>
+                                    @endif
+
                                           @if (session('status'))
                                             <div class="mb-4 font-medium text-sm text-green-600">
                                                 {{ session('status') }}

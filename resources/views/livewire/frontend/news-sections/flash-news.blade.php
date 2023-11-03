@@ -20,38 +20,14 @@
                 <span class="dis-inline-block cl6 slide100-txt pos-relative size-w-0" data-in="fadeInDown" data-out="fadeOutDown">
                     
                     @forelse ($newsPosts  as  $key => $flashNews )
-                    @if ($flashNews->news_type == 1 && session()->get('language') === 'hindi')
-                    <span class="dis-inline-block slide100-txt-item animated visible-false" >
-                        <a  target="_blank" href="{{route('home.inner',['newsid' => $flashNews->id , 'slug' =>  $flashNews->slug  ])}}
-                            " class="cl6">
-                            {!! Str::limit($flashNews->title, 60)!!} 
-                        </a>
-                    </span>
-                      @elseif ($flashNews->news_type == 2 && session()->get('language') === 'english')
-                            <span class="dis-inline-block slide100-txt-item animated visible-false" >
-                                <a  target="_blank" href="{{route('home.inner',['newsid' => $flashNews->id , 'slug' =>  $flashNews->slug  ])}}" class="cl6">
-                                    {!! Str::limit($flashNews->title, 60)!!} 
-                                </a>
-                            </span>
-                        @elseif ($flashNews->news_type == 3 && session()->get('language') === 'punjabi')
-                            <!-- Display Punjabi news -->
-                            <span class="dis-inline-block slide100-txt-item animated visible-false" >
-                                <a  target="_blank" href="{{route('home.inner',['newsid' => $flashNews->id , 'slug' =>   $flashNews->slug  ])}}" class="cl6">
-                                    {!! Str::limit($flashNews->title, 60)!!} 
-                                </a>
-                            </span>
-                        
-                        @elseif ($flashNews->news_type == 4 && session()->get('language') === 'urdu')
-                            <!-- Display Urdu news -->
-                            <span class="dis-inline-block slide100-txt-item animated visible-false" >
-                                <a  target="_blank" href="{{route('home.inner',['newsid' => $flashNews->id , 'slug' =>  $flashNews->slug  ])}}" class="cl6">
-                                    {!! Str::limit($flashNews->title, 60)!!} 
-                                </a>
-                            </span>
-                
-                         
-                        @endif
 
+                            <span class="dis-inline-block slide100-txt-item animated visible-false" >
+                                <a  target="_blank" href="{{route('home.inner',['newsid' => $flashNews->id , 'slug' =>  $flashNews->slug  ])}}
+                                    " class="cl6">
+                                    {!! Str::limit($flashNews->title, 60)!!} 
+                                </a>
+                            </span>
+    
                     @empty
                     <span class="dis-inline-block slide100-txt-item animated visible-false">
                         <a href="javascript:void()" class="cl6">

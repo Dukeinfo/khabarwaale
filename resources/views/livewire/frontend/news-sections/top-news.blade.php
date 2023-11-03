@@ -22,9 +22,9 @@
                     @endswitch  
                 </h3>
             </div>
-            @forelse ($topHinNewsData as  $key => $hintopNews )
+            @forelse ($top_NewsData as  $key => $hintopNews )
                     @if($key === 0)
-                        @if (session()->get('language') == 'hindi' )
+                 
                             <div class="card border-0 shadow-sm mb-3">
                                 <div class="card-body">
                                     <div class="p-b-20">
@@ -38,7 +38,18 @@
                                             <a target="_blank" href="{{route('home.category', ['id' => $hintopNews->getmenu->id, 'slug' => createSlug($hintopNews->getmenu->category_en)
                                                 ])}}" class="f1-s-4 cl10 hov-cl10 trans-03">
                                             
-                                                {{$hintopNews['getmenu']['category_hin'] ?? "NA"}}
+
+                                                @if (session()->get('language') === 'hindi')
+                                                    {{$hintopNews['getmenu']['category_hin'] ?? "NA"}}:
+                                                @elseif (session()->get('language') === 'english')
+                                                    {{$hintopNews['getmenu']['category_en'] ?? "NA"}}:
+                                                @elseif (session()->get('language') === 'punjabi')
+                                                    {{$hintopNews['getmenu']['category_pbi'] ?? "NA"}}:
+                                                @elseif (session()->get('language') === 'urdu')
+                                                    {{$hintopNews['getmenu']['category_urdu'] ?? "NA"}}:
+                                                @else   
+                                                    {{$hintopNews['getmenu']['category_en'] ?? "NA"}}:
+                                                @endif
                                             </a>
                                             <span class="f1-s-3 m-rl-3">
                                                 -
@@ -54,9 +65,9 @@
                                     </a>
                                 </div>
                             </div>
-                        @endif
+                      
                     @else   
-                        @if (session()->get('language') == 'hindi' )
+                      
 
                             <div class="card border-0 shadow-sm mb-3">
                                 <div class="card-body">
@@ -71,7 +82,18 @@
                                             <span class="cl8">
                                                 <a target="_blank"  href="{{route('home.category', ['id' => $hintopNews->getmenu->id, 'slug' => createSlug($hintopNews->getmenu->category_en)
                                                     ])}}" class="f1-s-4 cl10 hov-cl10 trans-03">
-                                                    {{$hintopNews['getmenu']['category_hin'] ?? "NA"}}
+
+                                                    @if (session()->get('language') === 'hindi')
+                                                        {{$hintopNews['getmenu']['category_hin'] ?? "NA"}}:
+                                                    @elseif (session()->get('language') === 'english')
+                                                        {{$hintopNews['getmenu']['category_en'] ?? "NA"}}:
+                                                    @elseif (session()->get('language') === 'punjabi')
+                                                        {{$hintopNews['getmenu']['category_pbi'] ?? "NA"}}:
+                                                    @elseif (session()->get('language') === 'urdu')
+                                                        {{$hintopNews['getmenu']['category_urdu'] ?? "NA"}}:
+                                                    @else   
+                                                        {{$hintopNews['getmenu']['category_en'] ?? "NA"}}:
+                                                    @endif
                                                 </a>
                                                 <span class="f1-s-3 m-rl-3">
                                                     -
@@ -87,218 +109,30 @@
                                     </div>
                                 </div>
                             </div>
-                        @endif
+                       
                     @endif
             @empty 
+                    @switch(session()->get('language'))
+                    @case('hindi')
+                            <p class="text-center text-danger"> {!! "कोई खबर नहीं मिली" !!}     </p>
+                        @break
+                    @case('punjabi')
+                            <p class="text-center text-danger">   {!! 'ਕੋਈ ਖ਼ਬਰ ਨਹੀਂ ਮਿਲੀ' !!}</p>
+                        @break
+                    @case('urdu')
+                        <p class="text-center text-danger">   {!! 'کوئی خبر نہیں ملی' !!}</p>
+                        @break
+                    @case('english')
+                        <p class="text-center text-danger">   {{" No news found"}}</p>
+                    @break
+                    @default
+                        <p class="text-center text-danger">   {{" No news found"}}</p>
+                    @endswitch
             @endforelse
 
-                        {{-- english  --}}
-                @forelse ($topEngNewsData as  $key => $topNews )
-                        @if($key === 0)
-                            @if (session()->get('language') == 'english' )
-                                <div class="card border-0 shadow-sm mb-3">
-                                    <div class="card-body">
-                                        <div class="p-b-20">
-                                            <h5 class="p-b-5">
-                                                <a target="_blank" href="{{route('home.inner',['newsid' => $topNews->id , 'slug' =>  $topNews->slug  ])}}" class="f1-m-3 cl2 hov-cl10 trans-03 font-weight-bold">
-                                                  
-                                                        {!! Str::limit($topNews->title, 70) !!} 
-                                                </a>
-                                            </h5>
-                                            <span class="cl8">
-                                                <a target="_blank" href="{{route('home.category', ['id' => $topNews->getmenu->id, 'slug' => createSlug($topNews->getmenu->category_en)
-                                                    ])}}" class="f1-s-4 cl10 hov-cl10 trans-03">
-                                                
-                                                    {{$topNews['getmenu']['category_en'] ?? "NA"}}
-                                                </a>
-                                                <span class="f1-s-3 m-rl-3">
-                                                    -
-                                                </span>
-                                                <span class="f1-s-3">
-                                                    {{carbon\Carbon::parse($topNews->post_date)->format('M d, Y')}}
-    
-                                                </span>
-                                            </span>
-                                        </div>
-                                        <a  target="_blank" href="{{route('home.inner',['newsid' => $topNews->id , 'slug' =>  $topNews->slug  ])}}" class="wrap-pic-w hov1 trans-03">
-                                            <img src="{{  isset($topNews->image)?  getNewsImage($topNews->image) : asset('assets/images/news/n1.jpg')}}" alt="IMG" class="img-fluid rounded">
-                                        </a>
-                                    </div>
-                                </div>
-                            @endif
-                        @else   
-                            @if (session()->get('language') == 'english' )
-                                <div class="card border-0 shadow-sm mb-3">
-                                    <div class="card-body">
-                                        <div class="flex-wr-sb-s">
-                                            <div class="size-w-2">
-                                                <h5 class="p-b-5">
-                                                    <a target="_blank" href="{{route('home.inner',['newsid' => $topNews->id , 'slug' =>  $topNews->slug  ])}}" class="f1-s-5 cl3 hov-cl10 trans-03">
-                                                       
-                                                        {!! Str::limit($topNews->title, 65) !!} 
-                                                    </a>
-                                                </h5>
-                                                <span class="cl8">
-                                                    <a target="_blank"  href="{{route('home.category', ['id' => $topNews->getmenu->id, 'slug' => createSlug($topNews->getmenu->category_en)
-                                                        ])}}" class="f1-s-4 cl10 hov-cl10 trans-03">
-                                                        {{$topNews['getmenu']['category_en'] ?? "NA"}}
-                                                    </a>
-                                                    <span class="f1-s-3 m-rl-3">
-                                                        -
-                                                    </span>
-                                                    <span class="f1-s-3">
-                                                        {{carbon\Carbon::parse($topNews->post_date)->format('M d, Y')}}
-                                                    </span>
-                                                </span>
-                                            </div>
-                                            <a  target="_blank" href="{{route('home.inner',['newsid' => $topNews->id , 'slug' =>  $topNews->slug  ])}}" class="size-w-1 wrap-pic-w hov1 trans-03">
-                                                <img src="{{  isset($topNews->thumbnail)? getThumbnail($topNews->thumbnail)  : asset('assets/images/post-06.jpg')}}" alt="" class="img-fluid rounded">
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endif
-                        @endif
-                @empty 
-                @endforelse
-                        {{-- punjabi  --}}
-                @forelse ($topPbiNewsData as  $key => $topNews )
-                        @if($key === 0)
-                            @if (session()->get('language') == 'punjabi' )
-                                <div class="card border-0 shadow-sm mb-3">
-                                    <div class="card-body">
-                                        <div class="p-b-20">
-                                            <h5 class="p-b-5">
-                                                <a target="_blank"  href="{{route('home.inner',['newsid' => $topNews->id , 'slug' => md5createSlug( $topNews->slug)  ])}}" class="f1-m-3 cl2 hov-cl10 trans-03 font-weight-bold">
-                                               
-                                                        {!! Str::limit($topNews->title, 70) !!} 
-                                                </a>
-                                            </h5>
-                                            <span class="cl8">
-                                                <a target="_blank"  href="{{route('home.category', ['id' => $topNews->getmenu->id, 'slug' => createSlug($topNews->getmenu->category_en)
-                                                    ])}}" class="f1-s-4 cl10 hov-cl10 trans-03">
-                                                
-                                                    {{$topNews['getmenu']['category_pbi'] ?? "NA"}}
-                                                </a>
-                                                <span class="f1-s-3 m-rl-3">
-                                                    -
-                                                </span>
-                                                <span class="f1-s-3">
-                                                    {{carbon\Carbon::parse($topNews->post_date)->format('M d, Y')}}
-    
-                                                </span>
-                                            </span>
-                                        </div>
-                                        <a href="{{route('home.inner',['newsid' => $topNews->id , 'slug' =>  $topNews->slug  ])}}" class="wrap-pic-w hov1 trans-03">
-                                            <img src="{{  isset($topNews->image)?  getNewsImage($topNews->image)   : asset('assets/images/news/n1.jpg')}}" alt="IMG" class="img-fluid rounded">
-                                        </a>
-                                    </div>
-                                </div>
-                            @endif
-                        @else   
-                            @if (session()->get('language') == 'punjabi' )
-                                <div class="card border-0 shadow-sm mb-3">
-                                    <div class="card-body">
-                                        <div class="flex-wr-sb-s">
-                                            <div class="size-w-2">
-                                                <h5 class="p-b-5">
-                                                    <a target="_blank"   href="{{route('home.inner',['newsid' => $topNews->id , 'slug' =>  $topNews->slug  ])}}" class="f1-s-5 cl3 hov-cl10 trans-03">
-                                                       
-                                                        {!! Str::limit($topNews->title, 65) !!} 
-                                                    </a>
-                                                </h5>
-                                                <span class="cl8">
-                                                    <a target="_blank"   href="{{route('home.category', ['id' => $topNews->getmenu->id, 'slug' => createSlug($topNews->getmenu->category_en)
-                                                        ])}}" class="f1-s-4 cl10 hov-cl10 trans-03">
-                                                        {{$topNews['getmenu']['category_pbi'] ?? "NA"}}
-                                                    </a>
-                                                    <span class="f1-s-3 m-rl-3">
-                                                        -
-                                                    </span>
-                                                    <span class="f1-s-3">
-                                                        {{carbon\Carbon::parse($topNews->post_date)->format('M d, Y')}}
-                                                    </span>
-                                                </span>
-                                            </div>
-                                            <a target="_blank"  href="{{route('home.inner',['newsid' => $topNews->id , 'slug' =>  $topNews->slug  ])}}" class="size-w-1 wrap-pic-w hov1 trans-03">
-                                                <img src="{{  isset($topNews->thumbnail)? getThumbnail($topNews->thumbnail)  : asset('assets/images/post-06.jpg')}}" alt="" class="img-fluid rounded">
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endif
-                        @endif
-                @empty 
-                @endforelse
-                        {{-- urdu  --}}
-                        @forelse ($topUrduNewsData as  $key => $topNews )
-                        @if($key === 0)
-                            @if (session()->get('language') == 'urdu' )
-                                <div class="card border-0 shadow-sm mb-3">
-                                    <div class="card-body">
-                                        <div class="p-b-20">
-                                            <h5 class="p-b-5">
-                                                <a  target="_blank" href="{{route('home.inner',['newsid' => $topNews->id , 'slug' =>  $topNews->slug  ])}}" class="f1-m-3 cl2 hov-cl10 trans-03 font-weight-bold">
-                                                   
-                                                        {!! Str::limit($topNews->title, 70) !!} 
-                                                </a>
-                                            </h5>
-                                            <span class="cl8">
-                                                <a target="_blank" href="{{route('home.category', ['id' => $topNews->getmenu->id, 'slug' => createSlug($topNews->getmenu->category_en)
-                                                    ])}}" class="f1-s-4 cl10 hov-cl10 trans-03">
-                                                
-                                                    {{$topNews['getmenu']['category_urdu'] ?? "NA"}}
-                                                </a>
-                                                <span class="f1-s-3 m-rl-3">
-                                                    -
-                                                </span>
-                                                <span class="f1-s-3">
-                                                    {{carbon\Carbon::parse($topNews->post_date)->format('M d, Y')}}
-    
-                                                </span>
-                                            </span>
-                                        </div>
-                                        <a target="_blank" href="{{route('home.inner',['newsid' => $topNews->id , 'slug' =>  $topNews->slug  ])}}" class="wrap-pic-w hov1 trans-03">
-                                            <img src="{{ isset($topNews->image)? getNewsImage($topNews->image)  : asset('assets/images/news/n1.jpg')}}" alt="IMG" class="img-fluid rounded">
-                                        </a>
-                                    </div>
-                                </div>
-                            @endif
-                        @else   
-                            @if (session()->get('language') == 'urdu' )
-                                <div class="card border-0 shadow-sm mb-3">
-                                    <div class="card-body">
-                                        <div class="flex-wr-sb-s">
-                                            <div class="size-w-2">
-                                                <h5 class="p-b-5">
-                                                    <a target="_blank" href="{{route('home.inner',['newsid' => $topNews->id , 'slug' =>  $topNews->slug  ])}}" class="f1-s-5 cl3 hov-cl10 trans-03">
-                                                      
-                                                        {!! Str::limit($topNews->title, 65) !!} 
-                                                    </a>
-                                                </h5>
-                                                <span class="cl8">
-                                                    <a target="_blank"  href="{{route('home.category', ['id' => $topNews->getmenu->id, 'slug' => createSlug($topNews->getmenu->category_en)
-                                                        ])}}" class="f1-s-4 cl10 hov-cl10 trans-03">
-                                                        {{$topNews['getmenu']['category_urdu'] ?? "NA"}}
-                                                    </a>
-                                                    <span class="f1-s-3 m-rl-3">
-                                                        -
-                                                    </span>
-                                                    <span class="f1-s-3">
-                                                        {{carbon\Carbon::parse($topNews->post_date)->format('M d, Y')}}
-                                                    </span>
-                                                </span>
-                                            </div>
-                                            <a target="_blank" href="{{route('home.inner',['newsid' => $topNews->id , 'slug' =>  $topNews->slug  ])}}" class="size-w-1 wrap-pic-w hov1 trans-03">
-                                                <img src="{{ isset($topNews->thumbnail)? getThumbnail($topNews->thumbnail)  :  asset('assets/images/post-06.jpg')}}" alt="" class="img-fluid rounded">
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endif
-                        @endif
-                @empty 
-                @endforelse
+   
+  
+      
 
             <div class="text-center">
                 <p class="text-uppercase text-center small pb-2">
@@ -325,9 +159,7 @@
                     <img src="{{ getAddImage($topNewsCentertAds->image) }}" class="img-fluid" alt="">
                 </a>
                 @else
-                {{-- <a href="javascript:void()">
-                    <img src="{{asset('assets/images/ads/ad2.jpg')}}" class="img-fluid" alt="">
-                </a> --}}
+           
                 @endif
             </div>
         </div>

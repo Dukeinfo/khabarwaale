@@ -8,12 +8,17 @@ use Livewire\Component;
 
 class SecondCategoryNews extends Component
 {
+    public $languageVal;
+    public function mount(){ 
+          $this->languageVal = session()->get('language');
+    
+    }
     public function render()
     {
 
         $getMenus = Category::orderBy('sort_id', 'ASC')
                     ->where('status', 'Active')->where('sort_id' ,2)->whereNull('deleted_at')->first();
-         $secondCatWiseHindiNews = NewsPost::with(['newstype', 'user', 'getmenu'])
+         $second_Ca_tWise_News = NewsPost::with(['newstype', 'user', 'getmenu'])
                     ->where(function ($query)  {
                         $query->whereHas('getmenu', function ($subquery)  {
                             $subquery->where('sort_id', 'like', '%' . '2' . '%');
@@ -21,49 +26,37 @@ class SecondCategoryNews extends Component
                         });
                     })->orderBy('created_at', 'desc')
                         ->orderBy('updated_at', 'desc')
-                        ->where('category_id' ,$getMenus->id)
-                        ->limit(4)->where('news_type' ,1)->get();
-
-
-        $secondCatWise_EngNews = NewsPost::with(['newstype', 'user', 'getmenu'])
-                                ->where(function ($query)  {
-                                    $query->whereHas('getmenu', function ($subquery)  {
-                                        $subquery->where('sort_id', 'like', '%' . '2' . '%');
-                    
-                                    });
-                                })->orderBy('created_at', 'desc')
-                                    ->orderBy('updated_at', 'desc')
-                                    ->where('category_id' ,$getMenus->id)
-                                    ->limit(4)->where('news_type' ,2)->get();
-
-
-        $secondCatWise_PbiNews = NewsPost::with(['newstype', 'user', 'getmenu'])
-                                    ->where(function ($query)  {
-                                        $query->whereHas('getmenu', function ($subquery)  {
-                                            $subquery->where('sort_id', 'like', '%' . '2' . '%');
+                        ->where('category_id' ,$getMenus->id);
                         
-                                        });
-                                      })->orderBy('created_at', 'desc')
-                                        ->orderBy('updated_at', 'desc')
-                                        ->where('category_id' ,$getMenus->id)
-                                        ->limit(4)->where('news_type' ,3)->get();
+                        switch ($this->languageVal) {
+                            case 'hindi':
+                                $second_Ca_tWise_News->where('news_type', 1);
+                                break;
+                        
+                            case 'english':
+                                $second_Ca_tWise_News->where('news_type', 2);
+                                break;
+                        
+                            case 'punjabi':
+                                $second_Ca_tWise_News->where('news_type', 3);
+                                break;
+                        
+                            case 'urdu':
+                                $second_Ca_tWise_News->where('news_type', 4);
+                                break;
+                        
+                            default:
+                                $second_Ca_tWise_News->where('news_type', 1);
+                                // Handle the default case if needed
+                        }
+            
+                    $second_Ca_tWise_News = $second_Ca_tWise_News->limit(4)->get();
+               
 
 
 
-         $secondCatWise_UrduNews = NewsPost::with(['newstype', 'user', 'getmenu'])
-                                    ->where(function ($query)  {
-                                        $query->whereHas('getmenu', function ($subquery)  {
-                                            $subquery->where('sort_id', 'like', '%' . '2' . '%');
-                                        });
-                                        })->orderBy('created_at', 'desc')
-                                        ->orderBy('updated_at', 'desc')
-                                        ->where('category_id' ,$getMenus->id)
-                                        ->limit(4)->where('news_type' ,4)->get();
         return view('livewire.frontend.category-news.second-category-news' ,[
-            'secondCatWiseHindiNews' => $secondCatWiseHindiNews,
-            'secondCatWise_EngNews' => $secondCatWise_EngNews,
-            'secondCatWise_PbiNews' => $secondCatWise_PbiNews,
-            'secondCatWise_UrduNews' => $secondCatWise_UrduNews,
+            'second_Ca_tWise_News' => $second_Ca_tWise_News,
               'getMenus'=> $getMenus]);
     }
 }

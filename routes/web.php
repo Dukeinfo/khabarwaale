@@ -99,42 +99,42 @@ Route::middleware([
     })->name('dashboard');
 });
 
-Route::group(['middleware' => 'auth'],function(){
+Route::group(['middleware' =>   ['auth', 'admin']],function(){
 Route::prefix('admin')->group(function(){
-Route::post('ckeditor/image_upload', [CkImageUploadController::class, 'upload'])->name('image.upload');
-Route::get('/dashboard', AdminDashboard::class)->name('admin_dashboard');
-Route::get('/profile', AdminProfile::class)->name('admin_profile');
-Route::get('/contact-view', ContactusView::class)->name('contact_view');
-Route::get('/contact-edit/{id}', ContactusEdit::class)->name('contact_edit');
-Route::get('/social-view', SocialAppsManager::class)->name('social_view');
-Route::get('/contact-entries', ContactMessages::class)->name('contact_entries');
-Route::post('/admin-logout', [AdminLogoutController::class,'adminlogout'])->name('adminlogout');
+    Route::post('ckeditor/image_upload', [CkImageUploadController::class, 'upload'])->name('image.upload');
+    Route::get('/dashboard', AdminDashboard::class)->name('admin_dashboard');
+    Route::get('/profile', AdminProfile::class)->name('admin_profile');
+    Route::get('/contact-view', ContactusView::class)->name('contact_view');
+    Route::get('/contact-edit/{id}', ContactusEdit::class)->name('contact_edit');
+    Route::get('/social-view', SocialAppsManager::class)->name('social_view');
+    Route::get('/contact-entries', ContactMessages::class)->name('contact_entries');
+    Route::post('/admin-logout', [AdminLogoutController::class,'adminlogout'])->name('adminlogout');
 // CreateMenus
-Route::get('/create-menu', CreateMenus::class)->name('create_menus');
-Route::get('/edit-menu/{id}', EditMenus::class)->name('edit_menus');
+    Route::get('/create-menu', CreateMenus::class)->name('create_menus');
+    Route::get('/edit-menu/{id}', EditMenus::class)->name('edit_menus');
 
-Route::get('/create-user', CreateUsers::class)->name('create_user');
-Route::get('/edit-user/{userid}', EditUser::class)->name('edit_user');
+    Route::get('/create-user', CreateUsers::class)->name('create_user');
+    Route::get('/edit-user/{userid}', EditUser::class)->name('edit_user');
 
-Route::get('/create-add', CreateAdd::class)->name('admin.create_add');
-Route::get('/edit-add/{addid}', EditAdd::class)->name('admin.edit_add');
+    Route::get('/create-add', CreateAdd::class)->name('admin.create_add');
+    Route::get('/edit-add/{addid}', EditAdd::class)->name('admin.edit_add');
 
-Route::get('/create-videos', CreateVideos::class)->name('admin.create_videos');
-Route::get('/edit-videos/{vid_id}', EditVideos::class)->name('admin.edit_videos');
+    Route::get('/create-videos', CreateVideos::class)->name('admin.create_videos');
+    Route::get('/edit-videos/{vid_id}', EditVideos::class)->name('admin.edit_videos');
 
-Route::get('/create-news', CreateNews::class)->name('admin.create_news');
-Route::get('/edit-news/{news_id}', EditNews::class)->name('admin.edit_news');
+    Route::get('/create-news', CreateNews::class)->name('admin.create_news');
+    Route::get('/edit-news/{news_id}', EditNews::class)->name('admin.edit_news');
 
-Route::get('/create-metadetail', CreateMetadetail::class)->name('admin.createMetadetail');
-Route::get('/edit-metadetail/{id}', EditMetadetail::class)->name('admin.editMetadetail');
+    Route::get('/create-metadetail', CreateMetadetail::class)->name('admin.createMetadetail');
+    Route::get('/edit-metadetail/{id}', EditMetadetail::class)->name('admin.editMetadetail');
 
-Route::get('/create-headerSnipped', CreateHeaderSnippets::class)->name('admin.createHeaderSnipped');
-Route::get('/edit-headerSnipped/{id}', EditHeaderSnippets::class)->name('admin.editeaderSnipped');
+    Route::get('/create-headerSnipped', CreateHeaderSnippets::class)->name('admin.createHeaderSnipped');
+    Route::get('/edit-headerSnipped/{id}', EditHeaderSnippets::class)->name('admin.editeaderSnipped');
 
-Route::get('/create-footerSnipped', CreateFooterSnippets::class)->name('admin.createfooterSnipped');
-Route::get('/edit-footerSnipped/{id}', EditFooterSnippets::class)->name('admin.editfooterSnipped');
-Route::get('/add-Archive', AddArchiveNews::class)->name('admin.Add_Archive_News');
-Route::get('/edit-Archive/{archiveId}', EditArchiveNews::class)->name('admin.edit_Archive_News');
+    Route::get('/create-footerSnipped', CreateFooterSnippets::class)->name('admin.createfooterSnipped');
+    Route::get('/edit-footerSnipped/{id}', EditFooterSnippets::class)->name('admin.editfooterSnipped');
+    Route::get('/add-Archive', AddArchiveNews::class)->name('admin.Add_Archive_News');
+    Route::get('/edit-Archive/{archiveId}', EditArchiveNews::class)->name('admin.edit_Archive_News');
 
 
 

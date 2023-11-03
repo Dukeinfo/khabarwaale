@@ -69,12 +69,12 @@ class CreateAdd extends Component
 
         $search =  trim($this->search);
         $records = Advertisment::where('location', 'like', '%'.$search.'%')
-        ->orwhere('page_name', 'like', '%'.$search.'%')
-        ->orwhere('type', 'like', '%'.$search.'%')
-        ->orwhere('from_date', 'like', '%'.$search.'%')
-        ->orwhere('to_date', 'like', '%'.$search.'%')
-        ->orwhere('post_month', 'like', '%'.$search.'%')
-        ->get();
+                                ->orwhere('page_name', 'like', '%'.$search.'%')
+                                ->orwhere('type', 'like', '%'.$search.'%')
+                                ->orwhere('from_date', 'like', '%'.$search.'%')
+                                ->orwhere('to_date', 'like', '%'.$search.'%')
+                                ->orwhere('post_month', 'like', '%'.$search.'%')
+                                ->get();
         return view('livewire.backend.advertisment.create-add',['get_add_location' => $getAddLocation,'records' => $records,'getCategory' => $getCategory]);
     }
 

@@ -165,6 +165,7 @@ return [
         /*
          * Application Service Providers...
          */
+        Spatie\Permission\PermissionServiceProvider::class,
         Jorenvh\Share\Providers\ShareServiceProvider::class,
         Kudashevs\ShareButtons\Providers\ShareButtonsServiceProvider::class,
         App\Providers\LanguageServiceProvider::class,
