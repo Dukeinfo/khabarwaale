@@ -18,7 +18,7 @@
                 <img src="{{ isset($reporterProfile->profile_photo_path ) ?  get_user_profile($reporterProfile->profile_photo_path): asset('no_image') }}" class="mr-3" width="90" alt="">
                 <div class="media-body">
                     <h5 class="mt-0 text-dark font-weight-bold">{{  $reporterProfile->name ?? "NA"}}  </h5>
-                    <p class="mb-3">{{  ucwords($reporterProfile->role->name ) ?? "NA"}} </p>
+                    <p class="mb-3">{{isset($reporterProfile->role->name ) ?  ucwords($reporterProfile->role->name ) : "NA"}} </p>
                     <p>
                         <a href="{{route('home.reporter_news')}}" target="_blank" class="btn btn-primary btn-sm px-3">
 

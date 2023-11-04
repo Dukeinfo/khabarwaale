@@ -47,12 +47,37 @@
 	</ul>
 
 </li>
+{{-- Roles And Permission --}}
+<li>
+	<a href="javascript: void(0);" class="has-arrow waves-effect">
+		<i class='bx bx-user'></i>
+		<span> Roles/ Permission  
+
+			<span class="badge bg-danger">New</span>
+
+		</span>
+	</a>
+		
+  <ul class="sub-menu" aria-expanded="false">
+			<li><a href="{{route('admin.view_permissions')}}">Add Permission   </a></li>
+			<li><a href="{{route('admin.view_roles')}}">Add Role </a></li>
+			<li><a href="{{route('admin.add_roles')}}"> Roles in Permission </a></li>
+			<li><a href="">  All Roles in Permission </a></li>
+
+			
+
+
+			
+			
+			
+	</ul>
+
+</li>
 <li>
 	<a href="{{route('admin.create_news')}}"  class="waves-effect"> 
 
 	   <i class='bx bx-news'></i>
 	   <span>Add News</span>
-	   <span class="badge bg-danger">New</span>
    </a>
    
 </li>
@@ -62,7 +87,6 @@
 
 		<i class='bx bx-archive'></i>
 	   <span>Add Archive News</span>
-	   <span class="badge bg-danger">New</span>
    </a>
    
 </li>

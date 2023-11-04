@@ -15,6 +15,11 @@ use App\Livewire\Backend\MenusMaster\CreateMenus;
 use App\Livewire\Backend\MenusMaster\EditMenus;
 use App\Livewire\Backend\News\CreateNews;
 use App\Livewire\Backend\News\EditNews;
+use App\Livewire\Backend\RoleAndPermissions\AddRolesPermissions;
+use App\Livewire\Backend\RoleAndPermissions\EditAllPermission;
+use App\Livewire\Backend\RoleAndPermissions\EditRoles;
+use App\Livewire\Backend\RoleAndPermissions\ViewAllPermission;
+use App\Livewire\Backend\RoleAndPermissions\ViewRoles;
 use App\Livewire\Backend\Seo\CreateFooterSnippets;
 use App\Livewire\Backend\Seo\CreateHeaderSnippets;
 use App\Livewire\Backend\Seo\CreateMetadetail;
@@ -135,10 +140,22 @@ Route::prefix('admin')->group(function(){
     Route::get('/edit-footerSnipped/{id}', EditFooterSnippets::class)->name('admin.editfooterSnipped');
     Route::get('/add-Archive', AddArchiveNews::class)->name('admin.Add_Archive_News');
     Route::get('/edit-Archive/{archiveId}', EditArchiveNews::class)->name('admin.edit_Archive_News');
+    
+    Route::get('/view-permissions', ViewAllPermission::class)->name('admin.view_permissions');
+    Route::get('/edit-permissions/{id}', EditAllPermission::class)->name('admin.edit_permissions');
 
+    Route::get('/view-roles', ViewRoles::class)->name('admin.view_roles');
+    Route::get('/edit-roles/{id}', EditRoles::class)->name('admin.edit_roles');
 
+    Route::get('/add-roles', AddRolesPermissions::class)->name('admin.add_roles');
 
+    
+    
 
+    
+    
+
+    
 });
 
 });
