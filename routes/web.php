@@ -18,6 +18,7 @@ use App\Livewire\Backend\News\EditNews;
 use App\Livewire\Backend\RoleAndPermissions\AddRolesPermissions;
 use App\Livewire\Backend\RoleAndPermissions\EditAllPermission;
 use App\Livewire\Backend\RoleAndPermissions\EditRoles;
+use App\Livewire\Backend\RoleAndPermissions\EditRolesPermissions;
 use App\Livewire\Backend\RoleAndPermissions\ViewAllPermission;
 use App\Livewire\Backend\RoleAndPermissions\ViewRoles;
 use App\Livewire\Backend\Seo\CreateFooterSnippets;
@@ -148,6 +149,8 @@ Route::prefix('admin')->group(function(){
     Route::get('/edit-roles/{id}', EditRoles::class)->name('admin.edit_roles');
 
     Route::get('/add-roles', AddRolesPermissions::class)->name('admin.add_roles');
+    Route::get('/edit-roles-permission/{id}', EditRolesPermissions::class)->name('admin.edit_roles_permissions');
+
 
     
     
