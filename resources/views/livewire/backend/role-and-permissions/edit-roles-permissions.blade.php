@@ -33,8 +33,13 @@
                             <div class="form-group">
                                 <div class="form-check mb-2 form-check-primary">
                                     <input class="form-check-input border border-dark" type="checkbox" value=""
+                                    {{ App\Models\User::roleHasPermissions($role, $permissions) ? 'checked' : ''  }}
                                         id="customckeck1">
                                     <label class="form-check-label" for="customckeck1">{{ $group->group_name }}</label>
+
+                                    @if (App\Models\User::roleHasPermissions($role, $permissions))
+                                    <i class="fas fa-check-circle text-success" style="font-size: 20px;"></i>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -43,9 +48,14 @@
                             @foreach ($permissions as $permission)
                             <div class="form-group">
                                 <div class="form-check mb-2 form-check-primary">
-                                    <input class="form-check-input border border-dark" wire:model="selectedPermissions.{{ $permission->id }}"
-                                        type="checkbox" value="{{ $permission->id }}" id="customckeck{{ $permission->id }}">
+                                    <input class=""  wire:model="selectedPermissions.{{ $permission->id }}"
+                                        type="checkbox" value="{{ $permission->id }}" id="customckeck{{ $permission->id }}"  
+                                        {{ $role->hasPermissionTo($permission->name) ? 'checked' : '' }}  >
+                                        
                                     <label class="form-check-label" for="customckeck{{ $permission->id }}">{{ $permission->name }}</label>
+                                    @if ($role->hasPermissionTo($permission->name))
+                                    <i class="fas fa-check-circle text-success" style="font-size: 20px;"></i>
+                                    @endif
                                 </div>
                             </div>
                             @endforeach

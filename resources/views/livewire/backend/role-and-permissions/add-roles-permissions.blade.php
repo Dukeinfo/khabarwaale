@@ -179,12 +179,12 @@
                                             <td> {{ $key+1}}</td>
 
                                             <td>{{$record->name ?? 'NA' }} <br>
-                                            <td> 
+                                            <td    width="70%"> 
                                                 
                                                 @foreach($record->permissions as $perm)
                                                 
                                                 
-                                                <span class="badge bg-success p-1"  style="font-size:20px;">  {{ $perm->name?? "NA"  }} </span>
+                                                <span class="badge bg-danger p-1 mt-1"  style="font-size:18px;">  {{ $perm->name?? "NA"  }} </span>
 
                                                 @endforeach
                                                 

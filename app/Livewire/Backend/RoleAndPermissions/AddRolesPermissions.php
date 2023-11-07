@@ -104,10 +104,14 @@ public function edit($id){
 
     public function  delete($id){
         try {
-            
-            DB::table('role_has_permissions')->where('id' ,$id)->delete();
+            $role = Role::findOrFail($id);
+            if (!is_null($role)) {
+               $role->delete();
+            }
+    
          
-            $this->alert('warning', 'Role permission  Deleted successfully!');
+         
+            $this->alert('warning', 'Role Permission Deleted Successfull');
             
         } catch (\Exception $e) {
             dd($e->getMessage());
@@ -116,4 +120,5 @@ public function edit($id){
 
     }
     
+
 }

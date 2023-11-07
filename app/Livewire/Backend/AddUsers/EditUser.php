@@ -4,10 +4,13 @@ namespace App\Livewire\Backend\AddUsers;
 
 use App\Models\AssigneMenu;
 use App\Models\Category;
-use App\Models\Role;
+// use App\Models\Role;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 use App\Models\User;
 use App\Models\WebsiteType;
 use Google\Service\ServiceControl\Auth;
+use Illuminate\Support\Facades\Log;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -92,10 +95,10 @@ class EditUser extends Component
             
                 $filePath = $this->edit_profile_photo_path->storeAs('uploads', $fileName, 'public');
           
+                
                 $profile = User::find($this->userId );
                 $profile->name = $this->name; 
                 $profile->website_type_id = $this->website_type_id; 
-
                 $profile->role_id = $this->role_id ;
                 $profile->username = $this->username;
                 $profile->email = $this->email;
@@ -109,6 +112,24 @@ class EditUser extends Component
                 $profile->profile_photo_path =  $filePath ?? Null;
                 $profile->status = $this->status;
                 $profile->save();
+
+                $role = Role::where('id', $this->role_id)->where('guard_name', 'web')->first();
+                    if ($role) {
+                        // Assign the updated role to the user
+                        $profile->roles()->detach();
+                        $profile->syncRoles([$role]);
+
+                        // Additional processing or redirect after successful role update
+                    } else {
+                        // Handle the case where the new role is not found in the 'web' guard
+                        // You can log an error, show a message, or take other actions.
+                        // For example:
+                        Log::error('Role not found in web guard for role ID: ' . $this->role_id);
+                        return redirect()->back()->with('error', 'Role not found');
+                    }
+
+
+                
             }else{
 
             $updateuser = User::find($this->userId );
@@ -126,6 +147,22 @@ class EditUser extends Component
             $updateuser->address = $this->address;
             $updateuser->status = $this->status;
             $updateuser->save();
+
+            $role = Role::where('id', $this->role_id)->where('guard_name', 'web')->first();
+            if ($role) {
+                // Assign the updated role to the user
+                $updateuser->roles()->detach();
+
+                $updateuser->syncRoles([$role]);
+
+                // Additional processing or redirect after successful role update
+            } else {
+                // Handle the case where the new role is not found in the 'web' guard
+                // You can log an error, show a message, or take other actions.
+                // For example:
+                Log::error('Role not found in web guard for role ID: ' . $this->role_id);
+                return redirect()->back()->with('error', 'Role not found');
+            }
         }
 
             $assignments = [];

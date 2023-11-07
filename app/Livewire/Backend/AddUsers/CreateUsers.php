@@ -5,16 +5,18 @@ namespace App\Livewire\Backend\AddUsers;
 use App\Livewire\Forms\CreateUserForm;
 use App\Models\AssigneMenu;
 use App\Models\Category;
-use App\Models\Role;
+// use App\Models\Role;
 use App\Models\User;
 use App\Models\WebsiteType;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Attributes\Rule;
 use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithFileUploads;
-
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 class CreateUsers extends Component
 {
     // public CreateUserForm $userForm;
@@ -102,6 +104,10 @@ use LivewireAlert;
         // }
         //  dd($menus);
    
+        $role = Role::where('id', $this->role_id)->where('guard_name', 'web')->first();
+        if ($role) {
+
+    
             //  $menusJson = json_encode($this->menus);
             $createuser =new User();            
             $createuser->name = $this->name; 
@@ -119,8 +125,24 @@ use LivewireAlert;
             $createuser->address = $this->address;
             $createuser->profile_photo_path = $filePath ?? Null;
             $createuser->status = $this->status;
-            $createuser->save();
           
+            // $createuser->roles()->detach();
+        //     if($this->role_id){
+        //        $createuser->assignRole($this->role_id);
+        //    }
+
+           // Save the user to the database
+                $createuser->save();
+              $createuser->assignRole($role);
+            } else {
+                // Handle the case where the role is not found in the 'web' guard
+                // You can log an error, show a message, or take other actions.
+                // For example:
+                Log::error('Role not found in web guard for role ID: ' . $this->role_id);
+                        $this->alert('error', 'Role not found');
+
+            }
+
 
             // $menus[] =$this->menus;
             $assignments = [];
