@@ -61,9 +61,14 @@
                                                 <div class="form-group">
                                                     <label for="status">Group name</label>
                                                     <select wire:model="group_name" class="form-select">
-                                                        <option value="">Select</option>
+                                                        <option> Select One Category </option>
+                                                        
+
+                                                        <option value="category">Category </option>
                                                         <option value="news">News  </option>
+                                                        <option value="user"> User </option>
                                                         <option value="banner">Banner </option>
+                                                        <option value="photo">Photo </option>
                                                         <option value="video">Video  </option>
                                                         <option value="live">Live  </option>
                                                         <option value="seo">Seo  </option>

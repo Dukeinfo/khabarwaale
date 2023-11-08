@@ -105,7 +105,7 @@ Route::middleware([
     })->name('dashboard');
 });
 
-Route::group(['middleware' =>   ['auth', 'admin']],function(){
+Route::group(['middleware' =>   ['auth' ]],function(){
 Route::prefix('admin')->group(function(){
     Route::post('ckeditor/image_upload', [CkImageUploadController::class, 'upload'])->name('image.upload');
     Route::get('/dashboard', AdminDashboard::class)->name('admin_dashboard');

@@ -5,13 +5,14 @@ namespace App\Livewire\Backend\RoleAndPermissions;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Livewire\Attributes\Rule;
 use Livewire\Component;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 class AddRolesPermissions extends Component
 {
 use LivewireAlert;
-
+#[Rule('required', message: 'Please fill out your date of birth.')]
     public $role_id;
     public $permissionAll = false;
     public $selectedPermissions = [];
@@ -40,7 +41,11 @@ use LivewireAlert;
         // dd($this->all());
         $this->validate([
             'role_id' => 'required',
-        ]);
+        ],
+        [
+            'role_id.required' => 'The role field is required. Please select a role.',
+        ]
+    );
         $role = Role::find($this->role_id);
 
         if (!$role) {

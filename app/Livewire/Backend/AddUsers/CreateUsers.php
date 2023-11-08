@@ -177,8 +177,10 @@ public function  active($id){
     public function  delete($id){
         try {
             
-            $findcat = User::findOrFail($id);
-            $findcat->delete();
+            $user = User::findOrFail($id);
+            if (!is_null($user)) {
+                $user->delete();
+            }
             $this->alert('warning', 'User Deleted successfully!');
             
         } catch (\Exception $e) {

@@ -20,7 +20,7 @@
 				
 			</li>
 
-
+			@if(Auth::user()->can('category.menu')) 
             <li>
 				<a href="javascript: void(0);" class="has-arrow waves-effect">
 					<i class='bx bx-image-add'></i>
@@ -33,8 +33,12 @@
 				</ul>
 			
 			</li>
+			@endif
 
 {{-- ================== --}}
+
+@if(Auth::user()->can('user.menu')) 
+
 <li>
 	<a href="javascript: void(0);" class="has-arrow waves-effect">
 		<i class='bx bx-user'></i>
@@ -48,10 +52,14 @@
 
 </li>
 {{-- Roles And Permission --}}
+@endif
+
+@if(Auth::user()->can('role.menu')) 
+
 <li>
 	<a href="javascript: void(0);" class="has-arrow waves-effect">
 		<i class='bx bx-user'></i>
-		<span> Roles/ Permission  
+		<span> Roles & Permission  
 
 			<span class="badge bg-danger">New</span>
 
@@ -61,18 +69,16 @@
   <ul class="sub-menu" aria-expanded="false">
 			<li><a href="{{route('admin.view_permissions')}}">Add Permission   </a></li>
 			<li><a href="{{route('admin.view_roles')}}">Add Role </a></li>
-			<li><a href="{{route('admin.add_roles')}}"> Roles in Permission </a></li>
-			<li><a href="">  All Roles in Permission </a></li>
+			<li><a href="{{route('admin.add_roles')}}"> All Roles in Permission </a></li>
 
-			
-
-
-			
-			
-			
 	</ul>
 
 </li>
+
+@endif
+
+@if(Auth::user()->can('news.menu')) 
+
 <li>
 	<a href="{{route('admin.create_news')}}"  class="waves-effect"> 
 
@@ -90,6 +96,9 @@
    </a>
    
 </li>
+@endif
+
+@if(Auth::user()->can('banner.menu')) 
 
 {{-- ================== --}}
 <li>
@@ -100,7 +109,8 @@
    </a>
    
 </li>
-
+@endif
+@if(Auth::user()->can('video.menu')) 
 <li>
 	<a href="{{route('admin.create_videos')}}"  class="waves-effect"> 
 
@@ -109,15 +119,8 @@
    </a>
    
 </li>
+@endif
 
-<li>
-	<a href="{{route('admin.create_videos')}}"  class="waves-effect"> 
-
-	   <i class='bx bx-poll'></i>
-	   <span>Add Poll</span>
-   </a>
-   
-</li>
 
 	
 
@@ -128,6 +131,9 @@
 			{{-- admission_inquery --}}
 	
 			<li class="menu-title">Search Engine Optimization</li>
+			
+			@if(Auth::user()->can('seo.menu')) 
+
 			<li>
 				<a href="javascript: void(0);" class="has-arrow waves-effect">
 					<i class='bx bx-line-chart'></i>
@@ -139,6 +145,8 @@
 					<li><a href="{{route('admin.createfooterSnipped')}}">Footer Snippets</a></li>
 				</ul>
 			</li>
+			@endif
+
 			
 
 		</ul>

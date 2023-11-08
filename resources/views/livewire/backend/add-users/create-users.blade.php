@@ -56,16 +56,6 @@
                                                 @error('website_type_id') <span class="error">{{ $message }}</span> @enderror
 
                                             </div>
-                                      
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label for="name">Name</label>
-                                                    <input wire:model.live="name" type="text" placeholder="Name" class="form-control" id="name">
-                                                    @error('name') <span class="error">{{ $message }}</span> @enderror
-                                                    
-                                                </div>
-                                            </div>
-                                
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="role_id">Role</label>
@@ -84,20 +74,30 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label for="username">Username</label>
-                                                    <input wire:model.live="username"  placeholder="Username" type="text" class="form-control" id="username">
+                                                    <label for="name">Name</label>
+                                                    <input wire:model.live="name" type="text" placeholder="Name" class="form-control" id="name">
+                                                    @error('name') <span class="error">{{ $message }}</span> @enderror
+                                                    
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="username">User name</label>
+                                                    <input wire:model.live="username"  placeholder="Username" type="text" class="form-control" id="uname" autocomplete="nope" >
                                                     @error('username') <span class="error">{{ $message }}</span> @enderror
                                                     
                                                 </div>
                                             </div>
                                 
+                             
+                                
+                                      
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="email">Email</label>
-                                                    <input wire:model.live="email" placeholder="email"  type="email" class="form-control" id="email">
+                                                    <input wire:model.live="email" placeholder="email"  type="email" class="form-control" id="email" >
                                                     @error('email') <span class="error">{{ $message }}</span> @enderror
                                                     
                                                 </div>

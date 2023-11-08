@@ -9,7 +9,7 @@ class EditorProfile extends Component
 {
     public function render()
     {
-            $reporterProfile =  User::where('role_id' ,'2')->where('status' ,1)->first();
+            $reporterProfile =  User::where('role_id' ,'6')->where('status' ,1)->first();
         return view('livewire.frontend.advertisement.editor-profile' ,[
         'reporterProfile' =>$reporterProfile
     
