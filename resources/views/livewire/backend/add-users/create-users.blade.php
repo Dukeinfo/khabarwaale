@@ -62,9 +62,9 @@
                                                     <select wire:model.live="role_id" class="form-control" id="role_id">
                                                         <option  value="">Select Role</option>
                                                         @forelse ($getRoles as $role )
-                                                            @if($role->id != 1)
+                                                            {{-- @if($role->id != 1) --}}
                                                                 <option value="{{$role->id}}"> {{ ucwords($role->name)}}</option>
-                                                                @endif
+                                                                {{-- @endif --}}
                                                             @empty
                                                             
                                                         @endforelse
@@ -303,7 +303,7 @@
                                     <tbody>
                                                       
                                          @forelse ( $records as $key => $record )
-                                         @if($record->role_id != 1)
+                                         {{-- @if($record->role_id != 1) --}}
                                          <tr>
                                             <td> {{ $key+1}}</td>
                                             <td>  <img src="{{asset('storage/'.$record->profile_photo_path)}}" alt=".." class="img-size-50 img-circle img-bordered-sm" width="50"></td>
@@ -342,7 +342,9 @@
                                                     <button class="btn btn-sm btn-success" disabled data-bs-toggle="modal" data-bs-target="#usermodel{{$record->id}}">
                                                         <i class="fa fa-eye fa-fw"></i></button>
                                                 <button   wire:click="edit({{$record->id}})" class="btn btn-sm btn-primary" title="Edit"  wire:target="edit({{ $record->id }})"  wire:loading.attr="disabled"><i class="fa fa-edit fa-fw"></i></button>
+                                                @role('admin')
                                                 <button   class="btn btn-sm btn-danger" title="Delete" wire:click="delete({{ $record->id }})" wire:target="delete({{ $record->id }})"  wire:loading.attr="disabled"><i class="fa fa-times fa-fw fa-lg"></i></button>
+                                                @endrole
                                             </td>
 
 
@@ -350,7 +352,7 @@
                                             @include('livewire.backend.add-users.usermodel')
                                         </tr>
 
-                                        @endif
+                                        {{-- @endif --}}
 
                                          @empty
                                             <tr>

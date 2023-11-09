@@ -20,7 +20,8 @@
 				
 			</li>
 
-			@if(Auth::user()->can('category.menu')) 
+			@if(auth()->user()->can('manage_sliders') )
+		
             <li>
 				<a href="javascript: void(0);" class="has-arrow waves-effect">
 					<i class='bx bx-image-add'></i>
@@ -37,7 +38,8 @@
 
 {{-- ================== --}}
 
-@if(Auth::user()->can('user.menu')) 
+@if(auth()->user()->can('manage_user') )
+
 
 <li>
 	<a href="javascript: void(0);" class="has-arrow waves-effect">
@@ -51,10 +53,9 @@
 	</ul>
 
 </li>
-{{-- Roles And Permission --}}
 @endif
 
-@if(Auth::user()->can('role.menu')) 
+@if(auth()->user()->can('manage_roles') )
 
 <li>
 	<a href="javascript: void(0);" class="has-arrow waves-effect">
@@ -74,33 +75,32 @@
 	</ul>
 
 </li>
-
 @endif
 
-@if(Auth::user()->can('news.menu')) 
 
+
+@if(auth()->user()->can('manage_news') )
 <li>
 	<a href="{{route('admin.create_news')}}"  class="waves-effect"> 
 
 	   <i class='bx bx-news'></i>
 	   <span>Add News</span>
    </a>
-   
 </li>
+@elseif(auth()->user()->can('manage_archive') )
 
 <li>
 	<a href="{{route('admin.Add_Archive_News')}}"  class="waves-effect"> 
-
 		<i class='bx bx-archive'></i>
 	   <span>Add Archive News</span>
    </a>
    
 </li>
-@endif
+ @endif
 
-@if(Auth::user()->can('banner.menu')) 
+ @if(auth()->user()->can('manage_adds') )
 
-{{-- ================== --}}
+
 <li>
 	<a href="{{route('admin.create_add')}}"  class="waves-effect"> 
 
@@ -110,7 +110,8 @@
    
 </li>
 @endif
-@if(Auth::user()->can('video.menu')) 
+@if(auth()->user()->can('manage_videos') )
+
 <li>
 	<a href="{{route('admin.create_videos')}}"  class="waves-effect"> 
 
@@ -132,7 +133,7 @@
 	
 			<li class="menu-title">Search Engine Optimization</li>
 			
-			@if(Auth::user()->can('seo.menu')) 
+			@if(Auth::user()->can('manage_seo')) 
 
 			<li>
 				<a href="javascript: void(0);" class="has-arrow waves-effect">

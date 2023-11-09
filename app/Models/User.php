@@ -70,10 +70,10 @@ class User extends Authenticatable
     }
 
  
-    public function role()
-    {
-        return $this->belongsTo(Role::class, 'role_id');
-    }
+    // public function role()
+    // {
+    //     return $this->belongsTo(Role::class, 'role_id');
+    // }
     public function websiteType()
     {
         return $this->belongsTo(WebsiteType::class, 'website_type_id');
@@ -116,5 +116,8 @@ class User extends Authenticatable
             return $hasPermission;
         }
       } 
+
+
+      
 
 }

@@ -502,6 +502,7 @@
                                     
 
                                                 <td>   
+                                                    @role('admin')  
                                                     
                                                     @if($record->archived_at  != Null)
                                                       
@@ -509,17 +510,21 @@
                                                         <i class="fa fa-archive fa-fw"></i>
                                                     </button>
                                                     @else 
+
                                                     <button class="btn btn-sm btn-dark" title="Add Archive" wire:click="archiveNewsPost({{$record->id}})" wire:target="archiveNewsPost({{ $record->id }})"  wire:loading.attr="disabled">
                                                         <i class="fa fa-archive fa-fw"></i>
                                                     </button>
                                                     @endif
+                                                    @endrole
+
                                                     <button class="btn btn-sm btn-success" title="View news" data-bs-toggle="modal" data-bs-target="#exampleModal{{$record->id}}">
                                                         <i class="fa fa-eye fa-fw"></i></button>
                                                     <button class="btn btn-sm btn-primary" title="Edit News" wire:click="edit({{$record->id}})" wire:target="edit({{ $record->id }})"  wire:loading.attr="disabled">
                                                         <i class="fa fa-edit fa-fw" ></i></button>
+                                                        @role('admin')  
                                                     <button class="btn btn-sm btn-danger" title="Delete News" wire:click="delete({{ $record->id }})" wire:target="delete({{ $record->id }})"  wire:loading.attr="disabled">
                                                         <i class="fa fa-times fa-fw fa-lg"></i></button>
-                        
+                                                        @endrole
                                                 {{-- <a  href="javascript:void(0)" wire:click="edit({{$record->id}})" class="text-success me-2" title="Edit"  ><i class="fa fa-edit fa-fw"></i></a> --}}
                                                 {{-- <a href="javascript:void(0)" class="text-danger me-2" title="Delete" ><i class="fa fa-times fa-fw fa-lg"></i></a> --}}
                                             </td>

@@ -109,39 +109,35 @@ Route::group(['middleware' =>   ['auth' ]],function(){
 Route::prefix('admin')->group(function(){
     Route::post('ckeditor/image_upload', [CkImageUploadController::class, 'upload'])->name('image.upload');
     Route::get('/dashboard', AdminDashboard::class)->name('admin_dashboard');
+    Route::post('/admin-logout', [AdminLogoutController::class,'adminlogout'])->name('adminlogout');
     Route::get('/profile', AdminProfile::class)->name('admin_profile');
+    Route::get('/contact-entries', ContactMessages::class)->name('contact_entries');
+
+Route::group(['middleware' => ['can:manage_social_app']], function () {
+        Route::get('/social-view', SocialAppsManager::class)->name('social_view');
+});
+
+Route::group(['middleware' => ['can:manage_contact_us']], function () {
+
     Route::get('/contact-view', ContactusView::class)->name('contact_view');
     Route::get('/contact-edit/{id}', ContactusEdit::class)->name('contact_edit');
-    Route::get('/social-view', SocialAppsManager::class)->name('social_view');
-    Route::get('/contact-entries', ContactMessages::class)->name('contact_entries');
-    Route::post('/admin-logout', [AdminLogoutController::class,'adminlogout'])->name('adminlogout');
+});
+
 // CreateMenus
+
+Route::group(['middleware' => ['can:manage_menu']], function () {
+
     Route::get('/create-menu', CreateMenus::class)->name('create_menus');
     Route::get('/edit-menu/{id}', EditMenus::class)->name('edit_menus');
+});
+
+Route::group(['middleware' => ['can:manage_user']], function () {
 
     Route::get('/create-user', CreateUsers::class)->name('create_user');
     Route::get('/edit-user/{userid}', EditUser::class)->name('edit_user');
+});
 
-    Route::get('/create-add', CreateAdd::class)->name('admin.create_add');
-    Route::get('/edit-add/{addid}', EditAdd::class)->name('admin.edit_add');
-
-    Route::get('/create-videos', CreateVideos::class)->name('admin.create_videos');
-    Route::get('/edit-videos/{vid_id}', EditVideos::class)->name('admin.edit_videos');
-
-    Route::get('/create-news', CreateNews::class)->name('admin.create_news');
-    Route::get('/edit-news/{news_id}', EditNews::class)->name('admin.edit_news');
-
-    Route::get('/create-metadetail', CreateMetadetail::class)->name('admin.createMetadetail');
-    Route::get('/edit-metadetail/{id}', EditMetadetail::class)->name('admin.editMetadetail');
-
-    Route::get('/create-headerSnipped', CreateHeaderSnippets::class)->name('admin.createHeaderSnipped');
-    Route::get('/edit-headerSnipped/{id}', EditHeaderSnippets::class)->name('admin.editeaderSnipped');
-
-    Route::get('/create-footerSnipped', CreateFooterSnippets::class)->name('admin.createfooterSnipped');
-    Route::get('/edit-footerSnipped/{id}', EditFooterSnippets::class)->name('admin.editfooterSnipped');
-    Route::get('/add-Archive', AddArchiveNews::class)->name('admin.Add_Archive_News');
-    Route::get('/edit-Archive/{archiveId}', EditArchiveNews::class)->name('admin.edit_Archive_News');
-    
+Route::group(['middleware' => ['can:manage_roles']], function () {
     Route::get('/view-permissions', ViewAllPermission::class)->name('admin.view_permissions');
     Route::get('/edit-permissions/{id}', EditAllPermission::class)->name('admin.edit_permissions');
 
@@ -151,6 +147,47 @@ Route::prefix('admin')->group(function(){
     Route::get('/add-roles', AddRolesPermissions::class)->name('admin.add_roles');
     Route::get('/edit-roles-permission/{id}', EditRolesPermissions::class)->name('admin.edit_roles_permissions');
 
+});
+
+Route::group(['middleware' => ['can:manage_adds']], function () {
+    Route::get('/create-add', CreateAdd::class)->name('admin.create_add');
+    Route::get('/edit-add/{addid}', EditAdd::class)->name('admin.edit_add');
+});
+
+Route::group(['middleware' => ['can:manage_videos']], function () {
+
+    Route::get('/create-videos', CreateVideos::class)->name('admin.create_videos');
+    Route::get('/edit-videos/{vid_id}', EditVideos::class)->name('admin.edit_videos');
+});
+Route::group(['middleware' => ['can:manage_news']], function () {
+        // Your routes that require at least one of the specified permissions
+    Route::get('/create-news', CreateNews::class)->name('admin.create_news');
+    Route::get('/edit-news/{news_id}', EditNews::class)->name('admin.edit_news');
+});
+
+Route::group(['middleware' => ['can:manage_archive']], function () {
+
+
+    Route::get('/add-Archive', AddArchiveNews::class)->name('admin.Add_Archive_News');
+    Route::get('/edit-Archive/{archiveId}', EditArchiveNews::class)->name('admin.edit_Archive_News');
+});
+
+Route::group(['middleware' => ['can:manage_seo']], function () {
+
+    Route::get('/create-metadetail', CreateMetadetail::class)->name('admin.createMetadetail');
+    Route::get('/edit-metadetail/{id}', EditMetadetail::class)->name('admin.editMetadetail');
+
+    Route::get('/create-headerSnipped', CreateHeaderSnippets::class)->name('admin.createHeaderSnipped');
+    Route::get('/edit-headerSnipped/{id}', EditHeaderSnippets::class)->name('admin.editeaderSnipped');
+
+    Route::get('/create-footerSnipped', CreateFooterSnippets::class)->name('admin.createfooterSnipped');
+    Route::get('/edit-footerSnipped/{id}', EditFooterSnippets::class)->name('admin.editfooterSnipped');
+});
+
+
+    
+
+});
 
     
     
@@ -161,4 +198,6 @@ Route::prefix('admin')->group(function(){
     
 });
 
-});
+
+
+

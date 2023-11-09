@@ -64,9 +64,9 @@
                                                     <select wire:model="role_id" class="form-control" id="role_id">
                                                         <option value="">Select Role</option>
                                                  @forelse ($getRoles as $role )
-                                                 @if($role->id != 1)
+                                                 {{-- @if($role->id != 1) --}}
                                                      <option value="{{$role->id}}"> {{ ucwords($role->name)}}</option>
-                                                     @endif
+                                                     {{-- @endif --}}
                                                  @empty
                                                      
                                                  @endforelse
