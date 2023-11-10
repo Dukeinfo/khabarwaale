@@ -21,7 +21,7 @@
                 </div>
             </div>
             <!-- end page title -->
-
+            @role('admin')
             <div class="row">
                 <div class="col-lg-12">
                     <div class="card">
@@ -259,6 +259,9 @@
                 </div>
             </div>
             <!-- end row -->
+            @else
+            <p class="text-center text-danger">Only Admin user can access this page </p>
+            @endrole
             
      
             <!-- end row -->

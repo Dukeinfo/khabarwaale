@@ -339,7 +339,7 @@
 
                                            @endif
                                                 <td>   
-                                                    <button class="btn btn-sm btn-success" disabled data-bs-toggle="modal" data-bs-target="#usermodel{{$record->id}}">
+                                                    <button class="btn btn-sm btn-success"  data-bs-toggle="modal" data-bs-target="#usermodel{{$record->id}}">
                                                         <i class="fa fa-eye fa-fw"></i></button>
                                                 <button   wire:click="edit({{$record->id}})" class="btn btn-sm btn-primary" title="Edit"  wire:target="edit({{ $record->id }})"  wire:loading.attr="disabled"><i class="fa fa-edit fa-fw"></i></button>
                                                 @role('admin')

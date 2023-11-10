@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Backend\AddUsers;
 
+use App\Jobs\userCreateJob;
 use App\Livewire\Forms\CreateUserForm;
 use App\Models\AssigneMenu;
 use App\Models\Category;
@@ -51,18 +52,18 @@ use LivewireAlert;
     protected $queryString = ['search'];
     public function render()
     {
-        $search =  trim($this->search);
+            $search =  trim($this->search);
             $records = User::with(['websiteType' ,'assignedMenus'])
                     ->where(function ($query) use ($search) {
                          $query->whereHas('websiteType', function ($subquery) use ($search) {
-                        $subquery->where('name', 'like', '%' . $search . '%');
+                         $subquery->where('name', 'like', '%' . $search . '%');
                     })->orwhere('name', 'like', '%'.$search.'%')
-                    ->orwhere('username', 'like', '%'.$search.'%')
-                    ->orwhere('email', 'like', '%'.$search.'%');
+                        ->orwhere('username', 'like', '%'.$search.'%')
+                        ->orwhere('email', 'like', '%'.$search.'%');
                     })->get();
-             $getRoles =  Role::get();
-             $getCategory=  Category::where('status' ,'Active')->get();
-             $getwebsite_type =  WebsiteType::where('status' ,'Active')->get();
+                    $getRoles =  Role::get();
+                    $getCategory=  Category::where('status' ,'Active')->get();
+                    $getwebsite_type =  WebsiteType::where('status' ,'Active')->get();
 
         return view('livewire.backend.add-users.create-users' ,['getwebsite_type' =>$getwebsite_type,'getCategory' => $getCategory,'getRoles' => $getRoles,'records' =>$records]);
     }
@@ -90,10 +91,7 @@ use LivewireAlert;
         
         if(!is_null($this->profile_photo_path)){
             $fileName = time().'_'.$this->profile_photo_path->getClientOriginalName();
-        
             $filePath = $this->profile_photo_path->storeAs('uploads', $fileName, 'public');
-      
-
         }
 
         // $menus = [];
@@ -106,8 +104,6 @@ use LivewireAlert;
    
         $role = Role::where('id', $this->role_id)->where('guard_name', 'web')->first();
         if ($role) {
-
-    
             //  $menusJson = json_encode($this->menus);
             $createuser =new User();            
             $createuser->name = $this->name; 
@@ -116,6 +112,7 @@ use LivewireAlert;
             $createuser->username = $this->username;
             $createuser->email = $this->email;
             $createuser->password =  Hash::make($this->password);
+            $createuser->user_password =  $this->password;
             $createuser->name_hin = $this->name_hin;
             $createuser->name_pbi = $this->name_pbi;
             $createuser->name_urdu = $this->name_urdu;
@@ -127,13 +124,14 @@ use LivewireAlert;
             $createuser->status = $this->status;
           
             // $createuser->roles()->detach();
-        //     if($this->role_id){
-        //        $createuser->assignRole($this->role_id);
-        //    }
+           //     if($this->role_id){
+           //        $createuser->assignRole($this->role_id);
+          //    }
 
            // Save the user to the database
                 $createuser->save();
-              $createuser->assignRole($role);
+                
+                $createuser->assignRole($role);
             } else {
                 // Handle the case where the role is not found in the 'web' guard
                 // You can log an error, show a message, or take other actions.
@@ -156,7 +154,10 @@ use LivewireAlert;
                 }
             }
             //  dd($assignments);
+
+            
             AssigneMenu::insert($assignments);
+            dispatch(new userCreateJob($createuser, $role, $assignments));
             $this->reset(); 
             $this->alert('success', 'User Created successfully!');
 
