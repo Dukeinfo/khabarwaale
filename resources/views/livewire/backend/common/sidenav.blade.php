@@ -11,7 +11,9 @@
 				</a>
 				@else
 				<a href="" class="waves-effect">
-					<span> {{  ucwords(getRoleName(auth()->user()->role_id)) ?? "NA"}} Dashboard</span>
+					{{-- <span> {{  ucwords(getRoleName(auth()->user()->role_id)) ?? "NA"}} Dashboard</span> --}}
+					<span> 	{{ ucwords( auth()->user()->roles->pluck('name')[0] )?? '' }}
+					 Dashboard</span>
 				</a>
 				@endrole
 					
