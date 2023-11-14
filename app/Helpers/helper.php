@@ -1,9 +1,11 @@
 <?php
 
 use App\Models\Category;
+use App\Models\Role;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+
 
 function authUserId(){
     return Auth::id();
@@ -11,6 +13,12 @@ function authUserId(){
  function getMenuName($id){
     $menuName = Category::where('id', $id)->first();
     return $menuName->category_en;
+}
+
+
+function getRoleName($id){
+    $role = Role::where('id', $id)->first();
+    return $role->name;
 }
 
 function getEditorId(){

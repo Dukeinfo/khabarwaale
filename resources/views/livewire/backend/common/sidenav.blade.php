@@ -4,7 +4,18 @@
 		<!-- Left Menu Start -->
 		<ul class="metismenu list-unstyled" id="side-menu">
 			<li class="menu-title">General</li>
-
+			<li>
+				@role('admin')
+				<a href="" class="waves-effect">
+					<span> Admin Dashboard</span>
+				</a>
+				@else
+				<a href="" class="waves-effect">
+					<span> {{  ucwords(getRoleName(auth()->user()->role_id)) ?? "NA"}} Dashboard</span>
+				</a>
+				@endrole
+					
+			</li>
 			<li>
 				<a href="{{route('admin_dashboard')}}" class="waves-effect">
 					<i class="bx bx-home-circle"></i>
