@@ -222,7 +222,7 @@
                                                 </div>
                                             </div>
                                 
-                                            <div class="col-md-4">
+                                            {{-- <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="status">Status</label>
                                                     <select wire:model="status" class="form-select">
@@ -233,7 +233,7 @@
                                                    @error('status') <span class="error">{{ $message }}</span> @enderror
         
                                                 </div>
-                                            </div>
+                                            </div> --}}
 
                                             
                                         </div>

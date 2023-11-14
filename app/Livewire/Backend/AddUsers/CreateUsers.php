@@ -49,7 +49,6 @@ use LivewireAlert;
     public $website_type_id ;
     #[Url(as: 'q')]
     public $search = '';
-    protected $queryString = ['search'];
     public function render()
     {
             $search =  trim($this->search);
@@ -84,9 +83,9 @@ use LivewireAlert;
             'menus' => 'required|array', // You can require this field to be an array
             'about' => 'required|string',
             'mobile' => 'required|string|max:20', // Adjust the maximum mobile length as needed
-            'address' => 'required|string|max:255',
-            'profile_photo_path' => 'image|max:1024', // Adjust the max file size as needed
-            'status' => 'required', // Ensure status is one of the specified values
+            'address' => 'required|string',
+            'profile_photo_path' => 'image|max:2048', // Adjust the max file size as needed
+            // 'status' => 'required', // Ensure status is one of the specified values
         ]);
         
         if(!is_null($this->profile_photo_path)){
@@ -121,7 +120,7 @@ use LivewireAlert;
             $createuser->mobile = $this->mobile;
             $createuser->address = $this->address;
             $createuser->profile_photo_path = $filePath ?? Null;
-            $createuser->status = $this->status;
+            $createuser->status = true;
           
             // $createuser->roles()->detach();
            //     if($this->role_id){
@@ -178,13 +177,20 @@ public function  active($id){
     public function  delete($id){
         try {
             
+      // Detach roles before deleting the user
             $user = User::findOrFail($id);
+            
+            $user->roles()->detach();
+
             if (!is_null($user)) {
                 $user->delete();
             }
+
+            
             $this->alert('warning', 'User Deleted successfully!');
             
         } catch (\Exception $e) {
+            
             dd($e->getMessage());
 
         }
@@ -192,11 +198,20 @@ public function  active($id){
    }
 
    public function edit($id){
-    try {
-        return redirect()->route('edit_user',['userid' =>$id ]);
-    } catch (\Exception $e) {
-        dd($e->getMessage());
-    }
+        try {
+            return redirect()->route('edit_user',['userid' =>$id ]);
+        } catch (\Exception $e) {
+            dd($e->getMessage());
+        }
 
-}
+    }
+    // view_userDetail
+    public function viewDetail($id){
+        try {
+            return redirect()->route('view_userDetail',['id' =>$id ]);
+        } catch (\Exception $e) {
+            dd($e->getMessage());
+        }
+
+    }
 }

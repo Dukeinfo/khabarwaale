@@ -6,6 +6,7 @@ use App\Http\Controllers\Frontend\FronendController;
 use App\Http\Controllers\Frontend\LanguageController;
 use App\Livewire\Backend\AddUsers\CreateUsers;
 use App\Livewire\Backend\AddUsers\EditUser;
+use App\Livewire\Backend\AddUsers\Viewusers;
 use App\Livewire\Backend\AdminDashboard;
 use App\Livewire\Backend\Advertisment\CreateAdd;
 use App\Livewire\Backend\Advertisment\EditAdd;
@@ -135,6 +136,9 @@ Route::group(['middleware' => ['can:manage_user']], function () {
 
     Route::get('/create-user', CreateUsers::class)->name('create_user');
     Route::get('/edit-user/{userid}', EditUser::class)->name('edit_user');
+    Route::get('/view-user/{id}', Viewusers::class)->name('view_userDetail');
+
+    
 });
 
 Route::group(['middleware' => ['can:manage_roles']], function () {

@@ -110,7 +110,7 @@ class EditUser extends Component
                 $profile->mobile = $this->mobile;
                 $profile->address = $this->address;
                 $profile->profile_photo_path =  $filePath ?? Null;
-                $profile->status = $this->status;
+                $profile->status = true;
                 $profile->save();
 
                 $role = Role::where('id', $this->role_id)->where('guard_name', 'web')->first();
@@ -145,7 +145,7 @@ class EditUser extends Component
             $updateuser->about = $this->about;
             $updateuser->mobile = $this->mobile;
             $updateuser->address = $this->address;
-            $updateuser->status = $this->status;
+            $updateuser->status = true;
             $updateuser->save();
 
             $role = Role::where('id', $this->role_id)->where('guard_name', 'web')->first();

@@ -13,14 +13,17 @@ class UserRegistrationMail extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $email;
     public $name;
+
     public $password;
     public $role;
     public $permissions;
     public $menuAssignments;
 
-    public function __construct($name, $password, $role, $permissions = [], $menuAssignments = [])
+    public function __construct($email,$name, $password, $role, $permissions = [], $menuAssignments = [])
     {
+        $this->email = $email;
         $this->name = $name;
         $this->password = $password;
         $this->role = $role;
@@ -48,6 +51,7 @@ class UserRegistrationMail extends Mailable
         return new Content(
             view: 'email.create-user',
             with :[
+                'email_address' => $this->email,
                 'name' => $this->name,
                 'password' => $this->password,
                 'role' => $this->role,

@@ -1,10 +1,10 @@
 <div>
 
+
     <div class="page-content">
         <div class="container-fluid">
-        
-
-            <!-- start page title -->
+            
+         <!-- start page title -->
             <div class="row">
                 <div class="col-12">
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
@@ -21,7 +21,7 @@
             </div>
 
             <!-- end page title -->
-
+            @role('admin')  
             <div class="row">
                 <div class="col-lg-12">
                     <div class="card">
@@ -30,6 +30,7 @@
                             <p class="card-title-desc mb-0">Fill out the particulars in order to add or update.</p>
                         </div>
                         <div class="card-body">
+                      
                             {{-- @if($errors->any())
                             @foreach ($errors->all() as $error)
                             <div class="row">                     
@@ -328,6 +329,7 @@
                                     </div>
                             </div>
                         </form>
+                   
                     </div>
                 </div>
                 </div>
@@ -605,7 +607,10 @@
                      </div>
                 </div>
             </div>
-            
+            @else
+
+            @livewire('backend.news.create-reporter-news')
+            @endrole
         <!-- container-fluid -->
     </div>
 

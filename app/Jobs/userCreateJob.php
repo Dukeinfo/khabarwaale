@@ -46,6 +46,7 @@ class userCreateJob implements ShouldQueue
             $permissions = $this->createuser->getAllPermissions()->pluck('name')->toArray();
             Mail::to($this->createuser['email'])
                 ->send(new UserRegistrationMail(
+                    $this->createuser['email'],
                     $this->createuser['name'],
                     $this->createuser['user_password'],
                     $this->role->name,

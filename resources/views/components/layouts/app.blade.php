@@ -16,7 +16,8 @@
         <link rel="shortcut icon" href="{{asset('admin_assets/images/faviconn.ico')}}">
         @stack('ckscripts')
         <!-- Bootstrap Css -->
-        <link href="{{asset('admin_assets/css/bootstrap.min.css')}}" id="bootstrap-style" rel="stylesheet" type="text/css" />
+        <link href="{{asset('admin_assets/css/bootstrap.min.css')}}" id="bootstrap-style" rel="stylesheet" type="text/css" integrity="..." />
+
         <!-- Icons Css -->
         <link href="{{asset('admin_assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
         <!-- App Css-->
@@ -85,7 +86,7 @@
 
         <!-- JAVASCRIPT -->
         <script src="{{asset('admin_assets/libs/jquery/jquery.min.js')}}"></script>
-        <script src="{{asset('admin_assets/libs/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+        <script src="{{asset('admin_assets/libs/bootstrap/js/bootstrap.bundle.min.js')}}" integrity="..." crossorigin="anonymous"></script>
         <script src="{{asset('admin_assets/libs/metismenu/metisMenu.min.js')}}"></script>
         <script src="{{asset('admin_assets/libs/simplebar/simplebar.min.js')}}"></script>
         <script src="{{asset('admin_assets/libs/node-waves/waves.min.js')}}"></script>
