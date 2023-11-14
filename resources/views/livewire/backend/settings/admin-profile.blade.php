@@ -35,15 +35,10 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header bg-transparent border-bottom py-3">
-
                             @role('admin')
-
                             <h4 class="card-title">update  Profile</h4>
-
                             @else
                             <h4 class="card-title">Update {{ ucwords( auth()->user()->roles->pluck('name')[0] )?? '' }}  Profile</h4>
-
-
                             @endrole
                         </div>
                         <div class="card-body">
