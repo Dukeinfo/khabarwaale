@@ -8,6 +8,7 @@ use App\Models\Role;
 use App\Models\User;
 use App\Models\WebsiteType;
 use App\Traits\UploadTrait;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
@@ -25,7 +26,9 @@ class CreateNews extends Component
     use UploadTrait;
     use LivewireAlert;
     use WithPagination;
+    protected $paginationTheme = 'bootstrap';
     public $gerUsers = [];
+    
     #[Rule('required' , message: 'News type field is required')] 
     public $news_type;
     #[Rule('required' , message: 'Category field is required')] 
@@ -70,7 +73,7 @@ class CreateNews extends Component
     public $post_month;
     #[Rule('required' )] 
     public $status;
-    #[Url(as: 'q', keep: true)]
+    #[Url(as: 'q')]
     public $search = '';
 
  public $type_search;
@@ -95,6 +98,14 @@ class CreateNews extends Component
 
  }
  
+ public function updatingSearch()
+ {
+
+     $this->resetPage();
+
+ }
+
+
     public function render()
     {
 
@@ -131,8 +142,12 @@ class CreateNews extends Component
             ->orWhereDate('post_date', $search) // Add this condition to filter by post_date
             ->orWhere('post_month', $search) //
             ->orWhere('title', 'like', '%' . $search . '%') 
+            ->orWhere('status', 'like', '%' . $search . '%') 
+
             ->orderBy('category_id')
-            ->get();
+            ->latest()
+            // ->get();
+            ->paginate(20);
         $this->queryTime = collect(DB::getQueryLog())->sum('time');
         return view('livewire.backend.news.create-news' ,['totalrecords' => $totalrecords,
          'getwebsite_type' => $getwebsite_type,
@@ -208,7 +223,8 @@ class CreateNews extends Component
      // Check if $this->news_type is a valid news type
      if (in_array($this->news_type, $validNewsTypes)) {
         $regularUsers = User::where('website_type_id', $this->news_type)->get();
-        $adminUser = User::where('id', authUserId())->where('role_id', 1)->get();
+        $adminUser = User::where('id', authUserId())->get();
+  
 
         // Include admin user in all conditions and check role_id
         if ($adminUser->isNotEmpty()) {

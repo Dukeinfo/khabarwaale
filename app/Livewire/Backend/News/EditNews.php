@@ -58,7 +58,7 @@ class EditNews extends Component
     public     $dbimage ;
     public     $dbthumbnail ;
     public function mount(  $news_id){
-        $newspoat = NewsPost::where('login' ,authUserId())->findOrFail($news_id);
+        $newspoat = NewsPost::findOrFail($news_id);
         $this->news_Id = $newspoat->id ?? null ;
         $this->news_type = $newspoat->news_type ?? null ;
         $this->category_id = $newspoat->category_id ?? null ;
@@ -89,7 +89,7 @@ class EditNews extends Component
         $this->status =  $newspoat->status ?? null ;
         if ($this->news_type) {
             $this->gerUsers = User::where('website_type_id', $this->news_type)->get();
-            $adminUser = User::where('id', authUserId())->where('role_id', 1)->get();
+            $adminUser = User::where('id', authUserId())->get();
             if ($adminUser->isNotEmpty()) {
                 $this->gerUsers = $adminUser->concat( $this->gerUsers );
             } else {
@@ -116,7 +116,7 @@ class EditNews extends Component
      // Check if $this->news_type is a valid news type
      if (in_array($this->news_type, $validNewsTypes)) {
         $regularUsers = User::where('website_type_id', $this->news_type)->get();
-        $adminUser = User::where('id', authUserId())->where('role_id', 1)->get();
+        $adminUser = User::where('id', authUserId())->get();
 
         // Include admin user in all conditions and check role_id
         if ($adminUser->isNotEmpty()) {

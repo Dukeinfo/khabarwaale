@@ -285,4 +285,7 @@
 
     
     </div>
+
+
+    @livewire('backend.news.view-reporter-news')
 </div>

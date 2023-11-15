@@ -36,7 +36,7 @@
                 <div class="col-md-6 border">
                     <h4> <span class="text-success">News Large Image :</span> </h4>
 
-                    <img src="{{ isset($record->image) ? getNewsImage($record->image) : asset('no_image.jpg')}}" alt=".." class="img-fluid" >
+                    <img src="{{ isset($record->image) ? getNewsImage($record->image) : asset('no_image.jpg')}}" alt=".." class="img-fluid " width="300px" >
 
 
 

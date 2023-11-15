@@ -3,6 +3,7 @@
 use App\Models\Category;
 use App\Models\Role;
 use App\Models\User;
+use App\Models\WebsiteType;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,6 +16,10 @@ function authUserId(){
     return $menuName->category_en;
 }
 
+function get_websiteType($id){
+    $web_type = WebsiteType::where('id', $id)->first();
+    return $web_type->name;
+}
 
 function getRoleName($id){
     $role = Role::where('id', $id)->first();

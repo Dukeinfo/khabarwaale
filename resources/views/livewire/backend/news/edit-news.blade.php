@@ -89,7 +89,7 @@
                                             @php
                                             $userName = '';
                                             
-                                            if ($user->role_id === 1) {
+                                            if ($user->role->name === 'admin') {
                                                 $userName = 'Admin'; // Display "Admin" for admin users
                                             } elseif ($user->website_type_id == 1) {
                                                 $userName = $user->name_hin;
@@ -105,7 +105,7 @@
 
                                             @endphp
                                     
-                                    <option value="{{ $user->id }}" class="{{ $user->role_id === 1 ? 'bg-success text-white' : ($user->role_id === 3 ? 'bg-dark text-white' : '') }}">
+                                    <option value="{{ $user->id }}" class="{{ $user->role->name === 'admin' ? 'bg-success text-white' : ($user->role->name === 'reporter'? 'bg-dark text-white' : '') }}">
                                         {{ $userName  }}    ({{ ucwords($roleName) }})
                                     </option>
                                         @empty
@@ -327,7 +327,8 @@
                                     <div class="row mt-3">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <button type="submit" wire:loading.attr="disabled"  class="btn btn-primary">Create News</button>
+                                                
+                                                <button type="submit" wire:loading.attr="disabled"   class="btn btn-primary">update News</button>
                                                 <div wire:loading wire:target="createNews">
                                                     <i class="fas fa-1x fa-sync-alt fa-spin"></i>
                                                  </div>

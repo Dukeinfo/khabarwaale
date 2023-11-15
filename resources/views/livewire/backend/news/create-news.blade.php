@@ -84,7 +84,7 @@
                                                     @php
                                                         $userName = '';
                                             
-                                                        if ($user->role_id === 1) {
+                                                        if ($user->role->name === 'admin') {
                                                             $userName = 'Admin'; // Display "Admin" for admin users
                                                         } elseif ($user->website_type_id == 1) {
                                                             $userName = $user->name_hin;
@@ -102,7 +102,7 @@
                                                     @endphp
                                                      
 
-                                                    <option value="{{ $user->id }}" class="{{ $user->role_id === 1 ? 'bg-success text-white' : ($user->role_id === 3 ? 'bg-dark text-white' : '') }}">
+                                                    <option value="{{ $user->id }}" class="{{ $user->role->name === 'admin' ? 'bg-success text-white' : ($user->role->name === 'reporter'? 'bg-dark text-white' : '') }}">
                                                         {{ $userName  }}    ({{ ucwords($roleName) }})
                                                     </option>
                                                 @empty
@@ -453,7 +453,7 @@
                                     <tbody>
                                                       
                                          @forelse ( $records as $key => $record )
-                                         @if($record->role_id != 1)
+                                         @role('admin')
                                          <tr>
                                             <td> 
                                                 {{-- $records->firstitem()+$loop->index ?? --}}
@@ -472,8 +472,9 @@
                                             <td> 
                                                 {{-- @if($record->user['role_id']  === '1') --}}
                                                       
-                                                <span class="badge bg-success p-1"> {{$record->user['name'] ?? 'NA' }}  </span>
-
+                                                <span class="badge bg-success p-1"> {{$record->user['name'] ?? 'NA' }}  </span><br>
+                                                
+                                                <span class=" p-1"> {{ ucwords($record->user->role->name ?? "NA") }} </span>
                                                 {{-- @else  --}}
                                                 {{-- {{$record->user['name'] ?? 'NA' }}     --}}
                                             
@@ -506,15 +507,17 @@
                                                 <td>   
                                                     @role('admin')  
                                                     
-                                                    @if($record->archived_at  != Null)
+                                                    @if($record->status  == "Approved")
                                                       
-                                                    <button class="btn btn-sm btn-info" title="Un-Archive" wire:click="unarchiveNewsPost({{$record->id}})" wire:target="unarchiveNewsPost({{ $record->id }})"  wire:loading.attr="disabled">
-                                                        <i class="fa fa-archive fa-fw"></i>
+                                                    <button class="btn btn-sm btn-info" title="-pending" wire:click="pending({{$record->id}})" wire:target="pending({{ $record->id }})"  wire:loading.attr="disabled">
+                                                        <i class="fa fa-thumbs-up fa-fw"></i>
+
                                                     </button>
                                                     @else 
 
-                                                    <button class="btn btn-sm btn-dark" title="Add Archive" wire:click="archiveNewsPost({{$record->id}})" wire:target="archiveNewsPost({{ $record->id }})"  wire:loading.attr="disabled">
-                                                        <i class="fa fa-archive fa-fw"></i>
+                                                    <button class="btn btn-sm btn-dark" title="Add approved" wire:click="approved({{$record->id}})" wire:target="approved({{ $record->id }})"  wire:loading.attr="disabled">
+                                                        <i class="fa fa-thumbs-down fa-fw"></i>
+
                                                     </button>
                                                     @endif
                                                     @endrole
@@ -527,8 +530,6 @@
                                                     <button class="btn btn-sm btn-danger" title="Delete News" wire:click="delete({{ $record->id }})" wire:target="delete({{ $record->id }})"  wire:loading.attr="disabled">
                                                         <i class="fa fa-times fa-fw fa-lg"></i></button>
                                                         @endrole
-                                                {{-- <a  href="javascript:void(0)" wire:click="edit({{$record->id}})" class="text-success me-2" title="Edit"  ><i class="fa fa-edit fa-fw"></i></a> --}}
-                                                {{-- <a href="javascript:void(0)" class="text-danger me-2" title="Delete" ><i class="fa fa-times fa-fw fa-lg"></i></a> --}}
                                             </td>
                                         </tr>
                                     <!-- Button trigger modal -->
@@ -539,13 +540,13 @@
                                         @include('livewire.backend.news.model')
                                         <!-- Modal -->
 
-                                        @endif
+                                        @endrole
                                          @empty
                                             <tr  class="text-center ">
                                                 <td colspan="7" class="text-danger fw-bold"> Record Not Found</td>                                           
                                             </tr>
                              
-                                             @endforelse 
+                                        @endforelse 
 
                      {{-- ========================= trash data =========================== --}}
      
@@ -595,12 +596,14 @@
                                             </tr>
                                              @empty
                                                                    
-                                             @endforelse       
+                                             @endforelse    
+
                                              @endif
+
                                     </tbody>
 
                                 </table>
-                    {{-- {{ $records->links() }} --}}
+                    {{ $records->links() }}
 
                             </div>
                         </div>
