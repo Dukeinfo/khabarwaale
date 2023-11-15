@@ -19,7 +19,7 @@
                                         <option value=""> Select type</option>
                                         @forelse ($getwebsite_type as $type )
 
-                                            <option value="{{$type->id}}">{{$type->websiteType->name ?? "NA"}} {{$type->id}}</option>
+                                            <option value="{{$type->websiteType->id }}">{{$type->websiteType->name ?? "NA"}} {{$type->websiteType->id}}</option>
                                         @empty
                                         @endforelse
                                     </select>
