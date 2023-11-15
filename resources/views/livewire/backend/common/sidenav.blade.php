@@ -33,7 +33,7 @@
 				
 			</li>
 
-			@if(auth()->user()->can('manage_sliders') )
+			@if(auth()->user()->can('manage_menu') )
 		
             <li>
 				<a href="javascript: void(0);" class="has-arrow waves-effect">
