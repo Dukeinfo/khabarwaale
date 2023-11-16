@@ -26,9 +26,9 @@
               
                         </div>
                         <div class="card-body">
-                             {{-- <p class="text-success fw-bold">      Query took {{ $queryTime }} seconds.</p> --}}
+                             <p class="text-success fw-bold">      Query took {{ $queryTime ?? '' }} seconds.</p>
 
-                            {{-- <span class="badge bg-success p-2  fs-4">Total news : {{ $totalrecords ?? '0'}} </span> --}}
+                            <span class="badge bg-success p-2  fs-4">Total news : {{ $totalnews ?? '0'}} </span>
                             <div class="table-responsive">
                                 <table class="table table-bordered table-striped datatable-- table-hover">
                                     <thead>
@@ -37,8 +37,7 @@
                                             <th>image</th>
                                             <th>Add Type</th>
                                             <th>Category </th>
-                                            <th>USer </th>
-
+                                            <th>User </th>
                                             <th>Post Date </th>
                                             <th>Post Month </th>
                                             <th>Status</th>    
@@ -87,12 +86,17 @@
                                                             </td>
                                                             @endif
                                                             <td>
-                                                                <button class="btn btn-sm btn-success" title="View news" data-bs-toggle="modal" data-bs-target="#exampleModal{{$reporter_news->id}}">
+                                                                <button class="btn btn-sm btn-success" title="View news" data-bs-toggle="modal" data-bs-target="#reporterModal{{$reporter_news->id}}">
                                                                     <i class="fa fa-eye fa-fw"></i></button>
-                                                                <button class="btn btn-sm btn-primary" title="Edit News" wire:click="edit({{$reporter_news->id}})" wire:target="edit({{ $reporter_news->id }})"  wire:loading.attr="disabled">
+                                                                <button class="btn btn-sm btn-primary" title="Edit News" wire:click="editReporterNews({{$reporter_news->id}})" wire:target="editReporterNews({{ $reporter_news->id }})"  wire:loading.attr="disabled">
                                                                     <i class="fa fa-edit fa-fw" ></i></button>
                                                             </td>
                                                         </tr>
+
+
+                                                     @include('livewire.backend.news.reporterModel') 
+
+
                                                     @empty
                                                         
                                                     @endforelse    

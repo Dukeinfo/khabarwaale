@@ -17,13 +17,24 @@ class ViewAllNews extends Component
         }
     public function render()
     {
-        $catWiseNewsData  = NewsPost::with(['newstype', 'user', 'getmenu'])
-        ->where(function ($query) {
-            $query->whereHas('user', function ($subquery) {
-                $subquery->where('role_id',  2);
-                    // ->orwhereIn('breaking_side', ['Show']);
-            });
-        })
+
+        
+        // $catWiseNewsData  = NewsPost::with(['newstype', 'user', 'getmenu'])
+        // ->where(function ($query) {
+        //     $query->whereHas('user', function ($subquery) {
+        //         $subquery->where('role_id',  2);
+        //             // ->orwhereIn('breaking_side', ['Show']);
+        //     });
+        // })
+
+        $catWiseNewsData = NewsPost::with(['newstype', 'user', 'getmenu'])
+            ->whereHas('user', function ($query) {
+                $query->whereHas('roles', function ($subquery) {
+                    $subquery->where('name', 'reporter');
+                });
+            })
+
+
         ->orderBy('created_at', 'desc')
         ->orderBy('updated_at', 'desc');
         switch ($this->language_Val) {

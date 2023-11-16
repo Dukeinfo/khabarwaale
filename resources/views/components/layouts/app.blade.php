@@ -31,7 +31,8 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.min.css" />
 
          <!-- pickday -->
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/pikaday/css/pikaday.css"> 
+         <script src="{{asset('admin_assets/js/ckeditor/ckeditor.js')}}"></script> 
+        {{-- <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/pikaday/css/pikaday.css">  --}}
         @livewireStyles
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 

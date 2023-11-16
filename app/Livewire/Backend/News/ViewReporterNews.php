@@ -4,6 +4,7 @@ namespace App\Livewire\Backend\News;
 
 use App\Models\NewsPost;
 use App\Traits\UploadTrait;
+use Illuminate\Support\Facades\DB;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Attributes\Url;
 use Livewire\Component;
@@ -50,6 +51,10 @@ class ViewReporterNews extends Component
 
     public function render()
     {
+        DB::enableQueryLog();
+        $totalnews = NewsPost::where('user_id' , authUserId())->count();
+
+
         $search = trim($this->search);
         $reporterRecords = NewsPost::with(['newstype', 'user', 'getmenu'])
         ->where('user_id', authUserId()) // Ensure that the news post belongs to the authenticated user
@@ -59,7 +64,8 @@ class ViewReporterNews extends Component
             })->orWhereHas('user', function ($userquery) use ($search) {
                 $userquery->where('name', '=', $search);
             })->orWhereHas('getmenu', function ($catquery) use ($search) {
-                $catquery->where('category_en', '=', $search);
+                $catquery->where('category_en', '=', $search)
+                ->orwhere('category_en', 'like', '%'.$search.'%');
             })->orWhereDate('post_date', $search)
             ->orWhere('post_month', $search)
             ->orWhere('title', 'like', '%' . $search . '%')
@@ -70,7 +76,27 @@ class ViewReporterNews extends Component
         ->get();
     
         $reporterTrashdata = NewsPost::where('user_id' , authUserId())->onlyTrashed()->get();
+        $this->queryTime = collect(DB::getQueryLog())->sum('time');
+
         // ->paginate(20);
-        return view('livewire.backend.news.view-reporter-news' ,['reporterRecords' =>$reporterRecords ,'reporterTrashdata' => $reporterTrashdata]);
+        return view('livewire.backend.news.view-reporter-news' ,[
+            'reporterRecords' =>$reporterRecords ,
+            'reporterTrashdata' => $reporterTrashdata,
+            'totalnews' =>$totalnews,
+
+    ]);
     }
+
+
+    // editReporter
+    public function editReporterNews($id){
+        try {
+            return redirect()->route('admin.edit_reporter_news',['news_id' =>$id ]);
+        } catch (\Exception $e) {
+            dd($e->getMessage());
+        }
+
+    }
+
+
 }

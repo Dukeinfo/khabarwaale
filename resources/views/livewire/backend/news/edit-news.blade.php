@@ -18,7 +18,8 @@
                 </div>
             </div>
             <!-- end page title -->
-
+            @role('admin')
+ 
             <div class="row">
                 <div class="col-lg-12">
                     <div class="card">
@@ -345,37 +346,40 @@
       
             <!-- end row -->
        <!-- end row -->
-       <script>
-        document.addEventListener('livewire:initialized', () => {
-        // CKEDITOR.replace('editor'); 
-        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');        
-            CKEDITOR.replace('editor', {
-            // filebrowserUploadUrl: '{{ route("image.upload") }}', // Set the image upload endpoint URL
-            filebrowserUploadUrl: "{{route('image.upload', ['_token' => csrf_token() ])}}",
-            filebrowserUploadMethod: 'form', // Use form-based file upload (default is XMLHttpRequest)
-            filebrowserBrowseUrl: '/ckfinder/ckfinder.html', // Set the CKFinder browse server URL
-            filebrowserImageBrowseUrl: '/ckfinder/ckfinder.html?type=Images', // Set the CKFinder image browse server URL
-            headers: {
-            'X-CSRF-TOKEN': csrfToken // Pass the CSRF token with the request headers
-            },
+        <script>
+            document.addEventListener('livewire:initialized', () => {
+            // CKEDITOR.replace('editor'); 
+            const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');        
+                CKEDITOR.replace('editor', {
+                // filebrowserUploadUrl: '{{ route("image.upload") }}', // Set the image upload endpoint URL
+                filebrowserUploadUrl: "{{route('image.upload', ['_token' => csrf_token() ])}}",
+                filebrowserUploadMethod: 'form', // Use form-based file upload (default is XMLHttpRequest)
+                filebrowserBrowseUrl: '/ckfinder/ckfinder.html', // Set the CKFinder browse server URL
+                filebrowserImageBrowseUrl: '/ckfinder/ckfinder.html?type=Images', // Set the CKFinder image browse server URL
+                headers: {
+                'X-CSRF-TOKEN': csrfToken // Pass the CSRF token with the request headers
+                },
 
-            });
+                });
 
-        CKEDITOR.instances.editor.on('change', function () {
-            @this.set('news_description', CKEDITOR.instances.editor.getData());
-        });
+                CKEDITOR.instances.editor.on('change', function () {
+                    @this.set('news_description', CKEDITOR.instances.editor.getData());
+                });
 
 
-        // Livewire.on('formSubmitted', function () {
-        //      CKEDITOR.instances.editor.setData(''); // Reset CKEditor content
+            // Livewire.on('formSubmitted', function () {
+            //      CKEDITOR.instances.editor.setData(''); // Reset CKEditor content
 
-        // });
+            // });
 
-        }); 
+            }); 
         </script>
 
             
         </div>
+        @else
+                
+        @endrole
         <!-- container-fluid -->
     </div>
 

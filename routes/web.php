@@ -16,6 +16,7 @@ use App\Livewire\Backend\MenusMaster\CreateMenus;
 use App\Livewire\Backend\MenusMaster\EditMenus;
 use App\Livewire\Backend\News\CreateNews;
 use App\Livewire\Backend\News\EditNews;
+use App\Livewire\Backend\News\EditReporterNews;
 use App\Livewire\Backend\RoleAndPermissions\AddRolesPermissions;
 use App\Livewire\Backend\RoleAndPermissions\EditAllPermission;
 use App\Livewire\Backend\RoleAndPermissions\EditRoles;
@@ -167,6 +168,10 @@ Route::group(['middleware' => ['can:manage_news']], function () {
         // Your routes that require at least one of the specified permissions
     Route::get('/create-news', CreateNews::class)->name('admin.create_news');
     Route::get('/edit-news/{news_id}', EditNews::class)->name('admin.edit_news');
+
+    Route::get('/edit-auth-news/{news_id}', EditReporterNews::class)->name('admin.edit_reporter_news');
+
+    // 
 });
 
 Route::group(['middleware' => ['can:manage_archive']], function () {

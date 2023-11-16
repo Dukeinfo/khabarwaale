@@ -528,8 +528,9 @@
                                                         <i class="fa fa-edit fa-fw" ></i></button>
                                                         @role('admin')  
                                                     <button class="btn btn-sm btn-danger" title="Delete News" wire:click="delete({{ $record->id }})" wire:target="delete({{ $record->id }})"  wire:loading.attr="disabled">
-                                                        <i class="fa fa-times fa-fw fa-lg"></i></button>
-                                                        @endrole
+                                                        <i class="fa fa-times fa-fw fa-lg"></i>
+                                                    </button>
+                                                    @endrole
                                             </td>
                                         </tr>
                                     <!-- Button trigger modal -->

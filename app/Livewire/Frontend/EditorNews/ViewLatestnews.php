@@ -21,11 +21,17 @@ public $languageVal;
     {
         $editorInfo =  User::where('role_id' ,'2')->where('status' ,1)->first();
 
+        // $EditorNewsLatest = NewsPost::with(['newstype', 'user', 'getmenu'])
+        // ->where(function ($query) {
+        //     $query->whereHas('user', function ($subquery) {
+        //         $subquery->where('role_id',  2);
+        //             // ->orwhereIn('breaking_side', ['Show']);
+        //     });
+        // })
         $EditorNewsLatest = NewsPost::with(['newstype', 'user', 'getmenu'])
-        ->where(function ($query) {
-            $query->whereHas('user', function ($subquery) {
-                $subquery->where('role_id',  2);
-                    // ->orwhereIn('breaking_side', ['Show']);
+        ->whereHas('user', function ($query) {
+            $query->whereHas('roles', function ($subquery) {
+                $subquery->where('name', 'reporter');
             });
         })
         ->orderBy('created_at', 'desc')
