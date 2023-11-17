@@ -93,6 +93,7 @@ class ViewReporterNews extends Component
         try {
             return redirect()->route('admin.edit_reporter_news',['news_id' =>$id ]);
         } catch (\Exception $e) {
+            $this->alert('error', 'News not found');
             dd($e->getMessage());
         }
 

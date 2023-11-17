@@ -6,11 +6,13 @@ use App\Models\AssigneMenu;
 use App\Models\NewsPost;
 use App\Models\User;
 use App\Traits\UploadTrait;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
-
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 class EditReporterNews extends Component
 {
     use WithFileUploads;
@@ -20,20 +22,17 @@ class EditReporterNews extends Component
     public $news_type;
     #[Rule('required' , message: 'Category field is required')] 
     public $category_id;
-
     #[Rule('required' , message: 'Title field is required')] 
     public $title;
     public $slug;
     #[Rule('required' , message: 'Heading field is required')] 
     public $heading;
-    #[Rule('required' , message: 'Heading 2 field is required')] 
     public $heading2;
-    #[Rule('required|image' , message: 'Image field is required')] 
     public $image;
     public $thumbnail;
     public $caption;
     // #[Rule('mimes:pdf' , message: 'File should be pdf')] 
-    public $pdf_file;
+    public $pdf_file ,$editpdf_file;
     #[Rule('required' , message: 'News Description field is required')] 
     public $news_description;
 
@@ -59,7 +58,9 @@ class EditReporterNews extends Component
     public function mount(  $news_id){
        
         // findOrFail
+        try {
         $reporterNews = NewsPost::where('user_id' , authUserId())->where('status', 'Approved')->findOrFail($news_id);
+      
         $this->reporterNews_Id = $reporterNews->id ?? null ;
         $this->news_type = $reporterNews->news_type ?? null ;
         $this->category_id = $reporterNews->category_id ?? null ;
@@ -81,6 +82,15 @@ class EditReporterNews extends Component
         $this->reject_reason = $reporterNews->reject_reason ?? null ;
         $this->post_date = $reporterNews->post_date ?? null ;
         $this->post_month = $reporterNews->post_month ?? null ;
+ 
+    } catch (ModelNotFoundException $e) {
+        // Handle the exception (e.g., log it or display an error message)
+        // You can also redirect the user to an error page or take other appropriate actions.
+        session()->flash('error', 'News not found');
+   
+        return redirect()->route('admin.create_news')->with($this->alert('error', 'News not found'));
+    }
+    
 
     }
     public function render()
@@ -95,93 +105,71 @@ class EditReporterNews extends Component
     }
 
     public function updateReporterNews(){
-        // $this->validate();
-// dd($this->news_description);
+   
+        $this->validate();
         if(!is_null($this->image)){
 
+            $model = NewsPost::find($this->reporterNews_Id );
+            $this->unlinkNewsImage($model, 'image', 'thumbnail');
+            
             $image =  $this->image;
             $folder = '/news_gallery';
             $newsimage = $this->uploadOne($image, $folder);
-            if( $this->gallery ){
-             
-                $this->image->storeAs('image_gallery',  $newsimage['file_name'] ,'public');
-            }
-            if(!is_null($this->pdf_file)){
 
-                $pdffile =  strtoupper(uniqid()) .'.'.$this->pdf_file->getClientOriginalExtension();
-                $file =  $this->pdf_file->storeAs('pdf_files',$pdffile, 'public');
-              } 
-              $createNews  =  NewsPost::find($this->reporterNews_Id);
-              $createNews->news_type = $this->news_type ?? null ;
-              $createNews->category_id = $this->category_id ?? null ;
-              $createNews->user_id = authUserId() ?? null ;
-              $createNews->title = $this->title ?? null ;
-              $createNews->slug = createSlug($this->title);
-              $createNews->heading = $this->heading ?? null ;
-              $createNews->heading2 = $this->heading2 ?? null ;
-              $createNews->image = $newsimage['file_name'] ?? null ;
-              $createNews->thumbnail = $newsimage['thumbnail_name'] ?? null ;
-              $createNews->caption = $this->caption ?? null ;
-              $createNews->pdf_file =  $pdffile  ?? null ;
-              $createNews->news_description = trim($this->news_description) ?? null ;
-              $createNews->slider =$this->slider ? 'Show' : Null ;
-              $createNews->breaking_top = $this->breaking_top ? 'Show' : Null ; 
-              $createNews->breaking_side = $this->breaking_side ? 'Show' : Null ;
-              $createNews->top_stories =  $this->top_stories ? 'Show' : Null ;
-              $createNews->gallery = $this->gallery ? 'Show' : Null ;
-              $createNews->more = $this->more ? 'Show' : Null ;
-              $createNews->send_noti = $this->send_noti ? 'Show' : Null  ;
-              $createNews->metatags = $this->metatags ?? null ;
-              $createNews->description = $this->description ?? null ;
-              $createNews->keywords = $this->keywords ?? null ;
-              $createNews->reject_reason = $this->reject_reason ?? null ;
-              $createNews->post_date =$this->post_date  ?? null ;
-              $createNews->post_month = $this->post_month ?? null ;
-            //   $createNews->status =  'Pending' ?? null ;
-              $createNews->ip_address =getUserIp();
-              $createNews->login = authUserId();
-              $createNews->save();
-              $this->dispatch('formSubmitted');
-              return redirect()->route('admin.create_news')->with($this->alert('success', 'News Created successfully!'));
-          } else{
-            if(!is_null($this->pdf_file)){
+    
+          } 
+          if(!is_null($this->editpdf_file)){
 
-                $pdffile =  strtoupper(uniqid()) .'.'.$this->pdf_file->getClientOriginalExtension();
-                $file =  $this->pdf_file->storeAs('pdf_files',$pdffile, 'public');
-              } 
-              $createNews  =  NewsPost::find($this->reporterNews_Id);
-              $createNews->news_type = $this->news_type ?? null ;
-              $createNews->category_id = $this->category_id ?? null ;
-              $createNews->user_id = authUserId() ?? null ;
-              $createNews->title = $this->title ?? null ;
-              $createNews->slug = createSlug($this->title);
-              $createNews->heading = $this->heading ?? null ;
-              $createNews->heading2 = $this->heading2 ?? null ;
-   
-              $createNews->caption = $this->caption ?? null ;
-              $createNews->pdf_file =  $pdffile  ?? null ;
-              $createNews->news_description = trim($this->news_description) ?? null ;
-              $createNews->slider =$this->slider ? 'Show' : Null ;
-              $createNews->breaking_top = $this->breaking_top ? 'Show' : Null ; 
-              $createNews->breaking_side = $this->breaking_side ? 'Show' : Null ;
-              $createNews->top_stories =  $this->top_stories ? 'Show' : Null ;
-              $createNews->gallery = $this->gallery ? 'Show' : Null ;
-              $createNews->more = $this->more ? 'Show' : Null ;
-              $createNews->send_noti = $this->send_noti ? 'Show' : Null  ;
-              $createNews->metatags = $this->metatags ?? null ;
-              $createNews->description = $this->description ?? null ;
-              $createNews->keywords = $this->keywords ?? null ;
-              $createNews->reject_reason = $this->reject_reason ?? null ;
-              $createNews->post_date =$this->post_date  ?? null ;
-              $createNews->post_month = $this->post_month ?? null ;
-            //   $createNews->status =  'Pending' ?? null ;
-              $createNews->ip_address =getUserIp();
-              $createNews->login = authUserId();
-              $createNews->save();
-              $this->dispatch('formSubmitted');
-              return redirect()->route('admin.create_news')->with($this->alert('success', 'News Created successfully!'));
-          }
+            $model = NewsPost::find($this->reporterNews_Id );
+            $this->unlink_pdf_file($model, 'pdf_file');
 
+            $editpdffile =  $this->editpdf_file;
+            $pdffolder = '/pdf_docs';
+            $editnewspdf = $this->uploadPdf($editpdffile, $pdffolder);
+          } 
+
+        $createNews  =  NewsPost::find( $this->reporterNews_Id );
+        $createNews->news_type = $this->news_type ?? null ;
+        $createNews->category_id = $this->category_id ?? null ;
+        $createNews->user_id = authUserId() ?? null ;
+        $createNews->title = $this->title ?? null ;
+        $createNews->slug = createSlug($this->title);
+        $createNews->heading = $this->heading ?? null ;
+        $createNews->heading2 = $this->heading2 ?? null ;
+        if(isset($this->image)){
+
+            $createNews->image = $newsimage['file_name'] ?? null ;
+            $createNews->thumbnail = $newsimage['thumbnail_name'] ?? null ;
+        }
+        $createNews->caption = $this->caption ?? null ;
+        if( isset($this->editpdf_file)){
+
+            $createNews->pdf_file =  $editnewspdf  ?? null ;
+        }
+        $createNews->news_description = $this->news_description ?? null ;
+
+        $createNews->slider =$this->slider ? 'Show' : Null ;
+        $createNews->breaking_top = $this->breaking_top ? 'Show' : Null ; 
+        $createNews->breaking_side = $this->breaking_side ? 'Show' : Null ;
+        $createNews->top_stories =  $this->top_stories ? 'Show' : Null ;
+        $createNews->gallery = $this->gallery ? 'Show' : Null ;
+        $createNews->more = $this->more ? 'Show' : Null ;
+        $createNews->send_noti = $this->send_noti ? 'Show' : Null  ;
+
+        $createNews->metatags = $this->metatags ?? null ;
+        $createNews->description = $this->description ?? null ;
+        $createNews->keywords = $this->keywords ?? null ;
+        
+        $createNews->post_date = $this->post_date ?? null ;
+        $createNews->post_month = $this->post_month ?? null ;
+        
+        $createNews->ip_address = getUserIp();
+        $createNews->login = authUserId();
+        $createNews->save();
+        $this->alert('success', 'News updated successfully!');
+        return redirect()->route('admin.create_news');
+
+  
                 
     }
 }

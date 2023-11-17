@@ -109,9 +109,9 @@
                             <div class="col-md-6 mb-3">
                                 <!-- PDF File -->
                                 <div class="form-group">
-                                    <label for="pdf_file">PDF File</label>
-                                    <input type="file" class="form-control" wire:model="pdf_file" id="pdf_file">
-                                    @error('pdf_file') <span class="error">{{ $message }}</span> @enderror
+                                    <label for="editpdf_file">PDF File</label>
+                                    <input type="file" class="form-control" wire:model="editpdf_file" id="editpdf_file">
+                                    @error('editpdf_file') <span class="error">{{ $message }}</span> @enderror
                                 </div>
                             </div>
 
@@ -199,7 +199,7 @@
                                 @error('description') <span class="error">{{ $message }}</span> @enderror
                             </div>
 
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <!-- Keywords -->
                                 <div class="form-group">
                                     <label for="keywords">Keywords</label>
@@ -209,14 +209,7 @@
                             </div>
 
                             <!-- Status -->
-                            <div class="col-md-6">
-                                <!-- Reject Reason -->
-                                <div class="form-group">
-                                    <label for="reject_reason">Reject Reason</label>
-                                    <textarea class="form-control border border-dark"  wire:model="reject_reason" id="reject_reason" rows="3"></textarea>
-                                </div>
-                                @error('reject_reason') <span class="error">{{ $message }}</span> @enderror
-                            </div>
+                    
 
                             <div class="col-md-4">
                                 <!-- Post Date -->

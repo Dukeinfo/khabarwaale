@@ -165,9 +165,9 @@
                                     <div class="col-md-6 mb-3">
                                         <!-- PDF File -->
                                         <div class="form-group">
-                                            <label for="pdf_file">PDF File</label>
-                                            <input type="file" class="form-control" wire:model="pdf_file" id="pdf_file">
-                                            @error('pdf_file') <span class="error">{{ $message }}</span> @enderror
+                                            <label for="editpdf_file">PDF File</label>
+                                            <input type="file" class="form-control" wire:model="editpdf_file" id="editpdf_file">
+                                            @error('editpdf_file') <span class="error">{{ $message }}</span> @enderror
                                         </div>
                                     </div>
 

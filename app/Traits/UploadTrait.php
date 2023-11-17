@@ -48,13 +48,57 @@ trait UploadTrait
          
     }
 
-    public function unlinkBlogImage($model, $imageField = 'image', $thumbnailField = 'thumbnail')
+
+
+
+    public function uploadPdf(UploadedFile $uploadedpdf, $pdffolder = null, $disk = 'public')
     {
-        $imagePath = Storage::path('public/blogimages/' . $model->$imageField);
+            // Generate a unique name for the image
+            $fileName =  strtoupper(uniqid()) .'.'.$uploadedpdf->getClientOriginalExtension();
+                // Optimize the uploaded image
+        
+        try{
+                $uploadedpdf->storeAs($pdffolder,$fileName, $disk);
+
+        } catch (\Exception $e) {
+            // Handle the exception (e.g., log it or display an error message)
+            dd($e->getMessage());
+        }
+     
+        Log::info('PDF file added  ');
+
+            return $fileName;
+
+          
+         
+    }
+
+
+    // unlink_pdf_file
+
+
+
+    public function unlink_pdf_file($model, $pdfField = 'pdf_file')
+    {
+        $pdfPath = Storage::path('public/pdf_docs/' . $model->$pdfField);
+        if (File::exists($pdfPath) && isset($model->$pdfField)) {
+            unlink($pdfPath);
+            Log::info('old PDF file  remved ');
+
+        }
+
+    
+    }
+
+
+
+    public function unlinkNewsImage($model, $imageField = 'image', $thumbnailField = 'thumbnail')
+    {
+        $imagePath = Storage::path('public/news_gallery/' . $model->$imageField);
 
         if (File::exists($imagePath) && isset($model->$imageField)) {
             unlink($imagePath);
-            Log::info('Blog main  Image remved ');
+            Log::info('News main  Image remved ');
 
         }
 
@@ -63,7 +107,7 @@ trait UploadTrait
             if (file_exists($thumbnailPath)) {
                 unlink($thumbnailPath);
             }
-            Log::info('Blog thumbnail  Image Removed ');
+            Log::info('News thumbnail  Image Removed ');
         }
     }
 

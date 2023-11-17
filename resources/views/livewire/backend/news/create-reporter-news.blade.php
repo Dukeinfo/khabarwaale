@@ -3,12 +3,23 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
+                @if(session('error'))
+
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <i class="mdi mdi-block-helper me-2"></i>
+                    Oops!   {{ session('error') }}
+                       
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                @endif
                 <div class="card-header bg-transparent border-bottom py-3">
                     <h4 class="card-title">Add Reporter  News</h4>
                     <p class="card-title-desc mb-0">Fill out the particulars in order to add or update.</p>
                 </div>
                 <div class="card-body">
+           
       
+
                  <form  wire:submit.prevent="createReporterNews">
                     <div class="row">
                             <div class="col-md-4 mb-3">
@@ -181,7 +192,7 @@
                                 @error('description') <span class="error">{{ $message }}</span> @enderror
                             </div>
 
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <!-- Keywords -->
                                 <div class="form-group">
                                     <label for="keywords">Keywords</label>
@@ -191,14 +202,7 @@
                             </div>
 
                             <!-- Status -->
-                            <div class="col-md-6">
-                                <!-- Reject Reason -->
-                                <div class="form-group">
-                                    <label for="reject_reason">Reject Reason</label>
-                                    <textarea class="form-control border border-dark"  wire:model="reject_reason" id="reject_reason" rows="3"></textarea>
-                                </div>
-                                @error('reject_reason') <span class="error">{{ $message }}</span> @enderror
-                            </div>
+                     
 
                             <div class="col-md-4">
                                 <!-- Post Date -->

@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\WebsiteType;
 use App\Traits\UploadTrait;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
@@ -35,7 +36,8 @@ class EditNews extends Component
     public $thumbnail;
     public $caption;
     // #[Rule('mimes:pdf' , message: 'File should be pdf')] 
-    public $pdf_file;
+    public  $pdf_file ,$editpdf_file;
+
     public $news_description;
 
     public $slider;
@@ -72,6 +74,9 @@ class EditNews extends Component
         $this->dbthumbnail = $newspoat->thumbnail ?? null ;
 
         $this->caption = $newspoat->caption ?? null ;
+        $this->pdf_file = $newspoat->pdf_file ?? null ;
+
+        
         $this->news_description = $newspoat->news_description ?? null ;
         $this->slider =$newspoat->slider ? true : false ;
         $this->breaking_top = $newspoat->breaking_top ? true : false ; 
@@ -136,20 +141,24 @@ class EditNews extends Component
 
     public function updateNews(){
         if(!is_null($this->image)){
+            $model = NewsPost::find($this->news_Id );
+            $this->unlinkNewsImage($model, 'image', 'thumbnail');
+
             $image =  $this->image;
             $folder = '/news_gallery';
             $newsimage = $this->uploadOne($image, $folder);
 
-            if( $this->gallery ){
-             
-                $this->image->storeAs('image_gallery',  $newsimage['file_name'] ,'public');
-            }
-            
           } 
-          if(!is_null($this->pdf_file)){
+ 
 
-            $pdffile =  strtoupper(uniqid()) .'.'.$this->pdf_file->getClientOriginalExtension();
-            $file =  $this->pdf_file->storeAs('pdf_files',$pdffile, 'public');
+        if(!is_null($this->editpdf_file)){
+
+            $model = NewsPost::find($this->news_Id );
+            $this->unlink_pdf_file($model, 'pdf_file');
+
+            $editpdffile =  $this->editpdf_file;
+            $pdffolder = '/pdf_docs';
+            $editnewspdf = $this->uploadPdf($editpdffile, $pdffolder);
           } 
         $createNews  =  NewsPost::find( $this->news_Id );
         $createNews->news_type = $this->news_type ?? null ;
@@ -164,32 +173,14 @@ class EditNews extends Component
         $createNews->heading = $this->heading ?? null ;
         $createNews->heading2 = $this->heading2 ?? null ;
         if(isset($this->image)){
-            // unlink orld image 
-            $imagePath1 = Storage::path('public/news_gallery/'. $createNews->image);
-            if(File::exists($imagePath1)){
-                unlink($imagePath1);
-            }
-            if($createNews->thumbnail){
-                $thumbnailPath = public_path('uploads/thumbnail/' .$createNews->thumbnail);
-                if (file_exists($thumbnailPath)) {
-                    // dd(  $thumbnailPath);
-                    unlink($thumbnailPath);
-                }
-            }
-            // unlink orld image 
+
             $createNews->image = $newsimage['file_name'] ?? null ;
             $createNews->thumbnail = $newsimage['thumbnail_name'] ?? null ;
         }
         $createNews->caption = $this->caption ?? null ;
-        if(isset($this->pdf_file)){
+        if( isset($this->editpdf_file)){
 
-            $pdfPath = Storage::path('public/pdf_files/'. $createNews->pdf_file);
-            if(File::exists($pdfPath)){
-                // dd( $pdfPath);
-                unlink($pdfPath);
-            }
-
-            $createNews->pdf_file =  $pdffile  ?? null ;
+            $createNews->pdf_file =  $editnewspdf  ?? null ;
         }
         $createNews->news_description = $this->news_description ?? null ;
 
@@ -214,7 +205,7 @@ class EditNews extends Component
         $createNews->ip_address =getUserIp();
         $createNews->login = authUserId();
         $createNews->save();
-        $this->alert('success', 'News Created successfully!');
+        $this->alert('success', 'News updated successfully!');
         return redirect()->route('admin.create_news');
     }
 

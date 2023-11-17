@@ -81,21 +81,18 @@ class CreateReporterNews extends Component
     public function createReporterNews(){
             $this->validate();
             if(!is_null($this->image)){
-
                 $image =  $this->image;
                 $folder = '/news_gallery';
                 $newsimage = $this->uploadOne($image, $folder);
-                if( $this->gallery ){
-                 
-                    $this->image->storeAs('image_gallery',  $newsimage['file_name'] ,'public');
-                }
-    
+        
               } 
+              
               if(!is_null($this->pdf_file)){
-    
-                $pdffile =  strtoupper(uniqid()) .'.'.$this->pdf_file->getClientOriginalExtension();
-                $file =  $this->pdf_file->storeAs('pdf_files',$pdffile, 'public');
+                $pdffile =  $this->pdf_file;
+                $pdffolder = '/pdf_docs';
+                $newspdfFile = $this->uploadPdf($pdffile, $pdffolder);
               } 
+      
               $createNews  = new NewsPost();
               $createNews->news_type = $this->news_type ?? null ;
               $createNews->category_id = $this->category_id ?? null ;
@@ -107,7 +104,7 @@ class CreateReporterNews extends Component
               $createNews->image = $newsimage['file_name'] ?? null ;
               $createNews->thumbnail = $newsimage['thumbnail_name'] ?? null ;
               $createNews->caption = $this->caption ?? null ;
-              $createNews->pdf_file =  $pdffile  ?? null ;
+              $createNews->pdf_file =  $newspdfFile  ?? null ;
               $createNews->news_description = trim($this->news_description) ?? null ;
               $createNews->slider =$this->slider ? 'Show' : Null ;
               $createNews->breaking_top = $this->breaking_top ? 'Show' : Null ; 
