@@ -49,6 +49,9 @@ class userCreateJob implements ShouldQueue
                     $this->createuser['email'],
                     $this->createuser['name'],
                     $this->createuser['user_password'],
+                    $this->createuser['mobile'],
+                    $this->createuser['address'],
+                    $this->createuser['website_type_id'],
                     $this->role->name,
                     $permissions,
                     $this->assignments
@@ -58,6 +61,8 @@ class userCreateJob implements ShouldQueue
             // Log the exception or perform any necessary actions
             // For example, you can log the error using Laravel's built-in logging system
             Log::error('Error sending user registration email: ' . $e->getMessage());
+              // Re-throw the exception (optional, depends on your use case)
+              throw $e;
         }
     }
 }

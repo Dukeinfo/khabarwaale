@@ -17,6 +17,10 @@
             <strong>Login Email:</strong> {{ ucwords($email_address) }}<br>
             <strong>Password:</strong> {{ $password }}<br>
             <strong>Role:</strong> {{ ucwords($role) }}<br>
+            <strong>Mobile no :</strong> {{ $mobile  }}<br>
+            <strong>Address :</strong> {{ ucwords($address) }}<br>
+            <strong>News type :</strong> {{ get_websiteType($website_type_id) }}<br>
+
         </p>
         <h3>Permissions:</h3>
         <ul>
@@ -24,7 +28,7 @@
                 <li>{{ ucwords( str_replace('_', ' ', $permission)) }}</li>
             @endforeach
         </ul>
-        <h3>Menu Assignments (Category):</h3>
+        <h3>Assigne Menu (Category):</h3>
         <ol>
             @foreach ($menuAssignments as $assignment)
                 <li> {{  getMenuName($assignment['category_id']) }}</li>
