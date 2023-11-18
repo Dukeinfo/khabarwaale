@@ -5,7 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Log;
-
+use Illuminate\Filesystem\Filesystem;
 class ProcessQueue extends Command
 {
     /**
@@ -28,16 +28,34 @@ class ProcessQueue extends Command
     public function handle()
     {
         //
-        $exitCode = Artisan::call('cache:clear');
-        $this->info('Application cache has been cleared');
+        // $exitCode = Artisan::call('cache:clear');
+        // $this->info('Application cache has been cleared');
+             
+        $lockFile = storage_path('queue_process.lock');
 
-        $exitCode = Artisan::call('queue:work');
+        // Check if a lock file exists, indicating that a process is already running
+        if (file_exists($lockFile)) {
+            $this->info('Queue worker is already running.');
+            Log::info('Queue worker is already running');
 
-        // Log information based on the exit code
-        if ($exitCode === 0) {
-            Log::info('Queue processing completed successfully.');
-        } else {
-            Log::error('Queue processing failed. Exit code: ' . $exitCode);
+            return;
+        }
+
+        // Create a lock file to indicate that a process is now running
+        (new Filesystem)->put($lockFile, '');
+
+        try {
+            Log::info('Starting queue worker in the background...');
+            Artisan::call('queue:work', ['--daemon' => true]);
+            $this->info('Queue worker has been started.');
+        } catch (\Exception $e) {
+            // Log the exception
+            Log::error('Error running queue worker: ' . $e->getMessage());
+        } finally {
+            // Remove the lock file after the process has finished (even if an exception occurred)
+            Log::info('Before deleting lock file');
+            (new Filesystem)->delete($lockFile);
+            Log::info('After deleting lock file');
         }
     }
 }
