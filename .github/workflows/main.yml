@@ -44,5 +44,3 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           server-dir: /
           port: 2221
-env:
-    FTP_DEBUG: 1
