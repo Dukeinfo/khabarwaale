@@ -39,7 +39,8 @@ jobs:
         uses: SamKirkland/FTP-Deploy-Action@4.0.0
         with:
           server: ftp.khabarwaale.com
-          username: khabarwaale@khabarwaale.com  # Use only the username without the domain
+          username: khabarwaale
           password: ${{ secrets.FTP_PASSWORD }}
           server-dir: /
           port: 2221
+          passive: true
