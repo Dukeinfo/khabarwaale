@@ -38,8 +38,8 @@ jobs:
       - name: Sync files
         uses: SamKirkland/FTP-Deploy-Action@3.1.1
         with:
-          server: ftp.khabarwaale.com
-          username: khabarwaale
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           server-dir: /
           port: 2221
