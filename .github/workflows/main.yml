@@ -39,9 +39,4 @@ jobs:
       - name: Sync files
         uses: SamKirkland/FTP-Deploy-Action@4.0.0
         with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftps
-          log-level: standard
-          timeout: ${{ vars.DEPLOY_TIMEOUT }}
+          timeout 10m npx ftp-deploy -u "${{ secrets.FTP_USERNAME }}" -p "${{ secrets.FTP_PASSWORD }}" -s "${{ secrets.FTP_SERVER }}" -P 2221 -d /
