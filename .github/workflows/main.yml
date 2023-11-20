@@ -10,8 +10,8 @@ jobs:
     env:
       LARAVEL_BYPASS_ENV_CHECK: 1  # Set the environment variable
     steps:
-      - name: 🚚 Get latest code
-        uses: actions/checkout@v3
+      - name: Get the latest code
+        uses: actions/checkout@v2.3.2
       - uses: actions/setup-node@master
       - name: Copy .env
         run: php -r "file_exists('.env') || copy('.env.example', '.env');"
@@ -23,7 +23,6 @@ jobs:
           sed -i "s/MAIL_HOST=.*/MAIL_HOST=${{ secrets.MAIL_HOST }}/" .env
           sed -i "s/MAIL_USERNAME=.*/MAIL_USERNAME=${{ secrets.MAIL_USERNAME }}/" .env
           sed -i "s/MAIL_PASSWORD=.*/MAIL_PASSWORD=${{ secrets.MAIL_PASSWORD }}/" .env
-          sed -i "s/APP_ENV=.*/APP_ENV=production/" .env
       - name: Install Dependencies
         run: composer update --ignore-platform-reqs
       - name: Generate key
@@ -35,14 +34,14 @@ jobs:
       - name: Clear Application Cache
         run: php artisan cache:clear
       - name: Compile Assets (npm run dev)
-        run: |
-            npm install
-            npm run build
-      - name: 📂 Sync files
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        run: npm install 
+             npm run build
+      - name: Sync files
+        uses: SamKirkland/FTP-Deploy-Action@4.0.0
         with:
-          server: ftp.khabarwaale.com
-          username: newkhabarwaale@khabarwaale.com
-          password: OGMYQ1K7O59U
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftps
-          server-dir: /
+          log-level: standard
+          timeout: ${{ vars.DEPLOY_TIMEOUT }}
