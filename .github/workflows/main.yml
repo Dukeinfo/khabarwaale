@@ -23,6 +23,7 @@ jobs:
           sed -i "s/MAIL_HOST=.*/MAIL_HOST=${{ secrets.MAIL_HOST }}/" .env
           sed -i "s/MAIL_USERNAME=.*/MAIL_USERNAME=${{ secrets.MAIL_USERNAME }}/" .env
           sed -i "s/MAIL_PASSWORD=.*/MAIL_PASSWORD=${{ secrets.MAIL_PASSWORD }}/" .env
+          sed -i "s/APP_ENV=.*/APP_ENV=production/" .env
       - name: Install Dependencies
         run: composer update --ignore-platform-reqs
       - name: Generate key
@@ -34,9 +35,12 @@ jobs:
       - name: Clear Application Cache
         run: php artisan cache:clear
       - name: Compile Assets (npm run dev)
-        run: npm install 
-             npm run build
+        run: npm install && npm run build
       - name: Sync files
         uses: SamKirkland/FTP-Deploy-Action@4.0.0
         with:
-          timeout 10m npx ftp-deploy -u "${{ secrets.FTP_USERNAME }}" -p "${{ secrets.FTP_PASSWORD }}" -s "${{ secrets.FTP_SERVER }}" -P 2221 -d /
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: /
+          port: 2221
