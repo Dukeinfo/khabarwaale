@@ -43,7 +43,7 @@ jobs:
         with:
           server: ftp.khabarwaale.com
           username: newkhabarwaale@khabarwaale.com
-          password: ${{ secrets.FTP_PASSWORD }}
+          password: secrets.FTP_PASSWORD
           protocol: ftps
-          server-dir: /
+          server-dir: public_html/khabarwaale/
           port: 2221
