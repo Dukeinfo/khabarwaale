@@ -43,7 +43,6 @@ jobs:
         with:
           server: ftp.khabarwaale.com
           username: newkhabarwaale@khabarwaale.com
-          password: secrets.FTP_PASSWORD
+          password: OGMYQ1K7O59U
           protocol: ftps
-          server-dir: public_html/khabarwaale/
-          port: 2221
+          server-dir: /
