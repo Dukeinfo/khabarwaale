@@ -54,9 +54,7 @@ class ProcessQueue extends Command
         } finally {
             // Remove the lock file after the process has finished (even if an exception occurred)
             Log::info('Before deleting lock file');
-
-            (new Filesystem)->delete($lockFile);
-            
+                (new Filesystem)->delete($lockFile);
             Log::info('After deleting lock file');
         }
     }
