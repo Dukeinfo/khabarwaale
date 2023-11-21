@@ -6,6 +6,7 @@ use App\Models\NewsPost;
 use App\Traits\UploadTrait;
 use Illuminate\Support\Facades\DB;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Livewire\Attributes\On;
 use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -48,6 +49,12 @@ class ViewReporterNews extends Component
         $this->resetPage();
    
     }
+
+    #[On('reporterNewsCreated')] 
+    public function update(){
+
+    }
+
 
     public function render()
     {

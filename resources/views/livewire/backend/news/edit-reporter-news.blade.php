@@ -345,41 +345,19 @@
                 { name: 'insert', items: ['Image', 'Table', 'SpecialChar', 'Iframe'] },
                 { name: 'styles', items: ['Styles', 'Format', 'Font', 'FontSize'] },
                 { name: 'indentation', items: ['Outdent', 'Indent'] },
-                { name: 'codesnippet', items: ['CodeSnippet'] }, // CodeSnippet tool
+                // { name: 'codesnippet', items: ['CodeSnippet'] }, // CodeSnippet tool
             ],
                  });
                         // Add .js-ckeditor-enabled class to tag it as activated
                         document.querySelector('#editor').classList.add('js-ckeditor-enabled');
                     }
-                    
-                    // Add a change event listener to capture changes and update Livewire property
-                    // const editor = CKEDITOR.instances['editor'];
-                    // if (editor) {
-                    //     editor.on('change', function () {
-                    //         @this.set('news_description', editor.getData());
-                    //     });
-                    // }
+      
 
                     CKEDITOR.instances.editor.on('change', function () {
                     @this.set('news_description', CKEDITOR.instances.editor.getData());
                 });
 
-                    // Livewire.on('about-created', () => {
-                    //     console.log("About created");
-
-                    //         editor.setData('');
-                     
-                    // });
-                //     Livewire.on('formSubmitted', () => {
-                //     CKEDITOR.instances.editor.setData('');
-                // });
-
-                    // const form = document.querySelector('#my-form');
-                    // if (form) {
-                    //     form.addEventListener('submit', function () {
-                    //          editor.setData('');
-                    //     });
-                    // }
+ 
 
                 })
     

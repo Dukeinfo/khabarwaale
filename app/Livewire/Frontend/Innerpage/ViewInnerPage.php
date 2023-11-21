@@ -4,10 +4,13 @@ namespace App\Livewire\Frontend\Innerpage;
 
 use App\Models\Category;
 use App\Models\NewsPost;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 
 class ViewInnerPage extends Component
 {
+
+    use LivewireAlert;
 
 // Declare a public property to store the $id parameter
 
@@ -20,9 +23,6 @@ public function mount(NewsPost $newsid)
     if ($newsid) {
         $this->news_id = $newsid->id;
         $this->menuId =  $newsid->getmenu->id;
-
-       
-
       
     } else {
         abort(404);
@@ -32,15 +32,14 @@ public function mount(NewsPost $newsid)
 
     public function render()
     {
-
+  try {
         $getNewsDetail = NewsPost::with('getmenu', 'newstype')->where('id' ,  $this->news_id  )
-        ->where('status', 'Approved') ->whereNull('deleted_at')->first();    
-
+        ->where('status', 'Approved') ->whereNull('deleted_at')->firstOrFail();    
         $currentUrl    = url()->current();
 
         $shareComponent = \Share::page(
             $currentUrl,
-            $getNewsDetail->title,
+            $getNewsDetail->title ?? 'blank Title news is not approved by admin ',
         )
         ->facebook()
         ->twitter()
@@ -48,6 +47,12 @@ public function mount(NewsPost $newsid)
         ->telegram()
         ->whatsapp()        
         ->reddit();
+    } catch (\Exception $e) {
+        // Handle other exceptions
+        abort(403);
+    //    dd( $e->getMessage());
+    }
+ 
 
     //  $shareComponent =   \ShareButtons::page($currentUrl , $getNewsDetail->title, [
     //         'title' => $getNewsDetail->title,

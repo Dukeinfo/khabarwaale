@@ -76,11 +76,11 @@ class CreateNews extends Component
     #[Url(as: 'q')]
     public $search = '';
 
- public $type_search;
- public $category_search; // Add this property
- public $date_search; // Add this property
- public $queryTime; 
- 
+    public $type_search;
+    public $category_search; // Add this property
+    public $date_search; // Add this property
+    public $queryTime; 
+    
 
 
 
@@ -105,7 +105,7 @@ class CreateNews extends Component
 
  }
 
-
+ #[On('reporterNewsCreated')] 
     public function render()
     {
 

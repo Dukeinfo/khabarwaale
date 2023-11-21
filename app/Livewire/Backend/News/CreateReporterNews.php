@@ -79,6 +79,7 @@ class CreateReporterNews extends Component
     }
 
     public function createReporterNews(){
+       
             $this->validate();
             if(!is_null($this->image)){
                 $image =  $this->image;
@@ -124,7 +125,7 @@ class CreateReporterNews extends Component
               $createNews->login = authUserId();
               $createNews->save();
               $this->reset();
-              $this->dispatch('formSubmitted');
+              $this->dispatch('reporterNewsCreated');
               $this->alert('success', 'News Created successfully!');
               // return redirect()->route('admin.create_news')->with();
               

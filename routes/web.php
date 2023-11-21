@@ -75,6 +75,9 @@ Route::get('/inner/{newsid}/{slug}', function ($newsid , $slug) { return view('i
 Route::get('/archive', function () {return view('archive');
 })->name('home.archive');
 
+Route::get('/video-gallery', function () {return view('video-gallery');
+})->name('home.video-gallery');
+
 
 Route::get('/reporter-news', function () {return view('reporter_news');
 })->name('home.reporter_news');
