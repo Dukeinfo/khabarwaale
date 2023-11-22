@@ -42,6 +42,8 @@
     </div>
     <!-- Modal Video 01-->
     @livewire('frontend.homepage.tv.live-tv')
+
+
     <script src="{{asset('assets/vendor/jquery/jquery-3.2.1.min.js')}}"></script>
     <script src="{{asset('assets/vendor/animsition/js/animsition.min.js')}}"></script>
     <script src="{{asset('assets/vendor/bootstrap/js/popper.js')}}"></script>

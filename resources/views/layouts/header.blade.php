@@ -107,7 +107,7 @@
                 </ul>
                 <ul class="main-menu-m">
                     @forelse ($getMenus as $key => $menu )
-                    <li  >
+                    <li>
                         <a href="{{url('/category')}}">
                             @switch(session()->get('language'))
                             @case('hindi')
@@ -131,6 +131,7 @@
                     @empty
 
                     @endforelse
+             
                 </ul>
             </div>
             <!--  -->
@@ -197,8 +198,9 @@
                             @empty
 
                             @endforelse
+                   
                          
-        
+                 
                         </ul>
                     </nav>
                 </div>

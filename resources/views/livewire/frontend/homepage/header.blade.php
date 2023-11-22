@@ -76,6 +76,7 @@
                 {{-- <a href="javascript:void()">
                     <span class="fab fa-instagram"></span>
                 </a>  --}}
+
             </div>
         </div>
     </div>
@@ -153,6 +154,20 @@
             @empty
 
             @endforelse
+            <li>
+                <a href="{{route('home.video-gallery')}}" > 
+                    @if (session()->get('language') === 'hindi')
+                             वीडियो
+                    @elseif (session()->get('language') === 'english')
+                            Videos
+                    @elseif (session()->get('language') === 'punjabi')
+                            ਵੀਡੀਓਜ਼
+                    @elseif (session()->get('language') === 'urdu')
+                                ویڈیوز
+                    @else   
+                    @endif
+                </a>
+            </li>
         </ul>
     </div>
     <!--  -->
@@ -219,7 +234,20 @@
                     @empty
 
                     @endforelse
-                 
+                            <li>
+                                <a href="{{route('home.video-gallery')}}" > 
+                                    @if (session()->get('language') === 'hindi')
+                                            वीडियो
+                                    @elseif (session()->get('language') === 'english')
+                                            Videos
+                                    @elseif (session()->get('language') === 'punjabi')
+                                            ਵੀਡੀਓਜ਼
+                                    @elseif (session()->get('language') === 'urdu')
+                                                ویڈیوز
+                                    @else   
+                                    @endif
+                                </a>
+                            </li>
 
                 </ul>
             </nav>

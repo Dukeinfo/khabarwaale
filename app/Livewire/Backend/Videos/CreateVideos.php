@@ -21,7 +21,7 @@ class CreateVideos extends Component
     public $video_title_urdu ;
     #[Rule('required', message: 'Title field is required')] 
     public $video_title_en;
-    #[Rule('required|url', message: 'Video url field is required')] 
+    #[Rule('required', message: 'Video id field is required')] 
     public $video_url;
     public $post_date;
     #[Rule('required', message: 'Status field is required')] 
@@ -67,6 +67,7 @@ class CreateVideos extends Component
         $createVideos->ip_address =getUserIp();
         $createVideos->login = authUserId();
         $createVideos->save();
+        $this->reset();
         $this->alert('success', 'Video Created successfully!');
 
     }
