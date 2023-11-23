@@ -47,7 +47,7 @@
                                 <table class="table table-bordered table-striped datatable--">
                                     <thead>
                                         <tr>
-                                            <th>#</th>
+                                            <th># || ID</th>
                                             <th> Name eng</th>
                                             <th> Name  hindi </th>
                                             <th> Name pbi</th>
@@ -63,7 +63,7 @@
                                                       
                                          @forelse ( $records as $key => $record )
                                          <tr>
-                                            <td> {{ $key+1}}</td>
+                                            <td> {{ $key+1}} || {{$record->id }} </td>
                                             <td>{{$record->category_en ?? 'NA' }}
                                             </td>
                                             <td> {{$record->category_hin ?? 'NA' }}</td>

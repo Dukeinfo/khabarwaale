@@ -3,7 +3,7 @@
 
     <div class="page-content">
         <div class="container-fluid">
-            
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
          <!-- start page title -->
             <div class="row">
                 <div class="col-12">
@@ -434,6 +434,22 @@
                              <p class="text-success fw-bold">      Query took {{ $queryTime }} seconds.</p>
 
                             <span class="badge bg-success p-2  fs-4">Total news : {{ $totalrecords ?? '0'}} </span>
+                           <div class="row">
+                            <div class="col-md-2">
+                                <form wire:submit.prevent="deleteSelected">
+                                    <button type="submit" class="btn btn-danger my-3" >Delete Selected </button>
+                                </form>
+                            </div>
+                            <div class="col-md-2">
+                                <form wire:submit.prevent="shareSelected">
+
+                                <button type="submit" class="btn btn-primary my-3"  >Share  Selected </button>
+                            </form>
+                          
+                            </div>
+                           </div>
+                      
+
                             <div class="table-responsive">
                                 <table class="table table-bordered table-striped datatable-- table-hover">
                                     <thead>
@@ -457,7 +473,7 @@
                                          <tr>
                                             <td> 
                                                 {{-- $records->firstitem()+$loop->index ?? --}}
-                                                {{ $key+1}} 
+                                             <input type="checkbox" id="row_{{$record->id}}" wire:model="selectednews" value="{{$record->id}}">   {{ $key+1}} 
                                             </td>
                                             <td> 
                                                 <img src="{{ isset($record->thumbnail) ? getThumbnail($record->thumbnail) : asset('no_image.jpg')}}" alt=".." class="img-size-50  img-bordered-sm rounded-circle" width="50">
@@ -602,6 +618,33 @@
                                              @endif
 
                                     </tbody>
+                                    <script>
+                                            document.addEventListener('livewire:initialized', () => {
+                                            Livewire.on('shareLinks',  function (e)  {
+                                                console.log('WhatsApp Share Link:');
+                                                var popupSize = {
+                                                    width: 780,
+                                                    height: 550
+                                                };
+                                                var verticalPos = Math.floor(($(window).width() - popupSize.width) / 2),
+                                                        horisontalPos = Math.floor(($(window).height() - popupSize.height) / 2);
+
+                                                    var popup = window.open($(this).prop('href'), 'social',
+                                                        'width=' + popupSize.width + ',height=' + popupSize.height +
+                                                        ',left=' + verticalPos + ',top=' + horisontalPos +
+                                                        ',location=0,menubar=0,toolbar=0,status=0,scrollbars=1,resizable=1');
+
+                                                    if (popup) {
+                                                        popup.focus();
+                                                        e.preventDefault();
+                                                    }
+
+                                        });
+                                    });
+
+                            
+                            
+                                        </script>
 
                                 </table>
                     {{ $records->links() }}
@@ -611,6 +654,9 @@
                      </div>
                 </div>
             </div>
+            <script src="{{ asset('js/share.js') }}"></script>
+
+
             @else
 
             @livewire('backend.news.create-reporter-news')

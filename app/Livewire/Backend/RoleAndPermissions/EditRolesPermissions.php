@@ -28,7 +28,11 @@ class EditRolesPermissions extends Component
 
         $this->permission_groups = User::getpermissionGroups();
 
+        $permissions = Permission::get();
+        foreach($permissions as  $permission){
 
+            $this->selectedPermissions[$permission->id ] =  $role->hasPermissionTo($permission->name);
+        }
 
         
     }

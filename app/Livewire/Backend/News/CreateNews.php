@@ -19,7 +19,8 @@ use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
-
+use Share;
+use Illuminate\Support\Facades\Route;
 class CreateNews extends Component
 {
     use WithFileUploads;
@@ -28,7 +29,7 @@ class CreateNews extends Component
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
     public $gerUsers = [];
-    
+    public $selectednews = [];
     #[Rule('required' , message: 'News type field is required')] 
     public $news_type;
     #[Rule('required' , message: 'Category field is required')] 
@@ -355,5 +356,39 @@ public function paramDelete($id){
             }
         }
 
+
+        public function deleteSelected()
+        {
+            // Delete the selected rows
+            try{
+                NewsPost::whereIn('id', $this->selectednews)->delete();
+                // Reset the selectedRows property
+                $this->selectednews = [];
+                // Reset the selectAll property
+            } catch (\Exception $e) {
+                dd($e->getMessage());
+            
+            }
+        } 
+        // shareSelected
+        public function shareSelected(){
+            $selectedShare =     NewsPost::whereIn('id', $this->selectednews)->get();
+
+            foreach ($selectedShare as $news) {
+                
+                $currentUrl = route('home.inner', ['newsid' => $news->id, 'slug' =>  $news->slug  ]);
+
+                $shareComponents[] = \Share::page(
+                    $currentUrl,
+                    $news->title ?? 'blank Title news is not approved by admin ',
+                )
+                
+                
+                    ->whatsapp();
+        
+            }
+            // dd($shareComponent);
+            $this->dispatch('shareLinks', $shareComponents);
+        }
 
 }

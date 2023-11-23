@@ -60,6 +60,8 @@ class EditNews extends Component
     public     $dbimage ;
     public     $dbthumbnail ;
     public function mount(  $news_id){
+
+
         $newspoat = NewsPost::findOrFail($news_id);
         $this->news_Id = $newspoat->id ?? null ;
         $this->news_type = $newspoat->news_type ?? null ;

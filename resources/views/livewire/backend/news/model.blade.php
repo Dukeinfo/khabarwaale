@@ -15,10 +15,10 @@
                         <span class="badge bg-dark p-1"> {{ $record->getmenu['category_en'] ?? 'NA'  }}</span>
                    </h4>
                    <h4> <span class="text-success">News Title :</span> </h4>
-                   <p> {{ ucwords($record->title) ?? 'NA' }}  </p>
-      
+                   <p>    {!! ucwords($record->title) ?? 'NA' !!} </p> 
+                
                   <h4> <span class="text-success">News Heading :</span> </h4>
-                   <p> {{ ucwords($record->heading) ?? 'NA' }}  </p> 
+                   <p> {!! ucwords($record->heading) ?? 'NA' !!}  </p> 
       
       
       
