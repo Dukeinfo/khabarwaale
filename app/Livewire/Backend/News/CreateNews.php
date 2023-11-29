@@ -425,4 +425,14 @@ public function paramDelete($id){
             $this->dispatch('copyShareLinks', $shareLinks);
            }
 
+           #[On('refresh-posts')] 
+           public function linkscopied(){
+            
+            $this->alert('success', 'Link copy Successfull', [
+                'toast' => false,
+                'position' => 'center'
+            ]);
+
+           }
+
 }
