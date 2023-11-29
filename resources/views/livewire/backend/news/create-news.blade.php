@@ -618,7 +618,7 @@
                                              @endif
 
                                     </tbody>
-                                    <script>
+                                    {{-- <script>
                                             document.addEventListener('livewire:initialized', () => {
                                             Livewire.on('shareLinks',  function (e)  {
                                                 console.log('WhatsApp Share Link:');
@@ -644,6 +644,32 @@
 
                             
                             
+                                        </script> --}}
+                                        <script>
+                  document.addEventListener('livewire:initialized', () => {
+                        Livewire.on('copyShareLinks', function (shareLinks) {
+                            // console.log(shareLinks)
+                            let linksToCopy = '';
+
+                            shareLinks.forEach(innerArray => {
+                                innerArray.forEach(obj => {
+                                    // linksToCopy += obj.whatsapp + '\n\n'; // Concatenate the 'facebook' link and add a newline
+                                    linksToCopy += obj + '\n\n'; // Concatenate the 'facebook' link and add a newline
+
+                                    // You can modify this to concatenate other social media links or format as needed
+                                });
+                            });
+
+                            navigator.clipboard.writeText(linksToCopy)
+                                .then(() => {
+                                    console.log('Links copied to clipboard!');
+                                })
+                                .catch(err => {
+                                    console.error('Could not copy links: ', err);
+                                });
+                        });
+                    });
+
                                         </script>
 
                                 </table>

@@ -19,8 +19,9 @@ use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
-use Share;
 use Illuminate\Support\Facades\Route;
+use Jorenvh\Share\Share;
+
 class CreateNews extends Component
 {
     use WithFileUploads;
@@ -128,7 +129,7 @@ class CreateNews extends Component
         $search = trim($this->search);
  
 
-   // Store the selected news type
+                    // Store the selected news type
 
             $records = NewsPost::with(['newstype', 'user', 'getmenu'])
             ->where(function ($query) use ($search) {
@@ -372,23 +373,56 @@ public function paramDelete($id){
         } 
         // shareSelected
         public function shareSelected(){
-            $selectedShare =     NewsPost::whereIn('id', $this->selectednews)->get();
-
-            foreach ($selectedShare as $news) {
-                
-                $currentUrl = route('home.inner', ['newsid' => $news->id, 'slug' =>  $news->slug  ]);
-
-                $shareComponents[] = \Share::page(
-                    $currentUrl,
-                    $news->title ?? 'blank Title news is not approved by admin ',
-                )
-                
-                
-                    ->whatsapp();
+            $selectedShare = NewsPost::whereIn('id', $this->selectednews)->get();
+            $shareLinks = [];
         
+            foreach ($selectedShare as $news) {
+                // $currentUrl = route('home.inner', ['newsid' => $news->id, 'slug' => $news->slug]);
+                $shareLinks[]  = route('home.inner', ['newsid' => $news->id, 'slug' => $news->slug]);
+
+
+                // $shareLinks[] = \Share::page(
+                //     $currentUrl ,
+                //     $news->title ?? 'blank Title news is not approved by admin',
+                // )
+                // ->facebook()
+                // ->twitter()
+                // ->linkedin()
+                // ->telegram()
+                // ->whatsapp()        
+                // ->reddit();
+                // ->getRawLinks();
+
+                // $currentUrl = route('home.inner', ['newsid' => $news->id, 'slug' => $news->slug]);
+        
+                // $shareComponent = \Share::page(
+                //     $currentUrl ,
+                //     $news->title ?? 'blank Title news is not approved by admin',
+                // );
+        
+                // Generate share links for multiple platforms
+                // $redditLink = $shareComponent->reddit()->getRawLinks()['reddit'] ?? null;
+                // $telegramLink = $shareComponent->telegram()->getRawLinks()['telegram'] ?? null;
+                // $twitterLink = $shareComponent->twitter()->getRawLinks()['twitter'] ?? null;
+                // $facebookLink = $shareComponent->facebook()->getRawLinks()['facebook'] ?? null;
+                // $whatsappLink = $shareComponent->whatsapp()->getRawLinks()['whatsapp'] ?? null;
+
+        
+        
+                // Store the links for later use
+                // $shareLinks[] = [
+                //     'reddit' => $redditLink,
+                //     'telegram' => $telegramLink,
+                //     'twitter' => $twitterLink,
+                //     'facebook' => $facebookLink,
+                //     'whatsapp' => $whatsappLink,
+
+                // ];
             }
-            // dd($shareComponent);
-            $this->dispatch('shareLinks', $shareComponents);
-        }
+      
+    // dd($shareLinks);
+         // Now $shareLinks contains an array of share links for each news post
+            $this->dispatch('copyShareLinks', $shareLinks);
+           }
 
 }
