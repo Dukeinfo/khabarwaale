@@ -347,24 +347,24 @@
             <!-- end row -->
        <!-- end row -->
         <script>
-            document.addEventListener('livewire:initialized', () => {
-            // CKEDITOR.replace('editor'); 
-            const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');        
-                CKEDITOR.replace('editor', {
-                // filebrowserUploadUrl: '{{ route("image.upload") }}', // Set the image upload endpoint URL
-                filebrowserUploadUrl: "{{route('image.upload', ['_token' => csrf_token() ])}}",
-                filebrowserUploadMethod: 'form', // Use form-based file upload (default is XMLHttpRequest)
-                filebrowserBrowseUrl: '/ckfinder/ckfinder.html', // Set the CKFinder browse server URL
-                filebrowserImageBrowseUrl: '/ckfinder/ckfinder.html?type=Images', // Set the CKFinder image browse server URL
-                headers: {
-                'X-CSRF-TOKEN': csrfToken // Pass the CSRF token with the request headers
-                },
+            // document.addEventListener('livewire:initialized', () => {
+            // // CKEDITOR.replace('editor'); 
+            // const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');        
+            //     CKEDITOR.replace('editor', {
+            //     // filebrowserUploadUrl: '{{ route("image.upload") }}', // Set the image upload endpoint URL
+            //     filebrowserUploadUrl: "{{route('image.upload', ['_token' => csrf_token() ])}}",
+            //     filebrowserUploadMethod: 'form', // Use form-based file upload (default is XMLHttpRequest)
+            //     filebrowserBrowseUrl: '/ckfinder/ckfinder.html', // Set the CKFinder browse server URL
+            //     filebrowserImageBrowseUrl: '/ckfinder/ckfinder.html?type=Images', // Set the CKFinder image browse server URL
+            //     headers: {
+            //     'X-CSRF-TOKEN': csrfToken // Pass the CSRF token with the request headers
+            //     },
 
-                });
+            //     });
 
-                CKEDITOR.instances.editor.on('change', function () {
-                    @this.set('news_description', CKEDITOR.instances.editor.getData());
-                });
+            //     CKEDITOR.instances.editor.on('change', function () {
+            //         @this.set('news_description', CKEDITOR.instances.editor.getData());
+            //     });
 
 
             // Livewire.on('formSubmitted', function () {
@@ -372,7 +372,54 @@
 
             // });
 
-            }); 
+            document.addEventListener('livewire:init', () => {
+                            const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+                            if (!document.querySelector('#editor.js-ckeditor-enabled')) {
+                                CKEDITOR.replace('editor', {
+                                    extraPlugins: 'specialchar,colorbutton,font,justify,indent,codesnippet',
+
+                            filebrowserUploadUrl: "{{ route('image.upload', ['_token' => csrf_token() ]) }}",
+                            filebrowserUploadMethod: 'form',
+                            filebrowserBrowseUrl: '/ckfinder/ckfinder.html',
+                            filebrowserImageBrowseUrl: '/ckfinder/ckfinder.html?type=Images',
+                            headers: {
+                                'X-CSRF-TOKEN': csrfToken
+                            },
+                            extraPlugins: 'specialchar,colorbutton,font,justify,indent,codesnippet',
+                            // toolbar: [
+                            //     { name: 'document', items: ['Source', 'Minimize', 'Maximize'] }, // Source, Minimize, and Maximize tools
+                            //     { name: 'clipboard', items: ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo'] },
+                            //     { name: 'editing', items: ['Find', 'Replace'] },
+                            //     { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', 'TextColor', 'BGColor'] },
+                            //     { name: 'paragraph', items: ['NumberedList', 'BulletedList', 'Blockquote', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'] },
+                            //     { name: 'links', items: ['Link', 'Unlink'] },
+                            //     { name: 'insert', items: ['Image', 'Table', 'SpecialChar', 'Iframe'] },
+                            //     { name: 'styles', items: ['Styles', 'Format', 'Font', 'FontSize'] },
+                            //     { name: 'indentation', items: ['Outdent', 'Indent'] },
+                            //     // { name: 'codesnippet', items: ['CodeSnippet'] }, // CodeSnippet tool
+                            // ],
+                        });
+                                // Add .js-ckeditor-enabled class to tag it as activated
+                                document.querySelector('#editor').classList.add('js-ckeditor-enabled');
+                            }
+                            
+                        // Add a change event listener to capture changes and update Livewire property
+                        
+                        // CKEDITOR.instances.editor.on('change', function () {
+                        //         @this.set('news_description', CKEDITOR.instances.editor.getData());
+                        // });
+
+                        const editor = CKEDITOR.instances['editor'];
+                            if (editor) {
+                                editor.on('change', function () {
+                                    @this.set('news_description', editor.getData());
+                                });
+                            }
+
+                    })
+
+        
         </script>
 
             

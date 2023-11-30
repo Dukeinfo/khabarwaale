@@ -107,7 +107,7 @@ class CreateNews extends Component
 
  }
 
- #[On('reporterNewsCreated')] 
+ #[On('formSubmitted')] 
     public function render()
     {
 

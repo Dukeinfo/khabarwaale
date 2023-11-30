@@ -16,7 +16,7 @@ CKEDITOR.editorConfig = function( config ) {
 		{ name: 'insert' },
 		{ name: 'forms' },
 		{ name: 'tools' },
-		{ name: 'document',	   groups: [ 'mode', 'document', 'doctools' ] },
+		{ name: 'document',	   groups: [ 'mode', 'document', 'doctools','Print' ] },
 		{ name: 'others' },
 		'/',
 		{ name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
@@ -27,8 +27,12 @@ CKEDITOR.editorConfig = function( config ) {
 	];
 
 	// Remove some buttons provided by the standard plugins, which are
+	   config.extraPlugins = 'scayt';
+    config.scayt_autoStartup = true;
+    config.scayt_sLang = 'en_US';
 	// not needed in the Standard(s) toolbar.
 	config.removeButtons = 'Underline,Subscript,Superscript';
+
 
 	// Set the most common block elements.
 	config.format_tags = 'p;h1;h2;h3;pre';
