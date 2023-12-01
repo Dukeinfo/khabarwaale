@@ -30,32 +30,33 @@ class ProcessQueue extends Command
         //
         // $exitCode = Artisan::call('cache:clear');
         // $this->info('Application cache has been cleared');
-             
-        $lockFile = storage_path('queue_process.lock');
-
-        // Check if a lock file exists, indicating that a process is already running
-        if (file_exists($lockFile)) {
-            $this->info('Queue worker is already running.');
             Log::info('Queue worker is already running');
+             
+        // $lockFile = storage_path('queue_process.lock');
 
-            return;
-        }
+        // // Check if a lock file exists, indicating that a process is already running
+        // if (file_exists($lockFile)) {
+        //     $this->info('Queue worker is already running.');
+        //     Log::info('Queue worker is already running');
 
-        // Create a lock file to indicate that a process is now running
-        (new Filesystem)->put($lockFile, '');
+        //     return;
+        // }
 
-        try {
-            Log::info('Starting queue worker in the background...');
-            Artisan::call('queue:work', ['--daemon' => true]);
-            $this->info('Queue worker has been started.');
-        } catch (\Exception $e) {
-            // Log the exception
-            Log::error('Error running queue worker: ' . $e->getMessage());
-        } finally {
-            // Remove the lock file after the process has finished (even if an exception occurred)
-            Log::info('Before deleting lock file');
-                (new Filesystem)->delete($lockFile);
-            Log::info('After deleting lock file');
-        }
+        // // Create a lock file to indicate that a process is now running
+        // (new Filesystem)->put($lockFile, '');
+
+        // try {
+        //     Log::info('Starting queue worker in the background...');
+        //     Artisan::call('queue:work', ['--daemon' => true]);
+        //     $this->info('Queue worker has been started.');
+        // } catch (\Exception $e) {
+        //     // Log the exception
+        //     Log::error('Error running queue worker: ' . $e->getMessage());
+        // } finally {
+        //     // Remove the lock file after the process has finished (even if an exception occurred)
+        //     Log::info('Before deleting lock file');
+        //         (new Filesystem)->delete($lockFile);
+        //     Log::info('After deleting lock file');
+        // }
     }
 }
