@@ -3,20 +3,28 @@
 @section('desc', 'Khabarwaale - News Portal')
 @section('keywords', 'Khabarwaale - News Portal')
 @section('content')
+<audio id="myAudio">
+    <source src="{{ asset('tone/notification.mp3') }}" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>
 
 @livewire('frontend.homepage.home-top-add')
 <section class="p-t-30">
     <div class="container">
         <div class="row">
+          
+        
             @livewire('frontend.news-sections.latest-news' )
             <!-- main news -->
             <livewire:frontend.news-sections.top-news lazy />
             {{-- right side add and editor profile  --}}
             @livewire('frontend.advertisement.right-adds')
+         
 
         </div>
     </div>
 </section>
+
  {{-- center add of home page  --}}
         @livewire('frontend.homepage.home-center-add')
 <section class="p-t-70">
@@ -44,4 +52,8 @@
         @livewire('frontend.homepage.home-bottom-add')
 
         @livewire('frontend.news-sections.bottom-news')
+
+
+
+ 
 @stop

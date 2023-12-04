@@ -31,7 +31,8 @@
         <!-- Styles -->
         @livewireStyles
     </head>
-    <body .class="animsition">
+    <body class="animsition"  >
+   
         <header>
           @livewire('frontend.homepage.header')
         </header>
@@ -91,6 +92,8 @@
         @stack('modals')
 
         @livewireScripts
+
+
 
     </body>
 </html>

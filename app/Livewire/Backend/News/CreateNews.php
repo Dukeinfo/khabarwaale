@@ -21,7 +21,7 @@ use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Route;
 use Jorenvh\Share\Share;
-
+use App\Events\NewNewsPostNotification;
 class CreateNews extends Component
 {
     use WithFileUploads;
@@ -213,8 +213,9 @@ class CreateNews extends Component
         $this->alert('success', 'News Created successfully!');
         // return redirect()->route('admin.create_news')->with();
         $this->dispatch('formSubmitted');
-
-       
+        
+        event(new NewNewsPostNotification('news posted'));
+        
     }
 
     public function handleChange()
@@ -427,6 +428,7 @@ public function paramDelete($id){
 
            #[On('refresh-posts')] 
            public function linkscopied(){
+            $this->selectednews = [];
             
             $this->alert('success', 'Link copy Successfull', [
                 'toast' => false,

@@ -171,7 +171,8 @@ return [
         App\Providers\LanguageServiceProvider::class,
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
+        App\Providers\BroadcastServiceProvider::class,
+        
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\FortifyServiceProvider::class,
@@ -191,6 +192,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
+        'Pusher' => Pusher\Pusher::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'GoogleTranslate' => Stichoza\GoogleTranslate\GoogleTranslate::class,
         'Share' => Jorenvh\Share\ShareFacade::class,
