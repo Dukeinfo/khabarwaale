@@ -7,15 +7,11 @@
                 <a href="{{ route('english.language') }}" class="left-topbar-item btn btn-primary">
                     English 
                 </a>
-                <a href="{{ route('hindi.language') }}" class="left-topbar-item btn btn-primary ml-2">
-                    Hindi
-                </a>
+  
                 <a href="{{ route('punjabi.language') }}" class="left-topbar-item btn btn-primary ml-2">
                     Punjabi
                 </a>
-                <a href="{{ route('urdu.language') }}" class="left-topbar-item btn btn-primary ml-2">
-                    Urdu
-                </a>
+         
                 <span class="left-topbar-item flex-wr-s-c">
                     <span class="mr-2">
                       @if (session()->get('language') === 'hindi')
@@ -100,15 +96,15 @@
                 <a href="{{ route('english.language') }}" class="left-topbar-item btn btn-primary">
                     English 
                 </a>
-                <a href="{{ route('hindi.language') }}" class="left-topbar-item btn btn-primary ml-2">
+                {{-- <a href="{{ route('hindi.language') }}" class="left-topbar-item btn btn-primary ml-2">
                     Hindi
-                </a>
+                </a> --}}
                 <a href="{{ route('punjabi.language') }}" class="left-topbar-item btn btn-primary ml-2">
                     Punjabi
                 </a>
-                <a href="{{ route('urdu.language') }}" class="left-topbar-item btn btn-primary ml-2">
+                {{-- <a href="{{ route('urdu.language') }}" class="left-topbar-item btn btn-primary ml-2">
                     Urdu
-                </a>
+                </a> --}}
                 <span class="left-topbar-item flex-wr-s-c">
                     <span class="mr-2">
                         @if (session()->get('language') === 'hindi')
