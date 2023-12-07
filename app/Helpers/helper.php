@@ -99,6 +99,9 @@ function get_pdf($pdf)
 function getNewsImage($image)
 {
  
+    if (str_starts_with($image, 'https')) {
+        return $image;
+    }
     return   asset('storage/news_gallery/'.$image);
 }
 
