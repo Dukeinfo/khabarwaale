@@ -58,7 +58,7 @@ function md5createSlug($val)
 }
 
 function getThumbnail($value) {
-    if (str_starts_with($value, 'http')) {
+    if (str_starts_with($value, 'https')) {
         return $value;
     }
     return asset('uploads/thumbnail/'.$value);
@@ -73,7 +73,7 @@ function getUserIp()
 
 function getGallerydetail($image)
 {
-    if (str_starts_with($image, 'http')) {
+    if (str_starts_with($image, 'https')) {
         return $image;
     }
 
