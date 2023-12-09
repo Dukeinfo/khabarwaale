@@ -126,27 +126,47 @@
         </ul>
         <ul class="main-menu-m">
             @forelse ($getMenus as $key => $menu )
-            <li>
-                <a href="{{ route('home.category', ['id' => $menu->id, 'slug' => createSlug($menu->category_en)  ])}}" >
-                    @switch(session()->get('language'))
-                    @case('hindi')
+                @if($menu->sort_id == 1) 
+                <li class="main-menu-active">
+                    <a href="{{url('/')}}" >
+                        @if (session()->get('language') == "hindi" )
                         {{ $menu->category_hin ?? "NA" }}
-                        @break
-                    @case('punjabi')
-                        {{ $menu->category_pbi ?? "NA" }}
-                        @break
-                    @case('urdu')
-                        {{ $menu->category_urdu ?? "NA" }}
-                        @break
-                    @case('english')
-                    {{ $menu->category_en ?? "NA" }}
-                    @break
-                    @default
+                        @endif
+                        @if (session()->get('language') == "english" )
                         {{ $menu->category_en ?? "NA" }}
-                    @endswitch
-               
-                </a>
-            </li>
+                        @endif
+                        @if (session()->get('language') == "punjabi" )
+                        {{ $menu->category_pbi ?? "NA" }}
+                        @endif
+                        @if (session()->get('language') == "urdu" )
+                        {{ $menu->category_urdu ?? "NA" }}
+                        @endif
+                        
+                    </a>
+                </li>
+            @else
+                <li>
+                    <a  href="{{ route('home.category', ['id' => $menu->id, 'slug' => createSlug($menu->category_en)  ])}}">
+                        @switch(session()->get('language'))
+                        @case('hindi')
+                            {{ $menu->category_hin ?? "NA" }}
+                            @break
+                        @case('punjabi')
+                            {{ $menu->category_pbi ?? "NA" }}
+                            @break
+                        @case('urdu')
+                            {{ $menu->category_urdu ?? "NA" }}
+                            @break
+                        @case('english')
+                        {{ $menu->category_en ?? "NA" }}
+                        @break
+                        @default
+                            {{ $menu->category_en ?? "NA" }}
+                        @endswitch
+                
+                    </a>
+                </li>
+            @endif
             @empty
 
             @endforelse
@@ -182,53 +202,50 @@
                     <img src="{{asset('assets/images/logo.png')}}" alt="LOGO">
                 </a>
                 <ul class="main-menu justify-content-center">
-                    <li class="main-menu-active">
-                        <a href="{{url('/')}}" >
-                            @switch(session()->get('language'))
-                            @case('hindi')
-                                    {!! 'होम '!!}
-                            @break
-                            @case('punjabi')
-                                    {!! 'ਹੋਮ '!!}    
-                            @break
-                            @case('urdu')
-                                    {!! 'گھر '!!}
-                             
-                            @break
-                            @case('english')
-                                    Home
-                            @break
-                            @default
-                                    Home
-                            @endswitch
-                            
-                        </a>
-                    </li>
+                    
                     @forelse ($getMenus as $key => $menu )
-                 
-                    <li>
-                        <a  href="{{ route('home.category', ['id' => $menu->id, 'slug' => createSlug($menu->category_en)  ])}}">
-                            @switch(session()->get('language'))
-                            @case('hindi')
-                                {{ $menu->category_hin ?? "NA" }}
-                                @break
-                            @case('punjabi')
-                                {{ $menu->category_pbi ?? "NA" }}
-                                @break
-                            @case('urdu')
-                                {{ $menu->category_urdu ?? "NA" }}
-                                @break
-                            @case('english')
-                            {{ $menu->category_en ?? "NA" }}
-                            @break
-                            @default
-                                {{ $menu->category_en ?? "NA" }}
-                            @endswitch
-                       
-                        </a>
-                    </li>
+                        @if($menu->sort_id == 1) 
+                            <li class="main-menu-active">
+                                <a href="{{url('/')}}" >
+                                    @if (session()->get('language') == "hindi" )
+                                    {{ $menu->category_hin ?? "NA" }}
+                                    @endif
+                                    @if (session()->get('language') == "english" )
+                                    {{ $menu->category_en ?? "NA" }}
+                                    @endif
+                                    @if (session()->get('language') == "punjabi" )
+                                    {{ $menu->category_pbi ?? "NA" }}
+                                    @endif
+                                    @if (session()->get('language') == "urdu" )
+                                    {{ $menu->category_urdu ?? "NA" }}
+                                    @endif
+                                    
+                                </a>
+                            </li>
+                         @else
+                            <li>
+                                <a  href="{{ route('home.category', ['id' => $menu->id, 'slug' => createSlug($menu->category_en)  ])}}">
+                                    @switch(session()->get('language'))
+                                    @case('hindi')
+                                        {{ $menu->category_hin ?? "NA" }}
+                                        @break
+                                    @case('punjabi')
+                                        {{ $menu->category_pbi ?? "NA" }}
+                                        @break
+                                    @case('urdu')
+                                        {{ $menu->category_urdu ?? "NA" }}
+                                        @break
+                                    @case('english')
+                                    {{ $menu->category_en ?? "NA" }}
+                                    @break
+                                    @default
+                                        {{ $menu->category_en ?? "NA" }}
+                                    @endswitch
+                            
+                                </a>
+                            </li>
+                        @endif
                     @empty
-
                     @endforelse
                             <li>
                                 <a href="{{route('home.video-gallery')}}" > 

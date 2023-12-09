@@ -21,7 +21,7 @@ class Bottomnews3 extends Component
     {
         
         $get_bottom3_Menus = Category::orderBy('sort_id', 'ASC')
-                ->where('status', 'Active')->where('sort_id' ,7)->whereNull('deleted_at')->first();
+                ->where('status', 'Active')->where('sort_id' ,8)->whereNull('deleted_at')->first();
                 
 
                 $seven_CatWise_News = NewsPost::with(['newstype', 'user', 'getmenu'])

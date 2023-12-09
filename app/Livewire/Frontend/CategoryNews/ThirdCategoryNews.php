@@ -20,7 +20,7 @@ class ThirdCategoryNews extends Component
     public function render()
     {
         $getMenus = Category::orderBy('sort_id', 'ASC')
-                    ->where('status', 'Active')->where('sort_id' ,3)->whereNull('deleted_at')->first();
+                    ->where('status', 'Active')->where('sort_id' ,4)->whereNull('deleted_at')->first();
                     
         $third_Cat_Wise_News = NewsPost::with(['newstype', 'user', 'getmenu'])
                         ->where(function ($query)  {

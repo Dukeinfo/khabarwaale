@@ -20,7 +20,7 @@ class BottomNews extends Component
     public function render()
     {
         $get_bottom1_Menus = Category::orderBy('sort_id', 'ASC')
-                ->where('status', 'Active')->where('sort_id' ,5)->whereNull('deleted_at')->first();
+                ->where('status', 'Active')->where('sort_id' ,6)->whereNull('deleted_at')->first();
 
 
 

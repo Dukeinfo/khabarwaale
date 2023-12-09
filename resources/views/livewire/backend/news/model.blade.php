@@ -14,7 +14,7 @@
                     <h4> <span class="text-success ">Category (Menu): </span>
                         <span class="badge bg-dark p-1"> {{ $record->getmenu['category_en'] ?? 'NA'  }}</span>
                    </h4>
-                   <h4> <span class="text-success">News Title :</span> </h4>
+                   <h4> <span class="text-success">News Title :</span> {{ $record->id ?? 'NA'}} </h4>
                    <p>    {!! ucwords($record->title) ?? 'NA' !!} </p> 
                 
                   <h4> <span class="text-success">News Heading :</span> </h4>

@@ -18,7 +18,7 @@ class Bottomnews2 extends Component
     public function render()
     {
         $get_bottom2_Menus = Category::orderBy('sort_id', 'ASC')
-                            ->where('status', 'Active')->where('sort_id' ,6)->whereNull('deleted_at')->first();
+                            ->where('status', 'Active')->where('sort_id' ,7)->whereNull('deleted_at')->first();
 
         $six_CatWise_News = NewsPost::with(['newstype', 'user', 'getmenu'])
                                 ->where(function ($query)  {
