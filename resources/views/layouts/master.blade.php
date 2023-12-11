@@ -17,7 +17,7 @@
                 {{ $snippet->description }}
             @empty
         @endforelse --}}
-    {{-- @stack('keywords') --}}
+    @stack('social-scripts')
     <link rel="icon" type="image/png" href="{{asset('assets/images/icons/favicon.png')}}" />
     <link rel="stylesheet" type="text/css" href="{{asset('assets/vendor/bootstrap/css/bootstrap.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/fonts/fontawesome-5.0.8/css/fontawesome-all.min.css')}}">

@@ -1,5 +1,5 @@
 <div class="card border-0 shadow-sm">
-    {{-- @push('social-scripts')
+    @push('social-scripts')
         <!-- Basic OG tags -->
         <meta property="og:url" content="{{url()->current()}}">
         <meta property="og:type" content="website">
@@ -9,7 +9,7 @@
         <meta property="og:image:width" content="1200"> <!-- Width of the image in pixels -->
         <meta property="og:image:height" content="630"> <!-- Height of the image in pixels -->
         <meta property="og:site_name" content="khabarwaale">
-    @endpush --}}
+    @endpush
     <div class="card-body">
         <div>
             <div class="flex-wr-sb-c p-tb-10">
