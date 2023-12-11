@@ -10,6 +10,9 @@ use Illuminate\Support\Str;
         <meta property="og:title" content="{{ $getNewsDetail->title }}" />   
         <meta property="og:description" content="{{  strip_tags(Str::limit($getNewsDetail->news_description, 200)) ?? "NA" }}" />
         <meta property="og:image" content="{{   getNewsImage($getNewsDetail->image)  }}" />
+        <span itemprop="thumbnail" itemscope itemtype="http://schema.org/ImageObject"> 
+            <link itemprop="url" href="{{   getNewsImage($getNewsDetail->image)  }}"> 
+          </span>
         <meta property="og:image:width" content="1200"> <!-- Width of the image in pixels -->
         <meta property="og:image:height" content="630"> <!-- Height of the image in pixels -->
         <meta property="og:site_name" content="khabarwaale">
