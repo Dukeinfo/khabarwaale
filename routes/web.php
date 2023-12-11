@@ -63,7 +63,11 @@ Route::controller(LanguageController::class)->group(function () {
 });
 Route::get('/subscriber/verify/{token}/{email}', [FronendController::class, 'verify'])->name('subscriber_verify');
 
-Route::get('/', function () {return view('welcome');
+Route::get('/', function () {
+
+    
+    return view('welcome');
+
 })->name('home.homepage');
 
 Route::get('/category/{id}/{slug}', function ($id, $slug) {  return view('category', compact('id', 'slug'));
@@ -131,13 +135,11 @@ Route::group(['middleware' => ['can:manage_contact_us']], function () {
 // CreateMenus
 
 Route::group(['middleware' => ['can:manage_menu']], function () {
-
     Route::get('/create-menu', CreateMenus::class)->name('create_menus');
     Route::get('/edit-menu/{id}', EditMenus::class)->name('edit_menus');
 });
 
 Route::group(['middleware' => ['can:manage_user']], function () {
-
     Route::get('/create-user', CreateUsers::class)->name('create_user');
     Route::get('/edit-user/{userid}', EditUser::class)->name('edit_user');
     Route::get('/view-user/{id}', Viewusers::class)->name('view_userDetail');

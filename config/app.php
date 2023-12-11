@@ -177,6 +177,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\FortifyServiceProvider::class,
         App\Providers\JetstreamServiceProvider::class,
+        Artesaos\SEOTools\Providers\SEOToolsServiceProvider::class,
     ])->toArray(),
 
     /*
@@ -197,6 +198,14 @@ return [
         'GoogleTranslate' => Stichoza\GoogleTranslate\GoogleTranslate::class,
         'Share' => Jorenvh\Share\ShareFacade::class,
         'ShareButtons' => Kudashevs\ShareButtons\Facades\ShareButtonsFacade::class,
+        
+        'SEOMeta'       => Artesaos\SEOTools\Facades\SEOMeta::class,
+        'OpenGraph'     => Artesaos\SEOTools\Facades\OpenGraph::class,
+        'Twitter'       => Artesaos\SEOTools\Facades\TwitterCard::class,
+        'JsonLd'        => Artesaos\SEOTools\Facades\JsonLd::class,
+        'JsonLdMulti'   => Artesaos\SEOTools\Facades\JsonLdMulti::class,
+        // or
+        'SEO' => Artesaos\SEOTools\Facades\SEOTools::class,
     ])->toArray(),
 
 ];

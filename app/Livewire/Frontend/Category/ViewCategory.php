@@ -6,6 +6,9 @@ use App\Models\Category;
 use App\Models\NewsPost;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Artesaos\SEOTools\Facades\SEOMeta;
+use Illuminate\Support\Str;
+use Artesaos\SEOTools\Facades\SEOTools;
 
 class ViewCategory extends Component
 {
@@ -24,6 +27,16 @@ public function mount( $id){
     $this->category_hin =  $getCategory->category_hin;
     $this->category_pbi =  $getCategory->category_pbi;
     $this->category_urdu =  $getCategory->category_urdu;
+
+    if($getCategory){
+        SEOTools::setTitle( 'ਖਬਰਾਂ ਵਾਲੇ -' .$getCategory->category_pbi ?? 'khabarwaale');
+        SEOTools::opengraph()->setUrl(url()->current());
+        SEOTools::setCanonical(url()->current());
+        SEOTools::opengraph()->addProperty('type', 'website');
+        SEOTools::twitter()->setSite($getCategory->category_pbi ?? '');
+    
+      }
+    
   }else{
         abort(404);
   }

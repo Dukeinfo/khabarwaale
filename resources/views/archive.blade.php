@@ -1,7 +1,23 @@
 @extends('layouts.master')
-@section('title', 'Khabarwaale - News Portal')
-@section('desc', 'Khabarwaale - News Portal')
-@section('keywords', 'Khabarwaale - News Portal')
+@php
+use Artesaos\SEOTools\Facades\SEOMeta;
+use Illuminate\Support\Str;
+use Artesaos\SEOTools\Facades\SEOTools;
+
+$seoMetaData =  App\Models\SeoMetadetail::first();
+        if($seoMetaData){
+    // if($seoMetaData){    
+    SEOTools::setTitle($seoMetaData->title ?? 'Archive - Punjabi News Portal ');
+    SEOTools::setDescription($seoMetaData->description ?? 'Archive - Punjabi News Portal');
+    SEOTools::opengraph()->setUrl(url()->current());
+    SEOTools::setCanonical(url()->current());
+    SEOTools::opengraph()->addProperty('type', 'website');
+    SEOTools::twitter()->setSite($seoMetaData->title ?? 'Archive - Punjabi News Portal');
+    $keywords = $seoMetaData->keywords ?? 'Archive - Punjabi News Portal';
+    SEOMeta::addKeyword( $keywords);
+       
+    }
+@endphp
 @section('content')
 
 <section class="p-t-30">

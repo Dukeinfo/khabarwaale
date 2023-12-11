@@ -1,4 +1,15 @@
 <div class="card border-0 shadow-sm">
+    {{-- @push('social-scripts')
+        <!-- Basic OG tags -->
+        <meta property="og:url" content="{{url()->current()}}">
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="{{ $getNewsDetail->title }}" />
+        <meta property="og:description" content="{{  strip_tags($getNewsDetail->news_description) ?? "NA" }}" />
+        <meta property="og:image" content="{{ $getNewsDetail->image_url }}" />
+        <meta property="og:image:width" content="1200"> <!-- Width of the image in pixels -->
+        <meta property="og:image:height" content="630"> <!-- Height of the image in pixels -->
+        <meta property="og:site_name" content="khabarwaale">
+    @endpush --}}
     <div class="card-body">
         <div>
             <div class="flex-wr-sb-c p-tb-10">
@@ -105,25 +116,88 @@
                     </span>
                     {{-- <link rel="stylesheet" href="{{ asset('css/share-buttons.css') }}"> --}}
                     {{-- <script src="{{ asset('js/share-buttons.js') }}"></script> --}}
-
-                <script src="{{ asset('js/share.js') }}"></script>
+                    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+                    <script src="{{ asset('js/share.js') }}"></script>
+                
 
                 <style>
-                    div#social-links {
-                        margin: 0 left;
-                        max-width: 500px;
-                    }
-                    div#social-links ul li {
-                        display: inline-block;
-                    }          
-                    div#social-links ul li a {
-                        padding: 20px;
-                        border: 1px solid #ccc;
-                        margin: 1px;
-                        font-size: 30px;
-                        color: #222;
-                        background-color: #ccc;
-                    }
+                        /* Adjust the container */
+                        div#social-links {
+                            margin: 20px auto;
+                            max-width: 500px;
+                            /* Center the social links */
+                        }
+                        /* Adjust the container */
+                        div#social-links {
+                            margin: 20px 0;
+                            max-width: 500px;
+                            text-align: left; /* Align the social links to the left */
+                        }
+
+                        /* Style the list */
+                        div#social-links ul {
+                            padding: 0;
+                            list-style: none;
+                        }
+
+                        /* Style the list items */
+                        div#social-links ul li {
+                            display: inline-block;
+                            margin: 5px; /* Adjust spacing between items */
+                        }
+
+                        /* Style the links */
+                        div#social-links ul li a {
+                            display: block;
+                            padding: 15px;
+                            border: 2px solid #00aeef; /* Using the specified color */
+                            border-radius: 50%; /* Make the links circular */
+                            font-size: 24px;
+                            color: #fff;
+                            background-color: #00aeef; /* Using the specified color */
+                            text-decoration: none;
+                            transition: background-color 0.3s, color 0.3s;
+                        }
+
+                        /* Hover effect */
+                        div#social-links ul li a:hover {
+                            background-color: #fff;
+                            color: #00aeef; /* Change to the specified color on hover */
+                        }
+
+
+                        /* Style the list */
+                        div#social-links ul {
+                            padding: 0;
+                            list-style: none;
+                        }
+
+                        /* Style the list items */
+                        div#social-links ul li {
+                            display: inline-block;
+                            margin: 5px; /* Adjust spacing between items */
+                        }
+
+                        /* Style the links */
+                        div#social-links ul li a {
+                            display: block;
+                            padding: 15px;
+                            border: 2px solid #00aeef; /* Using the specified color */
+                            border-radius: 50%; /* Make the links circular */
+                            font-size: 24px;
+                            color: #fff;
+                            background-color: #00aeef; /* Using the specified color */
+                            text-decoration: none;
+                            transition: background-color 0.3s, color 0.3s;
+                        }
+
+                        /* Hover effect */
+                        div#social-links ul li a:hover {
+                            background-color: #fff;
+                            color: #00aeef; /* Change to the specified color on hover */
+                        }
+
+
                 </style>
                     
                     <div class="flex-wr-s-s size-w-0">

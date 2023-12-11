@@ -6,6 +6,8 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>{{ 'Khabarwaale - News Portal' }}</title>
+  
+
         @stack('ckscripts')
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -15,6 +17,7 @@
         <meta name="description" content="@yield('desc')">
         <meta name="keywords" content="@yield('keywords')">
         <meta name="author" content="">
+
         <link rel="icon" type="image/png" href="{{asset('assets/images/icons/favicon.png')}}" />
         <link rel="stylesheet" type="text/css" href="{{asset('assets/vendor/bootstrap/css/bootstrap.min.css')}}">
         <link rel="stylesheet" type="text/css" href="{{asset('assets/fonts/fontawesome-5.0.8/css/fontawesome-all.min.css')}}">

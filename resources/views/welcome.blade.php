@@ -1,7 +1,23 @@
 @extends('layouts.master')
-@section('title', 'Khabarwaale - News Portal')
-@section('desc', 'Khabarwaale - News Portal')
-@section('keywords', 'Khabarwaale - News Portal')
+@php
+use Artesaos\SEOTools\Facades\SEOMeta;
+use Illuminate\Support\Str;
+use Artesaos\SEOTools\Facades\SEOTools;
+
+$seoMetaData =  App\Models\SeoMetadetail::first();
+        if($seoMetaData){
+    // if($seoMetaData){    
+    SEOTools::setTitle($seoMetaData->title ?? 'ਖਬਰਾਂ ਵਾਲੇ ');
+    SEOTools::setDescription($seoMetaData->description ?? 'News Portal');
+    SEOTools::opengraph()->setUrl(url()->current());
+    SEOTools::setCanonical(url()->current());
+    SEOTools::opengraph()->addProperty('type', 'website');
+    SEOTools::twitter()->setSite($seoMetaData->title ?? 'ਖਬਰਾਂ ਵਾਲੇ');
+    $keywords = $seoMetaData->keywords ?? 'ਖਬਰਾਂ ਵਾਲੇ';
+    SEOMeta::addKeyword( $keywords);
+       
+    }
+@endphp
 @section('content')
 <audio id="myAudio">
     <source src="{{ asset('tone/notification.mp3') }}" type="audio/mpeg">
