@@ -1,10 +1,14 @@
 <div class="card border-0 shadow-sm">
+    @php
+use Illuminate\Support\Str;
+        
+    @endphp
     @push('social-scripts')
         <!-- Basic OG tags -->
         <meta property="og:url" content="{{url()->current()}}">
-        <meta property="og:type" content="website">
-        <meta property="og:title" content="{{ $getNewsDetail->title }}" />
-        <meta property="og:description" content="{{  strip_tags($getNewsDetail->news_description) ?? "NA" }}" />
+        <meta property="og:type" content="website"> 
+        <meta property="og:title" content="{{ $getNewsDetail->title }}" />   
+        <meta property="og:description" content="{{  strip_tags(Str::limit($getNewsDetail->news_description, 200)) ?? "NA" }}" />
         <meta property="og:image" content="{{ $getNewsDetail->image_url }}" />
         <meta property="og:image:width" content="1200"> <!-- Width of the image in pixels -->
         <meta property="og:image:height" content="630"> <!-- Height of the image in pixels -->
