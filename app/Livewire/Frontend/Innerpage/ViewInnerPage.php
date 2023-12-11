@@ -48,17 +48,19 @@ public function mount(NewsPost $newsid)
         ->where('status', 'Approved') ->whereNull('deleted_at')->firstOrFail();    
         $currentUrl    = url()->current();
 
-        $shareComponent = \Share::page(
-            $currentUrl,
-            $getNewsDetail->title ,
+        // $shareComponent = \Share::page(
+        //     $currentUrl,
+        //     $getNewsDetail->title ,
            
-        )
-        ->facebook()
-        ->twitter()
-        ->linkedin()
-        ->telegram()
-        ->whatsapp()        
-        ->reddit();
+        // )
+        // ->facebook()
+        // ->twitter()
+        // ->linkedin()
+        // ->telegram()
+        // ->whatsapp()        
+        // ->reddit();
+        $shareComponent =   \Share::page(  $currentUrl )->whatsapp();
+
 
     //  $shareComponent =   \ShareButtons::page($currentUrl , $getNewsDetail->title, [
     //         'title' => $getNewsDetail->title,
@@ -79,18 +81,18 @@ public function mount(NewsPost $newsid)
     //     ->xing()          # Generates a Xing share button
     //     ->copylink()      # Generates a copy to the clipboard share button
     //     ->mailto() ;       # Generates a send by mail share button
-    if($getNewsDetail){
-      SEOTools::setTitle( 'ਖਬਰਾਂ ਵਾਲੇ -' .$getNewsDetail->title ?? 'khabarwaale');
-      SEOTools::setDescription(strip_tags( Str::limit($getNewsDetail->news_description, 200))?? '');
-      SEOTools::opengraph()->setUrl(url()->current());
-      SEOTools::setCanonical(url()->current());
-      SEOTools::opengraph()->addProperty('type', 'website');
-      SEOTools::twitter()->setSite($getNewsDetail->title ?? '');
-      $keywords = $getNewsDetail->keywords ?? '';
-      SEOMeta::addKeyword( $keywords);
-          // SEOTools::jsonLd()->addImage('https://pinegroveschool.org/pinegrove/public/assets/images/logo.png');
+    // if($getNewsDetail){
+    //   SEOTools::setTitle( 'ਖਬਰਾਂ ਵਾਲੇ -' .$getNewsDetail->title ?? 'khabarwaale');
+    //   SEOTools::setDescription(strip_tags( Str::limit($getNewsDetail->news_description, 200))?? '');
+    //   SEOTools::opengraph()->setUrl(url()->current());
+    //   SEOTools::setCanonical(url()->current());
+    //   SEOTools::opengraph()->addProperty('type', 'website');
+    //   SEOTools::twitter()->setSite($getNewsDetail->title ?? '');
+    //   $keywords = $getNewsDetail->keywords ?? '';
+    //   SEOMeta::addKeyword( $keywords);
+    //       // SEOTools::jsonLd()->addImage('https://pinegroveschool.org/pinegrove/public/assets/images/logo.png');
           
-    }
+    // }
     } catch (\Exception $e) {
         // Handle other exceptions
         abort(403);
