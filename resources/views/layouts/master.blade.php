@@ -9,7 +9,7 @@
     <meta name="keywords" content="@yield('keywords')">
     <meta name="author" content=""> --}}
     <!-- social-scripts -->
-    {{-- {!! SEO::generate() !!} --}}
+    {!! SEO::generate() !!}
     
         {{-- @php
             $headerSnippets = App\Models\SeoHeadersnippet::get();

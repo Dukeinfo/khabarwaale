@@ -4,16 +4,15 @@ use Illuminate\Support\Str;
         
     @endphp
     @push('social-scripts')
-        <!-- Basic OG tags -->
+    <!-- Basic OG tags -->
+    <!-- social-scripts -->
         <meta property="og:url" content="{{url()->current()}}">
         <meta property="og:type" content="website"> 
         <meta property="og:title" content="{{ $getNewsDetail->title }}" />   
         <meta property="og:description" content="{{  strip_tags(Str::limit($getNewsDetail->news_description, 200)) ?? "NA" }}" />
-          <!-- Other Open Graph tags -->
-          <meta property="og:image" content="{{  getNewsImage($getNewsDetail->image)  }}" />
-
-        {{-- <meta property="og:image:width" content="1200"> <!-- Width of the image in pixels -->
-        <meta property="og:image:height" content="630"> <!-- Height of the image in pixels --> --}}
+        <meta property="og:image" content="{{  getNewsImage($getNewsDetail->image)  }}" />
+        <meta property="og:image:width" content="1200"> <!-- Width of the image in pixels -->
+        <meta property="og:image:height" content="630"> <!-- Height of the image in pixels -->
         <meta property="og:site_name" content="khabarwaale">
     @endpush
     <div class="card-body">
