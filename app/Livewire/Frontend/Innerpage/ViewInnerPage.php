@@ -80,14 +80,15 @@ public function mount(NewsPost $newsid)
     //     ->copylink()      # Generates a copy to the clipboard share button
     //     ->mailto() ;       # Generates a send by mail share button
     if($getNewsDetail){
-      SEOTools::setTitle( 'ਖਬਰਾਂ ਵਾਲੇ -' .$getNewsDetail->title ?? 'khabarwaale');
-      SEOTools::setDescription(strip_tags( Str::limit($getNewsDetail->news_description, 200))?? '');
-      SEOTools::opengraph()->setUrl(url()->current());
-      SEOTools::setCanonical(url()->current());
-      SEOTools::opengraph()->addProperty('type', 'website');
-      SEOTools::twitter()->setSite($getNewsDetail->title ?? '');
-      $keywords = $getNewsDetail->keywords ?? '';
-      SEOMeta::addKeyword( $keywords);
+        SEOTools::setTitle( 'ਖਬਰਾਂ ਵਾਲੇ -' .$getNewsDetail->title ?? 'khabarwaale');
+        SEOTools::setDescription(strip_tags( Str::limit($getNewsDetail->news_description, 200))?? '');
+        SEOTools::opengraph()->setUrl(url()->current());
+        SEOTools::setCanonical(url()->current());
+        SEOTools::opengraph()->addProperty('type', 'website');
+        SEOTools::twitter()->setSite($getNewsDetail->title ?? '');
+        $keywords = $getNewsDetail->keywords ?? '';
+        SEOMeta::addKeyword( $keywords);
+        OpenGraph::addImage($getNewsDetail->image_url);
           // SEOTools::jsonLd()->addImage('https://pinegroveschool.org/pinegrove/public/assets/images/logo.png');
           
     }
