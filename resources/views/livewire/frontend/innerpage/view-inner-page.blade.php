@@ -25,6 +25,7 @@ use Illuminate\Support\Str;
     <meta property="og:type" content="khabarwaale">
     <meta property="og:image" content="{{  getNewsImage($getNewsDetail->image)  }}"> --}}
     {{-- start Whatsapp thumbnailUrl --}}
+    <meta property="og:image" content="{{ getNewsImage($getNewsDetail->image)}}">
     <link itemprop="thumbnailUrl" href="{{  getNewsImage($getNewsDetail->image)  }}"> 
     <span itemprop="thumbnail" itemscope itemtype="http://schema.org/ImageObject"> 
     <link itemprop="url" href="{{  getNewsImage($getNewsDetail->image)  }}"> </span>
