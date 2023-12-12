@@ -24,7 +24,14 @@ use Illuminate\Support\Str;
     <meta property="og:description" content="{{ $description ?? "NA" }}">
     <meta property="og:type" content="khabarwaale">
     <meta property="og:image" content="{{  getNewsImage($getNewsDetail->image)  }}">
+    
+
+    <link itemprop="thumbnailUrl" href="{{  getNewsImage($getNewsDetail->image)  }}"> 
+    <span itemprop="thumbnail" itemscope itemtype="http://schema.org/ImageObject"> 
+    <link itemprop="url" href="{{  getNewsImage($getNewsDetail->image)  }}"> </span>
     @endpush
+
+    
     <div class="card-body">
         <div>
             <div class="flex-wr-sb-c p-tb-10">
