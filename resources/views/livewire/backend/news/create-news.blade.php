@@ -630,7 +630,7 @@
                                                             {{ $key + 1 }}
                                                         </td>
                                                         <td>    
-                                                            <img src="{{ isset($record->thumbnail) ? getNewsImage($record->thumbnail) : gasset('no_image.jpg') }}"
+                                                            <img src="{{ isset($record->thumbnail) ? getNewsImage($record->thumbnail) : asset('no_image.jpg') }}"
                                                                 alt=".."
                                                                 class="img-size-50  img-bordered-sm rounded-circle"
                                                                 width="50">
