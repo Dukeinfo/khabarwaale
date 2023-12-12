@@ -31,13 +31,35 @@ public $language_Val , $menuId ,$slug;
 public function mount(NewsPost $newsid)
 {
 
-    if ($newsid) {
-        $this->news_id = $newsid->id;
-        $this->menuId =  $newsid->getmenu->id;
+    // if ($newsid) {
+    //     $this->news_id = $newsid->id;
+    //     $this->menuId =  $newsid->getmenu->id;
       
-    } else {
+    // } else {
+    //     abort(404);
+
+    // }
+
+    if ($newsid) {
+        if ($newsid->id) {
+            $this->news_id = $newsid->id;
+            if ($newsid->getmenu) {
+                $this->menuId = $newsid->getmenu->id;
+            } else {
+                // Handle the case when 'getmenu' relation is null
+                // You might want to handle this differently based on your application's logic
         abort(404);
 
+            }
+        } else {
+            // Handle the case when 'id' property of $newsid is null
+            // You might want to handle this differently based on your application's logic
+        abort(404);
+
+        }
+    } else {
+        // Handle the case when $newsid itself is null
+        abort(404);
     }
 }
 
