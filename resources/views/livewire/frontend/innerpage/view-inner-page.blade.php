@@ -6,14 +6,24 @@ use Illuminate\Support\Str;
     @push('social-scripts')
     <!-- Basic OG tags -->
     <!-- social-scripts -->
-        <meta property="og:url" content="{{url()->current()}}">
+        {{-- <meta property="og:url" content="{{url()->current()}}">
         <meta property="og:type" content="website"> 
         <meta property="og:title" content="{{ $getNewsDetail->title }}" />   
         <meta property="og:description" content="{{  strip_tags(Str::limit($getNewsDetail->news_description, 200)) ?? "NA" }}" />
         <meta property="og:image" content="{{  getNewsImage($getNewsDetail->image)  }}" />
         <meta property="og:image:width" content="1200"> <!-- Width of the image in pixels -->
         <meta property="og:image:height" content="630"> <!-- Height of the image in pixels -->
-        <meta property="og:site_name" content="khabarwaale">
+        <meta property="og:site_name" content="khabarwaale"> --}}
+    <title>{{ $getNewsDetail->title }}</title> 
+    <meta property="og:title" content="{{ $getNewsDetail->title }}">
+    <meta property="og:site_name" content="khabarwaale">
+    <meta property="og:url" content="{{url()->current()}}"/>
+    @php
+         $description =  strip_tags(Str::limit($getNewsDetail->news_description, 200))
+    @endphp
+    <meta property="og:description" content="{{ $description ?? "NA" }}">
+    <meta property="og:type" content="khabarwaale">
+    <meta property="og:image" content="{{  getNewsImage($getNewsDetail->image)  }}">
     @endpush
     <div class="card-body">
         <div>
