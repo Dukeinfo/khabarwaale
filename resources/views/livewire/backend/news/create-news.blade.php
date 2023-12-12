@@ -629,8 +629,8 @@
                                                                 wire:model="selectednews" value="{{ $record->id }}">
                                                             {{ $key + 1 }}
                                                         </td>
-                                                        <td>
-                                                            <img src="{{ isset($record->thumbnail) ? getThumbnail($record->thumbnail) : getNewsImage($record->image) }}"
+                                                        <td>    
+                                                            <img src="{{ isset($record->thumbnail) ? getNewsImage($record->thumbnail) : gasset('no_image.jpg') }}"
                                                                 alt=".."
                                                                 class="img-size-50  img-bordered-sm rounded-circle"
                                                                 width="50">
@@ -842,13 +842,19 @@
                                                     // console.log(shareLinks)
                                                     let linksToCopy = '';
 
-                                                    shareLinks.forEach(innerArray => {
-                                                        innerArray.forEach(obj => {
-                                                            // linksToCopy += obj.whatsapp + '\n\n'; // Concatenate the 'facebook' link and add a newline
-                                                            linksToCopy += obj +
-                                                            '\n\n'; // Concatenate the 'facebook' link and add a newline
+                                                    // shareLinks.forEach(innerArray => {
+                                                    //     innerArray.forEach(obj => {
+                                                    //         // linksToCopy += obj.whatsapp + '\n\n'; // Concatenate the 'facebook' link and add a newline
+                                                    //         linksToCopy += obj +
+                                                    //         '\n\n'; // Concatenate the 'facebook' link and add a newline
 
-                                                            // You can modify this to concatenate other social media links or format as needed
+                                                    //         // You can modify this to concatenate other social media links or format as needed
+                                                    //     });
+                                                    // });
+
+                                                    shareLinks.forEach(innerArray => {
+                                                        innerArray.forEach((obj, index) => {
+                                                            linksToCopy += obj + (index === innerArray.length - 1 ? '' : '\n\n');
                                                         });
                                                     });
 
