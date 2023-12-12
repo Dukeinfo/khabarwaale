@@ -51,7 +51,7 @@ public function mount(NewsPost $newsid)
         $shareComponent = \Share::page(
             $currentUrl,
             $getNewsDetail->title ,
-           
+            strip_tags( Str::limit($getNewsDetail->news_description, 200)),
         )
         ->facebook()
         ->twitter()
@@ -85,10 +85,12 @@ public function mount(NewsPost $newsid)
         SEOTools::opengraph()->setUrl(url()->current());
         SEOTools::setCanonical(url()->current());
         SEOTools::opengraph()->addProperty('type', 'website');
+        SEOTools::opengraph()->addImage( getNewsImage($getNewsDetail->image) );
         SEOTools::twitter()->setSite($getNewsDetail->title ?? '');
         $keywords = $getNewsDetail->keywords ?? '';
         SEOMeta::addKeyword( $keywords);
-        OpenGraph::addImage($getNewsDetail->image_url);
+        // OpenGraph::addImage($getNewsDetail->image_url);
+
           // SEOTools::jsonLd()->addImage('https://pinegroveschool.org/pinegrove/public/assets/images/logo.png');
           
     }

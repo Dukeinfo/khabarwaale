@@ -14,7 +14,7 @@ use Illuminate\Support\Str;
         <meta property="og:image:width" content="1200"> <!-- Width of the image in pixels -->
         <meta property="og:image:height" content="630"> <!-- Height of the image in pixels -->
         <meta property="og:site_name" content="khabarwaale"> --}}
-    <title>{{ $getNewsDetail->title }}</title> 
+    {{-- <title>{{ $getNewsDetail->title }}</title> 
     <meta property="og:title" content="{{ $getNewsDetail->title }}">
     <meta property="og:site_name" content="khabarwaale">
     <meta property="og:url" content="{{url()->current()}}"/>
@@ -23,15 +23,13 @@ use Illuminate\Support\Str;
     @endphp
     <meta property="og:description" content="{{ $description ?? "NA" }}">
     <meta property="og:type" content="khabarwaale">
-    <meta property="og:image" content="{{  getNewsImage($getNewsDetail->image)  }}">
-    
-
+    <meta property="og:image" content="{{  getNewsImage($getNewsDetail->image)  }}"> --}}
+    {{-- start Whatsapp thumbnailUrl --}}
     <link itemprop="thumbnailUrl" href="{{  getNewsImage($getNewsDetail->image)  }}"> 
     <span itemprop="thumbnail" itemscope itemtype="http://schema.org/ImageObject"> 
     <link itemprop="url" href="{{  getNewsImage($getNewsDetail->image)  }}"> </span>
+    {{-- end Whatsapp thumbnailUrl --}}
     @endpush
-
-    
     <div class="card-body">
         <div>
             <div class="flex-wr-sb-c p-tb-10">
