@@ -2,16 +2,11 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
-    {{-- <title>@yield('title')</title> --}}
     <meta http-equiv="content-type" content="text/html;charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    {!! SEO::generate() !!}
-    @stack('social-scripts')
     {{-- <meta name="description" content="@yield('desc')">
     <meta name="keywords" content="@yield('keywords')">
     <meta name="author" content=""> --}}
-    <!-- social-scripts -->
-    
         {{-- @php
             $headerSnippets = App\Models\SeoHeadersnippet::get();
         @endphp
@@ -19,6 +14,8 @@
                 {{ $snippet->description }}
             @empty
         @endforelse --}}
+    {!! SEO::generate() !!}
+    @stack('social-scripts')
     <link rel="icon" type="image/png" href="{{asset('assets/images/icons/favicon.png')}}" />
     <link rel="stylesheet" type="text/css" href="{{asset('assets/vendor/bootstrap/css/bootstrap.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/fonts/fontawesome-5.0.8/css/fontawesome-all.min.css')}}">

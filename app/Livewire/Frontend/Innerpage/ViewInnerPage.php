@@ -59,6 +59,7 @@ public function mount(NewsPost $newsid)
         ->telegram()
         ->whatsapp()        
         ->reddit();
+   
 
     //  $shareComponent =   \ShareButtons::page($currentUrl , $getNewsDetail->title, [
     //         'title' => $getNewsDetail->title,
@@ -89,9 +90,9 @@ public function mount(NewsPost $newsid)
         SEOTools::twitter()->setSite($getNewsDetail->title ?? '');
         $keywords = $getNewsDetail->keywords ?? '';
         SEOMeta::addKeyword( $keywords);
-        OpenGraph::addImage($getNewsDetail->image_url);
         SEOTools::jsonLd()->addImage(getNewsImage($getNewsDetail->image));
-        
+        // OpenGraph
+        OpenGraph::addImage( getNewsImage($getNewsDetail->image));
         $description =  strip_tags(Str::limit($getNewsDetail->news_description, 200));
         OpenGraph::setDescription($description);
         OpenGraph::setTitle($getNewsDetail->title);
@@ -99,12 +100,11 @@ public function mount(NewsPost $newsid)
         OpenGraph::addProperty('type', 'article');
         OpenGraph::addProperty('locale', 'pt-br');
         OpenGraph::addProperty('locale:alternate', ['pt-pt', 'en-us']);
-       
         OpenGraph::addImage(asset('assets/images/logo.png'));  
         OpenGraph::addImage(getNewsImage($getNewsDetail->image));
         OpenGraph::addImage(['url' =>getNewsImage($getNewsDetail->image), 'size' => 250]);
         OpenGraph::addImage(getNewsImage($getNewsDetail->image), ['height' => 250, 'width' => 250]);
-          
+        // OpenGraph
     }
     } catch (\Exception $e) {
         // Handle other exceptions
