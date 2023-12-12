@@ -51,7 +51,7 @@ public function mount(NewsPost $newsid)
         $shareComponent = \Share::page(
             $currentUrl,
             $getNewsDetail->title ,
-            strip_tags( Str::limit($getNewsDetail->news_description, 200)),
+      
         )
         ->facebook()
         ->twitter()
