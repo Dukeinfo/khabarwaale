@@ -23,7 +23,7 @@ class Bottomnews2 extends Component
         $six_CatWise_News = NewsPost::with(['newstype', 'user', 'getmenu'])
                                 ->where(function ($query)  {
                                     $query->whereHas('getmenu', function ($subquery)  {
-                                    $subquery->where('sort_id', 'like', '%' . '6' . '%');
+                                    $subquery->where('sort_id', 'like', '%' . '7' . '%');
 
                                 });
                                 })->orderBy('created_at', 'desc')

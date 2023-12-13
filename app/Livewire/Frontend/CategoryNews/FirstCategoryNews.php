@@ -25,7 +25,7 @@ class FirstCategoryNews extends Component
                 $ca1t_Wise_News = NewsPost::with(['newstype', 'user', 'getmenu'])
                         ->where(function ($query)  {
                             $query->whereHas('getmenu', function ($subquery)  {
-                                $subquery->where('sort_id', 'like', '%' . '1' . '%');
+                                $subquery->where('sort_id', 'like', '%' . '2' . '%');
 
                             });
                         })->orderBy('created_at', 'desc')
