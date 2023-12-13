@@ -23,9 +23,9 @@
                                 <th>#</th>
                                 <td>Profile</td>
                                 <th> Name </th>
-                                <th> Email </th>
+                                <th width="20%"> Email </th>
                                 <th> Website</th>
-                                <th> Menus</th>
+                                <th width="20%"> Menus</th>
                                 <th>Status</th>    
                                 <th>Action</th>
                             </tr>
