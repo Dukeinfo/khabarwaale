@@ -24,7 +24,7 @@
                             <span class="dis-inline-block slide100-txt-item animated visible-false" >
                                 <a  target="_blank" href="{{route('home.inner',['newsid' => $flashNews->id , 'slug' =>  $flashNews->slug  ])}}
                                     " class="cl6">
-                                    {!! Str::limit($flashNews->title, 60)!!} 
+                                    {!! Str::limit($flashNews->title, 80)!!}  {{$flashNews->created_at->diffForHumans()}}
                                 </a>
                             </span>
     
