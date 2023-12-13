@@ -32,10 +32,13 @@ class InnerPageRecommended extends Component
                             ->where('status', 'Approved')
                             ->whereNull('deleted_at')
                             ->where(function ($query) {
-                                $query->whereIn('breaking_top', ['Show'])
-                                    ->orWhere('id', $this->getnews_id)
-                                    ->orWhere('category_id', $this->getnews_category);
+                                    $query->whereIn('breaking_top', ['Show'])
+                                    ->Where('category_id', $this->getnews_category);
                             })
+                            // $query->whereIn('breaking_top', ['Show'])
+                            // ->orWhere('id', $this->getnews_id)
+                            // ->orWhere('category_id', $this->getnews_category);
+
                             ->orderBy('created_at', 'desc')
                             ->orderBy('updated_at', 'desc')
                             ->where('news_type', $this->getNewsType()) 
