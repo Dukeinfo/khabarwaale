@@ -22,7 +22,7 @@
                     @forelse ($newsPosts  as  $key => $flashNews )
 
                             <span class="dis-inline-block slide100-txt-item animated visible-false" >
-                                <a  target="_blank" href="{{route('home.inner',['newsid' => $flashNews->id , 'slug' =>  $flashNews->slug  ])}}
+                                <a title="{{$flashNews->title}}" target="_blank" href="{{route('home.inner',['newsid' => $flashNews->id , 'slug' =>  $flashNews->slug  ])}}
                                     " class="cl6">
                                     {!! Str::limit($flashNews->title, 80)!!}  {{$flashNews->created_at->diffForHumans()}}
                                 </a>
