@@ -83,9 +83,9 @@
                                                     $assignedMenus = $record->assignedMenus;
                                                 @endphp
                                                 @forelse ($assignedMenus as $index => $assignedMenu)
-                                                    <span class="badge bg-dark" style="font-size: 20px;">{{ $assignedMenu->getmenu->category_en ?? 'NA' }}</span>
+                                                    <span class="badge bg-dark my-2" style="font-size: 20px;">{{ $assignedMenu->getmenu->category_en ?? 'NA' }}</span>
                                                 @empty
-                                                    {{ 'NA'}}
+                                                 
                                                 @endforelse
                                             </td>
                                         </tr>

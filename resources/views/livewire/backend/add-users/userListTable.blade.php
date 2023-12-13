@@ -52,7 +52,7 @@
                                         <span class="badge bg-dark"> {{ $assignedMenu->getmenu->category_en ?? 'NA'  }}</span>
                                         
                                     @empty
-                                   {{ 'NA'}}
+                                
                                     @endforelse
                                 </td>
                           
