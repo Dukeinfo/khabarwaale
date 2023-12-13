@@ -120,12 +120,10 @@ use Illuminate\Support\Str;
                     </span>
 
                     <div class="flex-wr-s-s size-w-0">
-                        <a href="#" class="f1-s-12 cl8 hov-link1 m-r-15">
-                            India News
-                        </a>
+                   
 
                         <a href="#" class="f1-s-12 cl8 hov-link1 m-r-15">
-                            Congress
+                            khabarwaale
                         </a>
                     </div>
                 </div>
