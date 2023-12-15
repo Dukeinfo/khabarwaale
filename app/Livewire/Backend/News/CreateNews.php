@@ -17,11 +17,13 @@ use Livewire\Attributes\On;
 use Livewire\Attributes\Rule;
 use Livewire\Attributes\Url;
 use Livewire\Component;
-use Livewire\WithFileUploads;
+// use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Route;
 use Jorenvh\Share\Share;
-use App\Events\NewNewsPostNotification;
+use Illuminate\Support\Facades\Log;
+use Livewire\Features\SupportFileUploads\WithFileUploads;
+
 class CreateNews extends Component
 {
     use WithFileUploads;
@@ -213,10 +215,73 @@ class CreateNews extends Component
         $this->alert('success', 'News Created successfully!');
         // return redirect()->route('admin.create_news')->with();
         $this->dispatch('formSubmitted');
-        
-        event(new NewNewsPostNotification('news posted'));
+        if($this->send_noti == 'Show'){
+            $this->sendNotification($createNews);
+        }
+
         
     }
+// Web psuh notification 
+public function sendNotification( $createNews)
+{
+    $url = 'https://fcm.googleapis.com/fcm/send';
+    $news_url = route('home.inner', ['newsid' => $createNews->id, 'slug' => $createNews->slug]);
+    $FcmToken = User::whereNotNull('device_token')->pluck('device_token')->all();
+        
+    $serverKey = 'AAAAkWIc2hY:APA91bH7dl0ZNaS7dDZo-4SvqQHtu3WPGxnj0xrWHFINf9m1km-7-fUYzii1ge9sqL_L0SqeDZwLEnOicjaSGA9mzmoDIZYty6nhlsLEPjOVOGFBrxhhCISGMuWhXwivoakc_EE86gC3'; // ADD SERVER KEY HERE PROVIDED BY FCM
+
+    $data = [
+        "registration_ids" => $FcmToken,
+        "notification" => [
+            "title" => $createNews->title,
+            "body" => $createNews->heading,  
+        ],
+        "data" => [
+            "news_url" => $news_url,
+        ],
+    ];
+    $encodedData = json_encode($data);
+
+    $headers = [
+        'Authorization:key=' . $serverKey,
+        'Content-Type: application/json',
+    ];
+
+    $ch = curl_init();
+    
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+    curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
+    // Disabling SSL Certificate support temporarly
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $encodedData);
+    // Execute post
+    $result = curl_exec($ch);
+    if ($result === FALSE) {
+        die('Curl failed: ' . curl_error($ch));
+        Log::error('Curl failed: ' . curl_error($ch));
+        $this->alert('error', 'Failed to send notification!');
+
+    }        
+    // Close connection
+    curl_close($ch);
+    // FCM response
+    // dd($result);
+    Log::info('FCM Response: ' . $result);
+
+        $this->alert('success', 'Notification sent successfully', [
+            'toast' => false,
+            'position' => 'center'
+        ]);
+
+}
+// end notification 
+
+
+
 
     public function handleChange()
     {

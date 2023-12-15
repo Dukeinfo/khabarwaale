@@ -11,7 +11,12 @@
                 <a href="{{ route('punjabi.language') }}" class="left-topbar-item btn btn-primary ml-2">
                     Punjabi
                 </a>
-         
+
+                @auth
+                    
+                <button onclick="startFCM()" class="btn-flat left-topbar-item btn btn-danger ml-2">Allow notification
+                @endauth
+            </button>
                 <span class="left-topbar-item flex-wr-s-c">
                     <span class="mr-2">
                       @if (session()->get('language') === 'hindi')

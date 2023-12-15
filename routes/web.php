@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminLogoutController;
 use App\Http\Controllers\CkImageUploadController;
+use App\Http\Controllers\FirebasePushController;
 use App\Http\Controllers\Frontend\FronendController;
 use App\Http\Controllers\Frontend\LanguageController;
 use App\Livewire\Backend\AddUsers\CreateUsers;
@@ -54,6 +55,7 @@ use Spatie\Browsershot\Browsershot;
 |      "masbug/flysystem-google-drive-ext": "^2.2",
 */
 // Route::get('lang/change', [LanguageController::class, 'change'])->name('changeLang');
+
 Route::controller(LanguageController::class)->group(function () {
     Route::get('/language/english',  'english')->name('english.language');
     Route::get('/language/hindi',  'Hindi')->name('hindi.language');
@@ -115,6 +117,9 @@ Route::middleware([
 });
 
 Route::group(['middleware' =>   ['auth' ]],function(){
+Route::post('/store-token', [FirebasePushController::class, 'updateDeviceToken'])->name('store.token');
+Route::post('/send-web-notification', [FirebasePushController::class, 'sendNotification'])->name('send.web-notification');
+
 Route::prefix('admin')->group(function(){
     Route::post('ckeditor/image_upload', [CkImageUploadController::class, 'upload'])->name('image.upload');
     Route::get('/dashboard', AdminDashboard::class)->name('admin_dashboard');
