@@ -30,7 +30,7 @@ Route::post("push-subscribe", function(Request $request) {
 
     if ($existingSubscription) {
         // Subscription already exists, you can handle this case (e.g., return a response)
-        return response()->json(['message' => 'Subscription already exists'], 422);
+        return response()->json(['message' => ' Already Subscribed'], 422);
     }
 
     // Create a new push subscription
@@ -39,5 +39,5 @@ Route::post("push-subscribe", function(Request $request) {
     ]);
 
     // Return a success response
-    return response()->json(['message' => 'Subscription created successfully']);
+    return response()->json(['message' => 'Subscribe successfull']);
 });

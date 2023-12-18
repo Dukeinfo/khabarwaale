@@ -119,6 +119,15 @@
     </script> --}}
 
     <script>
+     window.onload = function() {
+        // Check if permission is already granted
+        if (Notification.permission === 'granted') {
+            console.log('Notification permission already granted.');
+        } else {
+            // Call requestPermission function after the page has loaded
+            requestPermission();
+        }
+    };
         navigator.serviceWorker.register("sw.js");
     
         function requestPermission() {
@@ -137,7 +146,7 @@
                                 body: JSON.stringify(subscription)
                             })
                             .then(response => {
-                                console.log('Push Subscription Response:', response);
+                                // console.log('Push Subscription Response:', response);
                                 return response.json();
                             })
 
@@ -156,6 +165,7 @@
                         });
                     });
                 }
+                
             });
         }
     </script>
