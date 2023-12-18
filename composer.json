@@ -18,6 +18,7 @@
         "laravel/sanctum": "^3.2",
         "laravel/tinker": "^2.8",
         "livewire/livewire": "^3.0",
+        "minishlink/web-push": "^8.0",
         "pusher/pusher-php-server": "^7.2",
         "spatie/browsershot": "^3.59",
         "spatie/image-optimizer": "^1.7",

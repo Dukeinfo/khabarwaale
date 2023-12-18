@@ -12,10 +12,10 @@
                     Punjabi
                 </a>
 
-                @auth
+               
                     
-                <button onclick="startFCM()" class="btn-flat left-topbar-item btn btn-danger ml-2">Allow notification
-                @endauth
+                <button onclick="requestPermission()" class="btn-flat left-topbar-item btn btn-danger ml-2">Allow notification
+              
             </button>
                 <span class="left-topbar-item flex-wr-s-c">
                     <span class="mr-2">

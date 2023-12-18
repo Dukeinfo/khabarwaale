@@ -59,7 +59,7 @@
     <script src="{{asset('assets/vendor/bootstrap/js/bootstrap.min.js')}}"></script>
     <script src="{{asset('assets/js/main.js')}}"></script>
     @livewireScripts
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    {{-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase.js"></script>
     <script>
         var firebaseConfig = {
@@ -116,6 +116,48 @@
         };
             new Notification(title, options);
         });
+    </script> --}}
+
+    <script>
+        navigator.serviceWorker.register("sw.js");
+    
+        function requestPermission() {
+            Notification.requestPermission().then((permission) => {
+                if (permission === 'granted') {
+                    // get service worker
+                    navigator.serviceWorker.ready.then((sw) => {
+                        // subscribe
+                        sw.pushManager.subscribe({
+                            userVisibleOnly: true,
+                            applicationServerKey: "BApbeJzNnKrw6EK1Q1ZOjOTsfFWxMIDpRCahg1ItXtJwwtxWAqQNYkviEgVze6eSd7TdAj0X8NavHNQyGsOwdqg"
+                        }).then((subscription) => {
+                            // subscription successful
+                            fetch("/api/push-subscribe", {
+                                method: "post",
+                                body: JSON.stringify(subscription)
+                            })
+                            .then(response => {
+                                console.log('Push Subscription Response:', response);
+                                return response.json();
+                            })
+
+                            .then(data => {
+                                if (data.message) {
+                                    alert(data.message);
+                                } else {
+                                    // Handle other cases if needed
+                                    console.warn('Unexpected response format:', data);
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error subscribing to push notifications:', error);
+                                alert("An error occurred. Please try again later.");
+                            });
+                        });
+                    });
+                }
+            });
+        }
     </script>
 </body>
 </html>

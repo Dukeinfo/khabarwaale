@@ -23,7 +23,9 @@ use Illuminate\Support\Facades\Route;
 use Jorenvh\Share\Share;
 use Illuminate\Support\Facades\Log;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
-
+use App\Models\PushSubscription;
+use Minishlink\WebPush\Subscription;
+use Minishlink\WebPush\WebPush;
 class CreateNews extends Component
 {
     use WithFileUploads;
@@ -211,13 +213,47 @@ class CreateNews extends Component
         $createNews->ip_address =getUserIp();
         $createNews->login = authUserId();
         $createNews->save();
+        if($this->send_noti == 'Show'){
+        $webPush = new WebPush([
+            'VAPID' => [
+                'publicKey' => 'BApbeJzNnKrw6EK1Q1ZOjOTsfFWxMIDpRCahg1ItXtJwwtxWAqQNYkviEgVze6eSd7TdAj0X8NavHNQyGsOwdqg',
+                'privateKey' => 'MEAhqJiHZ7kBJy_FeUv-xYyELG45ZBP5GgBUCAl9Skg',
+                'subject' => 'http://127.0.0.1',
+            ],
+        ]);
+
+        $pushData = [
+            'title'  => $this->title,
+            'body'  => $this->heading,
+            'url'  => 'inner/'.$createNews->id.'/'.createSlug($this->title),
+        ];
+
+
+        $payload = json_encode($pushData);
+
+        // Get all push subscriptions from the database
+        $subscriptions = PushSubscription::all();
+
+        foreach ($subscriptions as $subscription) {
+               $webPush->sendOneNotification(
+                 Subscription::create(json_decode($subscription->data, true)),
+                $payload
+            );
+
+        }
+        $this->alert('success', 'Notification sent successfully', [
+            'toast' => false,
+            'position' => 'center'
+        ]);
+    }
+
         $this->reset();
         $this->alert('success', 'News Created successfully!');
         // return redirect()->route('admin.create_news')->with();
         $this->dispatch('formSubmitted');
-        if($this->send_noti == 'Show'){
-            $this->sendNotification($createNews);
-        }
+        // if($this->send_noti == 'Show'){
+        //     $this->sendNotification($createNews);
+        // }
 
         
     }
