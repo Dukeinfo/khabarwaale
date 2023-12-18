@@ -120,15 +120,15 @@
 
         <script>
          const vapidPublicKey  =    "{{env('VAPID_PUBLIC_KEY')}}"
-         window.onload = function() {
-            // Check if permission is already granted
-            if (Notification.permission === 'granted') {
-                console.log('Notification permission already granted.');
-            } else {
-                // Call requestPermission function after the page has loaded
-                requestPermission();
-            }
-        };
+        //  window.onload = function() {
+        //     // Check if permission is already granted
+        //     if (Notification.permission === 'granted') {
+        //         console.log('Notification permission already granted.');
+        //     } else {
+        //         // Call requestPermission function after the page has loaded
+        //         requestPermission();
+        //     }
+        // };
         navigator.serviceWorker.register("sw.js");
     
         function requestPermission() {
