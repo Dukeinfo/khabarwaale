@@ -118,16 +118,18 @@
         });
     </script> --}}
 
-    <script>
-     window.onload = function() {
-        // Check if permission is already granted
-        if (Notification.permission === 'granted') {
-            console.log('Notification permission already granted.');
-        } else {
-            // Call requestPermission function after the page has loaded
-            requestPermission();
-        }
-    };
+        <script>
+         const vapidPublicKey  =    "{{env('VAPID_PUBLIC_KEY')}}"
+         console.log('public key ', vapidPublicKey);
+        window.onload = function() {
+            // Check if permission is already granted
+            if (Notification.permission === 'granted') {
+                console.log('Notification permission already granted.');
+            } else {
+                // Call requestPermission function after the page has loaded
+                requestPermission();
+            }
+        };
         navigator.serviceWorker.register("sw.js");
     
         function requestPermission() {
@@ -138,7 +140,7 @@
                         // subscribe
                         sw.pushManager.subscribe({
                             userVisibleOnly: true,
-                            applicationServerKey: "BApbeJzNnKrw6EK1Q1ZOjOTsfFWxMIDpRCahg1ItXtJwwtxWAqQNYkviEgVze6eSd7TdAj0X8NavHNQyGsOwdqg"
+                            applicationServerKey: vapidPublicKey
                         }).then((subscription) => {
                             // subscription successful
                             fetch("/api/push-subscribe", {

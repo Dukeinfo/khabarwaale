@@ -213,11 +213,15 @@ class CreateNews extends Component
         $createNews->ip_address =getUserIp();
         $createNews->login = authUserId();
         $createNews->save();
+
+        $vapidPublicKey = env('VAPID_PUBLIC_KEY');
+        $vapidPrivateKey = env('VAPID_PRIVATE_KEY');
+
         if($this->send_noti == 'Show'){
         $webPush = new WebPush([
             'VAPID' => [
-                'publicKey' => 'BApbeJzNnKrw6EK1Q1ZOjOTsfFWxMIDpRCahg1ItXtJwwtxWAqQNYkviEgVze6eSd7TdAj0X8NavHNQyGsOwdqg',
-                'privateKey' => 'MEAhqJiHZ7kBJy_FeUv-xYyELG45ZBP5GgBUCAl9Skg',
+                'publicKey' => $vapidPublicKey,
+                'privateKey' => $vapidPrivateKey,
                 'subject' => 'http://127.0.0.1',
             ],
         ]);
