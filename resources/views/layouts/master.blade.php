@@ -120,8 +120,7 @@
 
         <script>
          const vapidPublicKey  =    "{{env('VAPID_PUBLIC_KEY')}}"
-         console.log('public key ', vapidPublicKey);
-        window.onload = function() {
+         window.onload = function() {
             // Check if permission is already granted
             if (Notification.permission === 'granted') {
                 console.log('Notification permission already granted.');
