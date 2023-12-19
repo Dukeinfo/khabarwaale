@@ -19,13 +19,13 @@ const appurl  =    "{{env('APP_URL')}}"
 // self.addEventListener("notificationclick",  (event) => {
 // event.waitUntil(clients.openWindow(event.notification.data.notifURL));
 // });
-
+// Close 
 self.addEventListener("notificationclick", (event) => {
     const clickedNotification = event.notification;
     const action = event.action;
 
     if (action === 'close') {
-        // Close the notification if the 'close' action is performed
+        // Close the notification if the 'close' action is performed   
         clickedNotification.close();
     } else {
         // Open a new window with the specified URL when the notification is clicked
