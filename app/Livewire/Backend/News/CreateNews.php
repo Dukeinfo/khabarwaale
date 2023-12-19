@@ -229,11 +229,14 @@ class CreateNews extends Component
         $pushData = [
             'title'  => $this->title,
             'body'  => $this->heading,
-            'url'  => 'inner/'.$createNews->id.'/'.createSlug($this->title),
-            'image' =>  $createNews->image,
+            'url'  => 'inner/'.$createNews->id.'/'.md5($this->title),
+            'image' =>  env('APP_URL').'/storage/news_gallery/'.$createNews->image,
            
         ];
-        Log::info('Notify image '.$createNews->image);
+        env('APP_URL');
+        Log::info('Notify image '.env('APP_URL').'/storage/news_gallery/'.$createNews->image);
+
+        // https://www.khabarwaale.com/boldapunjab/storage/news_gallery/6581DA36919D8.jpg
 
         $payload = json_encode($pushData);
 
