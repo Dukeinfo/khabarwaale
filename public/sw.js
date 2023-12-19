@@ -1,10 +1,10 @@
 self.addEventListener("push", (event) => {
     notification = event.data.json();
 console.log("recived " ,notification);
-// const appurl  =    "{{env('APP_URL')}}"
+const appurl  =    "{{env('APP_URL')}}"
 
     event.waitUntil(self.registration.showNotification(notification.title , {
-        image: notification.image,
+        image:  appurl+'/storage/news_gallery/' + notification.image,
         body: notification.body ,
         icon: "icon.png" ,
         data: {
