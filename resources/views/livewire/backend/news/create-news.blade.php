@@ -619,18 +619,18 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-
+                                        
                                             @forelse ($records as $key => $record)
                                                 @role('admin')
                                                     <tr>
                                                         <td>
-                                                            {{-- $records->firstitem()+$loop->index ?? --}}
+                                                   
                                                             <input type="checkbox" id="row_{{ $record->id }}"
                                                                 wire:model="selectednews" value="{{ $record->id }}">
-                                                            {{ $key + 1 }}
+                                                                {{ $counter++ }}
                                                         </td>
                                                         <td>    
-                                                            <img src="{{ isset($record->thumbnail) ? getNewsImage($record->thumbnail) : asset('no_image.jpg') }}"
+                                                            <img src="{{ isset($record->thumbnail) ? getThumbnail($record->thumbnail) : asset('no_image.jpg') }}"
                                                                 alt=".."
                                                                 class="img-size-50  img-bordered-sm rounded-circle"
                                                                 width="50">

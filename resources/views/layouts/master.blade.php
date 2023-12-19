@@ -119,6 +119,7 @@
     </script> --}}
 
         <script>
+       
          const vapidPublicKey  =    "{{env('VAPID_PUBLIC_KEY')}}"
         //  window.onload = function() {
         //     // Check if permission is already granted
@@ -147,7 +148,7 @@
                                 body: JSON.stringify(subscription)
                             })
                             .then(response => {
-                                // console.log('Push Subscription Response:', response);
+                                console.log('Push Subscription Response:', response);
                                 return response.json();
                             })
 

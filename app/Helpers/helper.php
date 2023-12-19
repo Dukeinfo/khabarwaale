@@ -57,19 +57,19 @@ function md5createSlug($val)
     return $md5Hash;
 }
 
-function getThumbnail($value) {
-    if (str_starts_with($value, 'https')) {
-        return $value;
-    }
-    return asset('uploads/thumbnail/'.$value);
-}
+
 
 
 function getUserIp()
 {
     return !empty(request()->server('HTTP_CF_CONNECTING_IP')) ? request()->server('HTTP_CF_CONNECTING_IP') : request()->getClientIp();
 }
-
+function getThumbnail($value) {
+    if (str_starts_with($value, 'https')) {
+        return $value;
+    }
+    return asset('uploads/thumbnail/'.$value);
+}
 
 function getGallerydetail($image)
 {

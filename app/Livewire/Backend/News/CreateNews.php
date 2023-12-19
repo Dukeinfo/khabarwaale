@@ -87,7 +87,7 @@ class CreateNews extends Component
     public $date_search; // Add this property
     public $queryTime; 
     
-
+    public $counter = 1;
 
 
  public function filterByType()
@@ -149,10 +149,8 @@ class CreateNews extends Component
             ->orWhere('post_month', $search) //
             ->orWhere('title', 'like', '%' . $search . '%') 
             ->orWhere('status', 'like', '%' . $search . '%') 
-
-            ->orderBy('category_id')
             ->latest()
-            // ->get();
+           
             ->paginate(20);
         $this->queryTime = collect(DB::getQueryLog())->sum('time');
         return view('livewire.backend.news.create-news' ,['totalrecords' => $totalrecords,
@@ -188,7 +186,7 @@ class CreateNews extends Component
         $createNews->reporter_id = $this->reporter_id ?? null ;
         $createNews->old_parm = $this->old_parm ?? null ;
         $createNews->title = $this->title ?? null ;
-        $createNews->slug = createSlug($this->title);
+        $createNews->slug = md5($this->title);
         $createNews->heading = $this->heading ?? null ;
         $createNews->heading2 = $this->heading2 ?? null ;
         $createNews->image = $newsimage['file_name'] ?? null ;
@@ -216,13 +214,15 @@ class CreateNews extends Component
 
         $vapidPublicKey = env('VAPID_PUBLIC_KEY');
         $vapidPrivateKey = env('VAPID_PRIVATE_KEY');
+        $appurl  =    "{{env('APP_URL')}}";
+
 
         if($this->send_noti == 'Show'){
         $webPush = new WebPush([
             'VAPID' => [
                 'publicKey' => $vapidPublicKey,
                 'privateKey' => $vapidPrivateKey,
-                'subject' => 'http://127.0.0.1',
+                'subject' => $appurl,
             ],
         ]);
 
@@ -230,8 +230,10 @@ class CreateNews extends Component
             'title'  => $this->title,
             'body'  => $this->heading,
             'url'  => 'inner/'.$createNews->id.'/'.createSlug($this->title),
+            'image' =>  $createNews->image,
+           
         ];
-
+        Log::info('Notify image '.$createNews->image);
 
         $payload = json_encode($pushData);
 

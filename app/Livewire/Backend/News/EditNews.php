@@ -171,7 +171,7 @@ class EditNews extends Component
         $createNews->reporter_id = $this->reporter_id ?? null ;
         $createNews->old_parm = $this->old_parm ?? null ;
         $createNews->title = $this->title ?? null ;
-        $createNews->slug = createSlug($this->title);
+        $createNews->slug = md5($this->title);
         $createNews->heading = $this->heading ?? null ;
         $createNews->heading2 = $this->heading2 ?? null ;
         if(isset($this->image)){
