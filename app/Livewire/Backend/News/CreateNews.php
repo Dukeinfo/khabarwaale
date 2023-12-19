@@ -230,7 +230,7 @@ class CreateNews extends Component
             'title'  => $this->title,
             'body'  => $this->heading,
             'url'  => 'inner/'.$createNews->id.'/'.md5($this->title),
-            'image' =>  $createNews->image,
+            'image' =>  env('APP_URL').'/storage/news_gallery/'.$createNews->image,
            
         ];
         env('APP_URL');
