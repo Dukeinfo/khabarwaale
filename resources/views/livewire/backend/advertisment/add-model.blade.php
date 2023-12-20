@@ -52,13 +52,16 @@
                 
                 {{ $formattedFromDate }} to {{ $formattedToDate }}
                 @if ($daysLeft > 0)
-                    <span class="text-warning">
-                        ( for {{ $daysLeft }} day{{ $daysLeft != 1 ? 's' : '' }} )
+                    <span class="text-warning fw-bold">
+                        (for {{ $daysLeft }} day{{ $daysLeft != 1 ? 's' : '' }} )
                     </span>
-                @else
-                    <span class="text-danger">(Expired)</span>
+                @elseif($daysLeft < 0 )
+                    <span class="text-danger fw-bold">(Expired )</span>
+                {{-- @elseif($daysLeft <= 0 )
+                    <span class="text-danger fw-bold">(It will expire today)</span> --}}
+
                 @endif
-                
+
                 
                 
                     </h4>

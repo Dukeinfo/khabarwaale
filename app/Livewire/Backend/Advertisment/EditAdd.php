@@ -7,6 +7,7 @@ use App\Models\Advertisment;
 use App\Models\Category;
 use App\Traits\UploadTrait;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Livewire\Attributes\Rule;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -24,6 +25,7 @@ class EditAdd extends Component
     public $image_add;
     public $link_add;
     public $from_date;
+    #[Rule('required | after_or_equal:from_date', message: 'To date field is required')] 
     public $to_date;
     public $post_month;
     public $sort_id;
@@ -59,6 +61,7 @@ class EditAdd extends Component
     }
 
     public function updateadd(){
+        $this->validate();
         if(!is_null($this->editimage)){
                 $image =  $this->editimage;
                 // Define folder path

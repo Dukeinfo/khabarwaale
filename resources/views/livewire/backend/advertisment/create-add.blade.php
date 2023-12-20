@@ -270,9 +270,13 @@
                                                 <span class="text-warning fw-bold">
                                                     (for {{ $daysLeft }} day{{ $daysLeft != 1 ? 's' : '' }} )
                                                 </span>
-                                            @else
+                                            @elseif($daysLeft < 0 )
                                                 <span class="text-danger fw-bold">(Expired )</span>
+                                    
                                             @endif
+
+
+                                            
                                             
                                             </td>
                                             <td>{{ ucwords(str_replace('home.','',$record->page_name)) ?? 'NA' }}</td>
@@ -310,12 +314,63 @@
 
                                         @endif
                                          @empty
-                                            <tr>
-                                                <td colspan="4"> Record Not Found</td>                                           
+                                            <tr class="text-center">
+                                                <td colspan="8"> Record Not Found</td>                                           
                                             </tr>
                                              @endforelse 
 
-                                    
+                                       {{-- ========================= trash data =========================== --}}
+
+                                       @if (isset($trashdata) & (count($trashdata) > 0))
+                                       <tr>
+                                           <th colspan="7">
+                                               <h3> Trash data </h3>
+                                           </th>
+                                       </tr>
+                                       @forelse ($trashdata  as $keys => $trash)
+                                           <tr>
+                                               <td> {{ $trash->id }}</td>
+
+
+                                               <td>
+                                                   <img src="{{ isset($trash->thumbnail) ? getThumbnail($trash->thumbnail) : asset('no_image.jpg') }}"
+                                                       alt=".."
+                                                       class="img-size-50  img-bordered-sm rounded-circle"
+                                                       width="50">
+                                               </td>
+
+                                               <td>{{ ucwords(str_replace('home.','',$trash->page_name)) ?? 'NA' }}</td>
+                                  
+                                               <td> {{$trash->location ?? 'NA' }}</td>
+                                               <td>
+                               
+
+                                               </td>
+
+
+
+
+
+                                               <td colspan="2" class="text-center">
+
+                                                   <button class="btn btn-sm btn-danger"
+                                                       wire:click="restore({{ $trash->id }})"
+                                                       wire:target="restore({{ $trash->id }})"
+                                                       wire:loading.attr="disabled">
+                                                       Restore</button>
+                                                   <button class="btn btn-sm btn-warning"
+                                                       onclick="confirm('Are you sure you want to Peramanetly remove  this News ?') || event.stopImmediatePropagation()"
+                                                       wire:click="paramDelete({{ $trash->id }})"
+                                                       wire:target="paramDelete({{ $trash->id }})"
+                                                       wire:loading.attr="disabled">
+                                                       Peramanet Delete</button>
+                                                   {{-- <a  href="javascript:void(0)" wire:click="edit({{$record->id}})" class="text-success me-2" title="Edit"  ><i class="fa fa-edit fa-fw"></i></a> --}}
+                                                   {{-- <a href="javascript:void(0)" class="text-danger me-2" title="Delete" ><i class="fa fa-times fa-fw fa-lg"></i></a> --}}
+                                               </td>
+                                           </tr>
+                                       @empty
+                                       @endforelse
+                                   @endif
 
                                     </tbody>
                                 </table>

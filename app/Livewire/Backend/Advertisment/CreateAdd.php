@@ -8,6 +8,8 @@ use App\Models\Advertisment;
 use App\Models\Category;
 use App\Traits\UploadTrait;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Attributes\Url;
 use Livewire\Component;
@@ -35,7 +37,7 @@ class CreateAdd extends Component
     public $link_add;
     #[Rule('required', message: 'From Date field is required')] 
     public $from_date;
-    #[Rule('required', message: 'To date field is required')] 
+    #[Rule('required |date| after_or_equal:from_date', message: 'To date field is required')] 
     public $to_date;
     public $post_month;
     #[Rule('required', message: 'Sort id field is required')] 
@@ -62,8 +64,7 @@ class CreateAdd extends Component
         }
 
 
- 
-
+        $trashdata = Advertisment::onlyTrashed()->get();
         $getCategory=  Category::where('status' ,'Active')->get();
         $getAddLocation=  AddLocation::where('status' ,'Active')->orderby('name')->get();
 
@@ -75,7 +76,7 @@ class CreateAdd extends Component
                                 ->orwhere('to_date', 'like', '%'.$search.'%')
                                 ->orwhere('post_month', 'like', '%'.$search.'%')
                                 ->get();
-        return view('livewire.backend.advertisment.create-add',['get_add_location' => $getAddLocation,'records' => $records,'getCategory' => $getCategory]);
+        return view('livewire.backend.advertisment.create-add',['get_add_location' => $getAddLocation,'records' => $records,'getCategory' => $getCategory ,'trashdata' =>$trashdata]);
     }
 
     public function CreateAdd(){
@@ -156,4 +157,47 @@ class CreateAdd extends Component
                 }
 
         }
+
+        public function restore($id){
+            try {
+                
+                $restore = Advertisment::withTrashed()->find($id);
+                $restore->restore();
+                $this->alert('success', 'Advertisment Restore successfully!');
+                
+            } catch (\Exception $e) {
+                dd($e->getMessage());
+    
+            }
+        }
+
+        
+public function paramDelete($id){
+    try {
+
+        $getimg  = Advertisment::onlyTrashed()->find($id);
+
+        $imagePath = Storage::path('public/mainAdd/'. $getimg->image);
+ 
+        if(File::exists($imagePath) && isset( $getimg->image)){
+         
+            unlink($imagePath);
+        }
+        if($getimg->thumbnail){
+            $thumbnailPath = public_path('uploads/thumbnail/' .$getimg->thumbnail);
+            if (file_exists($thumbnailPath)) {
+                // dd(  $thumbnailPath);
+                unlink($thumbnailPath);
+            }
+        }
+        
+
+        Advertisment::onlyTrashed()->find($id)->forceDelete(); 
+        $this->alert('success', 'Advertisment  Deleted successfully!');
+    } catch (\Exception $e) {
+        dd($e->getMessage());
+
+    }
+
+}
 }
