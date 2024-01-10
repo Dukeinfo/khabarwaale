@@ -108,7 +108,7 @@
                                         </span>
                                     </div>
                                     <a target="_blank"   href="{{route('home.inner',['newsid' => $cat3_News->id , 'slug' =>  $cat3_News->slug ])}}" class="size-w-1 wrap-pic-w hov1 trans-03">
-                                        <img src="{{  isset($cat3_News->thumbnail)? getThumbnail($cat3_News->thumbnail)  : asset('assets/images/post-11.jpg')}}" alt="" class="img-fluid rounded">
+                                        <img src="{{  isset($cat3_News->thumbnail)? getThumbnail($cat3_News->thumbnail)  :getNewsImage($cat3_News->image)  }}" alt="" class="img-fluid rounded">
                                     </a>
                                 </div>
                             </div>
