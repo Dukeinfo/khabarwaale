@@ -73,8 +73,10 @@
                                                     class="form-control">
                                                     <option value=""> Select type</option>
                                                     @forelse ($getCategory as $category)
+                                                    @if ($category->id != 1 ||  $category->sort_id != 1 )
                                                         <option value="{{ $category->id }}">{{ $category->category_en }}
                                                         </option>
+                                                        @endif
                                                     @empty
                                                     @endforelse
                                                 </select>
