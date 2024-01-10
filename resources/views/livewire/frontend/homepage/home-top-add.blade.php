@@ -1,8 +1,6 @@
 <section class="p-t-30">
     <div class="container">
         <div class="row">
-   
-
             @forelse ($homeTopAdd as  $catTopAdd)
             <div class="col-lg-4 text-center">
                 {{-- <p class="text-uppercase text-center small pb-2">                
@@ -31,7 +29,6 @@
                 @endif
             </div>
         @empty
-
         @endforelse
         </div>
     </div>
