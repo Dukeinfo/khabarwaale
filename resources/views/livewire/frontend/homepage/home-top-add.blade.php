@@ -24,7 +24,7 @@
                     @endswitch 
                 </p>
                 @if(isset($catTopAdd->image))
-                <a href="{{$catTopAdd->link_add ?? "#"}}">
+                <a href="{{isset($catTopAdd->image_add) ?get_add_Image($catTopAdd->image_add) : $catTopAdd->link_add }}" target="_blank">
                     <img src="{{  getAddImage($catTopAdd->image)}}" class="img-fluid" alt="Advertisement">
                 </a>
                 @else

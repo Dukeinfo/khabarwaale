@@ -105,7 +105,6 @@ class CreateAdd extends Component
         $model->type = $this->type ?? Null;
         $model->image_add = $image_add['file_name'] ?? NUll;
         $model->thumbnail2 = $image_add['thumbnail_name'] ?? Null;
-
         $model->link_add = $this->link_add ?? Null;
         $model->from_date = $this->from_date;
         $model->to_date = $this->to_date;

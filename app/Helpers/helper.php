@@ -119,3 +119,14 @@ function get_user_profile($profile)
     return   asset('storage/'.$profile);
 }
 
+
+
+
+function get_add_Image($image)
+{
+ 
+    if (str_starts_with($image, 'https')) {
+        return $image;
+    }
+    return   asset('storage/image/'.$image);
+}
