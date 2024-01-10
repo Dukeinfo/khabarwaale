@@ -105,11 +105,10 @@
                                         </div>
                                         
                                         <a target="_blank" href="{{route('home.inner',['newsid' => $hintopNews->id , 'slug' =>  md5createSlug($hintopNews->slug ) ])}}" class="size-w-1 wrap-pic-w hov1 trans-03">
-                                           @if(isset($hintopNews->thumbnail))
-                                            <img src="{{  isset($hintopNews->thumbnail)? getThumbnail($hintopNews->thumbnail)  :  asset('assets/images/post-06.jpg')}}" alt="" class="img-fluid rounded">
-                                            @else
-                                            <img src="{{  isset($hintopNews->imag)? getNewsImage($hintopNews->image)  :  asset('assets/images/post-06.jpg')}}" alt="" class="img-fluid rounded">
-                                            @endif
+                                        
+                                            <img src="{{  isset($hintopNews->thumbnail)? getThumbnail($hintopNews->thumbnail)  :  getNewsImage($hintopNews->image)}}" alt="" class="img-fluid rounded">
+                                          
+                                           
                                             
                                         </a>  
                                     </div>
