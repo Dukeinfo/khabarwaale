@@ -227,7 +227,6 @@
 				@endif
 				<a class="dropdown-item" href="{{route('contact_entries')}}"><i class="bx bx-lock-open font-size-16 align-middle me-1"></i> <span key="t-lock-screen">Messages </span></a>
 				@else
-				<p class="text-center text-danger">Only Admin access  </p>
 				@endrole
 
 				<div class="dropdown-divider"></div>

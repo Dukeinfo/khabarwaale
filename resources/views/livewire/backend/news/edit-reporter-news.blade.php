@@ -37,7 +37,7 @@
                                         <option value=""> Select type</option>
                                         @forelse ($getwebsite_type as $type )
 
-                                            <option value="{{$type->websiteType->id }}">{{$type->websiteType->name ?? "NA"}} {{$type->websiteType->id}}</option>
+                                            <option value="{{$type->websiteType->id }}">{{$type->websiteType->name ?? "NA"}} </option>
                                         @empty
                                         @endforelse
                                     </select>
@@ -51,7 +51,7 @@
                                     <select name="category_id" wire:model="category_id" id="category_id" class="form-control">
                                             <option value=""> Select type</option>
                                             @forelse ($getCategory as $category )
-                                                <option value="{{$category->category_id}}">{{ getMenuName($category->category_id) ?? "NA"}} {{$category->category_id}}</option>
+                                                <option value="{{$category->category_id}}">{{ getMenuName($category->category_id) ?? "NA"}} </option>
                                             @empty
                                             @endforelse
                                     </select>

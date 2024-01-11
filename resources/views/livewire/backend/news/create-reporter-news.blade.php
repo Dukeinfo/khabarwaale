@@ -44,7 +44,7 @@
                                     <select name="category_id" wire:model="category_id" id="category_id" class="form-control">
                                             <option value=""> Select type</option>
                                             @forelse ($getCategory as $category )
-                                                <option value="{{$category->category_id}}">{{ getMenuName($category->category_id) ?? "NA"}} {{$category->category_id}}</option>
+                                                <option value="{{$category->category_id}}">{{ getMenuName($category->category_id) ?? "NA"}} </option>
                                             @empty
                                             @endforelse
                                     </select>
