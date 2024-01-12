@@ -167,7 +167,7 @@
                                         <div class="col-md-6 mb-3">
                                             <!-- Image -->
                                             <div class="form-group">
-                                                <label for="image">Image</label>
+                                                <label for="image">News Image</label>
                                                 <input type="file" class="form-control" wire:model="image"
                                                     id="image">
                                                 @error('image')
@@ -610,7 +610,7 @@
                                             <tr>
                                                 <th>#</th>
                                                 <th>image</th>
-                                                <th>Add Type</th>
+                                                <th>News Type</th>
                                                 <th>Category </th>
                                                 <th>User Name </th>
                                                 <th>Post Date </th>
@@ -733,7 +733,7 @@
                                             @endrole
                                         @empty
                                             <tr class="text-center ">
-                                                <td colspan="7" class="text-danger fw-bold"> Record Not Found</td>
+                                                <td colspan="9" class="text-danger fw-bold"> Record Not Found</td>
                                             </tr>
                                             @endforelse
 
@@ -741,29 +741,28 @@
 
                                             @if (isset($trashdata) & (count($trashdata) > 0))
                                                 <tr>
-                                                    <th colspan="7">
+                                                    <th colspan="9">
                                                         <h3> Trash data </h3>
                                                     </th>
+                                                </tr>
+                                                <tr>
+                                                   <th> #	 </th>
+                                                   <th> image	 </th>
+                                                   <th> News Type	 </th>
+                                                   <th> Category	 </th>
+                                                   <th> User	 </th>
+                                                   <th> Posted at	 </th>
+                                                   <th colspan="3" class="text-center"> Action </th>
                                                 </tr>
                                                 @forelse ($trashdata  as $keys => $trash)
                                                     <tr>
                                                         <td> {{ $trash->id }}</td>
-
-
-                                                        <td>
-                                                            <img src="{{ isset($trash->thumbnail) ? getThumbnail($trash->thumbnail) : asset('no_image.jpg') }}"
-                                                                alt=".."
-                                                                class="img-size-50  img-bordered-sm rounded-circle"
-                                                                width="50">
-                                                        </td>
-
+                                                        <td>   <img src="{{ isset($trash->thumbnail) ? getThumbnail($trash->thumbnail) : asset('no_image.jpg') }}"    alt=".."    class="img-size-50  img-bordered-sm rounded-circle"    width="50">   </td>
                                                         <td>{{ ucwords($trash->newstype['name']) ?? 'NA' }}</td>
-
                                                         <td>
-                                                            <span class="badge bg-dark p-1">
-                                                                {{ $trash->getmenu['category_en'] ?? 'NA' }}</span>
-
+                                                            <span class="badge bg-dark p-1">   {{ $trash->getmenu['category_en'] ?? 'NA' }}</span>
                                                         </td>
+
                                                         <td>
                                                             {{-- @if ($trash->user['role_id'] == 1)
                                                                 <span class="badge bg-success p-1">
@@ -780,12 +779,13 @@
                                                                 {{ ucwords( auth()->user()->roles->pluck('name')[0] )?? '' }} 
                                                             @endrole
                                                         </td>
+                                                        <td>{{ $trash->created_at->diffForHumans() ?? 'NA' }}</td>
 
 
 
 
 
-                                                        <td colspan="2" class="text-center">
+                                                        <td colspan="3" class="text-center">
 
                                                             <button class="btn btn-sm btn-danger"
                                                                 wire:click="restore({{ $trash->id }})"
