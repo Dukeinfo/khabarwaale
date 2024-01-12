@@ -17,7 +17,6 @@ class CategoryTopAdd extends Component
                            ->where('page_name' ,'category')
                            ->where('status', 'Yes') // Assuming 'status' is used to enable/disable ads
                            ->orderBy('created_at', 'desc')
-                           
                            ->limit(3)
                            ->get();
         return view('livewire.frontend.category.category-top-add',['categoryTopAdd' => $categoryTopAdd]);

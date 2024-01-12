@@ -121,7 +121,7 @@ use LivewireAlert;
             $createuser->about = $this->about;
             $createuser->mobile = $this->mobile;
             $createuser->address = $this->address;
-            $createuser->profile_photo_path = $filePath ?? Null;
+            $createuser->profile_photo_path = $fileName ?? Null;
             $createuser->status = true;
           
             // $createuser->roles()->detach();

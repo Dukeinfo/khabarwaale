@@ -109,7 +109,7 @@ class EditUser extends Component
                 $profile->about = $this->about;
                 $profile->mobile = $this->mobile;
                 $profile->address = $this->address;
-                $profile->profile_photo_path =  $filePath ?? Null;
+                $profile->profile_photo_path =  $fileName ?? Null;
                 $profile->status = true;
                 $profile->save();
 
