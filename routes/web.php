@@ -99,10 +99,10 @@ Route::get('/screenshot', [FronendController::class, 'captureScreenshot']);
 
 
 Livewire::setScriptRoute(function ($handle) {
-    return Route::get('/boldapunjab/livewire/livewire.js', $handle);
+    return Route::get('/livewire/livewire.js', $handle);
 });
 Livewire::setUpdateRoute(function ($handle) {
-    return Route::post('/boldapunjab/livewire/update', $handle);
+    return Route::post('/livewire/update', $handle);
         
 });
 Route::middleware([
