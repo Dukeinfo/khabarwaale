@@ -35,8 +35,8 @@
                              @forelse ( $records as $key => $record )
                              {{-- @if($record->role_id != 1) --}}
                              <tr>
-                                <td> {{ $key+1}}</td>
-                                <td>  <img src="{{asset('storage/'.$record->profile_photo_path)}}" alt=".." class="img-size-50 img-circle img-bordered-sm" width="50"></td>
+                                <td> {{ $key+1}}</td>   
+                                <td>  <img src="{{ isset($record->profile_photo_path) ?  asset('storage/uploads/'. $record->profile_photo_path) : asset('no_image.jpg')}}" alt=".." class="img-size-50 img-circle img-bordered-sm" width="50"></td>
 
                                 <td>{{$record->name ?? 'NA' }} <br>
                                     <span class="badge bg-primary" >  {{ ucwords($record->role['name'] ?? "NA") }} </span>

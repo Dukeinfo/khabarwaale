@@ -6,7 +6,7 @@
             </div>
             <div class="col-sm-6">
                 <div class="text-sm-end d-none d-sm-block">
-                    Pinegrove School, Solan (H.P.)
+                    <a href="https://www.khabarwaale.com/" target="_blank" > khabarwaale.com</a>
                 </div>
             </div>
         </div>

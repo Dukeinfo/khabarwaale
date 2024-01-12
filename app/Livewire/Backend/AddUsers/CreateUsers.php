@@ -59,6 +59,8 @@ use LivewireAlert;
                     })->orwhere('name', 'like', '%'.$search.'%')
                         ->orwhere('username', 'like', '%'.$search.'%')
                         ->orwhere('email', 'like', '%'.$search.'%');
+                    })->whereDoesntHave('roles', function ($roleQuery) {
+                        $roleQuery->where('name', 'admin');
                     })->get();
                     $getRoles =  Role::get();
                     $getCategory=  Category::where('status' ,'Active')->get();

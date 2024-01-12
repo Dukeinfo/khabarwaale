@@ -71,7 +71,7 @@
                                     <div class="mb-3">
                               
                                         
-                                        <img src="{{ asset('storage/uploads').'/'.$this->profile_photo_path }}" alt="Image" width="100" height="70"/>
+                                        <img src="{{ isset($this->profile_photo_path) ?  asset('storage/uploads/'.$this->profile_photo_path) :  asset('no_image.jpg') }}" alt="Image" width="100" height="70"/>
                                     </div>
                                 </div>
 

@@ -7,9 +7,10 @@
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <title>Admin Dashboard </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta content="Pinegrove School, Subathu" name="description" />
-        <meta content="Pinegrove School, Subathu" name="keywords" />
-        <meta content="Pinegrove School, Subathu" name="author" />
+        <meta content="khabarwaale - Punjabi News Portal" name="description" />
+        <meta content="khabarwaale" name="keywords" />
+        <meta content="khabarwaale - Punjabi News Portal" name="author" />
+        
         <!-- App favicon -->
             <!-- CK editor cnd link-->
             <script src="https://cdn.ckeditor.com/4.6.2/standard-all/ckeditor.js"></script>

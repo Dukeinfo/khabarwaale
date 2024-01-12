@@ -5,9 +5,10 @@
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <title>Sign In</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta content="Pinegrove School" name="description" />
-        <meta content="Pinegrove School" name="keywords" />
-        <meta content="Pinegrove School" name="author" />
+        <meta content="khabarwaale - Punjabi News Portal" name="description" />
+        <meta content="khabarwaale" name="keywords" />
+        <meta content="khabarwaale - Punjabi News Portal" name="author" />
+        
         <!-- App favicon -->
         <link rel="shortcut icon" href="{{asset('admin_assets/images/faviconn.ico')}}">
         <!-- Bootstrap Css -->
