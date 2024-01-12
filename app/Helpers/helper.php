@@ -116,7 +116,7 @@ function get_video_image($image)
 function get_user_profile($profile)
 {
  
-    return   asset('storage/'.$profile);
+    return   asset('storage/uploads/'.$profile);
 }
 
 
