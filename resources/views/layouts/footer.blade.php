@@ -210,8 +210,9 @@
                     Copyright &copy;<script>
                         document.write(new Date().getFullYear());
                     </script> All rights reserved
-                    <a href="javascript:void()" class="f1-s-1 cl10 hov-link1">
-                        Khabarwaale.com
+                    Maintained & Developed By:
+                    <a href="https://www.dukeinfosys.com" class="f1-s-1 cl10 hov-link1">
+                                Duke Infosys
                     </a>
                 </span>
             </div>
