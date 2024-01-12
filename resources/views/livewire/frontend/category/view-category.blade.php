@@ -207,10 +207,16 @@
                                                 Advertisement
                                         @endswitch
                                     </p>
+                                    @if(isset($categorycenterpAdd->image))
+                            
                                     <a href="javascript:void()">
-                                        <img src="{{ asset('assets/images/ads/ad2.jpg') }}" class="img-fluid" alt="">
+                                        <img src="{{ isset($categorycenterpAdd->image) ?  getAddImage($categorycenterpAdd->image) : asset('assets/images/ads/ad2.jpg') }}" class="img-fluid" alt="">
                                     </a>
+                                    @else 
+
+                                    @endif
                                 </div>
+                              
                                 @php $articleCount = 0 @endphp
                                 
                             @endif

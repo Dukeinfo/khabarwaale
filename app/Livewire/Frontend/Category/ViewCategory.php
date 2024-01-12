@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Frontend\Category;
 
+use App\Models\Advertisment;
 use App\Models\Category;
 use App\Models\NewsPost;
 use Livewire\Component;
@@ -81,12 +82,21 @@ public function mount( $id){
                             $catWiseNewsData = $catWiseNewsData->paginate(9);
                      
 
-                         
+                            $today = now()->toDateString();
+                            $categorycenterpAdd = Advertisment::where('from_date', '<=', $today)
+                                               ->where('to_date', '>=', $today)
+                                               ->where('location','Center Banner')
+                                               ->where('page_name' ,'category')
+                                               ->where('status', 'Yes') // Assuming 'status' is used to enable/disable ads
+                                               ->orderBy('created_at', 'desc')
+                                              
+                                               ->first();
                     
 
 
         return view('livewire.frontend.category.view-category',[
             'catWiseNewsData' =>$catWiseNewsData , 
+            'categorycenterpAdd' => $categorycenterpAdd,
          
          
         ])->layout('layouts.app');
