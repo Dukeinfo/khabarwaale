@@ -3,17 +3,7 @@
 @section('desc', 'Khabarwaale - News Portal')
 @section('keywords', 'Khabarwaale - News Portal')
 @section('content')
-
-
-
     @livewire('frontend.category.category-top-add')
-
-
     <!-- Other category page content -->
-
     @livewire('frontend.category.view-category' ,['id' =>$id ])
-
-
-
-
 @stop

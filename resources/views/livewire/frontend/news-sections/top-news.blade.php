@@ -105,11 +105,7 @@
                                         </div>
                                         
                                         <a target="_blank" href="{{route('home.inner',['newsid' => $hintopNews->id , 'slug' =>  md5createSlug($hintopNews->slug ) ])}}" class="size-w-1 wrap-pic-w hov1 trans-03">
-                                        
                                             <img src="{{  isset($hintopNews->thumbnail)? getThumbnail($hintopNews->thumbnail)  :  getNewsImage($hintopNews->image)}}" alt="" class="img-fluid rounded">
-                                          
-                                           
-                                            
                                         </a>  
                                     </div>
                                 </div>
