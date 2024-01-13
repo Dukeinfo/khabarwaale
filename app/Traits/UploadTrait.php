@@ -39,10 +39,32 @@ trait UploadTrait
             // $image->resize($thumbnailWidth, $thumbnailHeight);
 
             // Generate a thumbnail and save it to the specified directory
-            $thumbnailName = 'thumb_'.$file_name;
-            Image::make($uploadedFile)->fit(100, 75)->save($directory.'/'.$thumbnailName);
-            $image->save($directory.'/'. $thumbnailName);
-            return ['file_name' => $file_name, 'thumbnail_name' => $thumbnailName];
+                // Load the image
+                $image = Image::make($uploadedFile);
+                // Log the original image size
+                Log::info('Original Image Size: ' . $image->width() . 'x' . $image->height());
+
+                // Create a new instance for the thumbnail
+                $thumbnail = Image::make($uploadedFile)->fit(100, 75);
+
+                // Log the resized image size
+                Log::info('Resized Image Size: ' . $thumbnail->width() . 'x' . $thumbnail->height());
+
+                // Save the thumbnail
+                $thumbnailName = 'thumb_'.$file_name;
+                $thumbnail->save($directory.'/'.$thumbnailName);
+                return ['file_name' => $file_name, 'thumbnail_name' => $thumbnailName];
+
+            // $thumbnailName = 'thumb_'.$file_name;
+            // // Log the original image size
+            // Log::info('Original Image Size: ' . $image->width() . 'x' . $image->height());
+
+            // Image::make($uploadedFile)->fit(100, 75)->save($directory.'/'.$thumbnailName);
+
+            // Log::info('Resized Image Size: ' . $image->width() . 'x' . $image->height());
+
+            // $image->save($directory.'/'. $thumbnailName);
+            // return ['file_name' => $file_name, 'thumbnail_name' => $thumbnailName];
 
           
          
