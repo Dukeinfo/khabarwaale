@@ -51,8 +51,8 @@
                                         </div>
                                         <div class="col-md-4">
                                         <div class="mb-3">
-                                            <label for="video_url" class="form-label">Video URL</label>
-                                            <input type="text" class="form-control" id="video_url" wire:model="video_url" placeholder="https://example.com">
+                                            <label for="video_url" class="form-label">Video embed code </label>
+                                            <input type="text" class="form-control" id="video_url" wire:model="video_url" placeholder=" https://www.youtube.com/embed/=> xWwFbMnlZU0">
                                             @error('video_url') <span class="error">{{ $message }}</span> @enderror
                                         
                                         </div>
@@ -166,14 +166,14 @@
                                          <tr>
                                             <td> {{ $key+1}}</td>
                                             <td> 
-                                                <img src="{{getThumbnail($record->thumbnail) ?? ''}}" alt=".." class="img-size-50 img-circle img-bordered-sm" width="50">
+                                                <img src="{{isset($record->thumbnail) ? getThumbnail($record->thumbnail) :  asset('no_image.jpg')}}" alt=".." class="img-size-50 img-circle img-bordered-sm" width="50">
                                             </td>
                                             <td>
-                                                {{$record->video_title_en ?? "NA"}}
+                                                {{ Str::limit($record->video_title_en, 50)  ?? "NA"}}
 
                                             </td>
-                                            {{-- https://www.youtube.com/embed/{{$livetvnews->video_url}}?rel=0 --}}
-                                                <td> <a href="https://www.youtube.com/embed/{{$record->video_url ?? '#'}}" target="_blank" title="{{$record->video_url }}"> {{$record->video_title_en ?? "NA"}}</a> </td>
+                                            {{-- https://www.youtube.com/embed/{{$livetvnews->video_url}}?rel=0 --}}   
+                                                <td> <a href="https://www.youtube.com/embed/{{$record->video_url ?? '#'}}" target="_blank" title="{{$record->video_url }}"> {{  Str::limit($record->video_title_en, 50) ?? "NA"}}</a> </td>
                                                 <td> 
                                                     {{ \Carbon\Carbon::parse($record->post_date )->format('d-M-y') ?? ''}}
 
