@@ -46,10 +46,10 @@ class InnerPageRecommended extends Component
                             ->limit(6)
                             ->get();
                                 
-                              
+                            // , ['recmendNewsData' => $recmendNewsData]
 
                                 
-        return view('livewire.frontend.innerpage.inner-page-recommended', ['recmendNewsData' => $recmendNewsData]);
+        return view('livewire.frontend.innerpage.inner-page-recommended');
     }
 
 

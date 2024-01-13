@@ -6,7 +6,9 @@
 
 
 
-@livewire('frontend.innerpage.inner-page-top-add')
+{{-- @livewire('frontend.innerpage.inner-page-top-add') --}}
+@livewire('frontend.homepage.home-top-add')
+
 
 <section class="p-b-70 p-t-10">
 
