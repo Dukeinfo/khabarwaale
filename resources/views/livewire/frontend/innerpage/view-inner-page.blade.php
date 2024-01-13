@@ -103,7 +103,7 @@ use Illuminate\Support\Str;
                     </span>
                 </div>
 
-                <div class="wrap-pic-max-w p-b-30">
+                <div class="wrap-pic-max-w p-b-30 text-center">
                     <img src="{{isset($getNewsDetail->image)? getNewsImage($getNewsDetail->image)  : asset('assets/images/blog-list-04.jpg')}}" class="rounded img-fluid" alt="IMG">
                 </div>
 
