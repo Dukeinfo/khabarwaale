@@ -169,11 +169,11 @@
                                                 <img src="{{isset($record->thumbnail) ? getThumbnail($record->thumbnail) :  asset('no_image.jpg')}}" alt=".." class="img-size-50 img-circle img-bordered-sm" width="50">
                                             </td>
                                             <td>
-                                                {{ Str::limit($record->video_title_en, 50)  ?? "NA"}}
+                                                {{ Str::limit($record->video_title_en, 40)  ?? "NA"}}
 
                                             </td>
                                             {{-- https://www.youtube.com/embed/{{$livetvnews->video_url}}?rel=0 --}}   
-                                                <td> <a href="https://www.youtube.com/embed/{{$record->video_url ?? '#'}}" target="_blank" title="{{$record->video_url }}"> {{  Str::limit($record->video_title_en, 50) ?? "NA"}}</a> </td>
+                                                <td> <a href="https://www.youtube.com/embed/{{$record->video_url ?? '#'}}" target="_blank" title="{{$record->video_url }}"> {{  Str::limit($record->video_title_en, 40) ?? "NA"}}</a> </td>
                                                 <td> 
                                                     {{ \Carbon\Carbon::parse($record->post_date )->format('d-M-y') ?? ''}}
 
