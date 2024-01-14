@@ -38,20 +38,14 @@ class InnerPageRecommended extends Component
                             // $query->whereIn('breaking_top', ['Show'])
                             // ->orWhere('id', $this->getnews_id)
                             // ->orWhere('category_id', $this->getnews_category);
-
                             ->orderBy('created_at', 'desc')
                             ->orderBy('updated_at', 'desc')
                             ->where('news_type', $this->getNewsType()) 
                             ->inRandomOrder() // Get random posts
                             ->limit(6)
-                            ->get();
-                                
-                            // , ['recmendNewsData' => $recmendNewsData]
-
-                                
-        return view('livewire.frontend.innerpage.inner-page-recommended');
+                            ->get();       
+        return view('livewire.frontend.innerpage.inner-page-recommended', ['recmendNewsData' => $recmendNewsData]);
     }
-
 
         private function getNewsType()
         {
