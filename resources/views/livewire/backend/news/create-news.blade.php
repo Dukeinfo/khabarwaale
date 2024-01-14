@@ -615,7 +615,6 @@
                                                 <th>User Name </th>
                                                 <th>Post Date </th>
                                                 <th>Post Month </th>
-
                                                 <th>Status</th>
                                                 <th>Action</th>
                                             </tr>
@@ -660,8 +659,8 @@
 
                                                         </td>
 
-                                                        <td>{{ $record->post_date }}</td>
-                                                        <td>{{ $record->post_month }}</td>
+                                                        <td>{{ $record->post_date ?? 'NA'}} <br>{{ $record->created_at->diffForHumans() ?? 'NA' }}</td>
+                                                        <td>{{ $record->post_month  ?? 'NA' }}</td>
 
 
                                                         <td>
