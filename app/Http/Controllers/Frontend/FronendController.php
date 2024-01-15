@@ -125,7 +125,8 @@ class FronendController extends Controller
     public function captureScreenshot()
     {
         try {
-        Browsershot::url('https://example.com')
+        Browsershot::url('https://www.khabarwaale.com')
+                ->setScreenshotType('jpeg', 100)
             ->save('screenshot.png');
             
             dd("Done");

@@ -18,13 +18,18 @@
     {!! SEO::generate() !!}
     {{-- google --}}
     <meta name="google-site-verification" content="DhqXkLgsZA08lmkms8yHxN2nZn9GOvz4hSVV8NPp3EM" />
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-964426815"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'AW-964426815'); </script><?php   include 'adminkh/admin/config/db-config.php'; ?>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-964426815"></script> 
+    <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'AW-964426815'); 
+    </script>
+     @if(app()->environment('production'))
+        <?php   include 'adminkh/admin/config/db-config.php'; ?>
+    @endif
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-118451473-1"></script>
     <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'UA-118451473-1');
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-118451473-1');
     </script>
     {{-- google --}}
     @stack('social-scripts')
