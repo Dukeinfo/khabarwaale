@@ -177,11 +177,12 @@ public function  active($id){
         $this->alert('success', 'User Active successfully!');
 }
     public function  delete($id){
+        
         try {
             
       // Detach roles before deleting the user
             $user = User::findOrFail($id);
-            
+            AssigneMenu::where('user_id', $id)->delete();
             $user->roles()->detach();
 
             if (!is_null($user)) {
