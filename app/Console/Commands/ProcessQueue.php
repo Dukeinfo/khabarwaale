@@ -29,7 +29,7 @@ class ProcessQueue extends Command
     {
         // $exitCode = Artisan::call('cache:clear');
         // $this->info('Application cache has been cleared');
-        Log::info('Queue worker is already running');
+        // Log::info('Queue worker is already running');
              
         $lockFile = storage_path('queue_process.lock');
 
