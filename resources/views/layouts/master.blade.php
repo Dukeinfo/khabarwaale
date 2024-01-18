@@ -21,9 +21,7 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-964426815"></script> 
     <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'AW-964426815'); 
     </script>
-     @if(app()->environment('production'))
-        <?php   include 'adminkh/admin/config/db-config.php'; ?>
-    @endif
+
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-118451473-1"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
