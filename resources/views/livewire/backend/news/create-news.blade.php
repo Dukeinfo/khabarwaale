@@ -35,17 +35,17 @@
                             <div class="card-body">
 
                                 {{-- @if ($errors->any())
-                            @foreach ($errors->all() as $error)
-                            <div class="row">                     
-                                <div class="col-lg-12">
-                                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                            <div>{{$error}}</div>
-                                          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                @foreach ($errors->all() as $error)
+                                <div class="row">                     
+                                    <div class="col-lg-12">
+                                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                                <div>{{$error}}</div>
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            @endforeach
-                            @endif --}}
+                                @endforeach
+                                @endif --}}
                                 <form wire:submit.prevent="createNews" id="my-form">
                                     <div class="row">
                                         <div class="col-md-4 mb-3">
@@ -69,7 +69,7 @@
                                             <!-- Category ID -->
                                             <div class="form-group">
                                                 <label for="category_id">Category </label>
-                                                <select name="category_id" wire:model.live="category_id" id="category_id"
+                                                <select name="category_id" wire:model="category_id" id="category_id"
                                                     class="form-control">
                                                     <option value=""> Select type</option>
                                                     @forelse ($getCategory as $category)
@@ -90,7 +90,7 @@
                                             <!-- User ID -->
                                             <div class="form-group">
                                                 <label for="user_id">User </label>
-                                                <select name="user_id" wire:model.live="user_id" id="user_id"
+                                                <select name="user_id" wire:model="user_id" id="user_id"
                                                     class="form-control">
                                                     <option value=""> Select User</option>
                                                     @forelse ($gerUsers as $user)
@@ -132,7 +132,7 @@
                                             <!-- Title -->
                                             <div class="form-group">
                                                 <label for="title">Title</label>
-                                                <input type="text" class="form-control" wire:model="title"
+                                                <input type="text" class="form-control" placeholder="News Title" wire:model="title"
                                                     id="title">
                                                 @error('title')
                                                     <span class="error">{{ $message }}</span>
@@ -144,7 +144,7 @@
                                             <!-- Heading -->
                                             <div class="form-group">
                                                 <label for="heading">Heading</label>
-                                                <input type="text" class="form-control" wire:model="heading"
+                                                <input type="text" class="form-control" placeholder="News Heading 1"  wire:model="heading"
                                                     id="heading">
                                                 @error('heading')
                                                     <span class="error">{{ $message }}</span>
@@ -156,7 +156,7 @@
                                             <!-- Heading2 -->
                                             <div class="form-group">
                                                 <label for="heading2">Heading2</label>
-                                                <input type="text" class="form-control" wire:model="heading2"
+                                                <input type="text" class="form-control" placeholder="News Heading 2" wire:model="heading2"
                                                     id="heading2">
                                                 @error('heading2')
                                                     <span class="error">{{ $message }}</span>
@@ -168,7 +168,7 @@
                                             <!-- Image -->
                                             <div class="form-group">
                                                 <label for="image">News Image</label>
-                                                <input type="file" class="form-control" wire:model="image"
+                                                <input type="file" class="form-control"  wire:model="image"
                                                     id="image">
                                                 @error('image')
                                                     <span class="error">{{ $message }}</span>
@@ -180,7 +180,7 @@
                                             <!-- Caption -->
                                             <div class="form-group">
                                                 <label for="caption">Caption</label>
-                                                <input type="text" class="form-control" wire:model="caption"
+                                                <input type="text" class="form-control" placeholder="News Caption"  wire:model="caption"
                                                     id="caption">
                                                 @error('caption')
                                                     <span class="error">{{ $message }}</span>
@@ -295,7 +295,7 @@
                                             <!-- Metatags -->
                                             <div class="form-group">
                                                 <label for="metatags">Metatags</label>
-                                                <textarea class="form-control border border-dark" wire:model="metatags" id="metatags" rows="3"></textarea>
+                                                <textarea class="form-control border border-dark" placeholder="Metatags" wire:model="metatags" id="metatags" rows="3"></textarea>
                                                 @error('metatags')
                                                     <span class="error">{{ $message }}</span>
                                                 @enderror
@@ -306,7 +306,7 @@
                                             <!-- Description -->
                                             <div class="form-group">
                                                 <label for="description">Description</label>
-                                                <textarea class="form-control border border-dark" wire:model="description" id="description" rows="3"></textarea>
+                                                <textarea class="form-control border border-dark" placeholder="Meta Description"  wire:model="description" id="description" rows="3"></textarea>
                                             </div>
                                             @error('description')
                                                 <span class="error">{{ $message }}</span>
@@ -317,7 +317,7 @@
                                             <!-- Keywords -->
                                             <div class="form-group">
                                                 <label for="keywords">Keywords</label>
-                                                <textarea class="form-control border border-dark" wire:model="keywords" id="keywords" rows="3"></textarea>
+                                                <textarea class="form-control border border-dark" wire:model="keywords" placeholder="keywords" id="keywords" rows="3"></textarea>
                                             </div>
                                             @error('keywords')
                                                 <span class="error">{{ $message }}</span>
@@ -329,7 +329,7 @@
                                             <!-- Reject Reason -->
                                             <div class="form-group">
                                                 <label for="reject_reason">Reject Reason</label>
-                                                <textarea class="form-control border border-dark" wire:model="reject_reason" id="reject_reason" rows="3"></textarea>
+                                                <textarea class="form-control border border-dark" placeholder="News Reject Reason" wire:model="reject_reason" id="reject_reason" rows="3"></textarea>
                                             </div>
                                             @error('reject_reason')
                                                 <span class="error">{{ $message }}</span>

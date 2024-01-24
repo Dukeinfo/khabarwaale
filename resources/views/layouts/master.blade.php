@@ -5,23 +5,12 @@
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <meta http-equiv="content-type" content="text/html;charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    {{-- <meta name="description" content="@yield('desc')">
-    <meta name="keywords" content="@yield('keywords')">
-    <meta name="author" content=""> --}}
-        {{-- @php
-            $headerSnippets = App\Models\SeoHeadersnippet::get();
-        @endphp
-        @forelse($headerSnippets as $snippet)
-                {{ $snippet->description }}
-            @empty
-        @endforelse --}}
     {!! SEO::generate() !!}
     {{-- google --}}
     <meta name="google-site-verification" content="DhqXkLgsZA08lmkms8yHxN2nZn9GOvz4hSVV8NPp3EM" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-964426815"></script> 
     <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'AW-964426815'); 
     </script>
-
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-118451473-1"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -29,6 +18,13 @@
         gtag('js', new Date());
         gtag('config', 'UA-118451473-1');
     </script>
+        @php
+            $headerSnippets = App\Models\SeoHeadersnippet::where('status' ,'Active')->whereNull('deleted_at')->get();
+        @endphp
+        @forelse($headerSnippets as $snippet)
+             {!! $snippet->description !!}
+        @empty
+        @endforelse
     {{-- google --}}
     @stack('social-scripts')
     <link rel="icon" type="image/png" href="{{asset('assets/images/icons/favicon.png')}}" />
@@ -72,6 +68,14 @@
     <script src="{{asset('assets/vendor/bootstrap/js/popper.js')}}"></script>
     <script src="{{asset('assets/vendor/bootstrap/js/bootstrap.min.js')}}"></script>
     <script src="{{asset('assets/js/main.js')}}"></script>
+@php
+    $footerSnippets = App\Models\SeoFootersnippet::where('status' ,'Active')->whereNull('deleted_at')->get();
+@endphp
+    @forelse($footerSnippets as $snippet)
+    <!-- {{ $snippet->title }} -->
+    {!! $snippet->description !!}
+    @empty
+    @endforelse
     @livewireScripts
     {{-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase.js"></script>

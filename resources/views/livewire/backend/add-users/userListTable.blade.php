@@ -69,11 +69,11 @@
 
                                @endif
                                     <td>   
-                                        {{-- <button class="btn btn-sm btn-success"  data-bs-toggle="modal" data-bs-target="#usermodel{{$record->id}}">
+                                        <button class="btn btn-sm btn-success"  data-bs-toggle="modal" data-bs-target="#usermodel{{$record->id}}">
                                             <i class="fa fa-eye fa-fw"></i>
-                                        </button> --}}
+                                        </button>
                                             {{-- viewDetail --}}
-                                        <button   wire:click="viewDetail({{$record->id}})" class="btn btn-sm btn-primary" title="Edit"  wire:target="viewDetail({{ $record->id }})"  wire:loading.attr="disabled">
+                                        <button  disabled wire:click="viewDetail({{$record->id}})" class="btn btn-sm btn-primary" title="Edit"  wire:target="viewDetail({{ $record->id }})"  wire:loading.attr="disabled">
                                             <i class="fa fa-eye fa-fw"></i>
                                         </button>
                                                                            

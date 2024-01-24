@@ -15,10 +15,17 @@ class Kernel extends ConsoleKernel
     //     // Add other commands here if needed
     // ];
 
+    protected $commands = [
+        // Other commands...
+        \App\Console\Commands\ClearLogs::class,
+    ];
+
+
     protected function schedule(Schedule $schedule): void
     {
         // $schedule->command('inspire')->hourly();
         $schedule->command('queue:process')->everyMinute();
+        $schedule->command('logs:clear')->weekly();
     }
 
     /**

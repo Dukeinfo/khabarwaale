@@ -250,19 +250,19 @@ class CreateNews extends Component
             );
 
         }
-        $this->alert('success', 'Notification sent successfully', [
-            'toast' => false,
-            'position' => 'center'
-        ]);
-    }
+            $this->alert('success', 'Notification sent successfully', [
+                'toast' => false,
+                'position' => 'center'
+            ]);
+        }
 
-        $this->reset();
-        $this->alert('success', 'News Created successfully!');
-        // return redirect()->route('admin.create_news')->with();
-        $this->dispatch('formSubmitted');
-        // if($this->send_noti == 'Show'){
-        //     $this->sendNotification($createNews);
-        // }
+            $this->reset();
+            $this->alert('success', 'News Created successfully!');
+            // return redirect()->route('admin.create_news')->with();
+            $this->dispatch('formSubmitted');
+            // if($this->send_noti == 'Show'){
+            //     $this->sendNotification($createNews);
+            // }
 
         
     }

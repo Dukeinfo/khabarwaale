@@ -36,7 +36,7 @@ class ProcessQueue extends Command
         // Check if a lock file exists, indicating that a process is already running
         if (file_exists($lockFile)) {
             $this->info('Queue worker is already running.');
-            Log::info('Queue worker is already running');
+            // Log::info('Queue worker is already running');
 
             return;
         }

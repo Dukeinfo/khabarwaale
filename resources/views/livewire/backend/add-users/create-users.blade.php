@@ -45,7 +45,7 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="getwebsite_type">Wesite type </label>
-                                                   <select name="getwebsite_type" wire:model.live="website_type_id" id="getwebsite_type" class="form-control">
+                                                   <select name="getwebsite_type" wire:model="website_type_id" id="getwebsite_type" class="form-control">
                                                     <option value=""> Select type</option>
                                                     @forelse ($getwebsite_type as $type )
                                                         <option value="{{$type->id}}">{{$type->name}}</option>
@@ -59,7 +59,7 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="role_id">Role</label>
-                                                    <select wire:model.live="role_id" class="form-control" id="role_id">
+                                                    <select wire:model="role_id" class="form-control" id="role_id">
                                                         <option  value="">Select Role</option>
                                                         @forelse ($getRoles as $role )
                                                             {{-- @if($role->id != 1) --}}
@@ -77,15 +77,15 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="name">Name</label>
-                                                    <input wire:model.live="name" type="text" placeholder="Name" class="form-control" id="name">
+                                                    <input wire:model="name" type="text" placeholder="Name" class="form-control" id="name">
                                                     @error('name') <span class="error">{{ $message }}</span> @enderror
                                                     
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label for="username">User name</label>
-                                                    <input wire:model.live="username"  placeholder="Username" type="text" class="form-control" id="uname" autocomplete="nope" >
+                                                    <label for="">User name</label>
+                                                    <input wire:model="username"  placeholder="user name" type="text" class="form-control" id="" >
                                                     @error('username') <span class="error">{{ $message }}</span> @enderror
                                                     
                                                 </div>
@@ -97,7 +97,7 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="email">Email</label>
-                                                    <input wire:model.live="email" placeholder="email"  type="email" class="form-control" id="email" >
+                                                    <input wire:model="email" placeholder="email"  type="email" class="form-control" id="email" >
                                                     @error('email') <span class="error">{{ $message }}</span> @enderror
                                                     
                                                 </div>
@@ -129,7 +129,7 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="name_hin">Name (Hindi)</label>
-                                                    <input wire:model.live="name_hin" type="text" class="form-control" placeholder="Name (Hindi)" id="name_hin">
+                                                    <input wire:model="name_hin" type="text" class="form-control" placeholder="Name (Hindi)" id="name_hin">
                                                     @error('name_hin') <span class="error">{{ $message }}</span> @enderror
                                                     
                                                 </div>
@@ -138,7 +138,7 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="name_pbi">Name (Punjabi)</label>
-                                                    <input wire:model.live="name_pbi" type="text" placeholder="Name (Punjabi)" class="form-control" id="name_pbi">
+                                                    <input wire:model="name_pbi" type="text" placeholder="Name (Punjabi)" class="form-control" id="name_pbi">
                                                     @error('name_pbi') <span class="error">{{ $message }}</span> @enderror
                                                     
                                                 </div>
@@ -149,7 +149,7 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="name_urdu">Name (Urdu)</label>
-                                                    <input wire:model.live="name_urdu" type="text" placeholder="Name (Urdu)" class="form-control" id="name_urdu">
+                                                    <input wire:model="name_urdu" type="text" placeholder="Name (Urdu)" class="form-control" id="name_urdu">
                                                     @error('name_urdu') <span class="error">{{ $message }}</span> @enderror
                                                
                                                 </div>
@@ -157,7 +157,7 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="mobile">Mobile</label>
-                                                    <input wire:model.live="mobile" type="text" placeholder="Mobile" class="form-control" id="mobile">
+                                                    <input wire:model="mobile" type="text" placeholder="Mobile" class="form-control" id="mobile">
                                                     @error('mobile') <span class="error">{{ $message }}</span> @enderror
                                                 
                                                 </div>
@@ -168,10 +168,12 @@
                                                     <label for="menus">Menus</label>
                                                     <div>
                                                         @foreach($getCategory as $category)
+                                                        @if($category->id != '1')
                                                         <label for="menu_{{$category->id}}">
                                                             <input wire:model="menus.{{$category->id}}" type="checkbox" id="menu_{{$category->id}}" value="{{$category->category_en}}">
                                                             {{$category->category_en}}
                                                         </label>
+                                                        @endif
                                                     @endforeach
                                                         <!-- Add more menu items as needed -->
                                                     </div>
@@ -184,7 +186,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="about">About</label>
-                                                    <input wire:model.live="about" type="text" placeholder="About" class="form-control" id="about">
+                                                    <input wire:model="about" type="text" placeholder="About" class="form-control" id="about">
                                                     @error('about') <span class="error">{{ $message }}</span> @enderror
                                                     
                                                 </div>
@@ -216,7 +218,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="address">Address</label>
-                                                    <input wire:model.live="address" type="text" placeholder="Address" class="form-control" id="address">
+                                                    <input wire:model="address" type="text" placeholder="Address" class="form-control" id="address">
                                                     @error('address') <span class="error">{{ $message }}</span> @enderror
                                                     
                                                 </div>
@@ -228,7 +230,7 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="profile_photo_path">Profile Photo Path</label>
-                                                    <input wire:model.live="profile_photo_path" type="file" class="form-control" id="profile_photo_path">
+                                                    <input wire:model="profile_photo_path" type="file" class="form-control" id="profile_photo_path">
                                                     @error('profile_photo_path') <span class="error">{{ $message }}</span> @enderror
                                               
                                                 </div>

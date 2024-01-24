@@ -36,46 +36,47 @@
                                                 </h4>
                                             </th>
                                             <td>
-                                                <span class="text-primary">{{$record->name ?? 'NA'}}</span>
+                                                <span class="text-primary fw-bold"  style="font-size: 20px;">{{$record->name ?? 'NA'}}</span>
                                                 <span class="badge bg-danger" style="font-size: 20px;">{{ $record->username ?? 'NA' }}</span>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <th scope="row" class="text-success">     <h4>User Role: </h4></th>
+                                            <th scope="row" class="text-success ">     <h4>User Role: </h4></th>
                                             <td>
-                                                <span class="badge bg-primary" style="font-size: 20px;">{{ ucwords($record->role['name'] ?? 'NA') }}</span>
+                                                <span class="badge bg-primary fw-bold" style="font-size: 20px;">{{ ucwords($record->role['name'] ?? 'NA') }}</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row" class="text-success">     <h4>Created at : </h4></th>
+                                            <td>
+                                                <span class="badge bg-dark fw-bold" style="font-size: 20px;">{{  $record->created_at->diffForHumans()  ?? 'NA'}}</span>
                                             </td>
                                         </tr>
                                         <tr>
                                             <th scope="row" class="text-success">     <h4>User Email:</h4></th>
                                             <td>
-                                                <span class="text-primary">{{$record->email ?? 'NA'}}</span>
+                                                <span class="text-primary fw-bold">{{$record->email ?? 'NA'}}</span>
                                             </td>
                                         </tr>
                                         <tr>
                                             <th scope="row" class="text-success">     <h4>User Password:</h4></th>
                                             <td>
-                                                <span class="text-primary">{{$record->user_password ?? 'NA'}}</span>
+                                                <span class="text-primary fw-bold">{{$record->user_password ?? 'NA'}}</span>
                                             </td>
                                         </tr>
                                         <tr>
                                             <th scope="row" class="text-success">     <h4>User Mobile:</h4></th>
                                             <td>
-                                                <span class="text-primary">{{$record->mobile ?? 'NA'}}</span>
+                                                <span class="text-primary fw-bold">{{$record->mobile ?? 'NA'}}</span>
                                             </td>
                                         </tr>
                                         <tr>
                                             <th scope="row" class="text-success">     <h4>User websiteType:</h4></th>
                                             <td>
-                                                <span class="text-primary">{{$record->websiteType['name'] ?? 'NA'}}</span>
+                                                <span class="text-primary fw-bold">{{$record->websiteType['name'] ?? 'NA'}}</span>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <th scope="row" class="text-success">     <h4>User About:</h4></th>
-                                            <td>
-                                                <span class="text-primary">{{$record->about ?? 'NA'}}</span>
-                                            </td>
-                                        </tr>
+                                 
                                         <tr>
                                             <th scope="row" class="text-success">     <h4>User assignedMenus:</h4></th>
                                             <td>
@@ -87,6 +88,12 @@
                                                 @empty
                                                  
                                                 @endforelse
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row" class="text-success">     <h4>User About:</h4></th>
+                                            <td>
+                                                <span class="text-primary">{{$record->about ?? 'NA'}}</span>
                                             </td>
                                         </tr>
                                     </tbody>
