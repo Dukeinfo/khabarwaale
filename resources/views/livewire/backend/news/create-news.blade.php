@@ -110,7 +110,10 @@
                                                             }
 
                                                             // Get the role name using the role relationship
-                                                            $roleName = $user->role ? $user->role->name : ''; // Assuming the role name is in a 'name' attribute
+                                                            // $roleName = optional($user->role)->name; 
+                                                            // Default case for unknown role
+                                                            $roleName = optional($user->role)->name ?? 'Unknown Role';
+                                                            // Assuming the role name is in a 'name' attribute
                                                         @endphp
 
 
