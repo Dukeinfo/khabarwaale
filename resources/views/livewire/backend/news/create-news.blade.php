@@ -89,7 +89,11 @@
                                         <div class="col-md-4 mb-3">
                                             <!-- User ID -->
                                             <div class="form-group">
-                                                <label for="user_id">User </label>
+                                                
+                                                <label for="user_id">User </label> 
+                                                <div wire:loading wire:target="news_type">
+                                                    <i class="fas fa-1x fa-sync-alt fa-spin"></i>
+                                                </div>
                                                 <select name="user_id" wire:model="user_id" id="user_id"
                                                     class="form-control">
                                                     <option value=""> Select User</option>
