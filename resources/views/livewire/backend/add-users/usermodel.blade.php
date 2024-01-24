@@ -51,7 +51,7 @@
                     </div>
                     <div class="col-md-4 text-center d-flex flex-column justify-content-between align-items-center">
                         <!-- Your content goes here -->
-                        <img src="{{ isset($record->profile_photo_path) ?  asset('storage/uploads/'. $record->profile_photo_path) : asset('no_image.jpg')}}" alt=".." class="img-size-50 img-circle img-bordered-sm" width="">
+                        <img src="{{ isset($record->profile_photo_path) ?  asset('storage/uploads/'. $record->profile_photo_path) : asset('no_image.jpg')}}" alt=".." class="img-size-50 img-circle img-bordered-sm" width="100">
                     </div>
             </div>
         </div>
