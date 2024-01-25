@@ -7,28 +7,29 @@
     <button class="flex-c-c size-a-1 ab-t-r fs-20 cl2 hov-cl10 trans-03">
         <i class="zmdi zmdi-search"></i>
     </button>
-    <ul class="results bg-white " >
+    <ul class="results bg-white">
         @if (!empty($search))
-        @foreach($posts as $key => $post)
-        <li class="text-danger"><a href="{{route('home.inner',['newsid' => $post->id , 'slug' =>  $post->slug  ])}}">  
-            ({{$key+1}})  
-            {!! Str::limit(  $post->title, 25)!!} 
-        </a></li>
-        @endforeach
-
-                @if (session()->get('language') == "hindi" )
-                     <li class='text-danger text-center'>कोई परिणाम नहीं मिला</li>
+            @forelse($posts as $key => $post)
+                <li class="text-danger">
+                    <a href="{{ route('home.inner', ['newsid' => $post->id, 'slug' => $post->slug]) }}">
+                        ({{ $key + 1 }}) {!! Str::limit($post->title, 25) !!}
+                    </a>
+                </li>
+            @empty
+                @php
+                    $language = session()->get('language');
+                @endphp
+                @if ($language == "hindi")
+                    <li class='text-danger text-center'>कोई परिणाम नहीं मिला</li>
+                @elseif ($language == "english")
+                    <li class="text-danger text-center">No Results Found</li>
+                @elseif ($language == "punjabi")
+                    <li class="text-danger text-center">ਕੋਈ ਨਤੀਜੇ ਨਹੀਂ ਮਿਲੇ</li>
+                @elseif ($language == "urdu")
+                    <li class="text-danger text-center">کوئی نتیجہ نہیں</li>
                 @endif
-                @if (session()->get('language') == "english" )
-                     <li class="text-danger text-center">No Results Found</li>
-                @endif
-                @if (session()->get('language') == "punjabi" )
-                     <li class="text-danger text-center">ਕੋਈ ਨਤੀਜੇ ਨਹੀਂ ਮਿਲੇ</li>
-                @endif
-                @if (session()->get('language') == "urdu" )
-                     <li class="text-danger text-center">  کوئی نتیجہ نہیں</li>
-                @endif
+            @endforelse
         @endif
-     
     </ul>
+    
 </div>
