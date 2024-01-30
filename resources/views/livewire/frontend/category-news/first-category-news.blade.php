@@ -18,6 +18,7 @@
                   @endif
 
         </h3>
+        @if(isset($getMenus))
         <a   target="_blank"  href="{{route('home.category', ['id' => $getMenus->id, 'slug' => createSlug($getMenus->category_en)])}}" class="tab01-link f1-s-1 cl9 hov-cl10 trans-03">
         
                 @if (session()->get('language') === 'hindi')
@@ -34,6 +35,7 @@
              
             <i class="fs-12 m-l-5 fa fa-caret-right"></i>
         </a>
+        @endif
     </div>
 
     <div class="row" >
@@ -58,22 +60,59 @@
                                             </a>
                                         </h5>
                                         <span class="cl8">
-                                            <a  target="_blank"  href="{{ route('home.category', ['id' => $cat1_wise->getmenu->id, 'slug' => createSlug($cat1_wise->getmenu->category_en)  ])}}" class="f1-s-4 cl10 hov-cl10 trans-03">
-                                                
-
-
-                                                    @if (session()->get('language') === 'hindi')
-                                                        {{$cat1_wise['getmenu']['category_hin'] ?? "NA"}}:
-                                                    @elseif (session()->get('language') === 'english')
-                                                        {{$cat1_wise['getmenu']['category_en'] ?? "NA"}}:
-                                                    @elseif (session()->get('language') === 'punjabi')
-                                                        {{$cat1_wise['getmenu']['category_pbi'] ?? "NA"}}:
-                                                    @elseif (session()->get('language') === 'urdu')
-                                                        {{$cat1_wise['getmenu']['category_urdu'] ?? "NA"}}:
-                                                    @else   
-                                                        {{$cat1_wise['getmenu']['category_en'] ?? "NA"}}:
-                                                    @endif
+                                            
+                                            {{-- <a  target="_blank"  href="{{ $cat1_wise->getmenu ? route('home.category', ['id' => $cat1_wise->getmenu->id, 'slug' => createSlug($cat1_wise->getmenu->category_en)]) : '#' }}" class="f1-s-4 cl10 hov-cl10 trans-03">
+                                                @if (session()->get('language') === 'hindi')
+                                                    {{ $cat1_wise->getmenu ? $cat1_wise->getmenu->category_hin : "NA" }}:
+                                                @elseif (session()->get('language') === 'english')
+                                                    {{ $cat1_wise->getmenu ? $cat1_wise->getmenu->category_en : "NA" }}:
+                                                @elseif (session()->get('language') === 'punjabi')
+                                                    {{ $cat1_wise->getmenu ? $cat1_wise->getmenu->category_pbi : "NA" }}:
+                                                @elseif (session()->get('language') === 'urdu')
+                                                    {{ $cat1_wise->getmenu ? $cat1_wise->getmenu->category_urdu : "NA" }}:
+                                                @else   
+                                                    {{ $cat1_wise->getmenu ? $cat1_wise->getmenu->category_en : "NA" }}:
+                                                @endif
+                                            </a> --}}
+                                            @if (strpos($cat1_wise->category_id, ',') === false)
+                                            {{-- Single category ID --}}
+                                            <a  target="_blank"  href="{{ route('home.category', ['id' => $cat1_wise->getmenu->id, 'slug' => createSlug($cat1_wise->getmenu['category_en'])]) }}" class="f1-s-4 cl10 hov-cl10 trans-03">
+                                                @if (session()->get('language') === 'hindi')
+                                                    {{$cat1_wise['getmenu']['category_hin'] ?? "NA"}}:
+                                                @elseif (session()->get('language') === 'english')
+                                                    {{$cat1_wise['getmenu']['category_en'] ?? "NA"}}:
+                                                @elseif (session()->get('language') === 'punjabi')
+                                                    {{$cat1_wise['getmenu']['category_pbi'] ?? "NA"}}:
+                                                @elseif (session()->get('language') === 'urdu')
+                                                    {{$cat1_wise['getmenu']['category_urdu'] ?? "NA"}}:
+                                                @else   
+                                                    {{$cat1_wise['getmenu']['category_en'] ?? "NA"}}:
+                                                @endif
                                             </a>
+                                        @else
+                                          {{-- Multiple category IDs --}}
+                                        @php
+                                                $categoryIdsArray = explode(',', $cat1_wise->category_id);
+                                                $categories = \App\Models\Category::whereIn('id', $categoryIdsArray)->where('sort_id' ,2)->get();
+                                        @endphp
+                                        @foreach ($categories as $category)
+                                           
+                                                <a  target="_blank"  href="{{ route('home.category', ['id' => $category->id, 'slug' => createSlug($category->category_en)]) }}" class="f1-s-4 cl10 hov-cl10 trans-03">
+                                                    @if (session()->get('language') === 'hindi')
+                                                        {{ $category->category_hin ?? "NA" }}:
+                                                    @elseif (session()->get('language') === 'english')
+                                                        {{ $category->category_en ?? "NA" }}:
+                                                    @elseif (session()->get('language') === 'punjabi')
+                                                        {{ $category->category_pbi ?? "NA" }}:
+                                                    @elseif (session()->get('language') === 'urdu')
+                                                        {{$category->category_urdu ?? "NA" }}:
+                                                    @else   
+                                                        {{ $category->category_en ?? "NA" }}:
+                                                    @endif
+                                                </a>
+                                        @endforeach
+                                        @endif
+                                            
                                             <span class="f1-s-3 m-rl-3">
                                                 -
                                             </span>
@@ -104,7 +143,8 @@
                                                 </a>
                                             </h5>
                                             <span class="cl8">
-                                                <a  target="_blank"  href="{{route('home.category', ['id' => $cat1_wise->getmenu->id, 'slug' => createSlug($cat1_wise->getmenu->category_en)
+                                                {{-- <a  target="_blank"  href="{{route('home.category', ['id' => $cat1_wise->getmenu->id, 'slug' => createSlug($cat1_wise->getmenu->category_en)
+
                                                     ])}}" class="f1-s-4 cl10 hov-cl10 trans-03">
                                                         @if (session()->get('language') === 'hindi')
                                                             {{$cat1_wise['getmenu']['category_hin'] ?? "NA"}}:
@@ -118,7 +158,46 @@
                                                             {{$cat1_wise['getmenu']['category_en'] ?? "NA"}}:
                                                         @endif
 
-                                                </a>
+                                                </a> --}}
+                                                @if (strpos($cat1_wise->category_id, ',') === false)
+                                                    {{-- Single category ID --}}
+                                                    <a  target="_blank"  href="{{ route('home.category', ['id' => $cat1_wise->getmenu->id, 'slug' => createSlug($cat1_wise->getmenu['category_en'])]) }}" class="f1-s-4 cl10 hov-cl10 trans-03">
+                                                        @if (session()->get('language') === 'hindi')
+                                                            {{$cat1_wise['getmenu']['category_hin'] ?? "NA"}}:
+                                                        @elseif (session()->get('language') === 'english')
+                                                            {{$cat1_wise['getmenu']['category_en'] ?? "NA"}}:
+                                                        @elseif (session()->get('language') === 'punjabi')
+                                                            {{$cat1_wise['getmenu']['category_pbi'] ?? "NA"}}:
+                                                        @elseif (session()->get('language') === 'urdu')
+                                                            {{$cat1_wise['getmenu']['category_urdu'] ?? "NA"}}:
+                                                        @else   
+                                                            {{$cat1_wise['getmenu']['category_en'] ?? "NA"}}:
+                                                        @endif
+                                                    </a>
+                                                @else
+                                                  {{-- Multiple category IDs --}}
+                                                @php
+                                                        $categoryIdsArray = explode(',', $cat1_wise->category_id);
+                                                        $categories = \App\Models\Category::whereIn('id', $categoryIdsArray)->where('sort_id' ,2)->get();
+                                                @endphp
+                                                @foreach ($categories as $category)
+                                                    <a  target="_blank"  href="{{ route('home.category', ['id' => $category->id, 'slug' => createSlug($category->category_en)]) }}" class="f1-s-4 cl10 hov-cl10 trans-03">
+                                                        @if (session()->get('language') === 'hindi')
+                                                            {{ $category->category_hin ?? "NA" }}:
+                                                        @elseif (session()->get('language') === 'english')
+                                                            {{ $category->category_en ?? "NA" }}:
+                                                        @elseif (session()->get('language') === 'punjabi')
+                                                            {{ $category->category_pbi ?? "NA" }}:
+                                                        @elseif (session()->get('language') === 'urdu')
+                                                            {{$category->category_urdu ?? "NA" }}:
+                                                        @else   
+                                                            {{ $category->category_en ?? "NA" }}:
+                                                        @endif
+                                                    </a>
+                                                @endforeach
+                                                @endif
+                                        
+                                  
                                                 <span class="f1-s-3 m-rl-3">
                                                     -
                                                 </span>

@@ -35,10 +35,12 @@ class CreateNews extends Component
     protected $paginationTheme = 'bootstrap';
     public $gerUsers = [];
     public $selectednews = [];
+    #[Rule('required' , message: 'Category field is required')] 
+    public $category_id = [];
     #[Rule('required' , message: 'News type field is required')] 
     public $news_type;
-    #[Rule('required' , message: 'Category field is required')] 
-    public $category_id;
+    // #[Rule('required' , message: 'Category field is required')] 
+    // public $category_id;
     public $subcategory_id;
     #[Rule('required' , message: 'User field is required')] 
     public $user_id;
@@ -150,13 +152,14 @@ class CreateNews extends Component
             ->orWhere('title', 'like', '%' . $search . '%') 
             ->orWhere('status', 'like', '%' . $search . '%') 
             ->latest()
-           
             ->paginate(20);
         $this->queryTime = collect(DB::getQueryLog())->sum('time');
-        return view('livewire.backend.news.create-news' ,['totalrecords' => $totalrecords,
+        return view('livewire.backend.news.create-news' ,[
+        'totalrecords' => $totalrecords,
          'getwebsite_type' => $getwebsite_type,
           'getCategory' =>$getCategory,  
-            'records' =>$records , 'trashdata' => $trashdata]);
+            'records' =>$records ,
+             'trashdata' => $trashdata]);
     }
 
     public function createNews(){
@@ -180,7 +183,10 @@ class CreateNews extends Component
         $createNews  = new NewsPost();
         $createNews->news_type = $this->news_type ?? null ;
         $createNews->category_id = $this->category_id ?? null ;
-        $createNews->subcategory_id = $this->subcategory_id ?? null ;
+        // Convert array of category_ids to comma-separated string
+        $categoryIdsString = implode(',', $this->category_id);
+        $createNews->category_id = $categoryIdsString;
+        // $createNews->subcategory_id = $this->subcategory_id ?? null ;
         $createNews->user_id = $this->user_id ?? null ;
         $createNews->role_id = $this->role_id ?? null ;
         $createNews->reporter_id = $this->reporter_id ?? null ;

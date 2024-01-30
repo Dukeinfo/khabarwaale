@@ -29,6 +29,7 @@
                             <h5 class="p-b-5">
                                 <a href="{{route('home.inner',['newsid' => $latest_eng_News->id , 'slug' =>  $latest_eng_News->slug  ])}}
                                     " class="f1-s-5 cl3 hov-cl10 trans-03">
+                                    @if (strpos($latest_eng_News->category_id, ',') === false)
                                     <span class="text-danger mr-1">
                                         @if (session()->get('language') === 'hindi')
                                             {{$latest_eng_News['getmenu']['category_hin'] ?? "NA"}}:
@@ -42,6 +43,30 @@
                                             {{$latest_eng_News['getmenu']['category_en'] ?? "NA"}}:
                                         @endif
                                     </span>
+                                    @else
+                                    @php
+                                            $categoryIdsArray = explode(',', $latest_eng_News->category_id);
+                                            $categories = \App\Models\Category::whereIn('id', $categoryIdsArray)->get();
+                                    @endphp
+                                    @foreach ($categories as $key => $category)
+                                    @if ($loop->index < 3)
+                                      <span class="text-danger mr-1">
+                                            @if (session()->get('language') === 'hindi')
+                                                {{ $category->category_hin ?? "NA" }}
+                                            @elseif (session()->get('language') === 'english')
+                                                {{ $category->category_en ?? "NA" }}
+                                            @elseif (session()->get('language') === 'punjabi')
+                                                {{ $category->category_pbi ?? "NA" }},
+                                            @elseif (session()->get('language') === 'urdu')
+                                                {{$category->category_urdu ?? "NA" }}
+                                            @else   
+                                                {{ $category->category_en ?? "NA" }}
+                                            @endif
+                                        </span>
+                                    
+                                    @endif
+                                    @endforeach
+                                    @endif
                                     {!! Str::limit($latest_eng_News->title, 70) !!} 
                                 </a>
                             </h5>

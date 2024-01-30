@@ -22,7 +22,8 @@ class EditNews extends Component
     use LivewireAlert;
     public $gerUsers = [];
     public $news_type;
-    public $category_id;
+    public $category_id = [];
+
     public $subcategory_id;
     public $user_id;
     // public $role_id;
@@ -65,7 +66,8 @@ class EditNews extends Component
         $newspoat = NewsPost::findOrFail($news_id);
         $this->news_Id = $newspoat->id ?? null ;
         $this->news_type = $newspoat->news_type ?? null ;
-        $this->category_id = $newspoat->category_id ?? null ;
+        // $this->category_id = $newspoat->category_id ?? null ;
+        $this->category_id = explode(',', $newspoat->category_id);
         $this->subcategory_id = $newspoat->subcategory_id ?? null ;
         $this->user_id = $newspoat->user_id ?? null ;
         $this->title = $newspoat->title ?? null ;
@@ -164,7 +166,8 @@ class EditNews extends Component
           } 
         $createNews  =  NewsPost::find( $this->news_Id );
         $createNews->news_type = $this->news_type ?? null ;
-        $createNews->category_id = $this->category_id ?? null ;
+        $createNews->category_id =  implode(',', $this->category_id) ?? null ;
+       
         $createNews->subcategory_id = $this->subcategory_id ?? null ;
         $createNews->user_id = $this->user_id ?? null ;
         $createNews->role_id = $this->role_id ?? null ;

@@ -21,43 +21,103 @@ class SideForthCatNews extends Component
           $this->languageVal = session()->get('language');
     
     }
+    // public function render()
+    // {
+    //     $getMenus = Category::orderBy('sort_id', 'ASC')
+    //                 ->where('status', 'Active')->where('sort_id' ,5)->whereNull('deleted_at')->first();
+    //     $fourthCatWise_News = NewsPost::with(['newstype', 'user', 'getmenu'])
+    //                 ->where(function ($query)  {
+    //                     $query->whereHas('getmenu', function ($subquery)  {
+    //                         $subquery->where('sort_id', 'like', '%' . '5' . '%');
+
+    //                     });
+    //                 })->orderBy('created_at', 'desc')
+    //                     ->orderBy('updated_at', 'desc')
+    //                     ->where('category_id' ,$getMenus->id);
+                      
+    //                     switch ($this->languageVal) {
+    //                         case 'hindi':
+    //                             $fourthCatWise_News->where('news_type', 1);
+    //                             break;
+                        
+    //                         case 'english':
+    //                             $fourthCatWise_News->where('news_type', 2);
+    //                             break;
+                        
+    //                         case 'punjabi':
+    //                             $fourthCatWise_News->where('news_type', 3);
+    //                             break;
+                        
+    //                         case 'urdu':
+    //                             $fourthCatWise_News->where('news_type', 4);
+    //                             break;
+                        
+    //                         default:
+    //                             $fourthCatWise_News->where('news_type', 1);
+    //                             // Handle the default case if needed
+    //                     }
+            
+    //                 $fourthCatWise_News = $fourthCatWise_News->limit(4)->get();
+
+    //     return view('livewire.frontend.category-news.side-forth-cat-news' ,[
+    //                 'fourthCatWise_News' => $fourthCatWise_News,
+    //                 'getMenus' => $getMenus
+    //         ]
+    //      );
+    // }
+
     public function render()
     {
-        $getMenus = Category::orderBy('sort_id', 'ASC')
-                    ->where('status', 'Active')->where('sort_id' ,5)->whereNull('deleted_at')->first();
-        $fourthCatWise_News = NewsPost::with(['newstype', 'user', 'getmenu'])
-                    ->where(function ($query)  {
-                        $query->whereHas('getmenu', function ($subquery)  {
-                            $subquery->where('sort_id', 'like', '%' . '5' . '%');
 
-                        });
-                    })->orderBy('created_at', 'desc')
-                        ->orderBy('updated_at', 'desc')
-                        ->where('category_id' ,$getMenus->id);
-                      
-                        switch ($this->languageVal) {
-                            case 'hindi':
-                                $fourthCatWise_News->where('news_type', 1);
-                                break;
-                        
-                            case 'english':
-                                $fourthCatWise_News->where('news_type', 2);
-                                break;
-                        
-                            case 'punjabi':
-                                $fourthCatWise_News->where('news_type', 3);
-                                break;
-                        
-                            case 'urdu':
-                                $fourthCatWise_News->where('news_type', 4);
-                                break;
-                        
-                            default:
-                                $fourthCatWise_News->where('news_type', 1);
-                                // Handle the default case if needed
-                        }
-            
-                    $fourthCatWise_News = $fourthCatWise_News->limit(4)->get();
+
+        $getMenus = Category::orderBy('sort_id', 'ASC')
+        ->where('status', 'Active')
+        ->where('sort_id', 5)
+        ->whereNull('deleted_at')
+        ->first();
+
+        // Explode the comma-separated string of category IDs
+        $categoryIds = explode(',', $getMenus->id);
+
+        // Retrieve news posts with eager loaded relationships
+        $fourthCatWise_News = NewsPost::with(['newstype', 'user', 'getmenu'])
+            ->where(function ($query) use ($categoryIds) {
+                // Check if category_id contains any of the provided IDs
+                $query->where(function ($subquery) use ($categoryIds) {
+                    foreach ($categoryIds as $categoryId) {
+                        $subquery->orWhere('category_id', 'like', "%$categoryId%");
+                    }
+                });
+            })
+            ->orderBy('created_at', 'desc')
+            ->orderBy('updated_at', 'desc');
+
+        // Filter news posts based on language type
+        switch ($this->languageVal) {
+        case 'hindi':
+        $fourthCatWise_News->where('news_type', 1);
+        break;
+
+        case 'english':
+        $fourthCatWise_News->where('news_type', 2);
+        break;
+
+        case 'punjabi':
+        $fourthCatWise_News->where('news_type', 3);
+        break;
+
+        case 'urdu':
+        $fourthCatWise_News->where('news_type', 4);
+        break;
+
+        default:
+        $fourthCatWise_News->where('news_type', 1);
+        // Handle the default case if needed
+        }
+
+        // Limit the number of retrieved news posts
+        $fourthCatWise_News = $fourthCatWise_News->limit(4)->get();
+
 
         return view('livewire.frontend.category-news.side-forth-cat-news' ,[
                     'fourthCatWise_News' => $fourthCatWise_News,
@@ -65,6 +125,7 @@ class SideForthCatNews extends Component
             ]
          );
     }
+
 
     public function subscribe()
     {

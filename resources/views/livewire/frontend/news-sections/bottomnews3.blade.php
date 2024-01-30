@@ -45,7 +45,9 @@
                                 </a>
                             </h5>
                             <span class="cl8">
-                                <a  target="_blank" href="{{ route('home.category', ['id' => $cat_News->getmenu->id, 'slug' => createSlug($cat_News->getmenu->category_en)  ])}}" class="f1-s-4 cl10 hov-cl10 trans-03">
+                                @if (strpos($cat_News->category_id, ',') === false)
+                                {{-- Single category ID --}}
+                                    <a  target="_blank"  href="{{ route('home.category', ['id' => $cat_News->getmenu->id, 'slug' => createSlug($cat_News->getmenu['category_en'])]) }}" class="f1-s-4 cl10 hov-cl10 trans-03">
                                         @if (session()->get('language') === 'hindi')
                                             {{$cat_News['getmenu']['category_hin'] ?? "NA"}}:
                                         @elseif (session()->get('language') === 'english')
@@ -57,7 +59,29 @@
                                         @else   
                                             {{$cat_News['getmenu']['category_en'] ?? "NA"}}:
                                         @endif
-                                </a>
+                                    </a>
+                                @else
+                                {{-- Multiple category IDs --}}
+                                @php
+                                        $categoryIdsArray = explode(',', $cat_News->category_id);
+                                        $categories = \App\Models\Category::whereIn('id', $categoryIdsArray)->where('sort_id', 8)->get();
+                                @endphp
+                                @foreach ($categories as $category)
+                                    <a  target="_blank"  href="{{ route('home.category', ['id' => $category->id, 'slug' => createSlug($category->category_en)]) }}" class="f1-s-4 cl10 hov-cl10 trans-03">
+                                        @if (session()->get('language') === 'hindi')
+                                            {{ $category->category_hin ?? "NA" }}:
+                                        @elseif (session()->get('language') === 'english')
+                                            {{ $category->category_en ?? "NA" }}:
+                                        @elseif (session()->get('language') === 'punjabi')
+                                            {{ $category->category_pbi ?? "NA" }}:
+                                        @elseif (session()->get('language') === 'urdu')
+                                            {{$category->category_urdu ?? "NA" }}:
+                                        @else   
+                                            {{ $category->category_en ?? "NA" }}:
+                                        @endif
+                                    </a>
+                                @endforeach
+                                @endif
                                 <span class="f1-s-3 m-rl-3">
                                     -
                                 </span>
@@ -80,7 +104,9 @@
                                 </a>
                             </h5>
                             <span class="cl8">
-                                <a target="_blank"  href="{{ route('home.category', ['id' => $cat_News->getmenu->id, 'slug' => createSlug($cat_News->getmenu->category_en)  ])}}" class="f1-s-4 cl10 hov-cl10 trans-03">
+                                @if (strpos($cat_News->category_id, ',') === false)
+                                {{-- Single category ID --}}
+                                    <a  target="_blank"  href="{{ route('home.category', ['id' => $cat_News->getmenu->id, 'slug' => createSlug($cat_News->getmenu['category_en'])]) }}" class="f1-s-4 cl10 hov-cl10 trans-03">
                                         @if (session()->get('language') === 'hindi')
                                             {{$cat_News['getmenu']['category_hin'] ?? "NA"}}:
                                         @elseif (session()->get('language') === 'english')
@@ -92,7 +118,29 @@
                                         @else   
                                             {{$cat_News['getmenu']['category_en'] ?? "NA"}}:
                                         @endif
-                                </a>
+                                    </a>
+                                @else
+                                {{-- Multiple category IDs --}}
+                                @php
+                                        $categoryIdsArray = explode(',', $cat_News->category_id);
+                                        $categories = \App\Models\Category::whereIn('id', $categoryIdsArray)->where('sort_id', 8)->get();
+                                @endphp
+                                @foreach ($categories as $category)
+                                    <a  target="_blank"  href="{{ route('home.category', ['id' => $category->id, 'slug' => createSlug($category->category_en)]) }}" class="f1-s-4 cl10 hov-cl10 trans-03">
+                                        @if (session()->get('language') === 'hindi')
+                                            {{ $category->category_hin ?? "NA" }}:
+                                        @elseif (session()->get('language') === 'english')
+                                            {{ $category->category_en ?? "NA" }}:
+                                        @elseif (session()->get('language') === 'punjabi')
+                                            {{ $category->category_pbi ?? "NA" }}:
+                                        @elseif (session()->get('language') === 'urdu')
+                                            {{$category->category_urdu ?? "NA" }}:
+                                        @else   
+                                            {{ $category->category_en ?? "NA" }}:
+                                        @endif
+                                    </a>
+                                @endforeach
+                                @endif
                                 <span class="f1-s-3 m-rl-3">
                                     -
                                 </span>

@@ -12,7 +12,21 @@
                         <span class="text-primary "> {{$record->user['name'] ?? 'NA' }} </span>
                     </h4>
                     <h4> <span class="text-success ">Category (Menu): </span>
-                        <span class="badge bg-dark p-1"> {{ $record->getmenu['category_en'] ?? 'NA'  }}</span>
+                        {{-- <span class="badge bg-dark p-1"> {{ $record->getmenu['category_en'] ?? 'NA'  }}</span>
+                         --}}
+                         @if (strpos($record->category_id, ',') === false)
+                         {{-- Single category ID --}}
+                            <span class="badge bg-dark p-1">{{ $record->getmenu['category_en'] }}</span>
+                        @else
+                            {{-- Multiple category IDs --}}
+                            @php
+                                $categoryIdsArray = explode(',', $record->category_id);
+                                $categories = \App\Models\Category::whereIn('id', $categoryIdsArray)->get();
+                            @endphp
+                            @foreach ($categories as $category)
+                                <span class="badge bg-dark p-1">{{ $category->category_en }}</span>
+                            @endforeach
+                        @endif
                    </h4>
                    <h4> <span class="text-success">News Title :</span> {{ $record->id ?? 'NA'}} </h4>
                    <p>    {!! ucwords($record->title) ?? 'NA' !!} </p> 
@@ -24,6 +38,8 @@
       
                   <h4> <span class="text-success">News Type :</span>
                       {{ ucwords($record->newstype['name']) ?? 'NA' }}
+
+                      
                   </h4>
                   <h4> <span class="text-success">Pdf file :</span>
                             <a href="{{ isset($record->pdf_file )?  get_pdf($record->pdf_file)  : '' }}" download=""> {{ ucwords($record->pdf_file) ?? 'NA' }} </a>

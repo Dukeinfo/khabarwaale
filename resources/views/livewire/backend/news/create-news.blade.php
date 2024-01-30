@@ -65,7 +65,8 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                        <div class="col-md-4 mb-3">
+                                        {{-- <div class="col-md-4 mb-3">
+
                                             <!-- Category ID -->
                                             <div class="form-group">
                                                 <label for="category_id">Category </label>
@@ -84,7 +85,26 @@
                                                     <span class="error">{{ $message }}</span>
                                                 @enderror
                                             </div>
+                                        </div> --}}
+                                        <div class="col-md-4 mb-3">
+                                            <!-- Category ID -->
+                                            <div class="form-group">
+                                                <label for="category_id">Categories</label>
+                                                <select name="category_id[]" wire:model="category_id" id="category_id" class="form-control selectpicker" multiple data-live-search="true">
+                                                    <option value="">Select types</option>
+                                                    @forelse ($getCategory as $category)
+                                                        @if ($category->id != 1 || $category->sort_id != 1)
+                                                            <option value="{{ $category->id }}">{{ $category->category_en }}</option>
+                                                        @endif
+                                                    @empty
+                                                    @endforelse
+                                                </select>
+                                                @error('category_id')
+                                                    <span class="error">{{ $message }}</span>
+                                                @enderror
+                                            </div>
                                         </div>
+                                        
 
                                         <div class="col-md-4 mb-3">
                                             <!-- User ID -->
@@ -647,8 +667,31 @@
                                                         <td>{{ ucwords($record->newstype['name']) ?? 'NA' }}</td>
 
                                                         <td>
-                                                            <span class="badge bg-dark p-1">
-                                                                {{ $record->getmenu['category_en'] ?? 'NA' }}</span>
+                                                            {{-- <span class="badge bg-dark p-1">
+                                                                {{ $record->getmenu['category_en'] ?? 'NA' }}</span> --}}
+                                                                    {{-- @php
+                                                                    $categoryIdsArray = explode(',',  $record->category_id);
+                                                                    $categories = \App\Models\Category::whereIn('id', $categoryIdsArray)->get();
+
+                                                                    @endphp
+                                                                    @foreach($categories as $category)
+                                                                        
+                                                                    <span class="badge bg-dark p-1">     {{ $category->category_en }} </span>
+                                                                        
+                                                                    @endforeach --}}
+                                                                    @if (strpos($record->category_id, ',') === false)
+                                                                        {{-- Single category ID --}}
+                                                                        <span class="badge bg-dark p-1">{{ $record->getmenu['category_en'] }}</span>
+                                                                    @else
+                                                                        {{-- Multiple category IDs --}}
+                                                                        @php
+                                                                            $categoryIdsArray = explode(',', $record->category_id);
+                                                                            $categories = \App\Models\Category::whereIn('id', $categoryIdsArray)->get();
+                                                                        @endphp
+                                                                        @foreach ($categories as $category)
+                                                                            <span class="badge bg-dark p-1">{{ $category->category_en }}</span>
+                                                                        @endforeach
+                                                                    @endif
 
                                                         </td>
                                                         <td>

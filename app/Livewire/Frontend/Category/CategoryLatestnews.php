@@ -19,11 +19,25 @@ public $languageVal;
     }
     public function render()
     {
+        $categoryIds = explode(',', $this->category);
+
+        // $catWiselatest_eng_News = NewsPost::with(['newstype', 'user', 'getmenu'])
+        // ->where(function ($query) {
+        //     $query->whereHas('getmenu', function ($subquery) {
+        //         $subquery->where('id', 'like', '%' . $this->category . '%');
+        //             // ->orwhereIn('breaking_side', ['Show']);
+        //     });
+        // })
+        // ->orderBy('created_at', 'desc')
+        // ->orderBy('updated_at', 'desc')
+
         $catWiselatest_eng_News = NewsPost::with(['newstype', 'user', 'getmenu'])
-        ->where(function ($query) {
-            $query->whereHas('getmenu', function ($subquery) {
-                $subquery->where('id', 'like', '%' . $this->category . '%');
-                    // ->orwhereIn('breaking_side', ['Show']);
+        ->where(function ($query) use ($categoryIds) {
+            // Check if category_id contains any of the provided IDs
+            $query->where(function ($subquery) use ($categoryIds) {
+                foreach ($categoryIds as $categoryId) {
+                    $subquery->orWhere('category_id', 'like', "%$categoryId%");
+                }
             });
         })
         ->orderBy('created_at', 'desc')

@@ -55,8 +55,8 @@ use Illuminate\Support\Str;
                         @endswitch
                     </a>
 
-                    <a  target="_blank" href="{{route('home.category', ['id' => $menuId, 'slug' => createSlug($getNewsDetail['getmenu']['category_en'])  ])}}" class="breadcrumb-item f1-s-3 cl9">
-                        @if (session()->get('language') === 'hindi')
+                    {{-- <a  target="_blank" href="{{route('home.category', ['id' => $menuId, 'slug' => createSlug($getNewsDetail['getmenu']['category_en'])  ])}}" class="breadcrumb-item f1-s-3 cl9"> --}}
+                        {{-- @if (session()->get('language') === 'hindi')
                               {{$getNewsDetail['getmenu']['category_hin'] ?? "NA"}}
                         @elseif (session()->get('language') === 'english')
                              {{$getNewsDetail['getmenu']['category_en'] ?? "NA"}}
@@ -67,9 +67,50 @@ use Illuminate\Support\Str;
                         @else   
                               {{$getNewsDetail['getmenu']['category_en'] ?? "NA"}}
                         @endif
+                    </a> --}}
 
 
+                    @if (strpos($getNewsDetail->category_id, ',') === false)
+                    {{-- Single category ID --}}
+                    <a  target="_blank"  href="{{ route('home.category', ['id' => $getNewsDetail->getmenu->id, 'slug' => createSlug($getNewsDetail->getmenu['category_en'])]) }}"  class="breadcrumb-item f1-s-3 cl9">
+                        @if (session()->get('language') === 'hindi')
+                            {{$getNewsDetail['getmenu']['category_hin'] ?? "NA"}}:
+                        @elseif (session()->get('language') === 'english')
+                            {{$getNewsDetail['getmenu']['category_en'] ?? "NA"}}:
+                        @elseif (session()->get('language') === 'punjabi')
+                            {{$getNewsDetail['getmenu']['category_pbi'] ?? "NA"}}:
+                        @elseif (session()->get('language') === 'urdu')
+                            {{$getNewsDetail['getmenu']['category_urdu'] ?? "NA"}}:
+                        @else   
+                            {{$getNewsDetail['getmenu']['category_en'] ?? "NA"}}:
+                        @endif
                     </a>
+                @else
+                  {{-- Multiple category IDs --}}
+                @php
+                        $categoryIdsArray = explode(',', $getNewsDetail->category_id);
+                        $categories = \App\Models\Category::whereIn('id', $categoryIdsArray)->get();
+                @endphp
+                @foreach ($categories as $category)
+                @if ($loop->index < 3)
+
+                    <a  target="_blank"  href="{{ route('home.category', ['id' => $category->id, 'slug' => createSlug($category->category_en)]) }}" class="f1-s-4 cl10 hov-cl10 trans-03">
+                        @if (session()->get('language') === 'hindi')
+                            {{ $category->category_hin ?? "NA" }},
+                        @elseif (session()->get('language') === 'english')
+                            {{ $category->category_en ?? "NA" }},
+                        @elseif (session()->get('language') === 'punjabi')
+                            {{ $category->category_pbi ?? "NA" }},
+                        @elseif (session()->get('language') === 'urdu')
+                            {{$category->category_urdu ?? "NA" }}
+                        @else   
+                            {{ $category->category_en ?? "NA" }}
+                        @endif
+                    </a>
+                    @endif
+                @endforeach
+                @endif
+                    
 
                     <span class="breadcrumb-item f1-s-3 cl9">
                     

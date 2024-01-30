@@ -47,15 +47,28 @@ public function mount( $id){
 
     public function render()
     {
-                    $catWiseNewsData  = NewsPost::with(['newstype', 'user', 'getmenu'])
-                            ->where(function ($query)  {
-                                $query->whereHas('getmenu', function ($subquery)  {
-                                    $subquery->where('id', 'like', '%' . $this->categoryId . '%')
-                                    ;
-                                });
-                            })   
-                            ->orderBy('created_at', 'desc')
-                            ->orderBy('updated_at', 'desc')
+        $categoryIds = explode(',', $this->categoryId);
+                    // $catWiseNewsData  = NewsPost::with(['newstype', 'user', 'getmenu'])
+                    //         ->where(function ($query)  {
+                    //             $query->whereHas('getmenu', function ($subquery)  {
+                    //                 $subquery->where('id', 'like', '%' . $this->categoryId . '%')
+                    //                 ;
+                    //             });
+                    //         })   
+                    //         ->orderBy('created_at', 'desc')
+                    //         ->orderBy('updated_at', 'desc')
+
+                    $catWiseNewsData = NewsPost::with(['newstype', 'user', 'getmenu'])
+                    ->where(function ($query) use ($categoryIds) {
+                        // Check if category_id contains any of the provided IDs
+                        $query->where(function ($subquery) use ($categoryIds) {
+                            foreach ($categoryIds as $categoryId) {
+                                $subquery->orWhere('category_id', 'like', "%$categoryId%");
+                            }
+                        });
+                    })
+                    ->orderBy('created_at', 'desc')
+                    ->orderBy('updated_at', 'desc')
                             ->orderByRaw('RAND()');
                             switch ($this->language_Val) {
                                 case 'hindi':
@@ -99,6 +112,6 @@ public function mount( $id){
             'categorycenterpAdd' => $categorycenterpAdd,
          
          
-        ])->layout('layouts.app');
+        ]);
     }
 }

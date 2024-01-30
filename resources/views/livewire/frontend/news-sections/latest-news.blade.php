@@ -30,8 +30,8 @@
                             <div class="mb-3">
                                 <div class="border border-top-0 border-left-0 border-right-0 pb-3">
                                     <h5 class="p-b-5">
-                                        <a target="_blank" href="{{route('home.inner',['newsid' => $news->id , 'slug' =>  $news->slug  ])}}" class="f1-s-5 cl3 hov-cl10 trans-03">
-                                            <span class="text-danger mr-1">
+                                        {{-- <a target="_blank" href="{{route('home.inner',['newsid' => $news->id , 'slug' =>  $news->slug  ])}}" class="f1-s-5 cl3 hov-cl10 trans-03"> --}}
+                                            {{-- <span class="text-danger mr-1">
                                                     @if (session()->get('language') === 'hindi')
                                                         {{$news['getmenu']['category_hin'] ?? "NA"}}:
                                                     @elseif (session()->get('language') === 'english')
@@ -43,10 +43,55 @@
                                                     @else   
                                                         {{$news['getmenu']['category_en'] ?? "NA"}}:
                                                     @endif
-                                            </span>
+                                            </span> --}}
+
+                                            @if (strpos($news->category_id, ',') === false)
+                                            {{-- Single category ID --}}
+                                                <a  target="_blank"  href="{{ route('home.category', ['id' => $news->getmenu->id, 'slug' => createSlug($news->getmenu['category_en'])]) }}" class="f1-s-5 cl3 hov-cl10 trans-03">
+                                                    <span class="text-danger mr-1">
+                                                    @if (session()->get('language') === 'hindi')
+                                                        {{$news['getmenu']['category_hin'] ?? "NA"}}
+                                                    @elseif (session()->get('language') === 'english')
+                                                        {{$news['getmenu']['category_en'] ?? "NA"}}
+                                                    @elseif (session()->get('language') === 'punjabi')
+                                                        {{$news['getmenu']['category_pbi'] ?? "NA"}}
+                                                    @elseif (session()->get('language') === 'urdu')
+                                                        {{$news['getmenu']['category_urdu'] ?? "NA"}}
+                                                    @else   
+                                                        {{$news['getmenu']['category_en'] ?? "NA"}}
+                                                    @endif
+                                                    </span>
+                                                </a>
+                                            @else
+                                            {{-- Multiple category IDs --}}
+                                            @php
+                                                    $categoryIdsArray = explode(',', $news->category_id);
+                                                    $categories = \App\Models\Category::whereIn('id', $categoryIdsArray)->get();
+                                            @endphp
+                                            @foreach ($categories as $key => $category)
+                                            @if ($loop->index < 2)
+                                                <a  target="_blank"  href="{{ route('home.category', ['id' => $category->id, 'slug' => createSlug($category->category_en)]) }}" class="f1-s-5 cl3 hov-cl10 trans-03">
+                                                    <span class="text-danger mr-1">
+                                                    @if (session()->get('language') === 'hindi')
+                                                        {{ $category->category_hin ?? "NA" }}
+                                                    @elseif (session()->get('language') === 'english')
+                                                        {{ $category->category_en ?? "NA" }}
+                                                    @elseif (session()->get('language') === 'punjabi')
+                                                        {{ $category->category_pbi ?? "NA" }},
+                                                    @elseif (session()->get('language') === 'urdu')
+                                                        {{$category->category_urdu ?? "NA" }}
+                                                    @else   
+                                                        {{ $category->category_en ?? "NA" }}
+                                                    @endif
+                                                    </span>
+                                                </a>
+                                            @endif
+                                            @endforeach
+                                            @endif
+
                                                 {!! Str::limit($news->title, 60) !!} 
                                                 
-                                        </a>
+                                        {{-- </a> --}}
                                     </h5>
                                     <span class="cl8">
                                         <span class="f1-s-3">
