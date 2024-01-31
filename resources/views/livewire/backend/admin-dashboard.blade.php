@@ -86,7 +86,7 @@
                 </div>
             </div>
             <!-- end page title -->
-            <div class="row">
+            {{-- <div class="row">
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
@@ -128,14 +128,14 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
             {{-- Chart --}}
             <div class="row">
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header bg-transparent border-bottom py-3">
-                            <h4 class="card-title">Pie Chart </h4>
+                            <h4 class="card-title">Monthly Counts Pie Chart</h4>
                         </div>
                         <div class="card-body">
                             <div class="col-lg-8">
