@@ -5,7 +5,7 @@
         </h3>
     </div>
 
-    <ul class="p-t-32">
+    {{-- <ul class="p-t-32">
         @forelse ($archive_News as $news)
         <li class="p-rl-4 p-b-19">
             <a href="#" class="flex-wr-sb-c f1-s-10 text-uppercase cl2 hov-cl10 trans-03">
@@ -20,8 +20,23 @@
     @empty
         <!-- Handle the case where there are no news articles -->
     @endforelse
-    
+    </ul> --}}
 
-  
+
+        <ul class="p-t-32">
+            @foreach ($monthlyCounts as $monthlyCount)
+        <li class="p-rl-4 p-b-19">
+            <a href="#" class="flex-wr-sb-c f1-s-10 text-uppercase cl2 hov-cl10 trans-03">
+                <span>
+                    {{Carbon\Carbon::create()->month($monthlyCount->month)->format('F') ?? '' }} {{ $monthlyCount->year  ?? ''}} 
+                </span>
+                <span>
+                    ({{ $monthlyCount->count ?? '' }})
+                </span>
+            </a>
+        </li>
+        @endforeach
     </ul>
+
+
 </div>

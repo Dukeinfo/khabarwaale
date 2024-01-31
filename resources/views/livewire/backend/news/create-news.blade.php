@@ -809,7 +809,22 @@
                                                         <td>   <img src="{{ isset($trash->thumbnail) ? getThumbnail($trash->thumbnail) : asset('no_image.jpg') }}"    alt=".."    class="img-size-50  img-bordered-sm rounded-circle"    width="50">   </td>
                                                         <td>{{ ucwords($trash->newstype['name']) ?? 'NA' }}</td>
                                                         <td>
-                                                            <span class="badge bg-dark p-1">   {{ $trash->getmenu['category_en'] ?? 'NA' }}</span>
+                                                            @if (strpos($trash->category_id, ',') === false)
+                                                            {{-- Single category ID --}}
+                                                            <span class="badge bg-dark p-1">{{ $record->getmenu['category_en'] }}</span>
+                                                        @else
+                                                            {{-- Multiple category IDs --}}
+                                                            @php
+                                                                $categoryIdsArray = explode(',', $trash->category_id);
+                                                                $categories = \App\Models\Category::whereIn('id', $categoryIdsArray)->get();
+                                                            @endphp
+                                                            @foreach ($categories as $category)
+                                                                <span class="badge bg-dark p-1">{{ $category->category_en }}</span>
+                                                            @endforeach
+                                                        @endif
+                                                            
+                                                            
+                                                            {{-- <span class="badge bg-dark p-1">   {{ $trash->getmenu['category_en'] ?? 'NA' }}</span> --}}
                                                         </td>
 
                                                         <td>
