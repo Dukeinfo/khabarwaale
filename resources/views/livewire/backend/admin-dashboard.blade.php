@@ -72,12 +72,12 @@
                             <h4 class="card-title">Pie Chart </h4>
                         </div>
                         <div class="card-body">
-                            <div class="col-lg-6">
+                            <div class="col-lg-10">
                                 <canvas id="monthlyCountsPieChart" width="100" height="100"></canvas>
                             </div>
-                            <div class="col-lg-6">
+                            {{-- <div class="col-lg-6"> --}}
                           {{-- <canvas id="monthlyCountsChart" width="800" height="400"></canvas> --}}
-                            </div>
+                            {{-- </div> --}}
                         </div>
                     </div>
                 </div>
