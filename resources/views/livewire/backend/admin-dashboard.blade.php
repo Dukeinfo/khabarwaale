@@ -2,7 +2,6 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <div class="page-content">
         <div class="container-fluid">
-
             <!-- start page title -->
             <div class="row">
                 <div class="col-12">
@@ -16,6 +15,73 @@
                             </ol>
                         </div>
 
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                @foreach ($totalyearCounts as $yearCount)
+                <div class="col-lg-4">
+                    <div class="card mb-4">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="card-title">{{ $yearCount->year }}</h5>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">Total News Count: {{ $yearCount->count }}</p>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+            @php
+                
+                $totalCount = 0;
+                foreach ($totalyearCounts as $yearCount) {
+                    $totalCount += $yearCount->count;
+                }
+                @endphp
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header bg-info text-white">
+                            <h5 class="card-title">Total Count</h5>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">Total: {{ $totalCount }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header bg-transparent border-bottom py-3">
+                            <h4 class="card-title">Monthly Counts</h4>
+                        </div>
+                        <div class="card-body">
+                            @foreach ($modifiedCounts as $year => $months)
+                                <h5>{{ $year }}</h5>
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th width="50%">Month</th>
+                                            <th>Count</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                 
+                                        @foreach ($months as $month => $count)
+                                            <tr>
+                                                <td>{{ \Carbon\Carbon::create()->month($month)->format('F') }}</td>
+                                                <td>{{ $count }}</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
                 </div>
             </div>
