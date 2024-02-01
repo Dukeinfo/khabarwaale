@@ -153,7 +153,7 @@
                             <h4 class="card-title">Monthly Counts Pie Chart</h4>
                         </div>
                         <div class="card-body">
-                            <div class="col-lg-8">
+                            <div class="col-lg-12">
                                 <canvas id="monthlyCountsPieChart" width="500" height="500"></canvas>
                             </div>
                             {{-- <div class="col-lg-6"> --}}
@@ -274,7 +274,11 @@
                         plugins: {
                             title: {
                                 display: true,
-                                text: `Monthly Counts (${totalCount})`
+                                text: `Monthly Counts (${totalCount})`,
+                                position: 'top',
+                                align: 'start', // Adjusts alignment to start (left) of the legend box
+
+                                
                             },
                             legend: {
                                 display: true,
