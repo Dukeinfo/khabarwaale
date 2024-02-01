@@ -154,7 +154,7 @@
                         </div>
                         <div class="card-body">
                             <div class="col-lg-8">
-                                <canvas id="monthlyCountsPieChart" width="100" height="100"></canvas>
+                                <canvas id="monthlyCountsPieChart" width="500" height="500"></canvas>
                             </div>
                             {{-- <div class="col-lg-6"> --}}
                           {{-- <canvas id="monthlyCountsChart" width="800" height="400"></canvas> --}}
@@ -186,6 +186,7 @@
             </div>
 
             {{-- pie chart  --}}
+
             <script>
                 // Fetch data from Livewire
                 let monthlyCounts = {!! json_encode($monthlyCounts) !!};
@@ -217,6 +218,44 @@
                 // Log the total count to the console
                 console.log('Total Count:', totalCount);
             
+                // Define color arrays with at least 12 colors
+                const backgroundColors = [
+                    'rgba(255, 99, 132, 0.5)',    // Red
+                    'rgba(54, 162, 235, 0.5)',     // Blue
+                    'rgba(255, 205, 86, 0.5)',     // Yellow
+                    'rgba(75, 192, 192, 0.5)',     // Green
+                    'rgba(153, 102, 255, 0.5)',    // Purple
+                    'rgba(255, 159, 64, 0.5)',     // Orange
+                    'rgba(255, 0, 0, 0.5)',        // Bright Red
+                    'rgba(0, 255, 0, 0.5)',        // Bright Green
+                    'rgba(0, 0, 255, 0.5)',        // Bright Blue
+                    'rgba(255, 255, 0, 0.5)',      // Yellow
+                    'rgba(255, 192, 203, 0.5)',    // Pink
+                    'rgba(0, 255, 255, 0.5)',      // Cyan
+                    'rgba(128, 0, 128, 0.5)',      // Indigo
+                    'rgba(255, 165, 0, 0.5)',      // Orange
+                    'rgba(0, 128, 0, 0.5)',        // Dark Green
+                ];
+            
+                const borderColors = [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 205, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(255, 0, 0, 1)',       // Bright Red
+                    'rgba(0, 255, 0, 1)',       // Bright Green
+                    'rgba(0, 0, 255, 1)',       // Bright Blue
+                    'rgba(255, 255, 0, 1)',     // Yellow
+                    'rgba(255, 192, 203, 1)',   // Pink
+                    'rgba(0, 255, 255, 1)',     // Cyan
+                    'rgba(128, 0, 128, 1)',     // Indigo
+                    'rgba(255, 165, 0, 1)',     // Orange
+                    'rgba(0, 128, 0, 1)',       // Dark Green
+                    // Add more border colors as needed
+                ];
+            
                 // Create the pie chart
                 let ctx = document.getElementById('monthlyCountsPieChart').getContext('2d');
                 let chart = new Chart(ctx, {
@@ -226,22 +265,8 @@
                         datasets: [{
                             label: 'Monthly Counts',
                             data: counts,
-                            backgroundColor: [
-                                'rgba(255, 99, 132, 0.5)',   // Red
-                                'rgba(54, 162, 235, 0.5)',   // Blue
-                                'rgba(255, 205, 86, 0.5)',   // Yellow
-                                'rgba(75, 192, 192, 0.5)',   // Green
-                                'rgba(153, 102, 255, 0.5)',  // Purple
-                                'rgba(255, 159, 64, 0.5)'    // Orange
-                            ],
-                            borderColor: [
-                                'rgba(255, 99, 132, 1)',
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(255, 205, 86, 1)',
-                                'rgba(75, 192, 192, 1)',
-                                'rgba(153, 102, 255, 1)',
-                                'rgba(255, 159, 64, 1)'
-                            ],
+                            backgroundColor: backgroundColors,
+                            borderColor: borderColors,
                             borderWidth: 1
                         }]
                     },
@@ -254,9 +279,12 @@
                             legend: {
                                 display: true,
                                 position: 'right',
+                                align: 'start', // Adjusts alignment to start (left) of the legend box
                                 labels: {
                                     boxWidth: 20,
-                                    fontSize: 12
+                                    fontSize: 12,
+                                    padding: 20, // Add padding to legend items
+                                    
                                 }
                             },
                             tooltip: {
@@ -271,10 +299,14 @@
                                     }
                                 }
                             }
-                        }
+                        },
+                        responsive: true, // Make the chart responsive
+            maintainAspectRatio: false // Prevent the chart from maintaining aspect ratio
                     }
                 });
             </script>
+            
+            
             
 
 {{-- Col chat  --}}

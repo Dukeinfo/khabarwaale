@@ -51,44 +51,6 @@
 
 {{-- ================== --}}
 
-@if(auth()->user()->can('manage_user') )
-
-
-<li>
-	<a href="javascript: void(0);" class="has-arrow waves-effect">
-		<i class='bx bx-user'></i>
-		<span>Add user</span>
-	</a>
-		
-  <ul class="sub-menu" aria-expanded="false">
-			<li><a href="{{route('create_user')}}">Add User </a></li>
-	
-	</ul>
-
-</li>
-@endif
-
-@if(auth()->user()->can('manage_roles') )
-
-<li>
-	<a href="javascript: void(0);" class="has-arrow waves-effect">
-		<i class='bx bx-user'></i>
-		<span> Roles & Permission  
-
-			<span class="badge bg-danger">New</span>
-
-		</span>
-	</a>
-		
-  <ul class="sub-menu" aria-expanded="false">
-			<li><a href="{{route('admin.view_permissions')}}">Add Permission   </a></li>
-			<li><a href="{{route('admin.view_roles')}}">Add Role </a></li>
-			<li><a href="{{route('admin.add_roles')}}"> All Roles in Permission </a></li>
-
-	</ul>
-
-</li>
-@endif
 
 
 
@@ -136,7 +98,45 @@
 @endif
 
 
+@if(auth()->user()->can('manage_user') )
+
+
+<li>
+	<a href="javascript: void(0);" class="has-arrow waves-effect">
+		<i class='bx bx-user'></i>
+		<span>Add user</span>
+	</a>
+		
+  <ul class="sub-menu" aria-expanded="false">
+			<li><a href="{{route('create_user')}}">Add User </a></li>
 	
+	</ul>
+
+</li>
+@endif
+
+@if(auth()->user()->can('manage_roles') )
+
+<li>
+	<a href="javascript: void(0);" class="has-arrow waves-effect">
+		<i class='bx bx-user'></i>
+		<span> Roles & Permission  
+
+			<span class="badge bg-danger">New</span>
+
+		</span>
+	</a>
+		
+  <ul class="sub-menu" aria-expanded="false">
+			<li><a href="{{route('admin.view_permissions')}}">Add Permission   </a></li>
+			<li><a href="{{route('admin.view_roles')}}">Add Role </a></li>
+			<li><a href="{{route('admin.add_roles')}}"> All Roles in Permission </a></li>
+
+	</ul>
+
+</li>
+@endif
+
 
 
      
