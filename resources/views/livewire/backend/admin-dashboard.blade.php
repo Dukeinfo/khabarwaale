@@ -59,47 +59,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="card">
-                        <div class="card-header bg-transparent border-bottom py-3">
-                            <h4 class="card-title">Monthly Counts</h4>
-                        </div>
-                        <div class="card-body">
-                            @php
-                            $colors = ['bg-primary', 'bg-success', 'bg-danger', 'bg-warning', 'bg-info']; // Define colors
-                            $colorIndex = 0; // Index for selecting colors
-                        @endphp
-                            @foreach ($modifiedCounts as $year => $months)
-                       
-                        
-                                <h5 class=" {{ $colors[$colorIndex % count($colors)] }} text-white px-3 py-2">{{ $year }}</h5>
-                                <div class="table-responsive">
-                                    <table class="table table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th width="50%">Month</th>
-                                            <th>Count</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                 @php
-                                      $colorIndex++; // Move to the next color
-                                 @endphp
-                                        @foreach ($months as $month => $count)
-                                            <tr>
-                                                <td>{{ \Carbon\Carbon::create()->month($month)->format('F') }}</td>
-                                                <td>{{ $count }}</td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-            </div>
+         
             <!-- end page title -->
             {{-- <div class="row">
                 <div class="col-md-12">
@@ -164,7 +124,47 @@
                 </div>
             </div>
 
-
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header bg-transparent border-bottom py-3">
+                            <h4 class="card-title">Monthly Counts</h4>
+                        </div>
+                        <div class="card-body">
+                            @php
+                            $colors = ['bg-primary', 'bg-success', 'bg-danger', 'bg-warning', 'bg-info']; // Define colors
+                            $colorIndex = 0; // Index for selecting colors
+                        @endphp
+                            @foreach ($modifiedCounts as $year => $months)
+                       
+                        
+                                <h5 class=" {{ $colors[$colorIndex % count($colors)] }} text-white px-3 py-2">{{ $year }}</h5>
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th width="50%">Month</th>
+                                            <th>Count</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                 @php
+                                      $colorIndex++; // Move to the next color
+                                 @endphp
+                                        @foreach ($months as $month => $count)
+                                            <tr>
+                                                <td>{{ \Carbon\Carbon::create()->month($month)->format('F') }}</td>
+                                                <td>{{ $count }}</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </div>
 
 
 
