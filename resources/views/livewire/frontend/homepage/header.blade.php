@@ -4,8 +4,8 @@
         <div class="content-topbar container h-100">
             <div class="left-topbar">
      
-                <a href="{{ route('english.language') }}" class="left-topbar-item btn btn-primary">
-                    English 
+                <a href="https://www.khabarwale.in/"  class="left-topbar-item btn btn-primary">
+                    Hindi 
                 </a>
   
                 <a href="{{ route('punjabi.language') }}" class="left-topbar-item btn btn-primary ml-2">
@@ -98,8 +98,9 @@
     <div class="menu-mobile">
         <ul class="topbar-mobile">
             <li class="left-topbar">
-                <a href="{{ route('english.language') }}" class="left-topbar-item btn btn-primary">
-                    English 
+        
+                <a href="https://www.khabarwale.in/"  class="left-topbar-item btn btn-primary">
+                    Hindi 
                 </a>
                 {{-- <a href="{{ route('hindi.language') }}" class="left-topbar-item btn btn-primary ml-2">
                     Hindi

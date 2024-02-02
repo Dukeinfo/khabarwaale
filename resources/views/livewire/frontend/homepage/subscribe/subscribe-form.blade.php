@@ -26,7 +26,7 @@
         </div>
     </div>
     <!-- Stay Connected -->
-    <div class="p-b-30">
+    {{-- <div class="p-b-30">
         <div class="how2 how2-cl5 mb-4 flex-s-c bg-white">
             <h3 class="f1-m-2 cl17 tab01-title">
                 Stay Connected
@@ -86,7 +86,7 @@
                 </div>
             </li>
         </ul>
-    </div>
+    </div> --}}
 
     <!-- Subscribe -->
     <div class="bg10 p-rl-35 p-t-28 p-b-30 m-b-55"  @if(request()->routeIs('home.homepage')) style="display: none" @endif>

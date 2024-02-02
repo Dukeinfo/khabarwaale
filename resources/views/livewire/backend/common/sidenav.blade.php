@@ -3,7 +3,6 @@
 	<div id="sidebar-menu">
 		<!-- Left Menu Start -->
 		<ul class="metismenu list-unstyled" id="side-menu">
-			<li class="menu-title">General</li>
 			<li>
 				@role('admin')
 				<a href="" class="waves-effect">
@@ -12,8 +11,7 @@
 				@else
 				<a href="" class="waves-effect">
 					{{-- <span> {{  ucwords(getRoleName(auth()->user()->role_id)) ?? "NA"}} Dashboard</span> --}}
-					<span> 	{{ ucwords( auth()->user()->roles->pluck('name')[0] )?? '' }}
-					 Dashboard</span>
+					<span> 	{{ ucwords( auth()->user()->roles->pluck('name')[0] )?? '' }} Dashboard</span>
 				</a>
 				@endrole
 					
@@ -91,7 +89,7 @@
 	<a href="{{route('admin.create_videos')}}"  class="waves-effect"> 
 
 	   <i class='bx bx-video'></i>
-	   <span>Add Videos</span>
+	   <span>Editor Videos</span>
    </a>
    
 </li>

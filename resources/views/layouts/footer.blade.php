@@ -25,7 +25,7 @@
 
                     </p>
                     <div class="size-h-3 flex-s-c">
-                        <h5 class="f1-m-7 cl0">
+                        {{-- <h5 class="f1-m-7 cl0">
                         @if (session()->get('language') === 'hindi')
                             {!! 'हम सामाजिक हैं, हमसे जुड़ें'!!}
                        @elseif (session()->get('language') === 'english')
@@ -35,7 +35,7 @@
                        @elseif (session()->get('language') === 'urdu')
                                 {!! 'ہم سماجی ہیں، ہمارے ساتھ جڑیں۔' !!}
                        @endif
-                        </h5>
+                        </h5> --}}
                     </div>
                     @php
                           $getsocialApps = \App\Models\SocialApp::where('status' , 'Active')->get();
@@ -61,7 +61,8 @@
                             @elseif (session()->get('language') === 'english')
                                   Get Connected
                              @elseif (session()->get('language') === 'punjabi')
-                                    ਜੁੜੋ
+                                    {{-- ਸੰਪਰਕ --}}
+                                    Contact us
                             @elseif (session()->get('language') === 'urdu')
                                     جڑیں
                             @endif
@@ -132,7 +133,8 @@
                    @elseif (session()->get('language') === 'english')
                             Category
                     @elseif (session()->get('language') === 'punjabi')
-                            {!! 'ਸ਼੍ਰੇਣੀ'!!}
+                            {{-- {!! 'ਸ਼੍ਰੇਣੀ'!!} --}}
+                            Category
                    @elseif (session()->get('language') === 'urdu')
                             {!! 'قسم' !!}
                    @endif

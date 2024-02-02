@@ -13,8 +13,10 @@ trait UploadTrait
 {
     public function uploadOne(UploadedFile $uploadedFile, $folder = null, $disk = 'public')
     {
+        $currentMonth = date('m');
+        $currentYear = date('Y');
             // Generate a unique name for the image
-            $file_name =  strtoupper(uniqid()) .'.'.$uploadedFile->getClientOriginalExtension();
+            $file_name =   $currentMonth  .'_'. $currentYear . '_' .strtoupper(uniqid()).'.'.$uploadedFile->getClientOriginalExtension();
                 // Optimize the uploaded image
         
         try{

@@ -200,24 +200,7 @@
       
 
             <div class="text-center">
-                <p class="text-uppercase text-center small pb-2">
-                    @switch(session()->get('language'))
-                    @case('hindi')
-                        विज्ञापन
-                        @break
-                    @case('english')
-                        Advertisement
-                        @break
-                    @case('punjabi')
-                        ਇਸ਼ਤਿਹਾਰ
-                        @break
-                    @case('urdu')
-                        اشتہار
-                        @break
-                    @default
-                        Advertisement
-                    @endswitch 
-                </p>
+
                 @if(isset($topNewsCentertAds))
                 
                 <a href="{{$topNewsCentertAds->link_add  ?? '#'}}">

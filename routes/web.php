@@ -78,7 +78,10 @@ Route::get('/category/{id}/{slug}', function ($id, $slug) {  return view('catego
 Route::get('/inner/{newsid}/{slug}', function ($newsid , $slug) { return view('inner',compact('newsid','slug'));
 })->name('home.inner');
 
-Route::get('/archive', function () {return view('archive');
+Route::get('/archive', function () {
+    return redirect()->route('home.homepage');
+    // return view('archive');
+
 })->name('home.archive');
 
 Route::get('/video-gallery', function () {return view('video-gallery');

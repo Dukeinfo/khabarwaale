@@ -103,24 +103,7 @@ $seoMetaData =  App\Models\SeoMetadetail::first();
                     <div class="col-lg-12 mb-4">
                         <div class="card bg-white shadow-sm text-center border-0">
                             <div class="card-body">
-                                <p class="text-uppercase text-center small pb-2">
-                                    @switch(session()->get('language'))
-                                    @case('hindi')
-                                        विज्ञापन
-                                        @break
-                                    @case('english')
-                                        Advertisement
-                                        @break
-                                    @case('punjabi')
-                                        ਇਸ਼ਤਿਹਾਰ
-                                        @break
-                                    @case('urdu')
-                                        اشتہار
-                                        @break
-                                    @default
-                                        Advertisement
-                                    @endswitch 
-                                </p>
+                    
                                 <a href="javascript:void()">
                                     <img src="{{asset('assets')}}/images/ads/ad1.jpg" class="img-fluid" alt="">
                                 </a>
@@ -130,25 +113,7 @@ $seoMetaData =  App\Models\SeoMetadetail::first();
                     <div class="col-lg-12 mb-4">
                         <div class="card bg-white shadow-sm text-center border-0">
                             <div class="card-body">
-                                <p class="text-uppercase text-center small pb-2">
-
-                                    @switch(session()->get('language'))
-                                    @case('hindi')
-                                        विज्ञापन
-                                        @break
-                                    @case('english')
-                                        Advertisement
-                                        @break
-                                    @case('punjabi')
-                                        ਇਸ਼ਤਿਹਾਰ
-                                        @break
-                                    @case('urdu')
-                                        اشتہار
-                                        @break
-                                    @default
-                                        Advertisement
-                                    @endswitch 
-                                </p>
+                 
                                 <a href="javascript:void()">
                                     <img src="{{asset('assets')}}/images/ads/ad2.jpg" class="img-fluid" alt="">
                                 </a>

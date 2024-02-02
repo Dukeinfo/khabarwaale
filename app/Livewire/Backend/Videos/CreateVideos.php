@@ -23,8 +23,9 @@ class CreateVideos extends Component
     public $video_title_en;
     #[Rule('required', message: 'Video id field is required')] 
     public $video_url;
+
     public $post_date;
-    #[Rule('required', message: 'Status field is required')] 
+    // #[Rule('required', message: 'Status field is required')] 
     public $status;
     #[Url(as: 'q')]
     public $search = '';
@@ -32,6 +33,9 @@ class CreateVideos extends Component
     public function render()
     {
         
+        if (empty($this->post_date)) {
+            $this->post_date = now()->format('Y-m-d'); // Set to current date
+        }
         $search =  trim($this->search);
         $records = VideoGallery::where('video_title_en', 'like', '%'.$search.'%')
         ->orwhere('video_title_hin', 'like', '%'.$search.'%')
@@ -40,6 +44,7 @@ class CreateVideos extends Component
         ->orwhere('post_date', 'like', '%'.$search.'%')
         ->orwhere('video_url', 'like', '%'.$search.'%')
         ->orwhere('ip_address', 'like', '%'.$search.'%')
+        ->latest()
         ->get();
         return view('livewire.backend.videos.create-videos',['records' =>$records]);
     }
@@ -47,23 +52,23 @@ class CreateVideos extends Component
     public function CreateVideo(){
         $this->validate();
         $createVideos = new VideoGallery();
-        if(!is_null($this->video_image)){
-            $image =  $this->video_image;
-            // Define folder path
-            $folder = '/video';
-            $vidimage = $this->uploadOne($image, $folder);
+        // if(!is_null($this->video_image)){
+        //     $image =  $this->video_image;
+        //     // Define folder path
+        //     $folder = '/video';
+        //     $vidimage = $this->uploadOne($image, $folder);
     
-          } 
-        $createVideos->video_image = $vidimage['file_name'];
-        $createVideos->thumbnail = $vidimage['thumbnail_name'];
+        //   } 
+        // $createVideos->video_image = $vidimage['file_name'];
+        // $createVideos->thumbnail = $vidimage['thumbnail_name'];
         $createVideos->video_title_en = $this->video_title_en;
-        $createVideos->video_title_hin = $this->video_title_hin;
-        $createVideos->video_title_pbi = $this->video_title_pbi;
-        $createVideos->video_title_urdu = $this->video_title_urdu;
+        // $createVideos->video_title_hin = $this->video_title_hin;
+        // $createVideos->video_title_pbi = $this->video_title_pbi;
+        // $createVideos->video_title_urdu = $this->video_title_urdu;
         $createVideos->video_url = $this->video_url;
         $createVideos->post_date = $this->post_date;
-        $createVideos->sort_id = $this->sort_id;
-        $createVideos->status = $this->status;
+        // $createVideos->sort_id = $this->sort_id;
+        $createVideos->status = "Active";
         $createVideos->ip_address =getUserIp();
         $createVideos->login = authUserId();
         $createVideos->save();

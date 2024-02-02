@@ -20,14 +20,14 @@
                     <h5 class="mt-0 text-dark font-weight-bold">{{  $reporterProfile->name ?? "NA"}}  </h5>
                     <p class="mb-3">{{isset($reporterProfile->role->name ) ?  ucwords($reporterProfile->role->name ) : "NA"}} </p>
                     <p>
-                        <a href="{{route('home.reporter_news')}}" target="_blank" class="btn btn-primary btn-sm px-3">
+                        <a href="{{route('home.video-gallery')}}" target="_blank" class="btn btn-primary btn-sm px-3">
 
                             @if (session()->get('language') === 'hindi')
                             अधिक जाने 
                             @elseif (session()->get('language') === 'english')
                             Editor's Know More
                             @elseif (session()->get('language') === 'punjabi')
-                            ਹੋਰ ਜਾਣੋ
+                            ਕੱਪੜ ਛਾਣ
                             @elseif (session()->get('language') === 'urdu')
                             زیادہ جانو
                             @endif

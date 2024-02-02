@@ -57,14 +57,14 @@
                                         
                                         </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        {{-- <div class="col-md-4">
                                             <div class="mb-3">
                                                 <label for="video_image" class="form-label">Video Image </label>
                                                 <input type="file" class="form-control" id="video_image" wire:model="video_image">
                                                 @error('video_image') <span class="error">{{ $message }}</span> @enderror
 
                                             </div>
-                                        </div>
+                                        </div> --}}
                                         <div class="col-md-4">
                                         <div class="mb-3">
                                             <label for="post_date" class="form-label">Post Date</label>
@@ -74,14 +74,14 @@
                                         </div>
                                         </div>
 
-                                        <div class="col-md-4">
+                                        {{-- <div class="col-md-4">
                                             <label for="sort_id">Sort ID</label>
                                             <input wire:model="sort_id" type="number" placeholder="sort no" class="form-control" id="sort_id" placeholder="VSort no">
                                             @error('sort_id') <span class="error">{{ $message }}</span> @enderror
                                       
-                                        </div>
+                                        </div> --}}
                                     
-                                        <div class="col-md-4">
+                                        {{-- <div class="col-md-4">
                                             <label for="status">Status</label>
                                             <select wire:model="status" class="form-select">
                                                 <option value="">Select</option>
@@ -90,7 +90,7 @@
                                            </select>
                                            @error('status') <span class="error">{{ $message }}</span> @enderror
 
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 
                            
@@ -151,7 +151,7 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th> image</th>
+                                            {{-- <th> image</th> --}}
                                             <th> Title </th>
                                             <th> Link </th>
                                             <th> Date </th>
@@ -165,9 +165,9 @@
                                          @if($record->role_id != 1)
                                          <tr>
                                             <td> {{ $key+1}}</td>
-                                            <td> 
+                                            {{-- <td> 
                                                 <img src="{{isset($record->thumbnail) ? getThumbnail($record->thumbnail) :  asset('no_image.jpg')}}" alt=".." class="img-size-50 img-circle img-bordered-sm" width="50">
-                                            </td>
+                                            </td> --}}
                                             <td>
                                                 {{ Str::limit($record->video_title_en, 40)  ?? "NA"}}
 

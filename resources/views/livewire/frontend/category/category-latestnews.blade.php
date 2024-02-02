@@ -107,23 +107,7 @@
         <div class="col-lg-12 mb-4">
             <div class="card bg-white shadow-sm text-center border-0">
                 <div class="card-body">
-                    <p class="text-uppercase text-center small pb-2">      
-                        @switch(session()->get('language'))
-                        @case('hindi')
-                            विज्ञापन
-                            @break
-                        @case('english')
-                            Advertisement
-                            @break
-                        @case('punjabi')
-                            ਇਸ਼ਤਿਹਾਰ
-                            @break
-                        @case('urdu')
-                            اشتہار
-                            @break
-                        @default
-                            Advertisement
-                        @endswitch </p>
+           
                         @if(isset($categorylatestleftAds))
 
                         <a href="javascript:void()" wire:poll>

@@ -220,40 +220,48 @@
             
                 // Define color arrays with at least 12 colors
                 const backgroundColors = [
-                    'rgba(255, 99, 132, 0.5)',    // Red
-                    'rgba(54, 162, 235, 0.5)',     // Blue
-                    'rgba(255, 205, 86, 0.5)',     // Yellow
-                    'rgba(75, 192, 192, 0.5)',     // Green
-                    'rgba(153, 102, 255, 0.5)',    // Purple
-                    'rgba(255, 159, 64, 0.5)',     // Orange
-                    'rgba(255, 0, 0, 0.5)',        // Bright Red
-                    'rgba(0, 255, 0, 0.5)',        // Bright Green
-                    'rgba(0, 0, 255, 0.5)',        // Bright Blue
-                    'rgba(255, 255, 0, 0.5)',      // Yellow
-                    'rgba(255, 192, 203, 0.5)',    // Pink
-                    'rgba(0, 255, 255, 0.5)',      // Cyan
-                    'rgba(128, 0, 128, 0.5)',      // Indigo
-                    'rgba(255, 165, 0, 0.5)',      // Orange
-                    'rgba(0, 128, 0, 0.5)',        // Dark Green
+                    '#4BC0C0', // Green: #4BC0C0
+                    '#36A2EB', // Blue: #36A2EB
+                    '#FFCD56', // Yellow: #FFCD56
+                    '#FF6384', // Red: #FF6384
+                    '#9966FF', // Purple: #9966FF
+                    '#FF9F40', // Orange: #FF9F40
+                    '#FF0000', // Bright Red: #FF0000
+                    '#00FF00', // Bright Green: #00FF00
+                    '#0000FF', // Bright Blue: #0000FF
+                    '#FFFF00', // Yellow: #FFFF00
+                    '#800080', // Indigo: #800080
+                    '#FFA500', // Orange: #FFA500
+                    '#008000', // Dark Green: #008000
+                    '#5626C4', // Blue Violet: #5626C4
+                    '#E60576', // Hollywood Cerise: #E60576
+                    '#2CCCC3', // Maximum Blue Green: #2CCCC3
+                    '#FACD3D', // Sunglow: #FACD3D
+                    '#FF5100', // Red Orange: #FF5100
+                    '#181818'  // Cod Gray: #181818
+
                 ];
             
                 const borderColors = [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 205, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)',
-                    'rgba(255, 0, 0, 1)',       // Bright Red
-                    'rgba(0, 255, 0, 1)',       // Bright Green
-                    'rgba(0, 0, 255, 1)',       // Bright Blue
-                    'rgba(255, 255, 0, 1)',     // Yellow
-                    'rgba(255, 192, 203, 1)',   // Pink
-                    'rgba(0, 255, 255, 1)',     // Cyan
-                    'rgba(128, 0, 128, 1)',     // Indigo
-                    'rgba(255, 165, 0, 1)',     // Orange
-                    'rgba(0, 128, 0, 1)',       // Dark Green
-                    // Add more border colors as needed
+                    '#4BC0C0', // Green: #4BC0C0
+                    '#36A2EB', // Blue: #36A2EB
+                    '#FFCD56', // Yellow: #FFCD56
+                    '#FF6384', // Red: #FF6384
+                    '#9966FF', // Purple: #9966FF
+                    '#FF9F40', // Orange: #FF9F40
+                    '#FF0000', // Bright Red: #FF0000
+                    '#00FF00', // Bright Green: #00FF00
+                    '#0000FF', // Bright Blue: #0000FF
+                    '#FFFF00', // Yellow: #FFFF00
+                    '#800080', // Indigo: #800080
+                    '#FFA500', // Orange: #FFA500
+                    '#008000', // Dark Green: #008000
+                    '#5626C4', // Blue Violet: #5626C4
+                    '#E60576', // Hollywood Cerise: #E60576
+                    '#2CCCC3', // Maximum Blue Green: #2CCCC3
+                    '#FACD3D', // Sunglow: #FACD3D
+                    '#FF5100', // Red Orange: #FF5100
+                    '#181818'  // Cod Gray: #181818
                 ];
             
                 // Create the pie chart
@@ -305,7 +313,15 @@
                             }
                         },
                         responsive: true, // Make the chart responsive
-            maintainAspectRatio: false // Prevent the chart from maintaining aspect ratio
+                         maintainAspectRatio: false // Prevent the chart from maintaining aspect ratio
+                         
+                        //     onClick: function(e, legendItem) {
+                        //     // Toggle visibility of the corresponding month in the chart
+                        //     let index = legendItem.index;
+                        //     let meta = this.chart.getDatasetMeta(0);
+                        //     meta.data[index].hidden = !meta.data[index].hidden;
+                        //     this.chart.update();
+                        // }
                     }
                 });
             </script>

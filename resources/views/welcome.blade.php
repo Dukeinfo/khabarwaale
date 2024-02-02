@@ -24,7 +24,6 @@ $seoMetaData =  App\Models\SeoMetadetail::first();
     Your browser does not support the audio element.
 </audio>
 
-@livewire('frontend.homepage.home-top-add')
 
 <section class="p-t-30">
     <div class="container">

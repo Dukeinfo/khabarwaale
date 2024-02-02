@@ -55,42 +55,42 @@ class EditVideos extends Component
     }
 
     public function updateVideo(){
-        if(!is_null($this->editvideo_image)){
-            $image =  $this->editvideo_image;
-            // Define folder path
-            $folder = '/video';
-            $vidimage = $this->uploadOne($image, $folder);
+        // if(!is_null($this->editvideo_image)){
+        //     $image =  $this->editvideo_image;
+        //     // Define folder path
+        //     $folder = '/video';
+        //     $vidimage = $this->uploadOne($image, $folder);
 
-            $Videos = VideoGallery::find($this->video_id );
-            $Videos->video_image = $vidimage['file_name'];
-            $Videos->thumbnail = $vidimage['thumbnail_name'];
-            $Videos->video_title_en = $this->video_title_en;
-            $Videos->video_title_hin = $this->video_title_hin;
-            $Videos->video_title_pbi = $this->video_title_pbi;
-            $Videos->video_title_urdu = $this->video_title_urdu;
-            $Videos->video_url = $this->video_url;
-            $Videos->post_date = $this->post_date;
-            $Videos->sort_id = $this->sort_id;
-            $Videos->status = $this->status;
-            $Videos->ip_address =getUserIp();
-            $Videos->login = authUserId();
-            $Videos->save();
+        //     $Videos = VideoGallery::find($this->video_id );
+        //     // $Videos->video_image = $vidimage['file_name'];
+        //     // $Videos->thumbnail = $vidimage['thumbnail_name'];
+        //     $Videos->video_title_en = $this->video_title_en;
+        //     $Videos->video_title_hin = $this->video_title_hin;
+        //     $Videos->video_title_pbi = $this->video_title_pbi;
+        //     $Videos->video_title_urdu = $this->video_title_urdu;
+        //     $Videos->video_url = $this->video_url;
+        //     $Videos->post_date = $this->post_date;
+        //     $Videos->sort_id = $this->sort_id;
+        //     $Videos->status = $this->status;
+        //     $Videos->ip_address =getUserIp();
+        //     $Videos->login = authUserId();
+        //     $Videos->save();
 
-        }
-        else{
+        // }
+        // else{
         $createVideos = VideoGallery::find($this->video_id );
         $createVideos->video_title_en = $this->video_title_en;
-        $createVideos->video_title_hin = $this->video_title_hin;
-        $createVideos->video_title_pbi = $this->video_title_pbi;
-        $createVideos->video_title_urdu = $this->video_title_urdu;
+        // $createVideos->video_title_hin = $this->video_title_hin;
+        // $createVideos->video_title_pbi = $this->video_title_pbi;
+        // $createVideos->video_title_urdu = $this->video_title_urdu;
         $createVideos->video_url = $this->video_url;
         $createVideos->post_date = $this->post_date;
-        $createVideos->sort_id = $this->sort_id;
-        $createVideos->status = $this->status;
+        // $createVideos->sort_id = $this->sort_id;
+        $createVideos->status = 'Active';
         $createVideos->ip_address =getUserIp();
         $createVideos->login = authUserId();
         $createVideos->save();
-        }
+        // }
 
         $this->alert('success', 'Video Created successfully!');
         return  redirect()->route('admin.create_videos');

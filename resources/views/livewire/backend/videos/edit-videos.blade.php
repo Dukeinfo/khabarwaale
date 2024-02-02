@@ -57,14 +57,14 @@
                                         
                                         </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        {{-- <div class="col-md-4">
                                             <div class="mb-3">
                                                 <label for="editvideo_image" class="form-label">Video Image </label>
                                                 <input type="file" class="form-control" id="editvideo_image" wire:model="editvideo_image">
                                                 @error('editvideo_image') <span class="error">{{ $message }}</span> @enderror
 
                                             </div>
-                                        </div>
+                                        </div> --}}
                                         <div class="col-md-4">
                                         <div class="mb-3">
                                             <label for="post_date" class="form-label">Post Date</label>
@@ -74,13 +74,13 @@
                                         </div>
                                         </div>
 
-                                        <div class="col-md-4">
+                                        {{-- <div class="col-md-4">
                                             <label for="sort_id">Sort ID</label>
                                             <input wire:model="sort_id" type="number" placeholder="sort no" class="form-control" id="sort_id" placeholder="VSort no">
                                             @error('sort_id') <span class="error">{{ $message }}</span> @enderror
                                       
-                                        </div>
-                                    
+                                        </div> --}}
+{{--                                     
                                         <div class="col-md-4">
                                             <label for="status">Status</label>
                                             <select wire:model="status" class="form-select">
@@ -90,7 +90,7 @@
                                            </select>
                                            @error('status') <span class="error">{{ $message }}</span> @enderror
 
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 
                            

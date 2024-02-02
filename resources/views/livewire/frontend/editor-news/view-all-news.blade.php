@@ -185,24 +185,7 @@
                 @if ($showAds && $key == 6 )
                     <!-- Advertisement div after 6 articles -->
                     <div class="text-center my-5">
-                        <p class="text-uppercase text-center small pb-2">
-                            @switch(session()->get('language'))
-                                @case('hindi')
-                                    विज्ञापन
-                                    @break
-                                @case('english')
-                                    Advertisement
-                                    @break
-                                @case('punjabi')
-                                    ਇਸ਼ਤਿਹਾਰ
-                                    @break
-                                @case('urdu')
-                                    اشتہار
-                                    @break
-                                @default
-                                    Advertisement
-                            @endswitch
-                        </p>
+            
                         <a href="javascript:void()" >
                             <img src="{{ asset('assets/images/ads/ad2.jpg') }}" class="img-fluid" alt="">
                         </a>
@@ -212,24 +195,7 @@
                 @endif
             @empty
             <div class="text-center my-5">
-                <p class="text-uppercase text-center small pb-2">
-                    @switch(session()->get('language'))
-                        @case('hindi')
-                            विज्ञापन
-                            @break
-                        @case('english')
-                            Advertisement
-                            @break
-                        @case('punjabi')
-                            ਇਸ਼ਤਿਹਾਰ
-                            @break
-                        @case('urdu')
-                            اشتہار
-                            @break
-                        @default
-                            Advertisement
-                    @endswitch
-                </p>
+   
                 <a href="javascript:void()">
                     <img src="{{ asset('assets/images/ads/ad2.jpg') }}" class="img-fluid" alt="">
                 </a>
