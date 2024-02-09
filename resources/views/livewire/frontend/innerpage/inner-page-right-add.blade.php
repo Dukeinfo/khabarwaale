@@ -31,7 +31,12 @@
         </div>
 
         <!-- Archive -->
+        @if(request()->route()->getName() === 'readmore')
+        
+        @else
         @livewire('frontend.archive.view-archive')
+
+        @endif
 
     </div>
 </div>

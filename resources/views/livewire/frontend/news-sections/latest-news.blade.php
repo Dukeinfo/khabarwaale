@@ -138,23 +138,21 @@
                 </div>
             </div>
         </div>
+        
+        @if(isset($latestRightAds))
         <div class="col-lg-12 mb-4">
             <div class="card bg-white shadow-sm text-center border-0">
                 <div class="card-body">
-            
-                    @if(isset($latestRightAds))
-
                     <a href="javascript:void()">
-                        <img src="{{getAddImage($latestRightAds->image) }}" class="img-fluid" alt="">
+                        <img src="{{getAddImage($latestRightAds->image) }}"  class="img-fluid" alt="">
                     </a>
-                    @else
-                    {{-- <a href="javascript:void()">
-                        <img src="{{asset('assets/images/ads/v-ad1.gif')}}" class="img-fluid" alt="">
-                    </a> --}}
-                    @endif
                 </div>
             </div>
         </div>
-
+        @else
+        {{-- <a href="javascript:void()">
+            <img src="{{asset('assets/images/ads/v-ad1.gif')}}" class="img-fluid" alt="">
+        </a> --}}
+        @endif
     </div>
 </div>

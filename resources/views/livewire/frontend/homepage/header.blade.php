@@ -29,10 +29,7 @@
                             چندی گڑھ
                       @endif
                     </span>
-                    <img class="m-b-1 m-rl-8" src="{{asset('assets')}}/images/weather-icon.svg" alt="IMG" width="25">
-                    <span>
-                        HI 37° LO 21°
-                    </span>
+               
                 </span>
                 <a href="javascript:void()" class="left-topbar-item">
                
@@ -124,10 +121,7 @@
                             چندی گڑھ
                         @endif
                     </span>
-                    <img class="m-b-1 m-rl-8" src="{{asset('assets')}}/images/weather-icon.svg" alt="IMG" width="25">
-                    <span>
-                        HI 37° LO 21°
-                    </span>
+                
                 </span>
             </li>
         </ul>

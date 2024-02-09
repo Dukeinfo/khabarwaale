@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Frontend\Archive;
 
+use App\Models\Category;
 use Livewire\Component;
 
 class ViewArchiveNews extends Component

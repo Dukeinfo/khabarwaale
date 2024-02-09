@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Frontend\Archive;
 
+use App\Models\Category;
 use App\Models\NewsPost;
 use Livewire\Component;
 use Carbon\Carbon;
@@ -10,6 +11,12 @@ class ViewArchive extends Component
 
     public $languageVal;
     public $monthlyCounts;
+    public $monthSelect;
+    public $categorySelect;
+
+
+    
+
     
         public function mount(){
 
@@ -43,6 +50,17 @@ class ViewArchive extends Component
         // ->orderBy('year', 'desc')
         // ->orderBy('month', 'asc')
         // ->get();
-        return view('livewire.frontend.archive.view-archive' );
+        $getCategory = Category::orderBy('sort_id', 'ASC')
+                        ->whereNotIn('sort_id', [1]) // Exclude categories with sort_id equal to 1
+                        ->where('status', 'Active')
+                        ->whereNull('deleted_at')
+                        ->get();
+
+        return view('livewire.frontend.archive.view-archive' ,['getCategory' =>$getCategory]);
     }
+
+
+        public function submitArchive(){
+                dd($this->all());
+        }
 }

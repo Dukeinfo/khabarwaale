@@ -17,10 +17,10 @@
                         @if(isset($getFooteraddress->disclaimer))
                         
                         {!!  Str::limit($getFooteraddress->disclaimer, 150) !!}
-                        <a href="javascript:void()" class="cl17">read more</a>
+                        <a href="{{route('readmore')}}" class="cl17">Read more</a>
                         @else 
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur tempor magna eget elit efficitur, at accumsan sem placerat. Nulla tellus libero, mattis nec molestie at, facilisis ut turpis. Vestibulum dolor metus, tincidunt eget odio...
-                        <a href="javascript:void()" class="cl17">read more</a>
+                        <a href="{{route('readmore')}}" class="cl17">Read more</a>
                         @endif
 
                     </p>
