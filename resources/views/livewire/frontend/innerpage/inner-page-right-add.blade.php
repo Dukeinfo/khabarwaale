@@ -34,7 +34,7 @@
         @if(request()->route()->getName() === 'readmore')
         
         @else
-        @livewire('frontend.archive.view-archive')
+        {{-- @livewire('frontend.archive.view-archive') --}}
 
         @endif
 
