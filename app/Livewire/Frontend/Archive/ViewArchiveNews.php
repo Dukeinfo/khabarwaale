@@ -7,23 +7,32 @@ use App\Models\NewsPost;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 class ViewArchiveNews extends Component
 {
 
     use WithPagination;
   
 public $languageVal ;
-public $archivemonth; 
-    public function mount($id)
+public $archivemonth ,$archiveyear; 
+
+public $year;
+
+
+    public function mount($id, Request $request )
     {
         $this->languageVal = session()->get('language');
         $this->archivemonth =  $id;
+          // Get the year from the query parameters
+        $this->archiveyear = $request->query('year');
+   
           
     }
 
     public function render()
     {
         $archivePosts = NewsPost::with(['newstype', 'getmenu'])->whereMonth('created_at',$this->archivemonth )
+        ->whereYear('created_at', $this->archiveyear)
             ->orderBy('created_at', 'desc')
             ->orderBy('updated_at', 'desc');
             
@@ -60,8 +69,7 @@ public $archivemonth;
         
             if ($archiveMonthPost) {
                 $archiveMonthName = Carbon::parse($archiveMonthPost->created_at)->format('F');
-            
-                // $archiveMonthName now contains the full textual representation of the month
+        
             } 
 
         return view('livewire.frontend.archive.view-archive-news' ,
