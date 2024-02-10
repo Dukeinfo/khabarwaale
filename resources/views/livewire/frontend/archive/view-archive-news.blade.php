@@ -284,7 +284,12 @@
                     </div>
                 </div>
                 <!-- Pagination -->
+            
                 <div class="flex-wr-s-c m-rl--7 p-t-15 p-b-30 justify-content-center">
+                    <p>
+                        Showing {{ $archivePosts->firstItem() }} to {{ $archivePosts->lastItem() }}
+                        of {{ $archivePosts->total() }} total
+                    </p>
                     {{ $archivePosts->links() }}
                     {{-- <a href="javascript:void()" class="flex-c-c pagi-item hov-btn1 trans-03 m-all-7 pagi-active">1</a> --}}
                     {{-- <a href="javascript:void()" class="flex-c-c pagi-item hov-btn1 trans-03 m-all-7">2</a> --}}

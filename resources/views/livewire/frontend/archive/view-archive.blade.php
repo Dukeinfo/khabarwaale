@@ -25,19 +25,19 @@
 
         <ul class="p-t-32">
             @foreach ($monthlyCounts as $monthlyCount)
-            <li class="p-rl-4 p-b-19">
-                <a target="_blank" href="{{ route('home.archive', ['id' => $monthlyCount->month,
-                 'slug' => Carbon\Carbon::create()->month($monthlyCount->month)->format('F'),
-                  'year' => $monthlyCount->year]) }}" class="flex-wr-sb-c f1-s-10 text-uppercase cl2 hov-cl10 trans-03">
-                    <span>
-                        {{ Carbon\Carbon::create()->month($monthlyCount->month)->format('F') ?? '' }} {{ $monthlyCount->year ?? '' }}
-                    </span>
-                    <span>
-                        ({{ $monthlyCount->count ?? '' }})
-                    </span>
-                </a>
-            </li>
-        @endforeach
+                <li class="p-rl-4 p-b-19">
+                    <a target="_blank" href="{{ route('home.archive', ['id' => $monthlyCount->month,
+                    'slug' => Carbon\Carbon::create()->month($monthlyCount->month)->format('F'),
+                    'year' => $monthlyCount->year]) }}" class="flex-wr-sb-c f1-s-10 text-uppercase cl2 hov-cl10 trans-03">
+                        <span>
+                            {{ Carbon\Carbon::create()->month($monthlyCount->month)->format('F') ?? '' }} {{ $monthlyCount->year ?? '' }}
+                        </span>
+                        <span>
+                            ({{ $monthlyCount->count ?? '' }})
+                        </span>
+                    </a>
+                </li>
+            @endforeach
         
     </ul>
 
