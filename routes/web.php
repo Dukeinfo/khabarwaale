@@ -81,15 +81,22 @@ Route::get('/inner/{newsid}/{slug}', function ($newsid, $slug) {
     return view('inner', compact('newsid', 'slug'));
 })->name('home.inner');
 
-Route::get('/archive', function () {
-    // return redirect()->route('home.homepage');
-    return view('archive');
+// Route::get('/archive/{id}/{slug}', function () {
+//     // return redirect()->route('home.homepage');
+//     return view('archive');
 
-})->name('home.archive');
+// })->name('home.archive', compact('id', 'slug'));
 
 Route::get('/video-gallery', function () {
     return view('video-gallery');
 })->name('home.video-gallery');
+
+
+Route::get('/archive/{id}/{slug}', function ($id, $slug) {
+    return view('archive', compact('id', 'slug'));
+})->name('home.archive');
+
+
 
 
 Route::get('/reporter-news', function () {
