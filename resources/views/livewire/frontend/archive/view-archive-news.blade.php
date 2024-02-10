@@ -1,3 +1,9 @@
+<div>
+    <div class="container p-t-30">
+        <h2 class="f1-l-1 cl2 text-center">
+            {{$archiveMonthName ??  ''}}
+        </h2>
+    </div>
 <section class="p-t-30">
     <div class="container">
         <div class="row m-rl--1">
@@ -6,32 +12,100 @@
                     <div class="col-lg-12 mb-4">
                         <div class="how2 how2-cl5 flex-sb-c mb-4 bg-white">
                             <h3 class="f1-m-2 cl17 tab01-title">
-                                Latest News
+                                @switch(session()->get('language'))
+                                @case('hindi')
+                                    {!! 'ताजा खबर' !!}
+                                    @break
+                                @case('english')
+                                    {!! 'Latest News'!!}
+                                @break
+                                @case('punjabi')
+                                    {!! 'ਤਾਜ਼ਾ ਖ਼ਬਰਾਂ'!!}
+                                    @break
+                                @case('urdu')
+                                    {!!' تازہ ترین خبریں '!!}
+                                    @break
+                                @default
+                                     {!! 'Latest News'!!}
+                                @endswitch
                             </h3>
                         </div>
                         <div class="card border-0 shadow-sm">
                             <div class="card-body">
+                                @forelse ($archivelatest_News as   $latest_eng_News)
                                 <div class="mb-3">
                                     <div class="border border-top-0 border-left-0 border-right-0 pb-3">
                                         <h5 class="p-b-5">
-                                            <a href="javascript:void();" class="f1-s-5 cl3 hov-cl10 trans-03">
-                                                <span class="text-danger mr-1">Chandigarh:</span>
-                                                ED arrests woman IAS officer Ranu Sahu in alleged coal levy case in Chandigarh
+                                            <a href="{{route('home.inner',['newsid' => $latest_eng_News->id , 'slug' =>  $latest_eng_News->slug  ])}}
+                                                " class="f1-s-5 cl3 hov-cl10 trans-03">
+                                                @if (strpos($latest_eng_News->category_id, ',') === false)
+                                                <span class="text-danger mr-1">
+                                                    @if (session()->get('language') === 'hindi')
+                                                        {{$latest_eng_News['getmenu']['category_hin'] ?? "NA"}}:
+                                                    @elseif (session()->get('language') === 'english')
+                                                        {{$latest_eng_News['getmenu']['category_en'] ?? "NA"}}:
+                                                    @elseif (session()->get('language') === 'punjabi')
+                                                        {{$latest_eng_News['getmenu']['category_pbi'] ?? "NA"}}:
+                                                    @elseif (session()->get('language') === 'urdu')
+                                                        {{$latest_eng_News['getmenu']['category_urdu'] ?? "NA"}}:
+                                                    @else   
+                                                        {{$latest_eng_News['getmenu']['category_en'] ?? "NA"}}:
+                                                    @endif
+                                                </span>
+                                                @else
+                                                @php
+                                                        $categoryIdsArray = explode(',', $latest_eng_News->category_id);
+                                                        $categories = \App\Models\Category::whereIn('id', $categoryIdsArray)->get();
+                                                @endphp
+                                                @foreach ($categories as $key => $category)
+                                                @if ($loop->index < 3)
+                                                <span class="text-danger mr-1">
+                                                        @if (session()->get('language') === 'hindi')
+                                                            {{ $category->category_hin ?? "NA" }}
+                                                        @elseif (session()->get('language') === 'english')
+                                                            {{ $category->category_en ?? "NA" }}
+                                                        @elseif (session()->get('language') === 'punjabi')
+                                                            {{ $category->category_pbi ?? "NA" }},
+                                                        @elseif (session()->get('language') === 'urdu')
+                                                            {{$category->category_urdu ?? "NA" }}
+                                                        @else   
+                                                            {{ $category->category_en ?? "NA" }}
+                                                        @endif
+                                                    </span>
+                                                
+                                                @endif
+                                                @endforeach
+                                                @endif
+                                                {!! Str::limit($latest_eng_News->title, 70) !!} 
                                             </a>
                                         </h5>
                                         <span class="cl8">
                                             <span class="f1-s-3">
-                                                Jul 22, 2023
+                                    
+                                                    {{carbon\Carbon::parse($latest_eng_News->post_date)->format('M d, Y')}}
                                             </span>
                                         </span>
                                     </div>
                                 </div>
+                                @empty
+                                        <P class="text-danger text-center"> No News Found</P>
+                                @endforelse
                      
-                       
-                        
-                   
                                 <div class="text-center">
-                                    <a href="javascript:void()" class="btn btn-primary px-5">View All</a>
+                                    <a href="javascript:void()" class="btn btn-primary px-5">
+                                        @if (session()->get('language') === 'hindi')
+                                                सभी को देखें
+                                        @elseif (session()->get('language') === 'english')
+                                                View All
+                                        @elseif (session()->get('language') === 'punjabi')
+                                                ਸਭ ਦੇਖੋ
+                                        @elseif (session()->get('language') === 'urdu')
+                                                سب دیکھیں     
+                                        @else   
+                                                View All
+                                        @endif
+                                    </a>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -51,21 +125,12 @@
             <div class="col-lg-5">
                 <div class="row">
                     <div class="col-lg-12">
-                        {{-- <div class="how2 how2-cl5 flex-sb-c mb-4 bg-white">
+                        <div class="how2 how2-cl5 flex-sb-c mb-4 bg-white">
                             <h3 class="f1-m-2 cl17 tab01-title">
-                                @if (session()->get('language') === 'hindi')
-                                         {{ $category_hin  ?? "NA"}}
-                                @elseif (session()->get('language') === 'english')
-                                        {{ $category_en  ?? "NA"}}
-                                @elseif (session()->get('language') === 'punjabi')
-                                        {{ $category_pbi ?? "NA"}}
-                                @elseif (session()->get('language') === 'urdu')
-                                        {{ $category_urdu ?? "NA"}}
-                                @else   
-                                        {{ $category_en  ?? "NA"}}
-                                @endif
+                        
+                                {{$archiveMonthName ??  ''}}
                             </h3>
-                        </div> --}}
+                        </div>
              
                     
                         @php $articleCount = 0 @endphp
@@ -82,21 +147,7 @@
                                                 </a>
                                             </h5>
                                             <span class="cl8">
-                                                {{-- <a target="_blank" href="{{route('home.category', ['id' => $catNewsData->getmenu->id, 'slug' => createSlug($catNewsData->getmenu->category_en)
-                                                    ])}}" class="f1-s-4 cl10 hov-cl10 trans-03">
-                                                
-                                                    @if (session()->get('language') === 'hindi')
-                                                            {{$catNewsData['getmenu']['category_hin'] ?? "NA"}}
-                                                    @elseif (session()->get('language') === 'english')
-                                                        {{$catNewsData['getmenu']['category_en'] ?? "NA"}}
-                                                    @elseif (session()->get('language') === 'punjabi')
-                                                        {{$catNewsData['getmenu']['category_pbi'] ?? "NA"}}
-                                                    @elseif (session()->get('language') === 'urdu')
-                                                            {{$catNewsData['getmenu']['category_urdu'] ?? "NA"}}
-                                                    @else   
-                                                            {{$catNewsData['getmenu']['category_en'] ?? "NA"}}
-                                                    @endif
-                                                </a> --}}
+                               
 
                                                 @if (strpos($catNewsData->category_id, ',') === false)
                                                 {{-- Single category ID --}}
@@ -218,25 +269,7 @@
                                 </div>
                             @endif
                         
-                            @php $articleCount++ @endphp
-                        
-                            @if ($showAds && $key == 7 )
-                                <!-- Advertisement div after 6 articles -->
-                                <div class="text-center my-5">
-                   
-                                    @if(isset($categorycenterpAdd->image))
-                            
-                                    <a href="javascript:void()">
-                                        <img src="{{ isset($categorycenterpAdd->image) ?  getAddImage($categorycenterpAdd->image) : asset('assets/images/ads/ad2.jpg') }}" class="img-fluid" alt="">
-                                    </a>
-                                    @else 
-
-                                    @endif
-                                </div>
-                              
-                                @php $articleCount = 0 @endphp
-                                
-                            @endif
+                
                         @empty
                         <div class="text-center my-5">
          
@@ -265,3 +298,4 @@
         </div>
     </div>
 </section>
+</div>

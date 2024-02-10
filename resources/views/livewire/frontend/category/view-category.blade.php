@@ -1,7 +1,4 @@
 <div>
-    
-  
-
 <!-- Page heading -->
 <div class="container p-t-30">
     <h2 class="f1-l-1 cl2 text-center">

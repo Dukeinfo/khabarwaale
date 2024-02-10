@@ -1,6 +1,6 @@
 <div class="p-b-37">
     <div class="how2 how2-cl5 flex-s-c bg-white" id="openModalLink">
-        <h3 class="f1-m-2 cl17 tab01-title"   >
+        <h3 class="f1-m-2 cl17 tab01-title" >
             Archive
         </h3>
     </div>
@@ -26,7 +26,7 @@
         <ul class="p-t-32">
             @foreach ($monthlyCounts as $monthlyCount)
             <li class="p-rl-4 p-b-19">
-                <a href="{{route('home.archive',[ 'id' =>  $monthlyCount->month ,'slug' => Carbon\Carbon::create()->month($monthlyCount->month)->format('F')] )}}"  class="flex-wr-sb-c f1-s-10 text-uppercase cl2 hov-cl10 trans-03">
+                <a  target="_blank" href="{{route('home.archive',[ 'id' =>  $monthlyCount->month ,'slug' => Carbon\Carbon::create()->month($monthlyCount->month)->format('F')] )}}"  class="flex-wr-sb-c f1-s-10 text-uppercase cl2 hov-cl10 trans-03">
                     <span>
                         {{Carbon\Carbon::create()->month($monthlyCount->month)->format('F') ?? '' }} {{ $monthlyCount->year  ?? ''}} 
                     </span>
@@ -37,6 +37,8 @@
             </li>
          @endforeach
     </ul>
+
+
     <div class="modal fade" id="monthCategoryModal" tabindex="-1" role="dialog" aria-labelledby="monthCategoryModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
