@@ -79,80 +79,23 @@
     @empty
     @endforelse
     @livewireScripts
-    {{-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase.js"></script>
-    <script>
-        var firebaseConfig = {
-            apiKey: "AIzaSyBgtW8dn_KTd3sUVoOWoWE4fIPAwGHD5_A",
-            authDomain: "newsportal-79da9.firebaseapp.com",
-            projectId: "newsportal-79da9",
-            storageBucket: "newsportal-79da9.appspot.com",
-            messagingSenderId: "624416315926",
-            appId: "1:624416315926:web:00e195743e164354dab337"
-        };
-        firebase.initializeApp(firebaseConfig);
-        const messaging = firebase.messaging();
-        function startFCM() {
-            messaging
-                .requestPermission()
-                .then(function () {
-                    return messaging.getToken()
-                })
-                .then(function (response) {
-                    $.ajaxSetup({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        }
-                    });
-                    $.ajax({
-                        url: '{{ route("store.token") }}',
-                        type: 'POST',
-                        data: {
-                            token: response
-                        },
-                        dataType: 'JSON',
-                        success: function (response) {
-                            alert('Subscribed Success');
-                        },
-                        error: function (error) {
-                            alert(error);
-                        },
-                    });
-                }).catch(function (error) {
-                    alert(error);
-                });
-        }
-        messaging.onMessage(function (payload) {
-        const title = payload.notification.title;
-        const body = payload.notification.body;
-        const icon = payload.notification.icon;
-        const news_url = payload.data.news_url;
-        const options = {
-            body: body,
-            icon: icon,
-            data: {
-                url: news_url // Add the custom URL to the data field
-            }
-        };
-            new Notification(title, options);
-        });
-    </script> --}}
 
-        <script>
+
+        {{-- <script>
        
-         const vapidPublicKey  =    "{{env('VAPID_PUBLIC_KEY')}}"
-        //  window.onload = function() {
-        //     // Check if permission is already granted
-        //     if (Notification.permission === 'granted') {
-        //         console.log('Notification permission already granted.');
-        //     } else {
-        //         // Call requestPermission function after the page has loaded
-        //         requestPermission();
-        //     }
-        // };
-        navigator.serviceWorker.register("sw.js");
+             const vapidPublicKey  =    "{{env('VAPID_PUBLIC_KEY')}}"
+            //  window.onload = function() {
+            //     // Check if permission is already granted
+            //     if (Notification.permission === 'granted') {
+            //         console.log('Notification permission already granted.');
+            //     } else {
+            //         // Call requestPermission function after the page has loaded
+            //         requestPermission();
+            //     }
+            // };
+             navigator.serviceWorker.register("sw.js");
     
-        function requestPermission() {
+         function requestPermission() {
             Notification.requestPermission().then((permission) => {
                 if (permission === 'granted') {
                     // get service worker
@@ -189,7 +132,105 @@
                 }
                 
             });
+            }
+        </script> --}}
+
+
+<script>
+      const vapidPublicKey  =    "{{env('VAPID_PUBLIC_KEY')}}"
+
+    //   function createAlert(message) {
+    //     const alertDiv = document.createElement('div');
+    //     alertDiv.className = 'alert alert-success alert-dismissible';
+    //     alertDiv.innerHTML = `
+    //         ${message}
+    //         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    //             <span aria-hidden="true">&times;</span>
+    //         </button>
+    //     `;
+    //     document.body.appendChild(alertDiv);
+    // }
+    function createAlert(message) {
+        const alertDiv = document.createElement('div');
+        alertDiv.className = 'alert alert-success alert-dismissible';
+        alertDiv.innerHTML = `
+            ${message}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        `;
+
+        // Find the target element with the specified class
+        const targetElement = document.querySelector('.bg0.flex-wr-sb-c.p-rl-20.p-tb-8');
+
+        if (targetElement) {
+            // Insert the new alert div element after the target element
+            targetElement.parentNode.insertBefore(alertDiv, targetElement.nextSibling);
+        } else {
+            // If target element is not found, append the alert div to the body
+            document.body.appendChild(alertDiv);
         }
-    </script>
+    }
+    // Check if the browser supports service workers and notifications
+    if ('serviceWorker' in navigator && 'Notification' in window) {
+        navigator.serviceWorker.register("sw.js").then(() => {
+            // Service worker registration successful
+            // Check if the user is already subscribed
+            navigator.serviceWorker.ready.then((sw) => {
+                sw.pushManager.getSubscription().then((subscription) => {
+                    if (subscription === null) {
+                        // User is not subscribed, prompt them to allow notifications
+                        requestPermission();
+                    }
+                });
+            });
+        }).catch((error) => {
+            console.error('Service Worker registration failed:', error);
+        });
+    } else {
+        console.error('Service Worker or Notification API is not supported.');
+    }
+
+    function requestPermission() {
+        Notification.requestPermission().then((permission) => {
+            if (permission === 'granted') {
+                // get service worker
+                navigator.serviceWorker.ready.then((sw) => {
+                    // subscribe
+                    sw.pushManager.subscribe({
+                        userVisibleOnly: true,
+                        applicationServerKey: vapidPublicKey
+                    }).then((subscription) => {
+                        // subscription successful
+                        fetch("/api/push-subscribe", {
+                            method: "post",
+                            body: JSON.stringify(subscription)
+                        })
+                        .then(response => {
+                            console.log('Push Subscription Response:', response);
+                            return response.json();
+                        })
+                        .then(data => {
+                            if (data.message) {
+                                // alert(data.message);
+                                createAlert(data.message);
+                            } else {
+                                // Handle other cases if needed
+                                console.warn('Unexpected response format:', data);
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error subscribing to push notifications:', error);
+                            // alert("An error occurred. Please try again later.");
+                            createAlert("An error occurred. Please try again later.");
+                        });
+                    });
+                });
+            }
+        });
+    }
+</script>
+
+
 </body>
 </html>

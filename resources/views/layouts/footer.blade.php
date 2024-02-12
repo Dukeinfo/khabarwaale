@@ -183,7 +183,7 @@
     <div class="container size-h-4 p-tb-15">
         <div class="row">
             <div class="col-lg-4">
-                <a href="javascript:void()" class="f1-s-1 cl10 hov-link1">
+                <a href="{{route('readmore')}}" class="f1-s-1 cl10 hov-link1">
                     @if (session()->get('language') === 'hindi')
                         {!! 'हमारे बारे में'!!}
                     @elseif (session()->get('language') === 'english')
@@ -195,7 +195,7 @@
                     @endif
                 </a>
                 <span>|</span>
-                <a href="javascript:void()" class="f1-s-1 cl10 hov-link1">
+                <a href="{{route('privacyPolicy')}}" class="f1-s-1 cl10 hov-link1">
                     @if (session()->get('language') === 'hindi')
                             {!! 'गोपनीयता नीति'!!}
                 @elseif (session()->get('language') === 'english')

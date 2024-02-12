@@ -1,6 +1,6 @@
 <section class="bg-white" >
     <div class="container">
- 
+     
         <div class="bg0 flex-wr-sb-c p-rl-20 p-tb-8">
             <div class="f2-s-1 p-r-30 size-w-0 m-tb-6 flex-wr-s-c">
                 <span class="text-uppercase cl2 p-r-20">
@@ -57,6 +57,7 @@
 
       
         </div>
+    
         @if (session()->has('success'))
             <div class="alert alert-success alert-dismissible">
                 {{ session('success') }}

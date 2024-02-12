@@ -1,9 +1,9 @@
 
 {{-- ======================== --}}
 @extends('layouts.master')
-@section('title', 'Khabarwaale - News Portal')
-@section('desc', 'Khabarwaale - News Portal')
-@section('keywords', 'Khabarwaale - News Portal')
+@section('title', 'Khabarwaale - About-us')
+@section('desc', 'Khabarwaale - About-us News Portal')
+@section('keywords', 'Khabarwaale - About-us News Portal')
 @section('content')
 
 

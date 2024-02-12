@@ -58,7 +58,7 @@ public $year;
                     // Handle the default case if needed
             }
             
-            $archivelatest_News = $archivePosts->limit(6)->get();
+            $archivelatest_News = $archivePosts->limit(10)->get();
          
            
             $archivePosts =  $archivePosts->paginate(9);

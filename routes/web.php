@@ -73,6 +73,10 @@ Route::get('/readmore', function () {
     return view('readmorefooter');
 })->name('readmore');
 
+Route::get('/privacy-policy', function () {
+    return view('privacy_policy');
+})->name('privacyPolicy');
+
 Route::get('/category/{id}/{slug}', function ($id, $slug) {
     return view('category', compact('id', 'slug'));
 })->name('home.category');

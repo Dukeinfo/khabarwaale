@@ -6,18 +6,19 @@ use App\Models\Category;
 use App\Models\NewsPost;
 use Livewire\Component;
 use Carbon\Carbon;
+use Livewire\Attributes\On;
 class ViewArchive extends Component
 {
 
     public $languageVal;
     public $monthlyCounts;
     public $monthSelect;
+
     public $categorySelect;
+    public $fromDate;
+    public $toDate;
 
 
-    
-
-    
         public function mount(){
 
             $this->languageVal = session()->get('language');
@@ -59,8 +60,32 @@ class ViewArchive extends Component
         return view('livewire.frontend.archive.view-archive' ,['getCategory' =>$getCategory]);
     }
 
-
         public function submitArchive(){
-                dd($this->all());
+        dd('Comming soon');
+// dd($this->fromDate);
+            
+            $newsPosts = NewsPost::query();
+
+            // Filter by date range if 'fromDate' and 'toDate' are set
+            if ($this->fromDate && $this->toDate) {
+                $newsPosts->whereBetween('created_at', [
+                    Carbon::parse($this->fromDate)->startOfDay(),
+                    Carbon::parse($this->toDate)->endOfDay(),
+                ]);
+            }
+        
+            // Filter by category if 'categorySelect' is set
+            if ($this->categorySelect) {
+                $newsPosts->where('category_id', $this->categorySelect);
+            }
+        
+            // Fetch news posts
+            $newsPosts = $newsPosts->orderBy('created_at', 'desc')
+                                   ->orderBy('updated_at', 'desc')
+                                   ->get();
+
+                    dd(   $newsPosts);
+
+
         }
 }
