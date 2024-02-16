@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\NewsPost;
 use Livewire\Component;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 use Livewire\Attributes\On;
 class ViewArchive extends Component
 {
@@ -59,33 +60,38 @@ class ViewArchive extends Component
 
         return view('livewire.frontend.archive.view-archive' ,['getCategory' =>$getCategory]);
     }
-
+        public $newsData;
         public function submitArchive(){
-        dd('Comming soon');
-// dd($this->fromDate);
-            
-            $newsPosts = NewsPost::query();
-
-            // Filter by date range if 'fromDate' and 'toDate' are set
-            if ($this->fromDate && $this->toDate) {
-                $newsPosts->whereBetween('created_at', [
-                    Carbon::parse($this->fromDate)->startOfDay(),
-                    Carbon::parse($this->toDate)->endOfDay(),
-                ]);
-            }
-        
-            // Filter by category if 'categorySelect' is set
-            if ($this->categorySelect) {
-                $newsPosts->where('category_id', $this->categorySelect);
-            }
-        
-            // Fetch news posts
-            $newsPosts = $newsPosts->orderBy('created_at', 'desc')
-                                   ->orderBy('updated_at', 'desc')
-                                   ->get();
-
-                    dd(   $newsPosts);
-
+    
+            $this->newsData = NewsPost::whereBetween('created_at', [$this->fromDate, $this->toDate])
+            ->orWhere('category_id', $this->categorySelect)
+            ->where(function ($query) {
+                switch ($this->languageVal) {
+                    case 'hindi':
+                        $query->where('news_type', 1);
+                        break;
+                    
+                    case 'english':
+                        $query->where('news_type', 2);
+                        break;
+                    
+                    case 'punjabi':
+                        $query->where('news_type', 3);
+                        break;
+                    
+                    case 'urdu':
+                        $query->where('news_type', 4);
+                        break;
+                    
+                    default:
+                        $query->where('news_type', 1);
+                        // Handle the default case if needed
+                }
+            })
+            ->get();
+            $this->dispatch('datasending', newsData: $this->newsData);
+            $this->reset();
+            // return redirect('/');
 
         }
 }

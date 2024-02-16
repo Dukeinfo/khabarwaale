@@ -53,11 +53,8 @@
             
                 </span>
             </div>
-      @livewire('frontend.homepage.search-component')
-
-      
+                @livewire('frontend.homepage.search-component')
         </div>
-    
         @if (session()->has('success'))
             <div class="alert alert-success alert-dismissible">
                 {{ session('success') }}

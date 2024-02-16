@@ -139,7 +139,7 @@ use Illuminate\Support\Str;
 
                         <span>
                           
-                            {!! carbon\Carbon::parse($getNewsDetail->post_date)->format('M d, Y h:i A' ) ?? "NA" !!}
+                            {!! carbon\Carbon::parse($getNewsDetail->created_at)->format('M d, Y h:i A' ) ?? "NA" !!}
                         </span>
                     </span>
                 </div>

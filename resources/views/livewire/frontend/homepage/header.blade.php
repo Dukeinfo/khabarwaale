@@ -3,19 +3,13 @@
     <div class="topbar">
         <div class="content-topbar container h-100">
             <div class="left-topbar">
-     
                 <a href="https://www.khabarwale.in/"  class="left-topbar-item btn btn-primary">
                     Hindi 
                 </a>
-  
                 <a href="{{ route('punjabi.language') }}" class="left-topbar-item btn btn-primary ml-2">
                     Punjabi
                 </a>
-
-               
-                    
                 <button onclick="requestPermission()" type="button" class="btn-flat left-topbar-item btn btn-danger ml-2">Allow notification
-              
             </button>
                 <span class="left-topbar-item flex-wr-s-c">
                     <span class="mr-2">
@@ -29,12 +23,9 @@
                             چندی گڑھ
                       @endif
                     </span>
-               
                 </span>
                 <a href="javascript:void()" class="left-topbar-item">
-               
                     {!!  Carbon\Carbon::now()->format('d  M, Y') ?? "NA" !!}
-
                 </a>
                 <a href="javascript:void()" class="left-topbar-item">
                     @if (session()->get('language') === 'hindi')
@@ -69,12 +60,10 @@
                     <span class="{{$socialApps->icon ?? '' }}"></span>
                 </a> 
                 @empty
-                    
                 @endforelse
                 {{-- <a href="javascript:void()">
                     <span class="fab fa-instagram"></span>
                 </a>  --}}
-
             </div>
         </div>
     </div>
@@ -95,7 +84,6 @@
     <div class="menu-mobile">
         <ul class="topbar-mobile">
             <li class="left-topbar">
-        
                 <a href="https://www.khabarwale.in/"  class="left-topbar-item btn btn-primary">
                     Hindi 
                 </a>
@@ -108,7 +96,6 @@
                 <button  onclick="requestPermission()" type="button" class="left-topbar-item btn btn-danger ml-2">
                     Allow notification
                 </button>
-
                 <span class="left-topbar-item flex-wr-s-c">
                     <span class="mr-2">
                         @if (session()->get('language') === 'hindi')
@@ -121,7 +108,6 @@
                             چندی گڑھ
                         @endif
                     </span>
-                
                 </span>
             </li>
         </ul>
@@ -142,7 +128,6 @@
                         @if (session()->get('language') == "urdu" )
                         {{ $menu->category_urdu ?? "NA" }}
                         @endif
-                        
                     </a>
                 </li>
             @else
@@ -169,7 +154,6 @@
                 </li>
             @endif
             @empty
-
             @endforelse
             <li>
                 <a href="{{route('home.video-gallery')}}" > 
@@ -203,7 +187,6 @@
                     <img src="{{asset('assets/images/logo.png')}}" alt="LOGO">
                 </a>
                 <ul class="main-menu justify-content-center">
-                    
                     @forelse ($getMenus as $key => $menu )
                         @if($menu->sort_id == 1) 
                             <li class="main-menu-active">
@@ -242,7 +225,6 @@
                                     @default
                                         {{ $menu->category_en ?? "NA" }}
                                     @endswitch
-                            
                                 </a>
                             </li>
                         @endif
@@ -262,7 +244,6 @@
                                     @endif
                                 </a>
                             </li>
-
                 </ul>
             </nav>
         </div>

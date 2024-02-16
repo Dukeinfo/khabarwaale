@@ -8,6 +8,9 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Livewire\Attributes\On;
+
 class ViewArchiveNews extends Component
 {
 
@@ -79,4 +82,14 @@ public $year;
             'archivelatest_News' =>$archivelatest_News,
         ]);
     }
+
+    
+    #[On('datasending')] 
+     public function datasending($newsData){
+         
+         Log::info('Data recived ' ,$newsData);
+        
+     }
+    
+
 }

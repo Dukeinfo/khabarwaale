@@ -4,25 +4,6 @@
             Archive
         </h3>
     </div>
-
-    {{-- <ul class="p-t-32">
-        @forelse ($archive_News as $news)
-        <li class="p-rl-4 p-b-19">
-            <a href="#" class="flex-wr-sb-c f1-s-10 text-uppercase cl2 hov-cl10 trans-03">
-                <span>
-                    {{ $news->post_month }}
-                </span>
-                <span>
-                    ({{ $news->count }})
-                </span>
-            </a>
-        </li>
-    @empty
-        <!-- Handle the case where there are no news articles -->
-    @endforelse
-    </ul> --}}
-
-
         <ul class="p-t-32">
             @foreach ($monthlyCounts as $monthlyCount)
                 <li class="p-rl-4 p-b-19">
@@ -41,8 +22,7 @@
         
     </ul>
 
-
-    <div wire.ignore class="modal fade" id="monthCategoryModal" tabindex="-1" role="dialog" aria-labelledby="monthCategoryModalLabel" aria-hidden="true">
+    {{-- <div wire.ignore class="modal fade" id="monthCategoryModal" tabindex="-1" role="dialog" aria-labelledby="monthCategoryModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -52,7 +32,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                        {{-- <form wire:submit.prevent="submitArchive">
+                       <form wire:submit.prevent="submitArchive">
                             <div class="form-group">
                                 <label for="fromDate">From Date:</label>
                                 <input type="date" class="form-control" id="fromDate" wire:model='fromDate'>
@@ -75,15 +55,15 @@
                             </div>
                             <button type="submit" class="btn btn-primary" data-dismiss="modal">Submit</button>
 
-                        </form> --}}
+                        </form>
                 </div>
-                {{-- <div class="modal-footer">
+                <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-dismiss="modal">Submit</button>
                     <!-- Add any other buttons if needed -->
-                </div> --}}
+                </div> 
             </div>
         </div>
-    </div>
+    </div> --}}
     {{-- <script>
         document.addEventListener('livewire:initialized', () => {
             $('#monthCategoryModal form').on('submit', function(event) {
@@ -143,18 +123,13 @@
             </div>
         </div>
     </div>
-    @section('custom_scripts')
         <script>
-            $(document).ready(function(){
-                $("#showEnterCodeModal").on('hidden.bs.modal', function(){
-                    Livewire.on('onCloseModal', function() {
-                       $('#showEnterCodeModal').modal('hide'); 
-                      // Hide the modal after submission
-                });
-            });
-
-            });
+            document.addEventListener('livewire:initialized',()=>{
+                @this.on('datasending',(event)=>{
+                    // setTimeout(() => {
+                        $('#showEnterCodeModal').modal('hide');
+                    // }, 2000);
+                })  
+            })  
         </script>
-    @endsection
-    
 </div>
