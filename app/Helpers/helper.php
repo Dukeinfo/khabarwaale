@@ -198,25 +198,25 @@ function get_video_image($image)
 }
 
 
-// function get_user_profile($profile)
-// {
+function get_user_profile($profile)
+{
  
-//     return   asset('storage/uploads/'.$profile);
-// }
-
-
-function get_user_profile($profile) {
-    $profilePath = 'uploads/' . $profile;
-
-    // Check if the image exists in storage
-    if (Storage::exists($profilePath)) {
-        // Image exists, return its URL
-        return asset('storage/' . $profilePath);
-    } else {
-        // Image does not exist, return URL of default image
-        return asset( 'no_image.jpg');
-    }
+    return   asset('storage/uploads/'.$profile);
 }
+
+
+// function get_user_profile($profile) {
+//     $profilePath = 'storage/uploads/' . $profile;
+
+//     // Check if the image exists in storage
+//     if (Storage::exists($profilePath)) {
+//         // Image exists, return its URL
+//         return asset('storage/' . $profilePath);
+//     } else {
+//         // Image does not exist, return URL of default image
+//         return asset( 'no_image.jpg');
+//     }
+// }
 
 
 
