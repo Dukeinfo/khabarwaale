@@ -75,6 +75,7 @@ class CreateAdd extends Component
                                 ->orwhere('from_date', 'like', '%'.$search.'%')
                                 ->orwhere('to_date', 'like', '%'.$search.'%')
                                 ->orwhere('post_month', 'like', '%'.$search.'%')
+                                ->latest()
                                 ->get();
         return view('livewire.backend.advertisment.create-add',['get_add_location' => $getAddLocation,'records' => $records,'getCategory' => $getCategory ,'trashdata' =>$trashdata]);
     }

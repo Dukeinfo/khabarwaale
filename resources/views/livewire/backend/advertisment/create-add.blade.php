@@ -221,6 +221,7 @@
 
                                             <th>Page  Name </th>
                                             <th> location </th>
+                                            <td>Created at </td>
                                             <th>Status</th>    
                                             <th>Action</th>
                                         </tr>
@@ -282,6 +283,7 @@
                                             <td>{{ ucwords(str_replace('home.','',$record->page_name)) ?? 'NA' }}</td>
                                   
                                             <td> {{$record->location ?? 'NA' }}</td>
+                                            <td>  {{$record->created_at->diffForHumans()}}</td>
 
                                             <td>
                                                 @if($record->status  == "Yes")
@@ -294,7 +296,6 @@
                                                 </a> 
                                                 @endif
                                             </td>
-
                                                 <td>   
                                          
                                                     <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal{{$record->id}}">
