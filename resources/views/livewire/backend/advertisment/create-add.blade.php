@@ -221,7 +221,7 @@
 
                                             <th>Page  Name </th>
                                             <th> location </th>
-                                            <td>Created at </td>
+                                            <td>Created  </td>
                                             <th>Status</th>    
                                             <th>Action</th>
                                         </tr>
@@ -234,7 +234,7 @@
                                             <td> {{ $key+1}}</td>
                                             <td>   
                                                 
-                                                <img src="{{getThumbnail($record->thumbnail) ?? ''}}" alt=".." class="img-size-50  img-bordered-sm rounded" width="100" height="100">
+                                                <img src="{{getThumbnail($record->thumbnail) ?? ''}}" alt=".." class="img-size-50  img-bordered-sm rounded" width="90" height="90">
                                             
                                             </td>
                                             <td>
