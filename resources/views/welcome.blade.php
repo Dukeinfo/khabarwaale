@@ -30,7 +30,7 @@ $seoMetaData =  App\Models\SeoMetadetail::first();
         <div class="row">
             @livewire('frontend.news-sections.latest-news' )
             <!-- main news -->
-            <livewire:frontend.news-sections.top-news lazy />
+            <livewire:frontend.news-sections.top-news  />
             {{-- right side add and editor profile  --}}
             @livewire('frontend.advertisement.right-adds')
         </div>

@@ -29,7 +29,7 @@
                                 <div class="card-body">
                                     <div class="p-b-20">
                                         <h5 class="p-b-5">
-                                            <a target="_blank" href="{{route('home.inner',['newsid' => $hintopNews->id , 'slug' =>  md5createSlug($hintopNews->slug)  ])}}" class="f1-m-3 cl2 hov-cl10 trans-03 font-weight-bold">
+                                            <a target="_blank" href="{{route('home.inner',['newsid' => $hintopNews->id , 'slug' =>  $hintopNews->slug  ])}}" class="f1-m-3 cl2 hov-cl10 trans-03 font-weight-bold">
                                            
                                                     {!! Str::limit($hintopNews->title, 70) !!} 
                                             </a>
@@ -100,7 +100,7 @@
                                             </span>
                                         </span>
                                     </div>
-                                    <a target="_blank" href="{{route('home.inner',['newsid' => $hintopNews->id , 'slug' => md5createSlug( $hintopNews->slug)  ])}}" class="wrap-pic-w hov1 trans-03">
+                                    <a target="_blank" href="{{route('home.inner',['newsid' => $hintopNews->id , 'slug' =>  $hintopNews->slug  ])}}" class="wrap-pic-w hov1 trans-03">
                                         <img src="{{  isset($hintopNews->image)?getNewsImage($hintopNews->image) : asset('assets/images/news/n1.jpg')}}" alt="IMG" class="img-fluid rounded">
                                     </a>
                                 </div>
@@ -114,7 +114,7 @@
                                     <div class="flex-wr-sb-s">
                                         <div class="size-w-2">
                                             <h5 class="p-b-5">
-                                                <a target="_blank" href="{{route('home.inner',['newsid' => $hintopNews->id , 'slug' => md5createSlug( $hintopNews->slug)  ])}}" target="_blank" class="f1-s-5 cl3 hov-cl10 trans-03">
+                                                <a target="_blank" href="{{route('home.inner',['newsid' => $hintopNews->id , 'slug' =>  $hintopNews->slug  ])}}" target="_blank" class="f1-s-5 cl3 hov-cl10 trans-03">
                                                  
                                                     {!! Str::limit($hintopNews->title, 65) !!} 
                                                 </a>
@@ -168,7 +168,7 @@
                                             </span>
                                         </div>
                                         
-                                        <a target="_blank" href="{{route('home.inner',['newsid' => $hintopNews->id , 'slug' =>  md5createSlug($hintopNews->slug ) ])}}" class="size-w-1 wrap-pic-w hov1 trans-03">
+                                        <a target="_blank" href="{{route('home.inner',['newsid' => $hintopNews->id , 'slug' =>  $hintopNews->slug  ])}}" class="size-w-1 wrap-pic-w hov1 trans-03">
                                             <img src="{{  isset($hintopNews->thumbnail)? getThumbnail($hintopNews->thumbnail)  :  getNewsImage($hintopNews->image)}}" alt="" class="img-fluid rounded">
                                         </a>  
                                     </div>

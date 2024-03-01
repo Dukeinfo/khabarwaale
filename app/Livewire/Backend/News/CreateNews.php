@@ -26,6 +26,9 @@ use Livewire\Features\SupportFileUploads\WithFileUploads;
 use App\Models\PushSubscription;
 use Minishlink\WebPush\Subscription;
 use Minishlink\WebPush\WebPush;
+use Illuminate\Support\Str;
+use Stichoza\GoogleTranslate\GoogleTranslate;
+
 class CreateNews extends Component
 {
     use WithFileUploads;
@@ -163,16 +166,13 @@ class CreateNews extends Component
     }
 
     public function createNews(){
-        // dd( $this->news_description );
         $this->validate();
+        // dd(createSlug($this->title) );
         if(!is_null($this->image)){
 
             $image =  $this->image;
             $folder = '/news_gallery';
             $newsimage = $this->uploadOne($image, $folder);
-            // if( $this->gallery ){
-            //     $this->image->storeAs('image_gallery',  $newsimage['file_name'] ,'public');
-            // }
 
           } 
           if(!is_null($this->pdf_file)){
@@ -192,7 +192,7 @@ class CreateNews extends Component
         $createNews->reporter_id = $this->reporter_id ?? null ;
         $createNews->old_parm = $this->old_parm ?? null ;
         $createNews->title = $this->title ?? null ;
-        $createNews->slug = md5($this->title);
+        $createNews->slug = translateAndSlug($this->title) ;
         $createNews->heading = $this->heading ?? null ;
         $createNews->heading2 = $this->heading2 ?? null ;
         $createNews->image = $newsimage['file_name'] ?? null ;
