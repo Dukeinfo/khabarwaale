@@ -69,19 +69,19 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home.homepage');
 
-Route::get('/readmore.html', function () {
+Route::get('/readmore', function () {
     return view('readmorefooter');
 })->name('readmore');
 
-Route::get('/privacy-policy.html', function () {
+Route::get('/privacy-policy', function () {
     return view('privacy_policy');
 })->name('privacyPolicy');
 
-Route::get('/category/{id}/{slug}.html', function ($id, $slug) {
+Route::get('/category/{id}/{slug}', function ($id, $slug) {
     return view('category', compact('id', 'slug'));
 })->name('home.category');
 
-Route::get('/inner/{newsid}/{slug}.html', function ($newsid, $slug) {
+Route::get('/inner/{newsid}/{slug}', function ($newsid, $slug) {
     return view('inner', compact('newsid', 'slug'));
 })->name('home.inner');
 
@@ -91,19 +91,19 @@ Route::get('/inner/{newsid}/{slug}.html', function ($newsid, $slug) {
 
 // })->name('home.archive', compact('id', 'slug'));
 
-Route::get('/video-gallery.html', function () {
+Route::get('/video-gallery', function () {
     return view('video-gallery');
 })->name('home.video-gallery');
 
 
-Route::get('/archive/{id}/{slug}.html', function ($id, $slug) {
+Route::get('/archive/{id}/{slug}', function ($id, $slug) {
     return view('archive', compact('id', 'slug'));
 })->name('home.archive');
 
 
 
 
-Route::get('/reporter-news.html', function () {
+Route::get('/reporter-news', function () {
     return view('reporter_news');
 })->name('home.reporter_news');
 
