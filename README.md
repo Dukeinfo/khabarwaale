@@ -14,8 +14,7 @@ Khabarwaale is a comprehensive news website dedicated to providing readers with 
 - **Search Functionality**: Looking for a specific news article? Use our search feature to quickly find what you're looking for.
 
 ## Social Media Integration
-
-    Stay connected with us on social media:
+Stay connected with us on social media:
 
 - [Facebook](https://www.facebook.com/khabarwaaleofficial/)
 - [Twitter](https://twitter.com/khabarwaaletv)
