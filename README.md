@@ -55,10 +55,9 @@ Khabarwaale is a comprehensive news website dedicated to providing readers with 
  * https://www.khabarwaale.com
 
 ## Contributions
-    We welcome contributions from freelance journalists, writers, and contributors who are passionate about delivering quality news content. If you're interested in contributing to Khabarwaale, please reach out to us via email with your proposal.
+We welcome contributions from freelance journalists, writers, and contributors who are passionate about delivering quality news content. If you're interested in contributing to Khabarwaale, please reach out to us via email with your proposal.
 
 ## Disclaimer
-
-    While we strive to ensure the accuracy and reliability of the information presented on Khabarwaale, we cannot guarantee the absolute accuracy of all content. Readers are encouraged to cross-reference information and verify facts independently.
+While we strive to ensure the accuracy and reliability of the information presented on Khabarwaale, we cannot guarantee the absolute accuracy of all content. Readers are encouraged to cross-reference information and verify facts independently.
 
 * Thank you for choosing Khabarwaale as your go-to source for news and updates! Stay informed, stay connected.
