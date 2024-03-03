@@ -1,66 +1,64 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<p align="center"><a href="https://www.khabarwaale.com/" target="_blank"><img src="khabr.png" width="400" alt="Laravel Logo"></a></p>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Khabarwaale News Site
+Welcome to Khabarwaale - Your trusted source for the latest news and updates!
 
-## About Laravel
+## Introduction
+Khabarwaale is a comprehensive news website dedicated to providing readers with timely, accurate, and relevant news articles spanning various topics including politics, technology, entertainment, sports, and more.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- **Wide Range of Topics**: From global events to local news, Khabarwaale covers a diverse range of topics to keep you informed and engaged.
+- **Timely Updates**: Our team of dedicated journalists works around the clock to deliver the latest news as it happens.
+- **User-Friendly Interface**: Navigating through Khabarwaale is easy and intuitive, ensuring a seamless browsing experience for our readers.
+- **Responsive Design**: Whether you're accessing Khabarwaale on your desktop, tablet, or smartphone, our website adapts to your device's screen size for optimal viewing.
+- **Search Functionality**: Looking for a specific news article? Use our search feature to quickly find what you're looking for.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Social Media Integration
 
-## Learning Laravel
+    Stay connected with us on social media:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- [Facebook](https://www.facebook.com/khabarwaaleofficial/)
+- [Twitter](https://twitter.com/khabarwaaletv)
+- [Instagram](https://www.instagram.com/khabarwaaletv/)
+- [LinkedIn](https://www.linkedin.com/in/khabarwaale-waale-001132168/)
+- [YouTube](https://www.youtube.com/c/KhabarwaaleTV)
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+    Follow us on these platforms for additional updates, behind-the-scenes insights, and engaging content!
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Navigation Links
 
-## Laravel Sponsors
+- [Home](https://www.khabarwaale.com)
+- [Punjab News](https://www.khabarwaale.com/category/5/punjab)
+- [Chandigarh News](https://www.khabarwaale.com/category/6/chandigarh)
+- [National News](https://www.khabarwaale.com/category/7/national)
+- [International News](https://www.khabarwaale.com/category/8/world)
+- [Sports News](https://www.khabarwaale.com/category/9/sports)
+- [Education News](https://www.khabarwaale.com/category/10/education)
+- [Business News](https://www.khabarwaale.com/category/11/business)
+- [Transfer and Appointments](https://www.khabarwaale.com/category/12/transfer-and-appointments)
+- [Lifestyle News](https://www.khabarwaale.com/category/13/lifestyle)
+- [Religious News](https://www.khabarwaale.com/category/14/religious)
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
 
-### Premium Partners
+## How to Use
+* Navigation: Use the menu bar located at the top of the page to explore different sections and topics.
+* Reading Articles: Click on any headline to read the full article. You can also use the search bar to find specific articles.
+* Sharing: Found an article you like? Share it with your friends and followers on social media using the integrated sharing buttons.
+* Providing Feedback: We value your feedback! If you have any comments, suggestions, or concerns, feel free to contact us via the provided contact information.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+## Contact Us
+*  Have questions or feedback? We'd love to hear from you!
 
-## Contributing
+ * Email: newskhabarwaale@gmail.com
+ * Phone: +91-9815481679
+ * Address: C-2, SCO 86-87, TF, ਸੈਕਟਰ 45-C, ਚੰਡੀਗੜ੍ਹ
+ * https://www.khabarwaale.com
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Contributions
+    We welcome contributions from freelance journalists, writers, and contributors who are passionate about delivering quality news content. If you're interested in contributing to Khabarwaale, please reach out to us via email with your proposal.
 
-## Code of Conduct
+## Disclaimer
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+    While we strive to ensure the accuracy and reliability of the information presented on Khabarwaale, we cannot guarantee the absolute accuracy of all content. Readers are encouraged to cross-reference information and verify facts independently.
 
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+* Thank you for choosing Khabarwaale as your go-to source for news and updates! Stay informed, stay connected.
