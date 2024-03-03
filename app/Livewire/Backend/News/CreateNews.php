@@ -164,10 +164,11 @@ class CreateNews extends Component
             'records' =>$records ,
              'trashdata' => $trashdata]);
     }
-
+    public $newsSlug;
     public function createNews(){
         $this->validate();
         // dd(createSlug($this->title) );
+        $this->newsSlug =    translateAndSlug($this->title);
         if(!is_null($this->image)){
 
             $image =  $this->image;
@@ -192,7 +193,7 @@ class CreateNews extends Component
         $createNews->reporter_id = $this->reporter_id ?? null ;
         $createNews->old_parm = $this->old_parm ?? null ;
         $createNews->title = $this->title ?? null ;
-        $createNews->slug = translateAndSlug($this->title) ;
+        $createNews->slug = $this->newsSlug ;
         $createNews->heading = $this->heading ?? null ;
         $createNews->heading2 = $this->heading2 ?? null ;
         $createNews->image = $newsimage['file_name'] ?? null ;
@@ -235,7 +236,7 @@ class CreateNews extends Component
         $pushData = [
             'title'  => $this->title,
             'body'  => $this->heading,
-            'url'  => 'inner/'.$createNews->id.'/'.md5($this->title),
+            'url'  => 'inner/'.$createNews->id.'/'.$this->newsSlug,
             'image' =>  env('APP_URL').'/storage/news_gallery/'.$createNews->image,
            
         ];
