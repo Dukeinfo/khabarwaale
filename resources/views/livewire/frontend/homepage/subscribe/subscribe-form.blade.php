@@ -5,10 +5,14 @@
     <div class="p-b-30">
         <div class="position-relative">
             <div class="wrap-pic-w pos-relative">
-                <img src="{{ isset($rightlivetvnews->video_image) ?  get_video_image($rightlivetvnews->video_image): asset('assets/images/video-01.jpg')}}" alt="IMG">
-
+                @if(isset($rightlivetvnews->video_url))
+                <iframe width="100%" height="205" src="https://www.youtube.com/embed/{{$rightlivetvnews->video_url}}?rel=0" frameborder="0" allowfullscreen></iframe>
+                @else
+                {{-- <img src="{{ isset($rightlivetvnews->video_image) ?  get_video_image($rightlivetvnews->video_image): asset('assets/images/video-01.jpg')}}" alt="IMG"> --}}
+                <img src="{{ asset('assets/images/video-01.jpg')}}" alt="IMG">
+                @endif
                 <button class="s-full ab-t-l flex-c-c fs-32 cl0 hov-cl10 trans-03" data-toggle="modal" data-target="#modal-video-01">
-                    <span class="fab fa-youtube"></span>
+                  
                 </button>
             </div>
             <div class="p-tb-16 p-rl-25 bg3">
