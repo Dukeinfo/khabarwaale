@@ -6,7 +6,8 @@
                 <div class="col-md-4 mb-4">
                     <div class="video-container">
                         <!-- Embed YouTube video using iframe -->
-                        <iframe width="100%" height="215" src="https://www.youtube.com/embed/{{$videprecord->video_url}}?rel=0" frameborder="0" allowfullscreen></iframe>
+                        <iframe width="100%" height="200" src="https://www.youtube.com/embed/{{$videprecord->video_url}}?rel=0" frameborder="0" allowfullscreen></iframe>
+                      
                     </div>
                     <div class="video-info">
                         <div class="card">
@@ -24,8 +25,8 @@
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title">
-                                    <a href="https://www.youtube.com/watch?v={{$videprecord->video_url}}" target="_blank">
-                                        {!! Str::words($videprecord->video_title_en, 9, '...') ?? "NA" !!}
+                                    <a href="https://www.youtube.com/watch?v={{$videprecord->video_url}}" title="{{$videprecord->video_title_en ?? ''}}" target="_blank">
+                                        {!! Str::words($videprecord->video_title_en, 8, '...') ?? "NA" !!}
                                     </a>
                                 </h5>
                            

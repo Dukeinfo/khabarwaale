@@ -31,20 +31,6 @@
                                 <div class="border border-top-0 border-left-0 border-right-0 pb-3">
                                     <h5 class="p-b-5">
                                         {{-- <a target="_blank" href="{{route('home.inner',['newsid' => $news->id , 'slug' =>  $news->slug  ])}}" class="f1-s-5 cl3 hov-cl10 trans-03"> --}}
-                                            {{-- <span class="text-danger mr-1">
-                                                    @if (session()->get('language') === 'hindi')
-                                                        {{$news['getmenu']['category_hin'] ?? "NA"}}:
-                                                    @elseif (session()->get('language') === 'english')
-                                                        {{$news['getmenu']['category_en'] ?? "NA"}}:
-                                                    @elseif (session()->get('language') === 'punjabi')
-                                                        {{$news['getmenu']['category_pbi'] ?? "NA"}}:
-                                                    @elseif (session()->get('language') === 'urdu')
-                                                        {{$news['getmenu']['category_urdu'] ?? "NA"}}:
-                                                    @else   
-                                                        {{$news['getmenu']['category_en'] ?? "NA"}}:
-                                                    @endif
-                                            </span> --}}
-
                                             @if (strpos($news->category_id, ',') === false)
                                             {{-- Single category ID --}}
                                                 <a  target="_blank"  href="{{ route('home.category', ['id' => $news->getmenu->id, 'slug' => createSlug($news->getmenu['category_en'])]) }}" class="f1-s-5 cl3 hov-cl10 trans-03">
@@ -88,9 +74,11 @@
                                             @endif
                                             @endforeach
                                             @endif
-
-                                                {!! Str::limit($news->title, 60) !!} 
-                                                
+                                            {!! Str::limit($news->title, 60) !!} 
+                                                    <a target="_blank" href="{{route('home.inner',['newsid' => $news->id , 'slug' =>  $news->slug  ])}}" class=" hov1">
+                                                        ਦੇਖੋ
+                                                    </a>
+                                                    
                                         {{-- </a> --}}
                                     </h5>
                                     <span class="cl8">

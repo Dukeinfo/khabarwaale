@@ -80,107 +80,67 @@
     @endforelse
     @livewireScripts
 
+<style>
+/* Custom CSS for modal background */
+.modal {
+    background-color: rgba(0, 0, 0, 0.50) !important; 
+}
 
-        {{-- <script>
-       
-             const vapidPublicKey  =    "{{env('VAPID_PUBLIC_KEY')}}"
-            //  window.onload = function() {
-            //     // Check if permission is already granted
-            //     if (Notification.permission === 'granted') {
-            //         console.log('Notification permission already granted.');
-            //     } else {
-            //         // Call requestPermission function after the page has loaded
-            //         requestPermission();
-            //     }
-            // };
-             navigator.serviceWorker.register("sw.js");
-    
-         function requestPermission() {
-            Notification.requestPermission().then((permission) => {
-                if (permission === 'granted') {
-                    // get service worker
-                    navigator.serviceWorker.ready.then((sw) => {
-                        // subscribe
-                        sw.pushManager.subscribe({
-                            userVisibleOnly: true,
-                            applicationServerKey: vapidPublicKey
-                        }).then((subscription) => {
-                            // subscription successful
-                            fetch("api/push-subscribe", {
-                                method: "post",
-                                body: JSON.stringify(subscription)
-                            })
-                            .then(response => {
-                                console.log('Push Subscription Response:', response);
-                                return response.json();
-                            })
+.modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.50) !important; 
+    z-index: 1040; /* Make backdrop appear above the modal */
+}
 
-                            .then(data => {
-                                if (data.message) {
-                                    alert(data.message);
-                                } else {
-                                    // Handle other cases if needed
-                                    console.warn('Unexpected response format:', data);
-                                }
-                            })
-                            .catch(error => {
-                                console.error('Error subscribing to push notifications:', error);
-                                alert("An error occurred. Please try again later.");
-                            });
-                        });
-                    });
-                }
-                
-            });
-            }
-        </script> --}}
+.modal-backdrop.in {
+    opacity: 1 !important; 
+}
+
+</style>
+    <div class="modal fade" id="subscribeModal" tabindex="-1" aria-labelledby="subscribeModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-dark text-light">
+                    <h5 class="modal-title">
+                        @if (session()->get('language') == "hindi" )
+                            Subscribe to Notifications
+                        @elseif (session()->get('language') == "english" )
+                            Subscribe to Notifications
+                        @elseif (session()->get('language') == "punjabi" )
+                            ਸੂਚਨਾਵਾਂ  ਲਈ ਸਬਸਕ੍ਰਾਈਬ ਕਰੋ 
+                        @elseif (session()->get('language') == "urdu" )
+                            Subscribe to Notifications
+                        @endif
+                    </h5>
+                    <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body bg-light text-dark">
+                    ਕੀ ਤੁਸੀਂ ਨਵੇਂ ਅੱਪਡੇਟਾਂ ਅਤੇ ਤਰੱਕੀਆਂ ਬਾਰੇ ਸੂਚਨਾਵਾਂ ਪ੍ਰਾਪਤ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ?
+                </div>
+                <div class="modal-footer">
+                    {{-- <button type="button" class="btn btn-secondary" data-dismiss="modal">ਬੰਦ ਕਰੋ</button> --}}
+                    <button type="button" class="btn btn-primary" id="subscribeBtn">ਸਬਸਕ੍ਰਾਈਬ ਕਰੋ</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
+
+{{-- new js added to show pop up and alert  --}}
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
-      const vapidPublicKey  =    "{{env('VAPID_PUBLIC_KEY')}}"
-
-    //   function createAlert(message) {
-    //     const alertDiv = document.createElement('div');
-    //     alertDiv.className = 'alert alert-success alert-dismissible';
-    //     alertDiv.innerHTML = `
-    //         ${message}
-    //         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    //             <span aria-hidden="true">&times;</span>
-    //         </button>
-    //     `;
-    //     document.body.appendChild(alertDiv);
-    // }
-    function createAlert(message) {
-        const alertDiv = document.createElement('div');
-        alertDiv.className = 'alert alert-success alert-dismissible';
-        alertDiv.innerHTML = `
-            ${message}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        `;
-
-        // Find the target element with the specified class
-        const targetElement = document.querySelector('.bg0.flex-wr-sb-c.p-rl-20.p-tb-8');
-
-        if (targetElement) {
-            // Insert the new alert div element after the target element
-            targetElement.parentNode.insertBefore(alertDiv, targetElement.nextSibling);
-        } else {
-            // If target element is not found, append the alert div to the body
-            document.body.appendChild(alertDiv);
-        }
-    }
+    const vapidPublicKey = "{{env('VAPID_PUBLIC_KEY')}}";
     // Check if the browser supports service workers and notifications
     if ('serviceWorker' in navigator && 'Notification' in window) {
         navigator.serviceWorker.register("sw.js").then(() => {
-            // Service worker registration successful
             // Check if the user is already subscribed
             navigator.serviceWorker.ready.then((sw) => {
                 sw.pushManager.getSubscription().then((subscription) => {
                     if (subscription === null) {
                         // User is not subscribed, prompt them to allow notifications
-                        requestPermission();
+                        $('#subscribeModal').modal('show');
                     }
                 });
             });
@@ -190,6 +150,12 @@
     } else {
         console.error('Service Worker or Notification API is not supported.');
     }
+
+    // Event listener for subscribe button inside the modal
+    document.getElementById('subscribeBtn').addEventListener('click', function () {
+        requestPermission();
+        $('#subscribeModal').modal('hide');
+    });
 
     function requestPermission() {
         Notification.requestPermission().then((permission) => {
@@ -206,31 +172,28 @@
                             method: "post",
                             body: JSON.stringify(subscription)
                         })
-                        .then(response => {
-                            console.log('Push Subscription Response:', response);
-                            return response.json();
-                        })
-                        .then(data => {
-                            if (data.message) {
-                                // alert(data.message);
-                                createAlert(data.message);
-                            } else {
-                                // Handle other cases if needed
-                                console.warn('Unexpected response format:', data);
-                            }
-                        })
-                        .catch(error => {
-                            console.error('Error subscribing to push notifications:', error);
-                            // alert("An error occurred. Please try again later.");
-                            createAlert("An error occurred. Please try again later.");
-                        });
+                            .then(response => {
+                                console.log('Push Subscription Response:', response);
+                                return response.json();
+                            })
+                            .then(data => {
+                                if (data.message) {
+                                    // Show SweetAlert for success
+                                    swal("Subscribed!", data.message, "success");
+                                } else {
+                                    console.warn('Unexpected response format:', data);
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error subscribing to push notifications:', error);
+                                swal("Error", "An error occurred. Please try again later.", "error");
+                            });
                     });
                 });
             }
         });
     }
 </script>
-
 
 </body>
 </html>

@@ -9,7 +9,7 @@
                 <a href="{{ route('punjabi.language') }}" class="left-topbar-item btn btn-primary ml-2">
                     Punjabi
                 </a>
-                <button onclick="requestPermission()" type="button" class="btn-flat left-topbar-item btn btn-danger ml-2">Allow notification
+                {{-- <button onclick="requestPermission()" type="button" class="btn-flat left-topbar-item btn btn-danger ml-2">Allow notification --}}
             </button>
                 <span class="left-topbar-item flex-wr-s-c">
                     <span class="mr-2">
@@ -93,9 +93,9 @@
                 <a href="{{ route('punjabi.language') }}" class="left-topbar-item btn btn-primary ml-2">
                     Punjabi
                 </a>
-                <button  onclick="requestPermission()" type="button" class="left-topbar-item btn btn-danger ml-2">
+                {{-- <button  onclick="requestPermission()" type="button" class="left-topbar-item btn btn-danger ml-2">
                     Allow notification
-                </button>
+                </button> --}}
                 <span class="left-topbar-item flex-wr-s-c">
                     <span class="mr-2">
                         @if (session()->get('language') === 'hindi')

@@ -9,7 +9,7 @@ class ViewVideoGallery extends Component
 {
     public function render()
     {
-        $videprecords = VideoGallery::where('status', 'Active')->get();
+        $videprecords = VideoGallery::where('status', 'Active')->latest()->get();
         return view('livewire.frontend.videogallery.view-video-gallery' ,['videprecords' =>$videprecords]);
     }
 }

@@ -147,7 +147,9 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
+                                <h3 >   Total Videos : {{count($records) ?? ''}}</h3>
                                 <table class="table table-bordered table-striped datatable--">
+                            
                                     <thead>
                                         <tr>
                                             <th>#</th>
@@ -175,7 +177,9 @@
                                             {{-- https://www.youtube.com/embed/{{$livetvnews->video_url}}?rel=0 --}}   
                                                 <td> <a href="https://www.youtube.com/embed/{{$record->video_url ?? '#'}}" target="_blank" title="{{$record->video_url }}"> {{  Str::limit($record->video_title_en, 40) ?? "NA"}}</a> </td>
                                                 <td> 
-                                                    {{ \Carbon\Carbon::parse($record->post_date )->format('d-M-y') ?? ''}}
+                                                    {{ \Carbon\Carbon::parse($record->post_date )->format('d-M-y') ?? ''}} <br>
+                                                    {{ $record->created_at->diffForHumans() ?? ''}}
+
 
 
                                                 </td>
@@ -192,8 +196,11 @@
 
                                            @endif
                                                 <td>   
-                                                <a  href="javascript:void(0)" wire:click="edit({{$record->id}})" class="text-success me-2" title="Edit"  wire:target="edit({{ $record->id }})"  wire:loading.attr="disabled"><i class="fa fa-edit fa-fw"></i></a>
-                                                <a href="javascript:void(0)" class="text-danger me-2" title="Delete" wire:click="delete({{ $record->id }})" wire:target="delete({{ $record->id }})"  wire:loading.attr="disabled"><i class="fa fa-times fa-fw fa-lg"></i></a>
+
+                                                
+
+                                                <button  href="javascript:void(0)" wire:click="edit({{$record->id}})" class="btn btn-sm btn-success" title="Edit"  wire:target="edit({{ $record->id }})"  wire:loading.attr="disabled"><i class="fa fa-edit fa-fw"></i></button>
+                                                <button href="javascript:void(0)" class="btn btn-sm btn-danger" title="Delete" wire:click="delete({{ $record->id }})" wire:target="delete({{ $record->id }})"  wire:loading.attr="disabled"><i class="fa fa-times fa-fw fa-lg"></i></button>
                                             </td>
                                         </tr>
                                         @endif

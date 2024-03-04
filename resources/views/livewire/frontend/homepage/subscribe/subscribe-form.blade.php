@@ -6,7 +6,7 @@
         <div class="position-relative">
             <div class="wrap-pic-w pos-relative">
                 @if(isset($rightlivetvnews->video_url))
-                <iframe width="100%" height="205" src="https://www.youtube.com/embed/{{$rightlivetvnews->video_url}}?rel=0" frameborder="0" allowfullscreen></iframe>
+                <iframe width="100%" height="200" src="https://www.youtube.com/embed/{{$rightlivetvnews->video_url}}?rel=0" frameborder="0" allowfullscreen></iframe>
                 @else
                 {{-- <img src="{{ isset($rightlivetvnews->video_image) ?  get_video_image($rightlivetvnews->video_image): asset('assets/images/video-01.jpg')}}" alt="IMG"> --}}
                 <img src="{{ asset('assets/images/video-01.jpg')}}" alt="IMG">
@@ -15,9 +15,9 @@
                   
                 </button>
             </div>
-            <div class="p-tb-16 p-rl-25 bg3">
+            <div class="p-tb-16 p-rl-25 bg3" data-toggle="modal" data-target="#modal-video-01">
                 <h5 class="p-b-5">
-                    <a href="javascript:void()" class="f1-m-3 cl0 hov-cl10 trans-03">
+                    <a href="javascript:void()" class="f1-m-3 cl0 hov-cl10 trans-03" >
                         <span class="rippleSpan"></span> Watch LIVE TV
                     </a>
                 </h5>
