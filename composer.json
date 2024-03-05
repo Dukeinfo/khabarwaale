@@ -22,6 +22,7 @@
         "pusher/pusher-php-server": "^7.2",
         "spatie/browsershot": "^3.59",
         "spatie/image-optimizer": "^1.7",
+        "spatie/laravel-activitylog": "^4.7",
         "spatie/laravel-backup": "^8.3",
         "spatie/laravel-permission": "^6.0",
         "stichoza/google-translate-php": "^5.1"

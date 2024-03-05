@@ -60,12 +60,25 @@
 	   <span>Add News</span>
    </a>
 </li>
+
+
+@hasanyrole('Super Admin|admin')
+<li>
+	<a href="{{route('View_Activitylog')}}"  class="waves-effect"> 
+
+		<i class='bx bx-bell'></i>
+	   <span>View Activity   <span class="badge bg-danger">New</span></span>
+   </a>
+</li>
+@endhasanyrole
+
 @elseif(auth()->user()->can('manage_archive') )
 
 <li>
 	<a href="{{route('admin.Add_Archive_News')}}"  class="waves-effect"> 
 		<i class='bx bx-archive'></i>
 	   <span>Add Archive News</span>
+	  
    </a>
    
 </li>

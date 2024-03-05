@@ -178,7 +178,33 @@ class EditUser extends Component
                 }
             }
             //  dd($assignments);
-    
+            $category_ids = array_column($assignments, 'category_id');
+            if(isset($category_ids)){
+                logActivity(
+                    'User',
+                    $updateuser,
+                    [
+                        'User id'    => $updateuser->id,
+                        'User Name'  => $updateuser->name,
+                        'Category ID' => json_encode($category_ids), 
+                    ],
+                    'Update',
+                    'User has been Updated!'
+                );
+            }else{
+                logActivity(
+                    'User',
+                    $updateuser,
+                    [
+                        'User id'    => $updateuser->id,
+                        'User Name'  => $updateuser->name,
+                    ],
+                    'Update',
+                    'User has been Updated!'
+                );
+            }
+
+
             AssigneMenu::insert($assignments);
             $this->alert('success', 'User Created successfully!');
             return redirect()->route('create_user');

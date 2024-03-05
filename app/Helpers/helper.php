@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Stichoza\GoogleTranslate\GoogleTranslate;
 use Illuminate\Support\Str;
+use Spatie\Activitylog\Models\Activity;
 
 function authUserId(){
     return Auth::id();
@@ -248,5 +249,26 @@ function translateAndSlug($text) {
         // Return the slug
         return $slug;
 
+    }
+}
+
+
+if (! function_exists('abort_if_cannot')) {
+    function abort_if_cannot(string $action, int $code = 403): void
+    {
+        $message = 'You do not have permissions to '.strtolower(str_replace('_', ' ', $action));
+        abort_unless(auth()->user()->can($action), $code, $message);
+    }
+}
+
+if (! function_exists('logActivity')) {
+    function logActivity($subject, $performedOn, $properties = [], $event = null, $description = null)
+    {
+        activity($subject)
+            ->causedBy(auth()->user())
+            ->performedOn($performedOn)
+            ->withProperties($properties)
+            ->event($event)
+            ->log($description);
     }
 }

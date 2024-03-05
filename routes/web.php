@@ -5,6 +5,7 @@ use App\Http\Controllers\CkImageUploadController;
 use App\Http\Controllers\FirebasePushController;
 use App\Http\Controllers\Frontend\FronendController;
 use App\Http\Controllers\Frontend\LanguageController;
+use App\Livewire\Backend\ActivityLog\ViewActivitylog;
 use App\Livewire\Backend\AddUsers\CreateUsers;
 use App\Livewire\Backend\AddUsers\EditUser;
 use App\Livewire\Backend\AddUsers\Viewusers;
@@ -139,6 +140,9 @@ Route::group(['middleware' =>   ['auth']], function () {
         Route::post('/admin-logout', [AdminLogoutController::class, 'adminlogout'])->name('adminlogout');
         Route::get('/profile', AdminProfile::class)->name('admin_profile');
         Route::get('/contact-entries', ContactMessages::class)->name('contact_entries');
+        Route::get('/activity-log', ViewActivitylog::class)->name('View_Activitylog');
+
+        
 
         Route::group(['middleware' => ['can:manage_social_app']], function () {
             Route::get('/social-view', SocialAppsManager::class)->name('social_view');

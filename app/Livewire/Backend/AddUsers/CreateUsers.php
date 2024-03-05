@@ -131,7 +131,9 @@ use LivewireAlert;
 
            // Save the user to the database
                 $createuser->save();
-                
+
+          
+
                 $createuser->assignRole($role);
             } else {
                 // Handle the case where the role is not found in the 'web' guard
@@ -158,7 +160,34 @@ use LivewireAlert;
 
             
             AssigneMenu::insert($assignments);
+            $category_ids = array_column($assignments, 'category_id');
+            if(isset($category_ids)){
+                logActivity(
+                    'User',
+                    $createuser,
+                    [
+                        'User id'    => $createuser->id,
+                        'User Name'  => $createuser->name,
+                        'Category ID' => json_encode($category_ids), 
+                    ],
+                    'Create',
+                    'User has been successfully Created!'
+                );
+            }else{
+                logActivity(
+                    'User',
+                    $createuser,
+                    [
+                        'User id'    => $createuser->id,
+                        'User Name'  => $createuser->name,
+                    ],
+                    'Create',
+                    'User has been successfully Created!'
+                );
+            }
+
             dispatch(new userCreateJob($createuser, $role, $assignments));
+            
             $this->reset(); 
             $this->alert('success', 'User Created successfully!');
 
@@ -167,6 +196,17 @@ use LivewireAlert;
         $finduser = User::find($id);
         $finduser->status = "0";
         $finduser->save();
+
+        logActivity(
+            'User',
+            $finduser,
+            [
+                'User id'    => $finduser->id,
+                'User Name'  => $finduser->name,
+            ],
+            'Inactive',
+            'User has been inactive!'
+        );
         $this->alert('info', 'User Inactive successfully!');
 
 }
@@ -174,6 +214,16 @@ public function  active($id){
         $finduser = User::find($id);
         $finduser->status = "1";
         $finduser->save();
+        logActivity(
+            'User',
+            $finduser,
+            [
+                'User id'    => $finduser->id,
+                'User Name'  => $finduser->name,
+            ],
+            'Active',
+            'User has been active!'
+        );
         $this->alert('success', 'User Active successfully!');
 }
     public function  delete($id){
@@ -182,6 +232,18 @@ public function  active($id){
             
       // Detach roles before deleting the user
             $user = User::findOrFail($id);
+
+            logActivity(
+                'User',
+                $user,
+                [
+                    'User id'    => $user->id,
+                    'User Name'  => $user->name,
+                ],
+                'Delete',
+                'User has been deleteed!'
+            );
+
             AssigneMenu::where('user_id', $id)->delete();
             $user->roles()->detach();
 

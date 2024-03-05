@@ -183,7 +183,7 @@ class CreateNews extends Component
           } 
         $createNews  = new NewsPost();
         $createNews->news_type = $this->news_type ?? null ;
-        $createNews->category_id = $this->category_id ?? null ;
+        // $createNews->category_id = $this->category_id ?? null ;
         // Convert array of category_ids to comma-separated string
         $categoryIdsString = implode(',', $this->category_id);
         $createNews->category_id = $categoryIdsString;
@@ -219,6 +219,17 @@ class CreateNews extends Component
         $createNews->login = authUserId();
         $createNews->save();
 
+        logActivity(
+            'News',
+            $createNews,
+            [
+                'News id'    => $createNews->id,
+                'News Type'  => get_websiteType( $createNews->news_type),
+                'News Category' => $createNews->category_id ,
+            ],
+            'Create',
+            'News has been Created!'
+        );
         $vapidPublicKey = env('VAPID_PUBLIC_KEY');
         $vapidPrivateKey = env('VAPID_PRIVATE_KEY');
         $appurl  =    "{{env('APP_URL')}}";
@@ -363,6 +374,18 @@ public function sendNotification( $createNews)
         $rejected = NewsPost::find($id);
         $rejected->status = "Rejected";
         $rejected->save();
+
+        logActivity(
+            'News',
+            $rejected,
+            [
+                'News id'    => $rejected->id,
+                'News Type'  => get_websiteType($rejected->news_type),
+                'News Category' => $rejected->category_id ,
+            ],
+            'Rejected',
+            'News has been Rejected!'
+        );
         $this->alert('error', 'News Post Rejected !');
 
     }
@@ -371,6 +394,18 @@ public function sendNotification( $createNews)
             $approved = NewsPost::find($id);
             $approved->status = "Approved";
             $approved->save();
+
+            logActivity(
+                'News',
+                $approved,
+                [
+                    'News id'    => $approved->id,
+                    'News Type'  => get_websiteType($approved->news_type),
+                    'News Category' => $approved->category_id ,
+                ],
+                'Approved',
+                'News has been approved!'
+            );
             $this->alert('success', 'News Post Approved!');
     }
 
@@ -378,6 +413,18 @@ public function sendNotification( $createNews)
         $pending = NewsPost::find($id);
         $pending->status = "Pending";
         $pending->save();
+
+        logActivity(
+            'News',
+            $pending,
+            [
+                'News id'    => $pending->id,
+                'News Type'  => get_websiteType($pending->news_type),
+                'News Category' => $pending->category_id ,
+            ],
+            'Pending',
+            'News has been pending!'
+        );
         $this->alert('warning', 'NewsPost status is  Pending !');
     }
     
@@ -386,6 +433,19 @@ public function sendNotification( $createNews)
         try {
             
             $findcat = NewsPost::findOrFail($id);
+
+            logActivity(
+                'News',
+                $findcat,
+                [
+                    'News id'    => $findcat->id,
+                    'News Type'  => get_websiteType($findcat->news_type),
+                    'News Category' => $findcat->category_id ,
+                ],
+                'Delete',
+                'News has been deleteed!'
+            );
+
             $findcat->delete();
             $this->alert('warning', 'NewsPost Deleted successfully!');
             
