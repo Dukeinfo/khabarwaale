@@ -26,7 +26,7 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')->hourly();
         $schedule->command('queue:process')->everyMinute();
         $schedule->command('logs:clear')->weekly();
-        $schedule->command('capture:webpage')->dailyAt('20:00');
+        // $schedule->command('capture:webpage')->dailyAt('20:00');
 
     }
 
