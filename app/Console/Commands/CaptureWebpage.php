@@ -58,7 +58,7 @@ class CaptureWebpage extends Command
         //     Log::info('Error capturing or saving the webpage: ' . $e->getMessage());
         // }
         $email ='info@khabarwaale.com';
-        $url = 'https://laravel.com';
+        $url = 'https://www.khabarwaale.com/';
 
         SendBrowserScreenshotJob::dispatch($email, $url);
         $this->info('Screenshot request queued for email.'. $email);
