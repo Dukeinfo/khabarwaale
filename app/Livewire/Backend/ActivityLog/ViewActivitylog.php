@@ -30,9 +30,9 @@ class ViewActivitylog extends Component
         })
             ->latest()
             ->paginate(10);
-
+        $getTotal =    Activity::get();
         // $activityLogs = Activity::all();
-        return view('livewire.backend.activity-log.view-activitylog',['activityLogs' =>$activityLogs]);
+        return view('livewire.backend.activity-log.view-activitylog',['activityLogs' =>$activityLogs ,'getTotal' => $getTotal]);
     }
 
 
