@@ -35,6 +35,17 @@ class CreateMenuForm extends Form
              $createCategory->ip_address = getUserIp() ; 
              $createCategory->login = authUserId(); 
              $createCategory->save();
+
+             logActivity(
+               'Category',
+               $createCategory,
+               [
+                   'Category id'    => $createCategory->id,
+                   'Category Name ' => $createCategory->category_en ,
+               ],
+               'Create',
+               'Category has been Created!'
+           );
              $this->reset();
         }
 
@@ -63,6 +74,17 @@ class CreateMenuForm extends Form
             $createCategory->ip_address = getUserIp() ; 
             $createCategory->login = authUserId(); 
             $createCategory->save();
+
+            logActivity(
+               'Category',
+               $createCategory,
+               [
+                   'Category id'    => $createCategory->id,
+                   'Category Name ' => $createCategory->category_en ,
+               ],
+               'Update',
+               'Category has been Updated!'
+           );
             $this->reset();
 
             $this->reset();

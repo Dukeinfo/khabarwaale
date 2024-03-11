@@ -53,6 +53,18 @@ class AddArchiveNews extends Component
         $archive_News->ip = getUserIp();
         $archive_News->status = 'Active';
         $archive_News->save();
+
+        logActivity(
+            'ArchiveNews',
+            $archive_News,
+            [
+                'News id'    => $archive_News->id,
+    
+                'Archived at' => $archive_News->archived_at ,
+            ],
+            'Create',
+            'ArchiveNews has been Created!'
+        );
         $this->alert('success', 'Archive Created successfully!');
 
   
@@ -62,6 +74,18 @@ class AddArchiveNews extends Component
         $findcat = ArchiveNews::find($id);
         $findcat->status = "Inactive";
         $findcat->save();
+
+        logActivity(
+            'findcat',
+            $findcat,
+            [
+                'News id'    => $findcat->id,
+    
+                'Archived at' => $findcat->archived_at ,
+            ],
+            'Inactive',
+            'ArchiveNews has been inactive!'
+        );
         $this->alert('info', 'Status Inactive successfully!');
 
     }
@@ -69,6 +93,18 @@ class AddArchiveNews extends Component
             $findcat = ArchiveNews::find($id);
             $findcat->status = "Active";
             $findcat->save();
+
+            logActivity(
+                'findcat',
+                $findcat,
+                [
+                    'News id'    => $findcat->id,
+        
+                    'Archived at' => $findcat->archived_at ,
+                ],
+                'Active',
+                'ArchiveNews has been active!'
+            );
             $this->alert('success', 'Status Active successfully!');
     }
 
@@ -77,6 +113,19 @@ class AddArchiveNews extends Component
         try {
             
             $findcat = ArchiveNews::findOrFail($id);
+
+            logActivity(
+                'findcat',
+                $findcat,
+                [
+                    'News id'    => $findcat->id,
+        
+                    'Archived at' => $findcat->archived_at ,
+                ],
+                'Delete',
+                'ArchiveNews has been deleted!'
+            );
+
             $findcat->delete();
             $this->alert('warning', 'Archive Deleted successfully!');
             

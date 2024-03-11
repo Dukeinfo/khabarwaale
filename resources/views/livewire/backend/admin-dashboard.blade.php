@@ -135,32 +135,47 @@
                             $colors = ['bg-primary', 'bg-success', 'bg-danger', 'bg-warning', 'bg-info']; // Define colors
                             $colorIndex = 0; // Index for selecting colors
                         @endphp
-                            @foreach ($modifiedCounts as $year => $months)
-                       
+                          <div class="accordion accordion-flush" id="accordionFlushExample">
+                            @php
+                                $colorIndex = 0; // Initialize color index
+                            @endphp
                         
-                                <h5 class=" {{ $colors[$colorIndex % count($colors)] }} text-white px-3 py-2">{{ $year }}</h5>
-                                <div class="table-responsive">
-                                    <table class="table table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th width="50%">Month</th>
-                                            <th>Count</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                 @php
-                                      $colorIndex++; // Move to the next color
-                                 @endphp
-                                        @foreach ($months as $month => $count)
-                                            <tr>
-                                                <td>{{ \Carbon\Carbon::create()->month($month)->format('F') }}</td>
-                                                <td>{{ $count }}</td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                            @foreach ($modifiedCounts as $year => $months)
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="flush-heading{{ $year }}">
+                                        <button class="accordion-button collapsed text-white {{ $colors[$colorIndex % count($colors)] }}" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{ $year }}" aria-expanded="false" aria-controls="flush-collapse{{ $year }}">
+                                            {{ $year }}
+                                        </button>
+                                    </h2>
+                                    <div id="flush-collapse{{ $year }}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{ $year }}" data-bs-parent="#accordionFlushExample">
+                                        <div class="accordion-body">
+                                            <div class="table-responsive">
+                                                <table class="table table-striped">
+                                                    <thead>
+                                                        <tr>
+                                                            <th width="50%">Month</th>
+                                                            <th>Count</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach ($months as $month => $count)
+                                                            <tr>
+                                                                <td>{{ \Carbon\Carbon::create()->month($month)->format('F') }}</td>
+                                                                <td>{{ $count }}</td>
+                                                            </tr>
+                                                        @endforeach
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
+                                @php
+                                    $colorIndex++; // Move to the next color
+                                @endphp
                             @endforeach
+                        </div>
+                        
                         </div>
                     </div>
                 </div>

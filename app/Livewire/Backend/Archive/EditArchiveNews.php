@@ -36,6 +36,18 @@ public function updateArchiveDate()
     #archiveNews
         $archiveNews->archived_at = $this->archiveDate;
         $archiveNews->save();
+
+        logActivity(
+            'findcat',
+            $archiveNews,
+            [
+                'News id'    => $archiveNews->id,
+    
+                'Archived at' => $archiveNews->archived_at ,
+            ],
+            'Update',
+            'ArchiveNews has been Updated!'
+        );
         return redirect()->route('admin.Add_Archive_News')->with($this->alert('info', 'Status Inactive successfully!'));
        // Reset the input field
     

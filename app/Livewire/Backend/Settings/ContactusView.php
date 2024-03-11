@@ -75,6 +75,17 @@ class ContactusView extends Component
          $contact->save();
      
 
+         logActivity(
+            'ContactInfo',
+            $contact,
+            [
+                'Contact id'    => $contact->id,
+                'Contact email' => $contact->email ,
+            ],
+            'Create',
+            'Contact info  has been Created!'
+        );
+
         // Emit an event to notify the parent component (if needed)
 
 

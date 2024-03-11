@@ -124,6 +124,19 @@ class CreateReporterNews extends Component
               $createNews->ip_address =getUserIp();
               $createNews->login = authUserId();
               $createNews->save();
+
+              logActivity(
+                'News',
+                $createNews,
+                [
+                    'News id'    => $createNews->id,
+                    'News Type'  => get_websiteType($createNews->news_type),
+                    'News Category' => $createNews->category_id ,
+                ],
+                'Create',
+                'News has been Created!'
+            );
+
               $this->reset();
               $this->dispatch('reporterNewsCreated');
               $this->alert('success', 'News Created successfully!');

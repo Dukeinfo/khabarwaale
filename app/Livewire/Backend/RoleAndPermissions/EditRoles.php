@@ -28,6 +28,17 @@ use LivewireAlert;
         $role = Role::find($this->role_id);
         $role->name = $this->name;
         $role->save();
+
+        logActivity(
+            'Role',
+            $role,
+            [
+                'Role id'    => $role->id,
+                'Role  Name' => $role->name ,
+            ],
+            'Update',
+            'Role has been Updated!'
+        );
         return redirect()->route('admin.view_roles')->with($this->alert('success', 'Role Updated Successfully !'));
 
         $this->reset(['name',]);

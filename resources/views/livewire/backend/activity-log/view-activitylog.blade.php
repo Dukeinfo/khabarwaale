@@ -57,6 +57,7 @@
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered table-striped datatable--">
+                                    <h4> Total : {{count($activityLogs) ?? ''}}</h4>
                                     <thead>
                                         <tr>
                                             <th>ID</th>

@@ -55,6 +55,17 @@ class CreateMenus extends Component
             try {
                 
                 $findcat = Category::findOrFail($id);
+
+                logActivity(
+                    'Category',
+                    $findcat,
+                    [
+                        'Category id'    => $findcat->id,
+                        'Category Name ' => $findcat->category_en ,
+                    ],
+                    'Delete',
+                    'Category has been deleteed!'
+                );
                 $findcat->delete();
                 $this->alert('warning', 'Menu Deleted successfully!');
                 

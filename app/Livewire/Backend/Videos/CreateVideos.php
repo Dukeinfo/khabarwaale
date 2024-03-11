@@ -72,6 +72,17 @@ class CreateVideos extends Component
         $createVideos->ip_address =getUserIp();
         $createVideos->login = authUserId();
         $createVideos->save();
+
+        logActivity(
+            'VideoGallery',
+            $createVideos,
+            [
+                'video id'    => $createVideos->id,
+                'video  Date' => $createVideos->post_date ,
+            ],
+            'Create',
+            'Video has been Created!'
+        );
         $this->reset();
         $this->alert('success', 'Video Created successfully!');
 
@@ -80,6 +91,16 @@ class CreateVideos extends Component
         $findvideo = VideoGallery::find($id);
         $findvideo->status = "Inactive";
         $findvideo->save();
+        logActivity(
+            'VideoGallery',
+            $findvideo,
+            [
+                'video id'    => $findvideo->id,
+                'video  Date' => $findvideo->post_date ,
+            ],
+            'inactive',
+            'Video has been inactive!'
+        );
         $this->alert('info', 'Video Inactive successfully!');
 
     }
@@ -87,6 +108,17 @@ class CreateVideos extends Component
             $findvideo = VideoGallery::find($id);
             $findvideo->status = "Active";
             $findvideo->save();
+
+            logActivity(
+                'VideoGallery',
+                $findvideo,
+                [
+                    'video id'    => $findvideo->id,
+                    'video  Date' => $findvideo->post_date ,
+                ],
+                'active',
+                'Video has been active!'
+            );
             $this->alert('success', 'Video Active successfully!');
     }
 
@@ -94,6 +126,16 @@ class CreateVideos extends Component
         try {
             
             $delvideo = VideoGallery::findOrFail($id);
+            logActivity(
+                'VideoGallery',
+                $delvideo,
+                [
+                    'video id'    => $delvideo->id,
+                    'video  Date' => $delvideo->post_date ,
+                ],
+                'Delete',
+                'Video has been deleted!'
+            );
             $delvideo->delete();
             $this->alert('warning', 'Video Deleted successfully!');
             

@@ -35,6 +35,17 @@ use LivewireAlert;
         $role->name = $this->name;
         $role->group_name = $this->group_name;
         $role->save();
+
+        logActivity(
+            'Permission',
+            $role,
+            [
+                'Permission id'    => $role->id,
+                'Permission  Group' => $role->group_name ,
+            ],
+            'Created',
+            'Permission has been Created!'
+        );
         $this->alert('success', 'ermission Inserted Successfully !');
         $this->reset(['name', 'group_name']);
     }
@@ -44,6 +55,17 @@ use LivewireAlert;
         try {
             
             $delete = Permission::findOrFail($id);
+
+            logActivity(
+                'Permission',
+                $delete,
+                [
+                    'Permission id'    => $delete->id,
+                    'Permission  Group' => $delete->group_name ,
+                ],
+                'Delete',
+                'Permission has been Deleyed!'
+            );
             $delete->delete();
             $this->alert('warning', 'permission  Deleted successfully!');
             

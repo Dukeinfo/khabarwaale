@@ -166,6 +166,18 @@ class EditReporterNews extends Component
         $createNews->ip_address = getUserIp();
         $createNews->login = authUserId();
         $createNews->save();
+
+        logActivity(
+            'News',
+            $createNews,
+            [
+                'News id'    => $createNews->id,
+                'News Type'  => get_websiteType($createNews->news_type),
+                'News Category' => $createNews->category_id ,
+            ],
+            'Update',
+            'News has been Updated!'
+        );
         $this->alert('success', 'News updated successfully!');
         return redirect()->route('admin.create_news');
 

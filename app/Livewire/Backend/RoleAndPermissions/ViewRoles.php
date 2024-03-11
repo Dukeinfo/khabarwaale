@@ -34,6 +34,17 @@ public function createRole(){
     $role = new Role();
     $role->name = $this->name;
     $role->save();
+
+    logActivity(
+        'Role',
+        $role,
+        [
+            'Role id'    => $role->id,
+            'Role Name' => $role->name ,
+        ],
+        'Create',
+        'Role has been Created!'
+    );
     $this->alert('success', 'Role Inserted Successfully !');
     $this->reset(['name',]);
 
@@ -45,6 +56,17 @@ public function createRole(){
         try {
             
             $delete = Role::findOrFail($id);
+
+            logActivity(
+                'Role',
+                $delete,
+                [
+                    'Role id'    => $delete->id,
+                    'Role Name' => $delete->name ,
+                ],
+                'Delete',
+                'Role has been Deleted!'
+            );
             $delete->delete();
             $this->alert('warning', 'Role  Deleted successfully!');
             

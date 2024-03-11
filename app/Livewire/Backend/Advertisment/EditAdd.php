@@ -106,6 +106,18 @@ class EditAdd extends Component
             $advertisment->ip_address =getUserIp();
             $advertisment->login = authUserId();
             $advertisment->save();
+
+
+            logActivity(
+                'Advertisment',
+                $advertisment,
+                [
+                    'Add  id'    => $advertisment->id,
+                    'location '  =>  $advertisment->location,
+                ],
+                'Update',
+                'Advertisment has been Updated!'
+            );
             $this->alert('success', 'Add updated successfully!');
             return redirect()->route('admin.create_add');
     }

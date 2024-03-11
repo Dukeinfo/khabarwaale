@@ -35,6 +35,16 @@ class EditAllPermission extends Component
         $role->group_name = $this->group_name;
         $role->save();
     
+        logActivity(
+            'Permission',
+            $role,
+            [
+                'Role id'    => $role->id,
+                'Group  Name' => $role->group_name ,
+            ],
+            'Update',
+            'Permission has been Updated!'
+        );
         return redirect()->route('admin.view_permissions')->with($this->alert('success', 'ermission Updated Successfully !'));
     }
 }

@@ -90,6 +90,17 @@ class EditVideos extends Component
         $createVideos->ip_address =getUserIp();
         $createVideos->login = authUserId();
         $createVideos->save();
+
+        logActivity(
+            'VideoGallery',
+            $createVideos,
+            [
+                'video id'    => $createVideos->id,
+                'video  Date' => $createVideos->post_date ,
+            ],
+            'Update',
+            'Video has been Updated!'
+        );
         // }
 
         $this->alert('success', 'Video Created successfully!');

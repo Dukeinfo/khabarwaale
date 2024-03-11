@@ -116,6 +116,17 @@ class CreateAdd extends Component
         $model->login = authUserId();
         // Save the model to the database
         $model->save();
+
+        logActivity(
+            'Advertisment',
+            $model,
+            [
+                'Add  id'    => $model->id,
+                'location '  =>  $model->location,
+            ],
+            'Create',
+            'Advertisment has been Created!'
+        );
         $this->alert('success', 'Add Created successfully!');
         $this->reset();
 
@@ -125,6 +136,17 @@ class CreateAdd extends Component
             $findcat = Advertisment::find($id);
             $findcat->status = "No";
             $findcat->save();
+
+            logActivity(
+                'Advertisment',
+                $findcat,
+                [
+                    'Add  id'    => $findcat->id,
+                    'location '  =>  $findcat->location,
+                ],
+                'Inactive',
+                'Advertisment has been inactive!'
+            );
             $this->alert('info', 'Advertisment Inactive successfully!');
 
         }
@@ -132,6 +154,17 @@ class CreateAdd extends Component
                 $findcat = Advertisment::find($id);
                 $findcat->status = "Yes";
                 $findcat->save();
+
+                logActivity(
+                    'Advertisment',
+                    $findcat,
+                    [
+                        'Add  id'    => $findcat->id,
+                        'location '  =>  $findcat->location,
+                    ],
+                    'Active',
+                    'Advertisment has been active!'
+                );
                 $this->alert('success', 'Advertisment Active successfully!');
         }
 
@@ -139,6 +172,18 @@ class CreateAdd extends Component
             try {
                 
                 $findcat = Advertisment::findOrFail($id);
+
+                logActivity(
+                    'Advertisment',
+                    $findcat,
+                    [
+                        'Add  id'    => $findcat->id,
+                        'location '  =>  $findcat->location,
+                    ],
+                    'Delete',
+                    'Advertisment has been deletes!'
+                );
+
                 $findcat->delete();
                 $this->alert('warning', 'Advertisment Deleted successfully!');
                 
@@ -177,6 +222,16 @@ public function paramDelete($id){
 
         $getimg  = Advertisment::onlyTrashed()->find($id);
 
+        logActivity(
+            'Advertisment',
+            $getimg,
+            [
+                'Add  id'    => $getimg->id,
+                'location '  =>  $getimg->location,
+            ],
+            'paramDelete',
+            'Advertisment has been param Deleted!'
+        );
         $imagePath = Storage::path('public/mainAdd/'. $getimg->image);
  
         if(File::exists($imagePath) && isset( $getimg->image)){

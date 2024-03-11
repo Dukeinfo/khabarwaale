@@ -111,10 +111,21 @@ public function edit($id){
         try {
             $role = Role::findOrFail($id);
             if (!is_null($role)) {
+                logActivity(
+                    'Role',
+                    $role,
+                    [
+                        'Role id'    => $role->id,
+                        'Role Name' => $role->name ,
+                    ],
+                    'Create',
+                    'Role has been Created!'
+                );
                $role->delete();
             }
     
          
+     
          
             $this->alert('warning', 'Role Permission Deleted Successfull');
             

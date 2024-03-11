@@ -56,6 +56,17 @@ class CreateFooterSnippets extends Component
         $seoFootersnippet->ip_address = $this->ip_address ?? null;
         $seoFootersnippet->save();
         
+        logActivity(
+            'SeoFootersnippet',
+            $seoFootersnippet,
+            [
+                'Footer snippet  id'    => $seoFootersnippet->id,
+                'Footer title' => $seoFootersnippet->title ,
+            ],
+            'Create',
+            'Footer snippet has been Created!'
+        );
+
         $this->alert('success', 'Header snippet Created successfully!');
 
         $this->reset();
@@ -64,6 +75,17 @@ class CreateFooterSnippets extends Component
         $inactiveMetadetail = SeoFootersnippet::find($id);
         $inactiveMetadetail->status = "Inactive";
         $inactiveMetadetail->save();
+
+        logActivity(
+            'SeoFootersnippet',
+            $inactiveMetadetail,
+            [
+                'Footer snippet  id'    => $inactiveMetadetail->id,
+                'Footer title' => $inactiveMetadetail->title ,
+            ],
+            'Inactive',
+            'Footer snippet has been inactive!'
+        );
         $this->alert('info', 'Status Inactive successfully!');
 
     }
@@ -71,6 +93,17 @@ class CreateFooterSnippets extends Component
             $activeSeoMetadetail = SeoFootersnippet::find($id);
             $activeSeoMetadetail->status = "Active";
             $activeSeoMetadetail->save();
+
+            logActivity(
+                'SeoFootersnippet',
+                $activeSeoMetadetail,
+                [
+                    'Footer snippet  id'    => $activeSeoMetadetail->id,
+                    'Footer title' => $activeSeoMetadetail->title ,
+                ],
+                'Active',
+                'Footer snippet has been active!'
+            );
             $this->alert('success', 'Status Active successfully!');
     }
 
@@ -78,6 +111,18 @@ class CreateFooterSnippets extends Component
         try {
             
             $delSeoMetadetail = SeoFootersnippet::findOrFail($id);
+
+            logActivity(
+                'SeoFootersnippet',
+                $delSeoMetadetail,
+                [
+                    'Footer snippet  id'    => $delSeoMetadetail->id,
+                    'Footer title' => $delSeoMetadetail->title ,
+                ],
+                'Delete',
+                'Footer snippet has been Deleted!'
+            );
+
             $delSeoMetadetail->delete();
             $this->alert('warning', 'Header snippet Deleted successfully!');
             

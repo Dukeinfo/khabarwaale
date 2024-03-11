@@ -66,6 +66,17 @@ class ContactusEdit extends Component
             $contact->website = $this->website;
              $contact->save();
 
+             logActivity(
+                'ContactInfo',
+                $contact,
+                [
+                    'Contact id'    => $contact->id,
+                    'Contact email' => $contact->email ,
+                ],
+                'Update',
+                'Contact logos  has been updated!'
+            );
+
         }else{
             $contact = ContactInfo::findOrFail($this->contactinfoId);
  
@@ -77,6 +88,17 @@ class ContactusEdit extends Component
             $contact->disclaimer = $this->disclaimer;
             $contact->website = $this->website;
              $contact->save();
+
+             logActivity(
+                'ContactInfo',
+                $contact,
+                [
+                    'Contact id'    => $contact->id,
+                    'Contact email' => $contact->email ,
+                ],
+                'Update',
+                'Contact info  has been updated!'
+            );
         }
         $this->alert('success', ' Address updated Successfully');
 

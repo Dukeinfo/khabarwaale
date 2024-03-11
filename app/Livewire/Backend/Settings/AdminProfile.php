@@ -37,6 +37,17 @@ class AdminProfile extends Component
             $updateuser->name = $this->name;
             $updateuser->email = $this->email;
             $updateuser->save();    
+            logActivity(
+                'User',
+                $updateuser,
+                [
+                    'User id'    => $updateuser->id,
+                    'User Name' => $updateuser->name ,
+                ],
+                'Update',
+                'User profile has been Updated!'
+            );
+            
             $this->alert('success', ' Profile updated Successfully');
 
         }else{
@@ -44,7 +55,16 @@ class AdminProfile extends Component
             $updateuser->name = $this->name;
             $updateuser->email = $this->email;
             $updateuser->save();    
-
+            logActivity(
+                'User',
+                $updateuser,
+                [
+                    'User id'    => $updateuser->id,
+                    'User Name' => $updateuser->name ,
+                ],
+                'Update',
+                'User  has been Updated!'
+            );
             $this->alert('success', 'Profile updated Successfully');
         }
 
@@ -64,8 +84,20 @@ class AdminProfile extends Component
             $user =User::find(Auth::id());
             $user->password=Hash::make($this->password);
             $user->save();
-            Auth::logout();
+
+            logActivity(
+                'User',
+                $user,
+                [
+                    'User id'    => $user->id,
+                    'User Name' => $user->name ,
+                ],
+                'Update',
+                'User password  has been updated!'
+            );
       
+            Auth::logout();
+
             $this->alert('success', 'Password Changed Successfully!');
    
             return redirect()->route('login');

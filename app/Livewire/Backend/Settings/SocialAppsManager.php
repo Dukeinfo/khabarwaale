@@ -76,6 +76,18 @@ public function update()
 
     $socialApp = SocialApp::findOrFail($this->selectedId);
 
+    logActivity(
+        'SocialApp',
+        $socialApp,
+        [
+            'Social App id' => $socialApp->id,
+            'Social App Name' => $socialApp->name,
+        ],
+        'Update',
+        'SocialApp  has been Updated!'
+    );
+
+
     $logoPath = null;
     if ($this->logo) {
         $logoPath = $this->logo->store('logos', 'public');
@@ -98,6 +110,17 @@ public function update()
 public function delete($id)
 {
     $socialApp = SocialApp::findOrFail($id);
+
+    logActivity(
+        'SocialApp',
+        $socialApp,
+        [
+            'Social App id' => $socialApp->id,
+            'Social App Name' => $socialApp->name,
+        ],
+        'Delete',
+        'SocialApp  has been Deleted!'
+    );
     $socialApp->delete();
     $this->alert('warning', ' Social app deleted successfully!y');
 
