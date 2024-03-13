@@ -6,7 +6,7 @@
 
                 @if(isset($innerTop->image))
                 <a href="{{$innerTop->link_add ?? "#"}}">
-                    <img src="{{  getAddImage($innerTop->image)}}" class="img-fluid" alt="Advertisement">
+                    <img src="{{  getAddImage($innerTop->image)}}" class="img-fluid" alt="Advertisement" loading="lazy">
                 </a>
                 @else
                 @endif
