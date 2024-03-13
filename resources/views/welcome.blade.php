@@ -45,13 +45,13 @@ $seoMetaData =  App\Models\SeoMetadetail::first();
             <div class="col-md-10 col-lg-8">
                 <div class="p-b-20">
                     {{-- punjab  --}}
-                    @livewire('frontend.category-news.first-category-news' )
+                    @livewire('frontend.category-news.first-category-news')
                     <!-- Other -->
                     <div class="row">
                         {{-- chandigarh  --}}
-                    @livewire('frontend.category-news.second-category-news' ,['lazy' =>true])
+                    @livewire('frontend.category-news.second-category-news' )
                         {{-- haryana --}}
-                    @livewire('frontend.category-news.third-category-news' ,['lazy' =>true])
+                    @livewire('frontend.category-news.third-category-news' )
 
                     </div>
                 </div>
@@ -61,7 +61,7 @@ $seoMetaData =  App\Models\SeoMetadetail::first();
         </div>
     </div>
 </section>
-        @livewire('frontend.homepage.home-bottom-add' ,['lazy' =>true])
+        @livewire('frontend.homepage.home-bottom-add')
 
         @livewire('frontend.news-sections.bottom-news' ,['lazy' =>true])
 
