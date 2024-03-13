@@ -19,21 +19,22 @@ public $languageVal;
 
     public function render()
     {
-        $editorInfo =  User::where('role_id' ,'2')->where('status' ,1)->first();
 
         // $EditorNewsLatest = NewsPost::with(['newstype', 'user', 'getmenu'])
         // ->where(function ($query) {
         //     $query->whereHas('user', function ($subquery) {
-        //         $subquery->where('role_id',  2);
+        //         $subquery->where('role_id',  23);
         //             // ->orwhereIn('breaking_side', ['Show']);
         //     });
         // })
         $EditorNewsLatest = NewsPost::with(['newstype', 'user', 'getmenu'])
         ->whereHas('user', function ($query) {
             $query->whereHas('roles', function ($subquery) {
-                $subquery->where('name', 'reporter');
+                $subquery->where('name', 'admin');
             });
         })
+
+        ->latest()
         ->orderBy('created_at', 'desc')
         ->orderBy('updated_at', 'desc');
     
@@ -71,7 +72,6 @@ public $languageVal;
                             ->first();
         return view('livewire.frontend.editor-news.view-latestnews' ,[
         'EditorNewsLatest' =>$EditorNewsLatest,
-        'editorInfo' => $editorInfo,
         'editorlatestleftAds' => $editorlatestleftAds
 
     ]);

@@ -33,9 +33,9 @@
         <!-- Archive -->
         @if(request()->route()->getName() === 'readmore')
         
+            @livewire('frontend.archive.view-archive' ,['lazy' =>true])
         @else
-        @livewire('frontend.archive.view-archive')
-
+    
         @endif
 
     </div>

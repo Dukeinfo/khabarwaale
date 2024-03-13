@@ -64,54 +64,20 @@ Route::controller(LanguageController::class)->group(function () {
     Route::get('/language/urdu',  'urdu')->name('urdu.language');
     Route::get('/language/clear',  'clear_all_Lang');
 });
-Route::get('/subscriber/verify/{token}/{email}', [FronendController::class, 'verify'])->name('subscriber_verify');
-
-Route::get('/', function () {
-    return view('welcome');
-})->name('home.homepage');
-
-Route::get('/readmore', function () {
-    return view('readmorefooter');
-})->name('readmore');
-
-Route::get('/privacy-policy', function () {
-    return view('privacy_policy');
-})->name('privacyPolicy');
-
-Route::get('/category/{id}/{slug}', function ($id, $slug) {
-    return view('category', compact('id', 'slug'));
-})->name('home.category');
-
-Route::get('/inner/{newsid}/{slug}', function ($newsid, $slug) {
-    return view('inner', compact('newsid', 'slug'));
-})->name('home.inner');
-
-// Route::get('/archive/{id}/{slug}', function () {
-//     // return redirect()->route('home.homepage');
-//     return view('archive');
-
-// })->name('home.archive', compact('id', 'slug'));
-
-Route::get('/video-gallery', function () {
-    return view('video-gallery');
-})->name('home.video-gallery');
-
-
-Route::get('/archive/{id}/{slug}', function ($id, $slug) {
-    return view('archive', compact('id', 'slug'));
-})->name('home.archive');
-
-
-
-
-Route::get('/reporter-news', function () {
-    return view('reporter_news');
-})->name('home.reporter_news');
 
 Route::controller(FronendController::class)->group(function () {
+    Route::get('/', 'index')->name('home.homepage');
+    Route::get('/category/{id}/{slug}', 'category')->name('home.category');
+    Route::get('/inner/{newsid}/{slug}',  'inner')->name('home.inner');
+    Route::get('/video-gallery',  'videoGallery')->name('home.video-gallery');
+    Route::get('/archive/{id}/{slug}',  'archive')->name('home.archive');
+    Route::get('/readmore',  'readMore')->name('readmore');
+    Route::get('/privacy-policy', 'privacyPolicy')->name('privacyPolicy');
+    Route::get('/reporter-news',  'reporterNews')->name('home.reporter_news');
+    Route::get('/subscriber/verify/{token}/{email}', 'verify')->name('subscriber_verify');
+
 });
 
-Route::get('/screenshot', [FronendController::class, 'captureScreenshot']);
 
 Livewire::setScriptRoute(function ($handle) {
     return Route::get('/livewire/livewire.js', $handle);
@@ -141,8 +107,6 @@ Route::group(['middleware' =>   ['auth']], function () {
         Route::get('/profile', AdminProfile::class)->name('admin_profile');
         Route::get('/contact-entries', ContactMessages::class)->name('contact_entries');
         Route::get('/activity-log', ViewActivitylog::class)->name('View_Activitylog');
-
-        
 
         Route::group(['middleware' => ['can:manage_social_app']], function () {
             Route::get('/social-view', SocialAppsManager::class)->name('social_view');

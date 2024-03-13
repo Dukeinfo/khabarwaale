@@ -65,7 +65,5 @@ $seoMetaData =  App\Models\SeoMetadetail::first();
 
         @livewire('frontend.news-sections.bottom-news')
 
-
-
  
 @stop

@@ -17,7 +17,7 @@
             <div class="col-md-10 col-lg-8 p-b-30">
               @livewire('frontend.innerpage.view-inner-page' ,['newsid' => $newsid ])
 
-             @livewire('frontend.innerpage.inner-page-recommended' ,['newsid' => $newsid])
+             @livewire('frontend.innerpage.inner-page-recommended' ,['newsid' => $newsid ,'lazy' =>true] )
 
             </div>
 

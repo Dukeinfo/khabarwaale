@@ -185,21 +185,26 @@
                 @if ($showAds && $key == 6 )
                     <!-- Advertisement div after 6 articles -->
                     <div class="text-center my-5">
-            
-                        <a href="javascript:void()" >
-                            <img src="{{ asset('assets/images/ads/ad2.jpg') }}" class="img-fluid" alt="">
+                    
+                        @if(isset($reporter_newsAdd->image))
+                            
+                        <a href="javascript:void()">
+                            <img src="{{ isset($reporter_newsAdd->image) ?  getAddImage($reporter_newsAdd->image) : asset('thumb_652D6AC290510.jpg') }}" class="img-fluid" alt="">
                         </a>
+                        @else 
+
+                        @endif
                     </div>
                     @php $articleCount = 0 @endphp
                     
                 @endif
             @empty
-            <div class="text-center my-5">
+            {{-- <div class="text-center my-5">
    
                 <a href="javascript:void()">
                     <img src="{{ asset('assets/images/ads/ad2.jpg') }}" class="img-fluid" alt="">
                 </a>
-            </div>
+            </div> --}}
 
             @switch(session()->get('language'))
             @case('hindi')

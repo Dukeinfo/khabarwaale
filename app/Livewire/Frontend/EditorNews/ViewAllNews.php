@@ -2,10 +2,14 @@
 
 namespace App\Livewire\Frontend\EditorNews;
 
+use App\Models\Advertisment;
 use App\Models\NewsPost;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithPagination;
-
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 class ViewAllNews extends Component
 {
     use WithPagination;
@@ -18,25 +22,16 @@ class ViewAllNews extends Component
     public function render()
     {
 
-        
-        // $catWiseNewsData  = NewsPost::with(['newstype', 'user', 'getmenu'])
-        // ->where(function ($query) {
-        //     $query->whereHas('user', function ($subquery) {
-        //         $subquery->where('role_id',  2);
-        //             // ->orwhereIn('breaking_side', ['Show']);
-        //     });
-        // })
 
         $catWiseNewsData = NewsPost::with(['newstype', 'user', 'getmenu'])
             ->whereHas('user', function ($query) {
                 $query->whereHas('roles', function ($subquery) {
-                    $subquery->where('name', 'reporter');
+                    $subquery->where('name', 'admin');
                 });
             })
+     
+            ->latest();
 
-
-        ->orderBy('created_at', 'desc')
-        ->orderBy('updated_at', 'desc');
         switch ($this->language_Val) {
             case 'hindi':
                 $catWiseNewsData->where('news_type', 1);
@@ -60,9 +55,21 @@ class ViewAllNews extends Component
         }
         
         $catWiseNewsData = $catWiseNewsData->paginate(9);
+        $today = now()->toDateString();
+        $reporter_newsAdd = Advertisment::where('from_date', '<=', $today)
+                           ->where('to_date', '>=', $today)
+                           ->where('location','Center Banner')
+                           ->where('page_name' ,'Reporter_news')
+                           ->where('status', 'Yes') // Assuming 'status' is used to enable/disable ads
+                           ->orderBy('created_at', 'desc')
+                          
+                           ->first();
+    
 
         return view('livewire.frontend.editor-news.view-all-news',[
             'catWiseNewsData' =>$catWiseNewsData,
+            'reporter_newsAdd' => $reporter_newsAdd,
+          
         ]);
     }
 }

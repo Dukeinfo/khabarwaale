@@ -15,7 +15,7 @@ class CategorRightAdd extends Component
                            ->where('to_date', '>=', $today)
                            ->where('location','Right Add')
                            ->where('page_name' ,'category')
-                           ->where('status', 'Yes') // Assuming 'status' is used to enable/disable ads
+                           ->where('status', 'Yes') // Assuming  'status' is used to enable/disable ads
                            ->orderBy('created_at', 'desc')
                            ->get();
         $categorylivetvnews = VideoGallery::orderBy('created_at', 'desc') 

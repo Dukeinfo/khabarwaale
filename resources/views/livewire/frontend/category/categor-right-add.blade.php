@@ -6,8 +6,7 @@
             <div class="card bg-white shadow-sm text-center border-0">
                 <div class="card-body">
      
-             @if(isset($advertisement->image))
-
+                     @if(isset($advertisement->image))
                     <a href="{{$advertisement->link_add ?? "#"}}">
                         <img src="{{  getAddImage($advertisement->image) }}" class="img-fluid" alt="">
                     </a>

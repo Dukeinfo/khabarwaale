@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Advertisment;
 use App\Models\Category;
 use App\Models\NewsPost;
 use App\Models\Subscription;
@@ -15,32 +16,21 @@ class FronendController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        // 
-        $data['getMenus']  =  Category::orderby('sort_id','ASC')->where('status' ,'Active')->where('deleted_at',Null)->get();
-       
-   
-        $data['latestNewsData'] = NewsPost::with('getmenu', 'newstype', 'user') 
-                                            ->where('status', 'Approved') ->whereNull('deleted_at')
-                                            ->where(function ($query) { $query->whereIn('breaking_side', ['Show']);})
-                                            ->orderBy('created_at', 'desc')
-                                            ->limit(6)
-                                            ->get();        
-        $data['topNewsData'] = NewsPost::with('getmenu', 'newstype', 'user') 
-                                        ->where('status', 'Approved') ->whereNull('deleted_at')
-                                        ->where(function ($query) { $query->whereIn('breaking_top', ['Show']);})
-                                        ->orderBy('created_at', 'desc')
-                                        ->limit(8)
-                                        ->get();                                    
-        // ->orWhereIn('other_column_name', ['value1', 'value2']); // Add more columns as needed
-        $data['centerNewsCat'] = NewsPost::with('getmenu', 'newstype', 'user') 
-                                         ->where('status', 'Approved')->whereNull('deleted_at')
-                                         ->orderBy('created_at', 'desc')
-                                         ->limit(10)
-                                         ->get();                                   
-        return view('frontend.welcome' ,$data);
+    {                           
+        return view('welcome');
 
     }
+
+    public function category($id, $slug)
+    {
+        return view('category', compact('id', 'slug'));
+    }
+
+    public function inner($newsid, $slug)
+    {
+        return view('inner', compact('newsid', 'slug'));
+    }
+
 
      public function category_page(){
         $data['getMenus']  =  Category::orderby('sort_id')->where('status' ,'Active')->where('deleted_at',Null)->get();
@@ -48,11 +38,49 @@ class FronendController extends Controller
         return view('frontend.category',$data);
      }
 
+     
      public function inner_page(){
 
         return view('frontend.inner',compact('newsid'));
 
      }
+
+
+     public function videoGallery()
+     {
+         return view('video-gallery');
+     }
+
+     public function archive($id, $slug)
+     {
+         return view('archive', compact('id', 'slug'));
+     }
+
+     public function readMore()
+     {
+         return view('readmorefooter');
+     }
+
+
+     public function privacyPolicy()
+     {
+         return view('privacy_policy');
+     }
+
+     public function reporterNews()
+     {
+        $today = now()->toDateString();
+        $editorRightAdd = Advertisment::where('from_date', '<=', $today)
+                           ->where('to_date', '>=', $today)
+                           ->where('location','Right Add')
+                           ->where('page_name' ,'Reporter_news')
+                           ->where('status', 'Yes') // Assuming 'status' is used to enable/disable ads
+                           ->orderBy('created_at', 'desc')
+                           ->get();
+         return view('reporter_news',compact('editorRightAdd'));
+     }
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -122,18 +150,6 @@ class FronendController extends Controller
     }
     
 
-    public function captureScreenshot()
-    {
-        try {
-        Browsershot::url('https://www.khabarwaale.com')
-                ->setScreenshotType('jpeg', 100)
-            ->save('screenshot.png');
-            
-            dd("Done");
-        } catch (\Exception $e) {
-            Log::error($e->getMessage());
-        }
-    }
 
 
 }
