@@ -9,7 +9,7 @@
                 <iframe width="100%" height="200" src="https://www.youtube.com/embed/{{$rightlivetvnews->video_url}}?rel=0" frameborder="0" allowfullscreen></iframe>
                 @else
                 {{-- <img src="{{ isset($rightlivetvnews->video_image) ?  get_video_image($rightlivetvnews->video_image): asset('assets/images/video-01.jpg')}}" alt="IMG"> --}}
-                <img src="{{ asset('assets/images/video-01.jpg')}}" alt="IMG">
+                <img src="{{ asset('assets/images/video-01.jpg')}}" alt="IMG" loading="lazy">
                 @endif
                 <button class="s-full ab-t-l flex-c-c fs-32 cl0 hov-cl10 trans-03" data-toggle="modal" data-target="#modal-video-01">
                   

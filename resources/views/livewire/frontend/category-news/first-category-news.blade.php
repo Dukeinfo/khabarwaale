@@ -50,7 +50,7 @@
                                 <div class="card-body">
                                     <a   target="_blank"  href="{{route('home.inner',['newsid' => $cat1_wise->id , 'slug' =>  $cat1_wise->slug ])}}" class="wrap-pic-w hov1 trans-03">
 
-                                        <img src="{{ isset($cat1_wise->image)? getNewsImage($cat1_wise->image)  : asset('assets/images/post-05.jpg')}}" alt="IMG" class="img-fluid rounded">
+                                        <img src="{{ isset($cat1_wise->image)? getNewsImage($cat1_wise->image)  : asset('assets/images/post-05.jpg')}}" alt="IMG" class="img-fluid rounded" loading="lazy">
                                     </a>
                                     <div class="p-t-20">
                                         <h5 class="p-b-5">
@@ -208,7 +208,7 @@
                                             </span>
                                         </div>
                                         <a   target="_blank"  href="{{route('home.inner',['newsid' => $cat1_wise->id , 'slug' =>  $cat1_wise->slug ])}}" class="size-w-1 wrap-pic-w hov1 trans-03">
-                                            <img src="{{ isset($cat1_wise->thumbnail)? getThumbnail($cat1_wise->thumbnail)  :  getNewsImage($cat1_wise->image)   }}" alt="" class="img-fluid rounded">
+                                            <img src="{{ isset($cat1_wise->thumbnail)? getThumbnail($cat1_wise->thumbnail)  :  getNewsImage($cat1_wise->image)   }}" alt="" class="img-fluid rounded" loading="lazy">
                                         </a>
                                     </div>
                                 </div>

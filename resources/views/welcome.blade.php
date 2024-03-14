@@ -57,11 +57,11 @@ $seoMetaData =  App\Models\SeoMetadetail::first();
                 </div>
             </div>
                 {{-- Enternainment  --}}
-                    @livewire('frontend.category-news.side-forth-cat-news' ,['lazy' =>true])
+                    @livewire('frontend.category-news.side-forth-cat-news' )
         </div>
     </div>
 </section>
-        @livewire('frontend.homepage.home-bottom-add')
+        @livewire('frontend.homepage.home-bottom-add',['lazy' =>true])
 
         @livewire('frontend.news-sections.bottom-news' ,['lazy' =>true])
 

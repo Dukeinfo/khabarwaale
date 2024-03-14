@@ -167,7 +167,7 @@
                                             </span>
                                         </div>
                                         <a target="_blank" href="{{route('home.inner',['newsid' => $catNewsData->id , 'slug' =>  $catNewsData->slug  ])}}" class="wrap-pic-w hov1 trans-03">
-                                            <img src="{{  isset($catNewsData->image)?getNewsImage($catNewsData->image) : asset('assets/images/news/n1.jpg')}}" alt="IMG" class="img-fluid rounded">
+                                            <img src="{{  isset($catNewsData->image)?getNewsImage($catNewsData->image) : asset('assets/images/news/n1.jpg')}}" alt="IMG" class="img-fluid rounded" loading="lazy">
                                         </a>
                                     </div>
                                 </div>
@@ -231,7 +231,7 @@
                                                 </span>
                                             </div>
                                             <a target="_blank" href="{{route('home.inner',['newsid' => $catNewsData->id , 'slug' =>  $catNewsData->slug  ])}}" class="size-w-1 wrap-pic-w hov1 trans-03">
-                                                <img src="{{  isset($catNewsData->thumbnail)? getThumbnail($catNewsData->thumbnail)  :   getNewsImage($catNewsData->image) }}" alt="" class="img-fluid rounded">
+                                                <img src="{{  isset($catNewsData->thumbnail)? getThumbnail($catNewsData->thumbnail)  :   getNewsImage($catNewsData->image) }}" alt="" class="img-fluid rounded" loading="lazy">
                                             </a>
                                         </div>
                                     </div>
@@ -261,7 +261,7 @@
                         <div class="text-center my-5">
          
                             <a href="javascript:void()">
-                                <img src="{{ asset('assets/images/ads/ad2.jpg') }}" class="img-fluid" alt="">
+                                <img src="{{ asset('assets/images/ads/ad2.jpg') }}" class="img-fluid" alt="" loading="lazy">
                             </a>
                         </div>
                         <P class="text-danger text-center"> No News Found</P>

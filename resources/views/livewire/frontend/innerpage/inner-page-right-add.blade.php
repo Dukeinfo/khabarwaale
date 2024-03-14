@@ -10,7 +10,7 @@
                  @if(isset($advertisement->image))
     
                         <a href="{{$advertisement->link_add ?? "#"}}">
-                            <img src="{{  getAddImage($advertisement->image) }}" class="img-fluid" alt="">
+                            <img src="{{  getAddImage($advertisement->image) }}" class="img-fluid" alt="" loading="lazy">
                         </a>
                         @endif
                     </div>

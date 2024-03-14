@@ -8,7 +8,7 @@
                 @if(isset($homeBottomAdd))
                 
                 <a href="{{$homeBottomAdd->link_add ?? '#'}}">
-                    <img src="{{ getAddImage($homeBottomAdd->image)  }}" class="img-fluid" alt="">
+                    <img src="{{ getAddImage($homeBottomAdd->image)  }}" class="img-fluid" alt="" loading="lazy">
                 </a>
                 @else
                         {{-- @if (session()->get('language') == "hindi" )

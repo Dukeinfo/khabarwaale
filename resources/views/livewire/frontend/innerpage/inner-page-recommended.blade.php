@@ -28,7 +28,7 @@
                             <div class="card border-0 shadow-sm mb-3">
                                 <div class="card-body">
                                     <a target="_blank" href="{{route('home.inner',['newsid' => $recmendNews->id , 'slug' =>  $recmendNews->slug   ])}}" class="wrap-pic-w hov1 trans-03">
-                                        <img src="{{ isset($recmendNews->image)? getNewsImage($recmendNews->image)  :  asset('assets/images/post-05.jpg')}}" alt="IMG" class="img-fluid rounded">
+                                        <img src="{{ isset($recmendNews->image)? getNewsImage($recmendNews->image)  :  asset('assets/images/post-05.jpg')}}" alt="IMG" class="img-fluid rounded" loading="lazy">
                                     </a>
                                     <div class="p-t-20">
                                         <h5 class="p-b-5">

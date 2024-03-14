@@ -4,7 +4,7 @@
             <div class="col-lg-12 text-center">
                 @if(isset($homeCenterLongAdd))
                 <a href="{{$homeCenterLongAdd->link_add ?? '#'}}">
-                    <img src="{{ getAddImage($homeCenterLongAdd->image)  }}" class="img-fluid" alt="">
+                    <img src="{{ getAddImage($homeCenterLongAdd->image)  }}" class="img-fluid" alt="" loading="lazy">
                 </a>
                 @else
     

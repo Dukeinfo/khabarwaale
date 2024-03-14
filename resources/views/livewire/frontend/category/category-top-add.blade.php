@@ -6,7 +6,7 @@
           
                     @if(isset($catTopAdd->image))
                     <a href="{{$catTopAdd->link_add ?? "#"}}">
-                        <img src="{{  getAddImage($catTopAdd->image)}}" class="img-fluid" alt="Advertisement">
+                        <img src="{{  getAddImage($catTopAdd->image)}}" class="img-fluid" alt="Advertisement" loading="lazy">
                     </a>
                     @else
                     @endif

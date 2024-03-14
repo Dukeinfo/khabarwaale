@@ -101,7 +101,7 @@
                                         </span>
                                     </div>
                                     <a target="_blank" href="{{route('home.inner',['newsid' => $hintopNews->id , 'slug' =>  $hintopNews->slug  ])}}" class="wrap-pic-w hov1 trans-03">
-                                        <img src="{{  isset($hintopNews->image)?getNewsImage($hintopNews->image) : asset('assets/images/news/n1.jpg')}}" alt="IMG" class="img-fluid rounded">
+                                        <img src="{{  isset($hintopNews->image)?getNewsImage($hintopNews->image) : asset('assets/images/news/n1.jpg')}}" alt="IMG" class="img-fluid rounded" loading="lazy">
                                     </a>
                                 </div>
                             </div>
@@ -169,7 +169,7 @@
                                         </div>
                                         
                                         <a target="_blank" href="{{route('home.inner',['newsid' => $hintopNews->id , 'slug' =>  $hintopNews->slug  ])}}" class="size-w-1 wrap-pic-w hov1 trans-03">
-                                            <img src="{{  isset($hintopNews->thumbnail)? getThumbnail($hintopNews->thumbnail)  :  getNewsImage($hintopNews->image)}}" alt="" class="img-fluid rounded">
+                                            <img src="{{  isset($hintopNews->thumbnail)? getThumbnail($hintopNews->thumbnail)  :  getNewsImage($hintopNews->image)}}" alt="" class="img-fluid rounded" loading="lazy">
                                         </a>  
                                     </div>
                                 </div>

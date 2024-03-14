@@ -132,7 +132,7 @@
             <div class="card bg-white shadow-sm text-center border-0">
                 <div class="card-body">
                     <a href="javascript:void()">
-                        <img src="{{getAddImage($latestRightAds->image) }}"  class="img-fluid" alt="">
+                        <img src="{{getAddImage($latestRightAds->image) }}"  class="img-fluid" alt="" loading="lazy">
                     </a>
                 </div>
             </div>

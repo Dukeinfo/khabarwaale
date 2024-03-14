@@ -40,7 +40,7 @@
                         <div class="card border-0 shadow-sm mb-3">
                             <div class="card-body">
                                 <a  target="_blank"  href="{{route('home.inner',['newsid' => $catHindiNews->id , 'slug' =>  $catHindiNews->slug ])}}" class="wrap-pic-w hov1 trans-03">
-                                    <img src="{{  isset($catHindiNews->image)? getNewsImage($catHindiNews->image)  : asset('assets/images/post-10.jpg')}}" alt="IMG" class="img-fluid rounded">
+                                    <img src="{{  isset($catHindiNews->image)? getNewsImage($catHindiNews->image)  : asset('assets/images/post-10.jpg')}}" alt="IMG" class="img-fluid rounded" loading="lazy">
                                 </a>
                                 <div class="p-t-20">
                                     <h5 class="p-b-5">
@@ -170,7 +170,7 @@
                                     </span>
                                 </div>
                                 <a target="_blank"   href="{{route('home.inner',['newsid' => $catHindiNews->id , 'slug' =>  $catHindiNews->slug ])}}" class="size-w-1 wrap-pic-w hov1 trans-03">
-                                    <img src="{{  isset($catHindiNews->thumbnail)? getThumbnail($catHindiNews->thumbnail)  : getNewsImage($catHindiNews->image)   }}" alt="" class="img-fluid rounded">
+                                    <img src="{{  isset($catHindiNews->thumbnail)? getThumbnail($catHindiNews->thumbnail)  : getNewsImage($catHindiNews->image)   }}" alt="" class="img-fluid rounded " loading="lazy">
                                 </a>
                             </div>
                         </div>
