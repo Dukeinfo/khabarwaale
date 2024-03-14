@@ -20,6 +20,7 @@
                         @endif
                     </h3>
                 </div>
+ 
                 <div class="row">
                     @forelse ($recmendNewsData as $recmendNews )
                     <div class="col-sm-6">
@@ -109,9 +110,29 @@
                     @empty
                         
                     @endforelse
+
+          
+                      @if ($perPage < 6)
+                        <div wire:loading wire:target="loadMore">
+                            <div class="spinner-border text-info" role="status">
+                                <span class="">Loading...</span>
+                            </div>
+                        </div>
+                        @else
+                    @endif
+
+         
+                
                 </div>
             </div>
             
         </div>
     </div>
+    <script>
+    window.addEventListener('scroll', function() {
+        if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+            @this.loadMore()
+        }
+    });
+    </script>
 </div>

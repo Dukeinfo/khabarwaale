@@ -70,6 +70,7 @@
     <script src="{{asset('assets/vendor/bootstrap/js/popper.js')}}"></script>
     <script src="{{asset('assets/vendor/bootstrap/js/bootstrap.min.js')}}"></script>
     <script src="{{asset('assets/js/main.js')}}"></script>
+
 @php
     $footerSnippets = App\Models\SeoFootersnippet::where('status' ,'Active')->whereNull('deleted_at')->get();
 @endphp

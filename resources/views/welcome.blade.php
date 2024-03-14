@@ -28,6 +28,7 @@ $seoMetaData =  App\Models\SeoMetadetail::first();
 <section class="p-t-30">
     <div class="container">
         <div class="row">
+            {{-- left side news  --}}
             @livewire('frontend.news-sections.latest-news' )
             <!-- main news -->
             <livewire:frontend.news-sections.top-news  />

@@ -10,10 +10,17 @@ class InnerPageRecommended extends Component
 {
 
     use WithPagination;
+
     public $getnews_id ,$category_en, $category_hin ,$category_pbi  ,$category_urdu;
     public $language_Val ,$getnews_category;
+   
     
+
+    public $posts;
+    public $perPage = 2;
+    public $currentPage = 1;
     public function mount( NewsPost $newsid){
+        
         $this->language_Val = session()->get('language');
       if( $newsid ){
         $this->getnews_id = $newsid->id;
@@ -42,10 +49,23 @@ class InnerPageRecommended extends Component
                             ->orderBy('updated_at', 'desc')
                             ->where('news_type', $this->getNewsType()) 
                             ->inRandomOrder() // Get random posts
-                            ->limit(6)
-                            ->get();       
+                            // ->limit(6)
+                            // ->get();       
+                            ->paginate($this->perPage);
         return view('livewire.frontend.innerpage.inner-page-recommended', ['recmendNewsData' => $recmendNewsData]);
     }
+
+    public function loadMore()
+    {
+       
+
+        if ($this->perPage >= 8) {
+            return; // Stop loading more items
+        }
+        $this->perPage = min($this->perPage + 1, 8);
+       
+    }
+
 
         private function getNewsType()
         {
@@ -67,4 +87,6 @@ class InnerPageRecommended extends Component
                     }
         }
 
+
+        
 }

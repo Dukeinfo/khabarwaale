@@ -6,18 +6,18 @@ use App\Models\Advertisment;
 use App\Models\NewsPost;
 use Livewire\Attributes\Lazy;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class TopNews extends Component
 {
-
-  
+    use WithPagination;
     public $languageVal;
-    public function mount(){ 
-          $this->languageVal = session()->get('language');
+    public $perPage =3;
     
+    public function mount(){ 
+
+          $this->languageVal = session()->get('language');
     }
-
-
 
     public function render()
     {    
@@ -47,8 +47,11 @@ class TopNews extends Component
                     $top_NewsData->where('news_type', 1);
                         // Handle the default case if needed
                 }
+
     
-                 $top_NewsData = $top_NewsData->limit(7)->get();
+                 $top_NewsData = $top_NewsData
+                                ->limit(7) // Set the limit for news items
+                                ->paginate($this->perPage);
 
                 $today = now()->toDateString();
                 $topNewsCentertAds = Advertisment::where('from_date', '<=', $today)
@@ -62,5 +65,15 @@ class TopNews extends Component
                 'top_NewsData' => $top_NewsData,
                 'topNewsCentertAds' => $topNewsCentertAds,
             ]);
+    }
+
+    public function loadMoretopNews(){
+
+        if ($this->perPage >= 6) {
+            return; // Stop loading more items
+        }
+    
+        // Increment the limit for news items, but make sure it doesn't exceed 7
+        $this->perPage = min($this->perPage + 1, 6);
     }
 }

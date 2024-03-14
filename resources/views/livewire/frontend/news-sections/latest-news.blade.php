@@ -107,8 +107,10 @@
                     @endforelse
                 {{-- ====================== Punjabi ==================== --}}
 
-                        <div class="text-center">
-                            <a href="javascript:void()" class="btn btn-primary px-5">
+                        <div class="text-center" >
+                            @if($perPage < 8) 
+                            <button  class="btn btn-primary px-5"   wire:click="loadMorelatest"
+                            wire:loading.attr="disabled"  wire:loading.remove wire:target="loadMorelatest()"    >
                             @if (session()->get('language') === 'hindi')
                                     सभी को देखें
                             @elseif (session()->get('language') === 'english')
@@ -121,8 +123,30 @@
                                     View All
                             @endif
 
-                            </a>
+                            </button>
+                            @else
+                            <button  class="btn btn-primary px-5"   disabled   >
+                            @if (session()->get('language') === 'hindi')
+                                    सभी को देखें
+                            @elseif (session()->get('language') === 'english')
+                                    View All
+                            @elseif (session()->get('language') === 'punjabi')
+                                    ਸਭ ਦੇਖੋ
+                            @elseif (session()->get('language') === 'urdu')
+                                    سب دیکھیں     
+                            @else   
+                                    View All
+                            @endif
+
+                            </button>
+                            @endif
+                             <i class="fas fa-spinner fa-spin" wire:loading wire:target="loadMorelatest()"></i>
                         </div>
+                     
+
+
+                   
+
                 </div>
             </div>
         </div>
@@ -131,7 +155,7 @@
         <div class="col-lg-12 mb-4">
             <div class="card bg-white shadow-sm text-center border-0">
                 <div class="card-body">
-                    <a href="javascript:void()">
+                    <a href="javascript:void()"  wire:click="loadMore" >
                         <img src="{{getAddImage($latestRightAds->image) }}"  class="img-fluid" alt="" loading="lazy">
                     </a>
                 </div>

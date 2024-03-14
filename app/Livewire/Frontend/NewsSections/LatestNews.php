@@ -5,11 +5,17 @@ namespace App\Livewire\Frontend\NewsSections;
 use App\Models\Advertisment;
 use App\Models\NewsPost;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class LatestNews extends Component
 {
+    use WithPagination;
 
     public $languageVal;
+
+    public $posts;
+    public $perPage = 5;
+    public $currentPage = 1;
     public function mount(){ 
           $this->languageVal = session()->get('language');
     
@@ -48,7 +54,7 @@ class LatestNews extends Component
                         // Handle the default case if needed
                 }
     
-            $latestHinNewsData = $latestHinNewsData->get();
+            $latestHinNewsData = $latestHinNewsData->paginate($this->perPage);;
 
             $today = now()->toDateString();
             $latestRightAds = Advertisment::where('from_date', '<=', $today)
@@ -63,5 +69,15 @@ class LatestNews extends Component
                 'latestHinNewsData' =>$latestHinNewsData,
                 'latestRightAds' =>$latestRightAds,
     ]);
+    }
+
+    public function loadMorelatest()
+    {
+     
+        if ($this->perPage >= 8) {
+            return; // Stop loading more items
+        }
+        $this->perPage = min($this->perPage + 1, 8);
+       
     }
 }

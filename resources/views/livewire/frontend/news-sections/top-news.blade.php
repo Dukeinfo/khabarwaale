@@ -195,9 +195,17 @@
                     @endswitch
             @endforelse
 
-   
-  
+
+            <div class="text-center">
+                @if ($perPage < 6)
+                    <i class="fas fa-spinner fa-spin" wire:loading wire:target="loadMoretopNews()"></i>
+                    @else
+                    
+                @endif
+            </div>
+
       
+            
 
             <div class="text-center">
 
@@ -212,4 +220,12 @@
             </div>
         </div>
     </div>
+
+    <script>
+        window.addEventListener('scroll', function() {
+            if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+                @this.loadMoretopNews()
+            }
+        });
+        </script>
 </div>
