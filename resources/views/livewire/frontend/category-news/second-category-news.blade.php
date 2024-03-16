@@ -16,7 +16,7 @@
                 @endif
         </h3>
         <a href="{{route('home.category', ['id' => $getMenus->id, 'slug' => createSlug($getMenus->category_en)  ])}}" class="tab01-link f1-s-1 cl9 hov-cl10 trans-03">
-            @if (session()->get('language') === 'hindi')
+                 @if (session()->get('language') === 'hindi')
                          सभी को देखें
                 @elseif (session()->get('language') === 'english')
                         View All
@@ -31,7 +31,7 @@
         </a>
     </div>
     <!-- Main Item post -->
-                                {{--=================== Hindi =================== --}}
+
 
             @forelse ($second_Ca_tWise_News  as $key => $catHindiNews )
                 @if($key  == 0 )

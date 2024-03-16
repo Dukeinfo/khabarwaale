@@ -15,7 +15,7 @@
                                     {{ $get_bottom1_Menus->category_urdu ?? "NA"}}
                         @else   
                                     {{ $get_bottom1_Menus->category_en  ?? "NA"}}
-                        @endif
+                        @endif 
                     </h3>
                     <a href="{{route('home.category', ['id' => $get_bottom1_Menus->id, 'slug' => createSlug($get_bottom1_Menus->category_en)  ])}}" class="tab01-link f1-s-1 cl9 hov-cl10 trans-03">
                         @if (session()->get('language') === 'hindi')
@@ -51,19 +51,7 @@
                                                 </a>
                                             </h5>
                                             <span class="cl8">
-                                                {{-- <a  target="_blank" href="{{ route('home.category', ['id' => $cat5_News->getmenu->id, 'slug' => createSlug($cat5_News->getmenu->category_en)  ])}}" class="f1-s-4 cl10 hov-cl10 trans-03">
-                                                    @if (session()->get('language') === 'hindi')
-                                                        {{$cat5_News['getmenu']['category_hin'] ?? "NA"}}:
-                                                    @elseif (session()->get('language') === 'english')
-                                                        {{$cat5_News['getmenu']['category_en'] ?? "NA"}}:
-                                                    @elseif (session()->get('language') === 'punjabi')
-                                                        {{$cat5_News['getmenu']['category_pbi'] ?? "NA"}}:
-                                                    @elseif (session()->get('language') === 'urdu')
-                                                        {{$cat5_News['getmenu']['category_urdu'] ?? "NA"}}:
-                                                    @else   
-                                                        {{$cat5_News['getmenu']['category_en'] ?? "NA"}}:
-                                                    @endif
-                                                </a> --}}
+                              
                                                 @if (strpos($cat5_News->category_id, ',') === false)
                                                 {{-- Single category ID --}}
                                                     <a  target="_blank"  href="{{ route('home.category', ['id' => $cat5_News->getmenu->id, 'slug' => createSlug($cat5_News->getmenu['category_en'])]) }}" class="f1-s-4 cl10 hov-cl10 trans-03">

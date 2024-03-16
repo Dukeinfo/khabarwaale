@@ -66,7 +66,7 @@ class InnerPageRecommended extends Component
        
     }
 
-
+ 
         private function getNewsType()
         {
                     switch ($this->language_Val) {

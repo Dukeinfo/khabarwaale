@@ -71,6 +71,8 @@ Route::controller(FronendController::class)->group(function () {
     Route::get('/inner/{newsid}/{slug}',  'inner')->name('home.inner');
     Route::get('/video-gallery',  'videoGallery')->name('home.video-gallery');
     Route::get('/archive/{id}/{slug}',  'archive')->name('home.archive');
+    Route::get('/archive-page',  'archive_page')->name('home.archive_page');
+
     Route::get('/readmore',  'readMore')->name('readmore');
     Route::get('/privacy-policy', 'privacyPolicy')->name('privacyPolicy');
     Route::get('/reporter-news',  'reporterNews')->name('home.reporter_news');

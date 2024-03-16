@@ -8,6 +8,7 @@
                 <div class="col-12">
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                         <h4 class="mb-sm-0 font-size-18">Add Archive</h4>
+                        <h5 ><a class="btn btn-success" href="{{route('home.archive_page')}}" target="_blank"> Check Archive page</a></h5>
 
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">

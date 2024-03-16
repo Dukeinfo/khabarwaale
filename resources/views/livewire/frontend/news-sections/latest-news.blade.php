@@ -35,6 +35,7 @@
                                             {{-- Single category ID --}}
                                                 <a  target="_blank"  href="{{ route('home.category', ['id' => $news->getmenu->id, 'slug' => createSlug($news->getmenu['category_en'])]) }}" class="f1-s-5 cl3 hov-cl10 trans-03">
                                                     <span class="text-danger mr-1">
+                                                        
                                                     @if (session()->get('language') === 'hindi')
                                                         {{$news['getmenu']['category_hin'] ?? "NA"}}
                                                     @elseif (session()->get('language') === 'english')

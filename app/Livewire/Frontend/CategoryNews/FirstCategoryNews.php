@@ -67,7 +67,7 @@ class FirstCategoryNews extends Component
     //     ]);
     // }
     public function render(){
-            // Retrieve the category with specific conditions
+            // Retrieve the category with specific conditions 
             $getMenus = Category::orderBy('sort_id', 'ASC')
                                 ->where('status', 'Active')
                                 ->where('sort_id', 2)

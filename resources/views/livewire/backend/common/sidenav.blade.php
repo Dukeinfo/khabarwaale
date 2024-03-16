@@ -106,7 +106,16 @@
    </a>
    
 </li>
+<li>
+	<a href="{{route('admin.Add_Archive_News')}}"  class="waves-effect"> 
+	   <i class='bx bx-archive'></i>
+	   <span>Add Archive <span class="badge bg-danger">New</span></span>
+   </a>
+   
+</li>
 @endif
+
+
 
 
 @if(auth()->user()->can('manage_user') )
@@ -133,7 +142,7 @@
 		<i class='bx bx-user'></i>
 		<span> Roles & Permission  
 
-			<span class="badge bg-danger">New</span>
+	
 
 		</span>
 	</a>
