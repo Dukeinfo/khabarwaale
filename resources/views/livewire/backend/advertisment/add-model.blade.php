@@ -33,7 +33,6 @@
                     @php
                     $formattedFromDate = isset($record->from_date) ? date('M d, Y', strtotime($record->from_date)) : 'NA';
                     $formattedToDate = isset($record->to_date) ? date('M d, Y', strtotime($record->to_date)) : 'NA';
-                
                     $fromDate = isset($record->from_date) ? new DateTime($formattedFromDate) : null;
                     $toDate = isset($record->to_date) ? new DateTime($formattedToDate) : null;
                 

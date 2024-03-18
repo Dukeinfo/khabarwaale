@@ -142,21 +142,18 @@ class FronendController extends Controller
             ->first();
     
         $data['rightAdvertisements'] =  Advertisment::where(function ($query) use ($archiveDate) {
-            $query->where(function ($query) use ($archiveDate) {
-                // Check if today's date is within the advertisement date range
-                $query->where('from_date', '<=', $archiveDate)
-                    ->where('to_date', '>=', $archiveDate);
-            })->orWhere(function ($query) use ($archiveDate) {
-                // Check if today's date is equal to the from_date of the advertisement
-                $query->where('from_date', '=', $archiveDate);
-            });
-        })
-            // ->where('to_date', '>=', $today)
-            ->where('location', 'Right Add')
-            ->where('page_name', 'Homepage')
-            ->whereDate('created_at', '<=', $archiveDate) 
-            ->latest()
-            ->where('status', 'Yes')
+                $query->where(function ($query) use ($archiveDate) {
+                        $query->where('from_date', '<=', $archiveDate)
+                            ->where('to_date', '>=', $archiveDate);
+                    })->orWhere(function ($query) use ($archiveDate) {
+                        $query->where('from_date', '=', $archiveDate);
+                    });
+                })
+                ->whereDate('created_at', '<=', $archiveDate) 
+                 ->where('location', 'Right Add')
+                ->where('page_name', 'Homepage')
+                ->where('status', 'Yes')
+                ->latest()
             ->limit(3)
             ->get();
     
