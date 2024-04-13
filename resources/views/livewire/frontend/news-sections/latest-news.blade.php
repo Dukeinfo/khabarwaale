@@ -156,7 +156,13 @@
         <div class="col-lg-12 mb-4">
             <div class="card bg-white shadow-sm text-center border-0">
                 <div class="card-body">
-                    <a href="{{$latestRightAds->link_add  ?? '#'}}">
+                    @if(!isset($latestRightAds->image_add))
+                        <a href="{{ get_add_Image($latestRightAds->image_add) }}" target="_blank">
+                    @elseif(isset($latestRightAds->link_add))
+                        <a href="{{$latestRightAds->link_add }}" target="_blank">
+                    @else
+                        <a href="javascript:void(0);" target="_blank">
+                    @endif
                         <img src="{{getAddImage($latestRightAds->image) }}"  class="img-fluid" alt="" loading="lazy">
                     </a>
                 </div>
