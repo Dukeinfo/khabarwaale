@@ -156,7 +156,7 @@
         <div class="col-lg-12 mb-4">
             <div class="card bg-white shadow-sm text-center border-0">
                 <div class="card-body">
-                    @if(!isset($latestRightAds->image_add))
+                    @if(isset($latestRightAds->image_add))
                         <a href="{{ get_add_Image($latestRightAds->image_add) }}" target="_blank">
                     @elseif(isset($latestRightAds->link_add))
                         <a href="{{$latestRightAds->link_add }}" target="_blank">
