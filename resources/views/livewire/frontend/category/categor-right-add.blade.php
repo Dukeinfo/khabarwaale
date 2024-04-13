@@ -20,9 +20,6 @@
 
         <!-- Editor's Desk -->
              @livewire('frontend.advertisement.editor-profile')
-
-   
-
             <!-- Subscribe -->
             @livewire('frontend.homepage.subscribe.subscribe-form')
 
