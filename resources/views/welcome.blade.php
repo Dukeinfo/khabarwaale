@@ -62,9 +62,9 @@ $seoMetaData =  App\Models\SeoMetadetail::first();
         </div>
     </div>
 </section>
-        @livewire('frontend.homepage.home-bottom-add',['lazy' =>true])
+        @livewire('frontend.homepage.home-bottom-add')
 
-        @livewire('frontend.news-sections.bottom-news' ,['lazy' =>true])
+        @livewire('frontend.news-sections.bottom-news')
 
  
 @stop
