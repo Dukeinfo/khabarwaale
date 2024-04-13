@@ -203,15 +203,9 @@
                     
                 @endif
             </div>
-
-      
-            
-
             <div class="text-center">
-
                 @if(isset($topNewsCentertAds))
-                
-                <a href="{{$topNewsCentertAds->link_add  ?? '#'}}">
+                    <a href="{{isset($topNewsCentertAds->image_add) ? get_add_Image($topNewsCentertAds->image_add) : $topNewsCentertAds->link_add }}" target="_blank">
                     <img src="{{ getAddImage($topNewsCentertAds->image) }}" class="img-fluid" alt="">
                 </a>
                 @else

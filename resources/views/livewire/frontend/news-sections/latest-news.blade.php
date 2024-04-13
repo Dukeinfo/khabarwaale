@@ -156,7 +156,7 @@
         <div class="col-lg-12 mb-4">
             <div class="card bg-white shadow-sm text-center border-0">
                 <div class="card-body">
-                    <a href="javascript:void()"  wire:click="loadMore" >
+                    <a href="{{$latestRightAds->link_add  ?? '#'}}">
                         <img src="{{getAddImage($latestRightAds->image) }}"  class="img-fluid" alt="" loading="lazy">
                     </a>
                 </div>

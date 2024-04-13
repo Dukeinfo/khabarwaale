@@ -27,7 +27,7 @@
             @php $showAds = true @endphp
             @forelse ($catWiseNewsData as $key => $catNewsData)
                 @if($key == 0 ) 
-                    <div class="card border-0 shadow-sm mb-3" wire:poll >
+                    <div class="card border-0 shadow-sm mb-3">
                         <div class="card-body">
                             <div class="p-b-20">
                                 <h5 class="p-b-5">
@@ -110,7 +110,7 @@
                         </div>
                     </div>
                 @else
-                    <div class="card border-0 shadow-sm mb-3" wire:poll>
+                    <div class="card border-0 shadow-sm mb-3">
                         <div class="card-body">
                             <div class="flex-wr-sb-s">
                                 <div class="size-w-2">

@@ -110,7 +110,7 @@
            
                         @if(isset($categorylatestleftAds))
 
-                        <a href="javascript:void()" wire:poll>
+                        <a href="javascript:void()" >
                             <img src="{{getAddImage($categorylatestleftAds->image) }}" class="img-fluid" alt="" loading="lazy">
                         </a>
                         @else

@@ -147,7 +147,7 @@
        
                         @if(isset($editorlatestleftAds))
 
-                        <a href="javascript:void()" wire:poll>
+                        <a href="javascript:void()" >
                             <img src="{{getAddImage($editorlatestleftAds->image) }}" class="img-fluid" alt="" loading="lazy">
                         </a>
                         @else
