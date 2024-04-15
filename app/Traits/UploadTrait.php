@@ -16,11 +16,14 @@ trait UploadTrait
         $currentMonth = date('m');
         $currentYear = date('Y');
             // Generate a unique name for the image
-            $file_name =   $currentMonth  .'_'. $currentYear . '_' .strtoupper(uniqid()).'.'.$uploadedFile->getClientOriginalExtension();
+            // $file_name =   $currentMonth  .'_'. $currentYear . '_' .strtoupper(uniqid()).'.'.$uploadedFile->getClientOriginalExtension();
                 // Optimize the uploaded image
-        
+            $new_file_name =   $currentMonth  . '_' . $currentYear . '_' . strtoupper(uniqid()) . '.' . 'webp';
         try{
-          $uploadedFile->storeAs($folder,$file_name, $disk);
+        //   $uploadedFile->storeAs($folder,$new_file_name, $disk);
+        $image = Image::make($uploadedFile)->orientate()->encode('webp',70);
+        $filePath = $folder ? $folder . '/' . $new_file_name : $new_file_name;
+        Storage::disk($disk)->put($filePath, $image->stream());
 
         } catch (\Exception $e) {
             // Handle the exception (e.g., log it or display an error message)
@@ -33,7 +36,7 @@ trait UploadTrait
             if (!File::exists($directory)) {
                 File::makeDirectory($directory, 0755, true, true);
             }
-            $image = Image::make($uploadedFile);
+            $image = Image::make($uploadedFile)->orientate()->encode('webp');
             // Calculate the new height to maintain the aspect ratio
             // $thumbnailWidth = 100;
             // $thumbnailHeight = ($image->height() * $thumbnailWidth) / $image->width();
@@ -47,15 +50,15 @@ trait UploadTrait
                 Log::info('Original Image Size: ' . $image->width() . 'x' . $image->height());
 
                 // Create a new instance for the thumbnail
-                $thumbnail = Image::make($uploadedFile)->fit(100, 75);
+                $thumbnail = Image::make($uploadedFile)->fit(100, 75)->orientate()->encode('webp');
 
                 // Log the resized image size
                 Log::info('Resized Image Size: ' . $thumbnail->width() . 'x' . $thumbnail->height());
 
                 // Save the thumbnail
-                $thumbnailName = 'thumb_'.$file_name;
+                $thumbnailName = 'thumb_'.$new_file_name;
                 $thumbnail->save($directory.'/'.$thumbnailName);
-                return ['file_name' => $file_name, 'thumbnail_name' => $thumbnailName];
+                return ['file_name' => $new_file_name, 'thumbnail_name' => $thumbnailName];
 
             // $thumbnailName = 'thumb_'.$file_name;
             // // Log the original image size
