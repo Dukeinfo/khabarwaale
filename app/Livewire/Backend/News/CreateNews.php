@@ -614,4 +614,48 @@ public function paramDelete($id){
 
            }
 
+           public function updateFileExtensions()
+           {
+               try {
+                   // Retrieve all records where image or thumbnail ends with '.jpg'
+                   $pages = NewsPost::where('image', 'like', '%.jpg')
+                                       ->orWhere('image', 'like', '%.png')
+                                       ->orWhere('image', 'like', '%.jpeg')
+                                       ->orWhere('thumbnail', 'like', '%.jpg')
+                                       ->orWhere('thumbnail', 'like', '%.png')
+                                       ->orWhere('thumbnail', 'like', '%.jpeg')
+                                       ->get();
+           
+               
+                   foreach ($pages as $page) {
+                       if (strpos($page->image, '.jpg') !== false) {
+                           $page->image = str_replace('.jpg', '.webp', $page->image);
+                       } elseif (strpos($page->image, '.jpeg') !== false) {
+                           $page->image = str_replace('.jpeg', '.webp', $page->image);
+                       } elseif (strpos($page->image, '.png') !== false) {
+                           $page->image = str_replace('.png', '.webp', $page->image);
+                       }
+                   
+                       if (strpos($page->thumbnail, '.jpg') !== false) {
+                           $page->thumbnail = str_replace('.jpg', '.webp', $page->thumbnail);
+                       } elseif (strpos($page->thumbnail, '.jpeg') !== false) {
+                           $page->thumbnail = str_replace('.jpeg', '.webp', $page->thumbnail);
+                       } elseif (strpos($page->thumbnail, '.png') !== false) {
+                           $page->thumbnail = str_replace('.png', '.webp', $page->thumbnail);
+                       }
+                   
+                       $page->save();
+                   }
+           
+            
+                $this->alert('success', 'File extensions updated successfully');
+
+               } catch (\Exception $e) {
+                   // Log or handle the exception
+             
+                $this->alert('error', 'Error updating file extensions:'. $e->getMessage());
+
+               }
+           }
+
 }

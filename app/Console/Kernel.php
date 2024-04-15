@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Console\Commands\ConvertImagesToWebP;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -18,6 +19,8 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         // Other commands...
         \App\Console\Commands\ClearLogs::class,
+        ConvertImagesToWebP::class,
+
     ];
 
 

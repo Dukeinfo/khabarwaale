@@ -166,4 +166,24 @@ trait UploadTrait
     //     ];
     // }
 
+    public function convertToWebP($imagePath, $outputPath)
+    {
+
+        try {
+            // Open the image using Intervention Image
+            $image = Image::make($imagePath);
+            // Convert the image to WebP format and remove EXIF data
+            $image->orientate()->encode('webp', 75);
+            // Save the converted image
+            Storage::put($outputPath, $image->stream());
+            // Unlink (delete) the original image file
+            unlink($imagePath);
+            return $outputPath;
+        } catch (\Exception $e) {
+            // Handle any exceptions
+            Log::error('Image conversion error: ' . $e->getMessage());
+            return null;
+        }
+    }
+
 }
