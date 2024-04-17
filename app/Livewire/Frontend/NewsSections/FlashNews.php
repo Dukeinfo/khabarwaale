@@ -16,9 +16,6 @@ class FlashNews extends Component
     
     }
 
-
-
-
     public function render()
     {
         $today = Carbon::now()->toDateString();
@@ -59,7 +56,7 @@ class FlashNews extends Component
     
             $newsPosts = $newsPosts->orderBy('created_at', 'desc')
                                     ->orderBy('created_at', 'desc')
-                                    ->take(6)
+                                    ->take(5)
                                     ->get();      
                                 
         return view('livewire.frontend.news-sections.flash-news' ,['newsPosts' => $newsPosts]);
