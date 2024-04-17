@@ -17,7 +17,7 @@ class ConvertImagesToWebP extends Command
     public function handle()
     {
         //
-        updateFileExtensions()
+        // updateFileExtensions()
         // try {
         //     $directory = 'public/news_gallery'; // Adjust the directory path as needed
 

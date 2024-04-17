@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
+        "arcanedev/log-viewer": "^10.1",
         "artesaos/seotools": "^1.2",
         "guzzlehttp/guzzle": "^7.2",
         "intervention/image": "^2.7",
@@ -20,6 +21,7 @@
         "livewire/livewire": "^3.0",
         "minishlink/web-push": "^8.0",
         "pusher/pusher-php-server": "^7.2",
+        "rap2hpoutre/laravel-log-viewer": "^2.4",
         "spatie/browsershot": "^3.59",
         "spatie/image-optimizer": "^1.7",
         "spatie/laravel-activitylog": "^4.7",

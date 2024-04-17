@@ -48,16 +48,6 @@ public function mount( $id){
     public function render()
     {
         $categoryIds = explode(',', $this->categoryId);
-                    // $catWiseNewsData  = NewsPost::with(['newstype', 'user', 'getmenu'])
-                    //         ->where(function ($query)  {
-                    //             $query->whereHas('getmenu', function ($subquery)  {
-                    //                 $subquery->where('id', 'like', '%' . $this->categoryId . '%')
-                    //                 ;
-                    //             });
-                    //         })   
-                    //         ->orderBy('created_at', 'desc')
-                    //         ->orderBy('updated_at', 'desc')
-
                     $catWiseNewsData = NewsPost::with(['newstype', 'user', 'getmenu'])
                     ->where(function ($query) use ($categoryIds) {
                         // Check if category_id contains any of the provided IDs
@@ -69,29 +59,9 @@ public function mount( $id){
                     })
                     ->orderBy('created_at', 'desc')
                     ->orderBy('updated_at', 'desc')
+                    ->where('news_type', $this->getNewsType()) 
                             ->orderByRaw('RAND()');
-                            switch ($this->language_Val) {
-                                case 'hindi':
-                                    $catWiseNewsData->where('news_type', 1);
-                                    break;
-                            
-                                case 'english':
-                                    $catWiseNewsData->where('news_type', 2);
-                                    break;
-                            
-                                case 'punjabi':
-                                    $catWiseNewsData->where('news_type', 3);
-                                    break;
-                            
-                                case 'urdu':
-                                    $catWiseNewsData->where('news_type', 4);
-                                    break;
-                            
-                                default:
-                                  $catWiseNewsData->where('news_type', 1);
-                                    // Handle the default case if needed
-                            }
-                            
+                       
                             $catWiseNewsData = $catWiseNewsData->paginate(9);
                      
 
@@ -113,5 +83,25 @@ public function mount( $id){
          
          
         ]);
+    }
+
+    private function getNewsType()
+    {
+                switch ($this->language_Val) {
+                    case 'hindi':
+                        return 1;
+
+                    case 'english':
+                        return 2;
+
+                    case 'punjabi':
+                        return 3;
+
+                    case 'urdu':
+                        return 4;
+
+                    default:
+                        return 1; // Handle the default case if needed
+                }
     }
 }
