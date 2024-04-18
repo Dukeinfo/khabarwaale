@@ -41,6 +41,7 @@ use App\Livewire\Backend\Videos\EditVideos;
 use App\Livewire\Frontend\Category\ViewCategory;
 use App\Livewire\Frontend\Homepage\ViewHomepage;
 use App\Livewire\Frontend\Innerpage\ViewInnerPage;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use Livewire\Livewire;
 use Spatie\Browsershot\Browsershot;
@@ -57,6 +58,12 @@ use Spatie\Browsershot\Browsershot;
 */
 // Route::get('lang/change', [LanguageController::class, 'change'])->name('changeLang');
 
+Route::get('/optimize', function() {
+    Artisan::call('optimize:clear');
+    return redirect()->route('home.homepage')->with('success' ,'site optimize successfull');
+        // return "optimize is cleared";
+    
+    });
 Route::controller(LanguageController::class)->group(function () {
     Route::get('/language/english',  'english')->name('english.language');
     Route::get('/language/hindi',  'Hindi')->name('hindi.language');

@@ -19,14 +19,15 @@ class FlashNews extends Component
     public function render()
     {
     
-    $newsPosts = Cache::remember('flash_news_posts', now()->addHours(1), function () {
+    $newsPosts = Cache::remember('flash_news_posts', now()->addMinutes(10), function () {
         $today = Carbon::now()->toDateString();
 
-        $newsPosts = NewsPost::with('getmenu', 'newstype', 'user')
-            ->where('status', 'Approved')
-            ->whereNull('deleted_at')
-            ->where(function ($query) use ($today) {
-                $query->where('post_date', $today) // Match the current date
+        $newsPosts = NewsPost::select('id', 'news_type', 'category_id', 'user_id', 'title', 'slug', 'heading',  'image', 'thumbnail','created_at','updated_at')
+                ->with('getmenu', 'newstype', 'user')
+                ->where('status', 'Approved')
+                ->whereNull('deleted_at')
+                ->where(function ($query) use ($today) {
+                    $query->where('post_date', $today) // Match the current date
                     ->orWhere(function ($query) {
                         $query->whereIn('breaking_side', ['Show'])
                             ->orWhereIn('breaking_top', ['Show'])
