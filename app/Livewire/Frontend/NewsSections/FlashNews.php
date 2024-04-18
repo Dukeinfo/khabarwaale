@@ -6,7 +6,7 @@ use App\Models\NewsPost;
 use Livewire\Component;
 use Livewire\Attributes\Computed;
 use Illuminate\Support\Carbon;
-
+use Illuminate\Support\Facades\Cache;
 class FlashNews extends Component
 {
 
@@ -18,7 +18,10 @@ class FlashNews extends Component
 
     public function render()
     {
+    
+    $newsPosts = Cache::remember('flash_news_posts', now()->addHours(1), function () {
         $today = Carbon::now()->toDateString();
+
         $newsPosts = NewsPost::with('getmenu', 'newstype', 'user')
             ->where('status', 'Approved')
             ->whereNull('deleted_at')
@@ -29,36 +32,37 @@ class FlashNews extends Component
                             ->orWhereIn('breaking_top', ['Show'])
                             ->orWhereIn('slider', ['Show']);
                     });
-            });
-       // Limit the number of results to 6
-        
-                switch ($this->languageVal) {
-                    case 'hindi':
-                        $newsPosts->where('news_type', 1);
-                        break;
-                
-                    case 'english':
-                        $newsPosts->where('news_type', 2);
-                        break;
-                
-                    case 'punjabi':
-                        $newsPosts->where('news_type', 3);
-                        break;
-                
-                    case 'urdu':
-                        $newsPosts->where('news_type', 4);
-                        break;
-                
-                    default:
-                    $newsPosts->where('news_type', 1);
-                        // Handle the default case if needed
-                }
-    
-            $newsPosts = $newsPosts->orderBy('created_at', 'desc')
-                                    ->orderBy('created_at', 'desc')
-                                    ->take(5)
-                                    ->get();      
+            })
+            ->where('news_type', $this->getNewsType())
+            ->orderBy('created_at', 'desc')
+            ->take(5)
+            ->get();
+
+        return $newsPosts;
+    });
                                 
         return view('livewire.frontend.news-sections.flash-news' ,['newsPosts' => $newsPosts]);
+    }
+
+
+    private function getNewsType()
+    {
+        switch ($this->languageVal) {
+            case 'hindi':
+                return 1;
+                break;
+            case 'english':
+                return 2;
+                break;
+            case 'punjabi':
+                return 3;
+                break;
+            case 'urdu':
+                return 4;
+                break;
+            default:
+                return 1;
+                // Handle the default case if needed
+        }
     }
 }
