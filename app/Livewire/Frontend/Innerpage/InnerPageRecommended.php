@@ -5,7 +5,7 @@ namespace App\Livewire\Frontend\Innerpage;
 use App\Models\NewsPost;
 use Livewire\Component;
 use Livewire\WithPagination;
-
+use Illuminate\Support\Facades\Cache;
 class InnerPageRecommended extends Component
 {
 
@@ -52,6 +52,10 @@ class InnerPageRecommended extends Component
                             // ->limit(6)
                             // ->get();       
                             ->paginate($this->perPage);
+
+
+
+                            
         return view('livewire.frontend.innerpage.inner-page-recommended', ['recmendNewsData' => $recmendNewsData]);
     }
 

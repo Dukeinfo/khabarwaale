@@ -14,7 +14,7 @@ use Artesaos\SEOTools\Facades\JsonLd;
 // OR with multi
 use Illuminate\Support\Str;
 use Artesaos\SEOTools\Facades\JsonLdMulti;
-
+use Illuminate\Support\Facades\Cache;
 // OR use only single facades 
 
 use Artesaos\SEOTools\Facades\SEOTools;
@@ -66,10 +66,18 @@ public function mount(NewsPost $newsid)
     public function render()
     {
   try {
-        $getNewsDetail = NewsPost::with('getmenu', 'newstype')->where('id' ,  $this->news_id  )
-        ->where('status', 'Approved') ->whereNull('deleted_at')->firstOrFail();    
-        $currentUrl    = url()->current();
 
+            $getNewsDetail = Cache::remember('news_detail_' . $this->news_id, 10, function () {
+                return NewsPost::with('getmenu', 'newstype')
+                    ->where('id', $this->news_id)
+                    ->where('status', 'Approved')
+                    ->whereNull('deleted_at')
+                    ->firstOrFail();
+            });
+
+        // $getNewsDetail = NewsPost::with('getmenu', 'newstype')->where('id' ,  $this->news_id  )
+        // ->where('status', 'Approved') ->whereNull('deleted_at')->firstOrFail();    
+        $currentUrl    = url()->current();
         $shareComponent = \Share::page(
             $currentUrl,
             $getNewsDetail->title ,
