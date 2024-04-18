@@ -29,8 +29,8 @@ class TopNews extends Component
                 ->whereIn('breaking_top', ['Show'])
                 ->where('news_type', $this->getNewsType())
                 ->orderBy('created_at', 'desc')
-                ->limit(7)
-                ->paginate($this->perPage);
+                ->limit(6)
+                ->paginate(6);
         });
         $today = now()->toDateString();
         $topNewsCentertAds = Advertisment::where('from_date', '<=', $today)
@@ -49,15 +49,15 @@ class TopNews extends Component
             ]);
     }
 
-    public function loadMoretopNews()
-    {
-        if ($this->perPage >= 6) {
-            return; // Stop loading more items
-        }
+    // public function loadMoretopNews()
+    // {
+    //     if ($this->perPage >= 6) {
+    //         return; // Stop loading more items
+    //     }
 
-        // Increment the limit for news items, but make sure it doesn't exceed 6
-        $this->perPage = min($this->perPage + 1, 6);
-    }
+    //     // Increment the limit for news items, but make sure it doesn't exceed 6
+    //     $this->perPage = min($this->perPage + 1, 6);
+    // }
 
     private function getNewsType()
     {

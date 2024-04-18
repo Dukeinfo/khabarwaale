@@ -36,7 +36,7 @@ class LatestNews extends Component
                 ->where('news_type', $this->getNewsType())
                 ->take(6)
                 ->orderBy('created_at', 'desc')
-                ->paginate($this->perPage);
+                ->paginate(7);
         });
 
         $today = now()->toDateString();
