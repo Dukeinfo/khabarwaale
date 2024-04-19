@@ -25,6 +25,9 @@ class DatabaseSeeder extends Seeder
         $this->call(WebsiteTypeSeeder::class);
         $this->call(ContactInfoSeeder::class);
         $this->call(SocialAppSeeder::class);
+        $this->call(RolesAndPermissionsSeeder::class);
+
+        
 
         
 

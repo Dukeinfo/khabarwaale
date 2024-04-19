@@ -16,22 +16,27 @@ class RoleSeeder extends Seeder
     public function run()
     {
         //
-        Role::truncate();
+        // Role::truncate();
 
         $create = new Role();
         $create->name = "admin";
+        $create->guard_name = "web";
         $create->save();
 
         $editor = new Role();
         $editor->name = "editor";
+        $editor->guard_name = "web";
         $editor->save();
 
         $reporter = new Role();
         $reporter->name = "reporter";
+        $reporter->guard_name = "web";
         $reporter->save();
 
         $dataentery = new Role();
         $dataentery->name = "dataentery";
+        $dataentery->guard_name = "web";
+
         $dataentery->save();
     }
 }

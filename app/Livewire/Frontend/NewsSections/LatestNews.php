@@ -25,9 +25,10 @@ class LatestNews extends Component
 
     public function render()
     {
-        $latestHinNewsData = Cache::remember('latest_news_posts_' . $this->languageVal, now()->addMinutes(10), function () {
-            return NewsPost::select('id', 'news_type', 'category_id', 'user_id', 'title', 'slug', 'heading',  'image', 'thumbnail','created_at','updated_at')
-            ->with('getmenu', 'newstype')
+        $latestHinNewsData = Cache::remember('latest_news_posts_' . $this->languageVal, now()->addMinutes(5), function () {
+            return NewsPost::select('id', 'slug', 'news_type', 'category_id', 'user_id', 'title', 'slug', 'heading',  'image', 'thumbnail'
+                ,'status' ,'deleted_at'   ,'breaking_side' ,  'created_at','updated_at')
+                ->with('getmenu', 'newstype')
                 ->where('status', 'Approved')
                 ->whereNull('deleted_at')
                 ->where(function ($query) {

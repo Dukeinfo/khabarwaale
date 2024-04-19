@@ -37,7 +37,8 @@ class Bottomnews2 extends Component
         // Retrieve news posts with eager loaded relationships
         // Use caching for news posts data
         $six_CatWise_News = Cache::remember('bottom2_news_' . $this->languageVal,  now()->addMinutes(10), function () use ($categoryIds) {
-            return NewsPost::select('id', 'news_type', 'category_id', 'user_id', 'title', 'slug', 'heading',  'image', 'thumbnail','created_at','updated_at')
+            return NewsPost::select('id', 'slug', 'news_type', 'category_id', 'user_id', 'title', 'slug', 'heading', 
+            'image', 'thumbnail', 'status','created_at','updated_at')
             ->with(['newstype', 'user', 'getmenu'])
                 ->where(function ($query) use ($categoryIds) {
                     // Check if category_id contains any of the provided IDs

@@ -67,8 +67,10 @@ public function mount(NewsPost $newsid)
     {
   try {
 
-            $getNewsDetail = Cache::remember('news_detail_' . $this->news_id, 10, function () {
-                return NewsPost::with('getmenu', 'newstype')
+            $getNewsDetail = Cache::remember('news_detail_' . $this->news_id, now()->addMinutes(5), function () {
+                return NewsPost::select('id', 'slug','news_type', 'category_id', 'user_id', 'title', 'slug', 'heading', 
+                'image', 'thumbnail',"status"   ,"deleted_at"    ,"created_at" )
+                ->with('getmenu', 'newstype')
                     ->where('id', $this->news_id)
                     ->where('status', 'Approved')
                     ->whereNull('deleted_at')

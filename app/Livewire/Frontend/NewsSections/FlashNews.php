@@ -22,7 +22,9 @@ class FlashNews extends Component
     $newsPosts = Cache::remember('flash_news_posts', now()->addMinutes(10), function () {
         $today = Carbon::now()->toDateString();
 
-        $newsPosts = NewsPost::select('id', 'news_type', 'category_id', 'user_id', 'title', 'slug', 'heading',  'image', 'thumbnail','created_at','updated_at')
+        $newsPosts = NewsPost::select('id', 'slug', 'news_type', 'category_id', 'user_id', 'title', 'slug', 'heading', 
+                'status',    'deleted_at',    'post_date',    'breaking_side',    'breaking_top',    'slider',    
+                 'image', 'thumbnail','created_at','updated_at')
                 ->with('getmenu', 'newstype', 'user')
                 ->where('status', 'Approved')
                 ->whereNull('deleted_at')

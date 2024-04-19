@@ -10,7 +10,7 @@ use Livewire\WithPagination;
 use Artesaos\SEOTools\Facades\SEOMeta;
 use Illuminate\Support\Str;
 use Artesaos\SEOTools\Facades\SEOTools;
-
+use Illuminate\Support\Facades\Cache;
 class ViewCategory extends Component
 {
 
@@ -47,22 +47,44 @@ public function mount( $id){
 
     public function render()
     {
-        $categoryIds = explode(',', $this->categoryId);
-                    $catWiseNewsData = NewsPost::with(['newstype', 'user', 'getmenu'])
-                    ->where(function ($query) use ($categoryIds) {
-                        // Check if category_id contains any of the provided IDs
-                        $query->where(function ($subquery) use ($categoryIds) {
-                            foreach ($categoryIds as $categoryId) {
-                                $subquery->orWhere('category_id', 'like', "%$categoryId%");
-                            }
-                        });
-                    })
-                    ->orderBy('created_at', 'desc')
-                    ->orderBy('updated_at', 'desc')
-                    ->where('news_type', $this->getNewsType()) 
-                            ->orderByRaw('RAND()');
+        $cacheKey = 'category_news_' . $this->categoryId . '_' . $this->language_Val;
+
+
+        $catWiseNewsData = Cache::remember($cacheKey, now()->addMinutes(10), function () {
+            $categoryIds = explode(',', $this->categoryId);
+            return NewsPost::select('id', 'slug', 'news_type', 'category_id', 'user_id', 'title', 'slug', 'heading', 
+             'image', 'thumbnail', "status" ,"created_at" )
+            ->with(['newstype', 'user', 'getmenu'])
+                ->where(function ($query) use ($categoryIds) {
+                    $query->where(function ($subquery) use ($categoryIds) {
+                        foreach ($categoryIds as $categoryId) {
+                            $subquery->orWhere('category_id', 'like', "%$categoryId%");
+                        }
+                    });
+                })
+                ->orderBy('created_at', 'desc')
+                ->orderBy('updated_at', 'desc')
+                ->where('news_type', $this->getNewsType()) 
+                ->orderByRaw('RAND()')
+                ->paginate(9);
+        });
+
+        // $categoryIds = explode(',', $this->categoryId);
+        //             $catWiseNewsData = NewsPost::with(['newstype', 'user', 'getmenu'])
+        //             ->where(function ($query) use ($categoryIds) {
+        //                 // Check if category_id contains any of the provided IDs
+        //                 $query->where(function ($subquery) use ($categoryIds) {
+        //                     foreach ($categoryIds as $categoryId) {
+        //                         $subquery->orWhere('category_id', 'like', "%$categoryId%");
+        //                     }
+        //                 });
+        //             })
+        //             ->orderBy('created_at', 'desc')
+        //             ->orderBy('updated_at', 'desc')
+        //             ->where('news_type', $this->getNewsType()) 
+        //                     ->orderByRaw('RAND()');
                        
-                            $catWiseNewsData = $catWiseNewsData->paginate(9);
+        //                     $catWiseNewsData = $catWiseNewsData->paginate(9);
                      
 
                             $today = now()->toDateString();
@@ -105,3 +127,6 @@ public function mount( $id){
                 }
     }
 }
+
+
+ 
