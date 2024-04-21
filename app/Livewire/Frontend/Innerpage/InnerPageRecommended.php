@@ -48,7 +48,7 @@ class InnerPageRecommended extends Component
                             ->orderBy('created_at', 'desc')
                             ->orderBy('updated_at', 'desc')
                             ->where('news_type', $this->getNewsType()) 
-                            ->inRandomOrder() // Get random posts
+            
                             // ->limit(6)
                             // ->get();       
                             ->paginate($this->perPage);
