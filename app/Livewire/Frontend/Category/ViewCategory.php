@@ -65,7 +65,6 @@ public function mount( $id){
                 ->orderBy('created_at', 'desc')
                 ->orderBy('updated_at', 'desc')
                 ->where('news_type', $this->getNewsType()) 
-                ->orderByRaw('RAND()')
                 ->paginate(9);
         });
 

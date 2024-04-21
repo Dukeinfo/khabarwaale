@@ -74,7 +74,6 @@ public $languageVal;
                         })
                         ->orderBy('created_at', 'desc')
                         ->orderBy('updated_at', 'desc')
-                        ->orderByRaw('RAND()')
                         ->when($this->languageVal, function ($query, $language) {
                             switch ($language) {
                                 case 'hindi':
