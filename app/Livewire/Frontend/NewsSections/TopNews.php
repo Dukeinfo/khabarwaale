@@ -50,15 +50,6 @@ class TopNews extends Component
             ]);
     }
 
-    // public function loadMoretopNews()
-    // {
-    //     if ($this->perPage >= 6) {
-    //         return; // Stop loading more items
-    //     }
-
-    //     // Increment the limit for news items, but make sure it doesn't exceed 6
-    //     $this->perPage = min($this->perPage + 1, 6);
-    // }
 
     private function getNewsType()
     {
