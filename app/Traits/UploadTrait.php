@@ -126,7 +126,7 @@ trait UploadTrait
             // Save the converted image
             Storage::put($outputPath, $image->stream());
             // Unlink (delete) the original image file
-            unlink($imagePath);
+            // unlink($imagePath);
             return $outputPath;
         } catch (\Exception $e) {
             // Handle any exceptions
