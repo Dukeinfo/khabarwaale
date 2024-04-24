@@ -63,7 +63,7 @@ Route::get('/optimize', function() {
     return redirect()->route('home.homepage')->with('success' ,'site optimize successfull');
         // return "optimize is cleared";
     
-    });
+    })->name('optimizeSite');
 Route::controller(LanguageController::class)->group(function () {
     Route::get('/language/english',  'english')->name('english.language');
     Route::get('/language/hindi',  'Hindi')->name('hindi.language');

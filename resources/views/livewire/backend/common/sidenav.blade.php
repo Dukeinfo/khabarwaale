@@ -31,6 +31,14 @@
 				
 			</li>
 
+					<li>
+				<a href="{{route('optimizeSite')}}" target="_blank" class="waves-effect"> 
+				   <i class='bx bx-health'></i>
+				   <span>Optimize <span class="badge bg-danger">New</span></span>
+			   </a>
+			   
+		   </li>
+
 			@if(auth()->user()->can('manage_menu') )
 		
             <li>
