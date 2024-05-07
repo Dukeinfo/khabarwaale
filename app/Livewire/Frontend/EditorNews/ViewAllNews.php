@@ -55,7 +55,7 @@ class ViewAllNews extends Component
         // }
         
         // $catWiseNewsData = $catWiseNewsData->paginate(9);
-        $catWiseNewsData = Cache::remember('cat_wise_news_data_' . $this->language_Val, now()->addMinutes(5), function () {
+        $catWiseNewsData = Cache::remember('cat_wise_news_data_' . $this->language_Val, now()->addMinutes(1), function () {
             return NewsPost::with(['newstype', 'user', 'getmenu'])
                 ->whereHas('user', function ($query) {
                     $query->whereHas('roles', function ($subquery) {

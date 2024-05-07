@@ -16,7 +16,7 @@ class FirstCategoryNews extends Component
     #[Url(history: true)]
     public function render(){
             // Retrieve the category with specific conditions 
-            $getMenus = Cache::remember('first_category_news_menus', now()->addMinutes(5), function () {
+            $getMenus = Cache::remember('first_category_news_menus', now()->addMinutes(1), function () {
                 return Category::orderBy('sort_id', 'ASC')
                                 ->where('status', 'Active')
                                 ->where('sort_id', 2)
@@ -25,7 +25,7 @@ class FirstCategoryNews extends Component
             });
             // Explode the comma-separated string of category IDs
   
-            $ca1t_Wise_News = Cache::remember('first_category_news_posts_' . $this->languageVal, now()->addMinutes(5), function () use ($getMenus) {
+            $ca1t_Wise_News = Cache::remember('first_category_news_posts_' . $this->languageVal, now()->addMinutes(1), function () use ($getMenus) {
                 if ($getMenus) {    
                     $categoryIds = explode(',', $getMenus->id);
                     return NewsPost::select('id', 'slug', 'news_type', 'category_id', 'user_id', 'title', 'slug', 'heading',  'image', 'thumbnail'

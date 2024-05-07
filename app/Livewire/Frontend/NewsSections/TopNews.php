@@ -21,7 +21,7 @@ class TopNews extends Component
 
     public function render()
     {    
-        $top_NewsData = Cache::remember('top_news_posts_' . $this->languageVal, now()->addMinutes(5), function () {
+        $top_NewsData = Cache::remember('top_news_posts_' . $this->languageVal, now()->addMinutes(1), function () {
             return NewsPost::select('id', 'slug', 'news_type', 'category_id', 'user_id', 'title', 'slug',  'image', 
                   'thumbnail','breaking_top', 'deleted_at','status', 'created_at','updated_at')
             ->with('getmenu', 'newstype')
