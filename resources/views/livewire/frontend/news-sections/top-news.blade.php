@@ -95,7 +95,7 @@
                                                 -
                                             </span>
                                             <span class="f1-s-3">
-                                                {!! carbon\Carbon::parse($hintopNews->created_at)->format('M d, Y' ) ?? "NA" !!}
+                                                {!! carbon\Carbon::parse($hintopNews->created_at)->format('M d, Y h:i A' ) ?? "NA" !!}
 
                                             </span>
                                         </span>
@@ -164,8 +164,7 @@
                                                 </span>
                                                 <span class="f1-s-3">
 
-                                                {!! carbon\Carbon::parse($hintopNews->created_at)->format('M d, Y' ) ?? "NA" !!}
-
+                                                {!! carbon\Carbon::parse($hintopNews->created_at)->format('M d, Y h:i A' ) ?? "NA" !!}
                                                 </span>
                                             </span>
                                         </div>

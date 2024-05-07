@@ -84,7 +84,8 @@
                                     </h5>
                                     <span class="cl8">
                                         <span class="f1-s-3">
-                                        {{carbon\Carbon::parse($news->created_at)->format('M d, Y')}}
+                                        {!! carbon\Carbon::parse($news->created_at)->format('M d, Y h:i A' ) ?? "NA" !!}
+
                                         </span>
                                     </span>
                                 </div>
