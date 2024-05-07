@@ -91,7 +91,7 @@
                                             -
                                         </span>
                                         <span class="f1-s-3">
-                                            {!! carbon\Carbon::parse($catHindiNews->post_date)->format('M d, Y') ?? "NA" !!}
+                                            {!! carbon\Carbon::parse($catHindiNews->created_at)->format('M d, Y') ?? "NA" !!}
 
                                         </span>
                                     </span>
@@ -165,7 +165,7 @@
                                             -
                                         </span>
                                         <span class="f1-s-3">
-                                            {!! carbon\Carbon::parse($catHindiNews->post_date)->format('M d, Y') ?? "NA" !!}
+                                            {!! carbon\Carbon::parse($catHindiNews->created_at)->format('M d, Y') ?? "NA" !!}
                                         </span>
                                     </span>
                                 </div>

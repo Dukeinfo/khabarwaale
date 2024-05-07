@@ -4,27 +4,7 @@ use Illuminate\Support\Str;
         
     @endphp
     @push('social-scripts')
-    <!-- Basic OG tags -->
-    <!-- social-scripts -->
-        {{-- <meta property="og:url" content="{{url()->current()}}">
-        <meta property="og:type" content="website"> 
-        <meta property="og:title" content="{{ $getNewsDetail->title }}" />   
-        <meta property="og:description" content="{{  strip_tags(Str::limit($getNewsDetail->news_description, 200)) ?? "NA" }}" />
-        <meta property="og:image" content="{{  getNewsImage($getNewsDetail->image)  }}" />
-        <meta property="og:image:width" content="1200"> <!-- Width of the image in pixels -->
-        <meta property="og:image:height" content="630"> <!-- Height of the image in pixels -->
-        <meta property="og:site_name" content="khabarwaale"> --}}
-    {{-- <title>{{ $getNewsDetail->title }}</title> 
-    <meta property="og:title" content="{{ $getNewsDetail->title }}">
-    <meta property="og:site_name" content="khabarwaale">
-    <meta property="og:url" content="{{url()->current()}}"/>
-    @php
-         $description =  strip_tags(Str::limit($getNewsDetail->news_description, 200))
-    @endphp
-    <meta property="og:description" content="{{ $description ?? "NA" }}">
-    <meta property="og:type" content="khabarwaale">
-    <meta property="og:image" content="{{  getNewsImage($getNewsDetail->image)  }}"> --}}
-    {{-- start Whatsapp thumbnailUrl --}}
+  
     <meta property="og:image" content="{{ getNewsImage($getNewsDetail->image)}}">
     <link itemprop="thumbnailUrl" href="{{  getNewsImage($getNewsDetail->image)  }}"> 
     <span itemprop="thumbnail" itemscope itemtype="http://schema.org/ImageObject"> 
@@ -55,19 +35,7 @@ use Illuminate\Support\Str;
                         @endswitch
                     </a>
 
-                    {{-- <a  target="_blank" href="{{route('home.category', ['id' => $menuId, 'slug' => createSlug($getNewsDetail['getmenu']['category_en'])  ])}}" class="breadcrumb-item f1-s-3 cl9"> --}}
-                        {{-- @if (session()->get('language') === 'hindi')
-                              {{$getNewsDetail['getmenu']['category_hin'] ?? "NA"}}
-                        @elseif (session()->get('language') === 'english')
-                             {{$getNewsDetail['getmenu']['category_en'] ?? "NA"}}
-                        @elseif (session()->get('language') === 'punjabi')
-                             {{$getNewsDetail['getmenu']['category_pbi'] ?? "NA"}}
-                        @elseif (session()->get('language') === 'urdu')
-                              {{$getNewsDetail['getmenu']['category_urdu'] ?? "NA"}}
-                        @else   
-                              {{$getNewsDetail['getmenu']['category_en'] ?? "NA"}}
-                        @endif
-                    </a> --}}
+          
 
 
                     @if (strpos($getNewsDetail->category_id, ',') === false)
@@ -148,6 +116,10 @@ use Illuminate\Support\Str;
                     <img src="{{isset($getNewsDetail->image)? getNewsImage($getNewsDetail->image)  : asset('assets/images/blog-list-04.jpg')}}" class="rounded img-fluid" alt="IMG" loading="lazy">
                 </div>
 
+                <p class="f1-s-13 cl6">
+                    {!! $getNewsDetail->heading ?? "NA"!!}
+
+                </p>
                 <p class="f1-s-13 cl6 p-b-25">
                     {!! $getNewsDetail->news_description ?? "NA"!!}
                 </p>
@@ -155,20 +127,20 @@ use Illuminate\Support\Str;
          
 
                 <!-- Tag -->
+                @if(isset($getNewsDetail->pdf_file))
+                <!-- Tag -->
                 <div class="flex-s-s p-t-12 p-b-15">
                     <span class="f1-s-12 cl5 m-r-8">
-                        Tags:
+                       PDF 
                     </span>
 
                     <div class="flex-wr-s-s size-w-0">
-                   
-
-                        <a href="#" class="f1-s-12 cl8 hov-link1 m-r-15">
-                            khabarwaale
+                        <a href=" {{ get_pdfFile($getNewsDetail->pdf_file) ?? ''}}" target="_blank" class="f1-s-12 cl8 hov-link1 m-r-15">
+                                {{$getNewsDetail->caption ?? ''}}
                         </a>
                     </div>
                 </div>
-
+                @endif
                 <!-- Share -->
                 <div class="flex-s-s">
                     <span class="f1-s-12 cl5 p-t-1 m-r-15">
@@ -264,8 +236,8 @@ use Illuminate\Support\Str;
                         {!! $shareComponent !!}
                         {{-- <a href="#" class="dis-block f1-s-13 cl0 bg-facebook borad-3 p-tb-4 p-rl-18 hov-btn1 m-r-3 m-b-3 trans-03">
                             <i class="fab fa-facebook-f"></i>
-                        </a> --}}
-{{-- 
+                        </a>
+
                         <a href="#" class="dis-block f1-s-13 cl0 bg-twitter borad-3 p-tb-4 p-rl-18 hov-btn1 m-r-3 m-b-3 trans-03">
                             <i class="fab fa-twitter"></i>
                         </a>

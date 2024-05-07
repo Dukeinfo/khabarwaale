@@ -115,7 +115,7 @@
                                                 -
                                             </span>
                                             <span class="f1-s-3">
-                                                {!! carbon\Carbon::parse($cat1_wise->post_date)->format('M d, Y') ?? "NA" !!}
+                                                {!! carbon\Carbon::parse($cat1_wise->created_at)->format('M d, Y') ?? "NA" !!}
                                             </span>
                                         </span>
                                     </div>
@@ -200,7 +200,7 @@
                                                         -
                                                     </span>
                                                     <span class="f1-s-3">
-                                                        {!!  carbon\Carbon::parse($cat1_wise->post_date)->format('M d, Y') ?? "NA" !!}
+                                                        {!!  carbon\Carbon::parse($cat1_wise->created_at)->format('M d, Y') ?? "NA" !!}
 
                                                     </span>
                                                 </span>

@@ -86,7 +86,7 @@
                                     -
                                 </span>
                                 <span class="f1-s-3">
-                                    {!! carbon\Carbon::parse($cat_News->post_date)->format('M d, Y') ?? "NA" !!}
+                                    {!! carbon\Carbon::parse($cat_News->created_at)->format('M d, Y') ?? "NA" !!}
                                 </span>
                             </span>
                         </div>
@@ -145,7 +145,7 @@
                                     -
                                 </span>
                                 <span class="f1-s-3">
-                                    {!! carbon\Carbon::parse($cat_News->post_date)->format('M d, Y') ?? "NA" !!}
+                                    {!! carbon\Carbon::parse($cat_News->created_at)->format('M d, Y') ?? "NA" !!}
                                 </span>
                             </span>
                         </div>

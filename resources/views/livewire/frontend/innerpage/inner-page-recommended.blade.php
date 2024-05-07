@@ -99,7 +99,7 @@
                                                 -
                                             </span>
                                             <span class="f1-s-3">
-                                                {!!   carbon\Carbon::parse($recmendNews->post_date)->format('M d, Y')  ?? "NA" !!}
+                                                {!!   carbon\Carbon::parse($recmendNews->created_at)->format('M d, Y')  ?? "NA" !!}
                                             </span>
                                         </span>
                                     </div>

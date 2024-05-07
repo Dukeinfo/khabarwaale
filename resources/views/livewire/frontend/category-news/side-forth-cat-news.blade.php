@@ -32,7 +32,7 @@
                                                 </h5>
                                                 <span class="cl8">
                                                     <span class="f1-s-3">
-                                                        {!! carbon\Carbon::parse($cat_HinNews->post_date)->format('M d, Y') ?? "NA" !!}
+                                                        {!! carbon\Carbon::parse($cat_HinNews->created_at)->format('M d, Y') ?? "NA" !!}
                                                     </span>
                                                 </span>
                                             </div>
@@ -53,7 +53,7 @@
                                                     </h5>
                                                     <span class="cl8">
                                                         <span class="f1-s-3">
-                                                            {!! carbon\Carbon::parse($cat_HinNews->post_date)->format('M d, Y') ?? "NA" !!}
+                                                            {!! carbon\Carbon::parse($cat_HinNews->created_at)->format('M d, Y') ?? "NA" !!}
                                                         </span>
                                                     </span>
                                                 </div>

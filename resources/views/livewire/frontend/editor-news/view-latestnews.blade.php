@@ -95,7 +95,7 @@
                                 </span>
                                 <span class="f1-s-3">
                           
-                                          {{carbon\Carbon::parse($latest_eng_News->post_date)->format('M d, Y')}}
+                                          {{carbon\Carbon::parse($latest_eng_News->created_at)->format('M d, Y')}}
                                 </span>
                             </span>
                         </div>

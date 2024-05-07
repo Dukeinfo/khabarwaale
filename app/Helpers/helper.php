@@ -272,3 +272,9 @@ if (! function_exists('logActivity')) {
             ->log($description);
     }
 }
+
+function get_pdfFile($pdf)
+{
+ 
+    return   asset('storage/pdf_docs/'.$pdf);
+}
