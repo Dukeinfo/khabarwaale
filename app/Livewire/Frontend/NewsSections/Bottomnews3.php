@@ -21,7 +21,7 @@ class Bottomnews3 extends Component
 
     public function render(){
         // Retrieve the category with specific conditions
-        $get_bottom3_Menus = Cache::remember('bottom3_category', now()->addMinutes(10), function () {
+        $get_bottom3_Menus = Cache::remember('bottom3_category', now()->addMinutes(1), function () {
             return Category::orderBy('sort_id', 'ASC')
                 ->where('status', 'Active')
                 ->where('sort_id', 8)
@@ -38,7 +38,7 @@ class Bottomnews3 extends Component
         $categoryIds = explode(',', $get_bottom3_Menus->id);
         
         // Retrieve news posts with eager loaded relationships
-        $seven_CatWise_News = Cache::remember('bottom3_news_' . $this->languageVal, now()->addMinutes(10), function () use ($categoryIds) {
+        $seven_CatWise_News = Cache::remember('bottom3_news_' . $this->languageVal, now()->addMinutes(1), function () use ($categoryIds) {
             return NewsPost::select('id', 'slug', 'news_type', 'category_id', 'user_id', 'title', 'slug', 'heading', 
                             'image', 'thumbnail', 'status','created_at','updated_at')
             ->with(['newstype', 'user', 'getmenu'])

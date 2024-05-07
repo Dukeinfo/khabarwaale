@@ -59,7 +59,7 @@ public $languageVal;
     //         $catWiselatest_eng_News = $catWiselatest_eng_News->limit(6)->get();
                 $cacheKey = 'category_latest_news_' . $this->category . '_' . $this->languageVal;
 
-                $catWiselatest_eng_News = Cache::remember($cacheKey, now()->addMinutes(10), function () {
+                $catWiselatest_eng_News = Cache::remember($cacheKey, now()->addMinutes(1), function () {
                     $categoryIds = explode(',', $this->category);
 
                     return NewsPost::select('id', 'slug', 'news_type', 'category_id', 'user_id', 'title', 'slug', 'heading', 

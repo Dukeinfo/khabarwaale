@@ -50,7 +50,7 @@ public function mount( $id){
         $cacheKey = 'category_news_' . $this->categoryId . '_' . $this->language_Val;
 
 
-        $catWiseNewsData = Cache::remember($cacheKey, now()->addMinutes(10), function () {
+        $catWiseNewsData = Cache::remember($cacheKey, now()->addMinutes(1), function () {
             $categoryIds = explode(',', $this->categoryId);
             return NewsPost::select('id', 'slug', 'news_type', 'category_id', 'user_id', 'title', 'slug', 'heading', 
              'image', 'thumbnail', "status" ,"created_at" )

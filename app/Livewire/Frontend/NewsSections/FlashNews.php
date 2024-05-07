@@ -19,7 +19,7 @@ class FlashNews extends Component
     public function render()
     {
     
-    $newsPosts = Cache::remember('flash_news_posts', now()->addMinutes(10), function () {
+    $newsPosts = Cache::remember('flash_news_posts', now()->addMinutes(1), function () {
         $today = Carbon::now()->toDateString();
 
         $newsPosts = NewsPost::select('id', 'slug', 'news_type', 'category_id', 'user_id', 'title', 'slug', 'heading', 

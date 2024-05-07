@@ -20,7 +20,7 @@ public $languageVal;
     public function render()
     {
         $cacheKey = 'editor_news_latest_' . $this->languageVal;
-            $EditorNewsLatest = Cache::remember($cacheKey, now()->addMinutes(10), function () {
+            $EditorNewsLatest = Cache::remember($cacheKey, now()->addMinutes(1), function () {
                 return NewsPost::with(['newstype', 'user', 'getmenu'])
                     ->whereHas('user', function ($query) {
                         $query->whereHas('roles', function ($subquery) {

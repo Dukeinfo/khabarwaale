@@ -21,7 +21,7 @@ class BottomNews extends Component
     public function render(){
         // Retrieve the category with specific conditions
  
-                $get_bottom1_Menus = Cache::remember('bottom1_category',now()->addMinutes(10), function () {
+                $get_bottom1_Menus = Cache::remember('bottom1_category',now()->addMinutes(1), function () {
                     return Category::orderBy('sort_id', 'ASC')
                         ->where('status', 'Active')
                         ->where('sort_id', 6)
@@ -39,7 +39,7 @@ class BottomNews extends Component
         $categoryIds = explode(',', $get_bottom1_Menus->id);
         
      // Use caching for the category data with a cache duration of 10 minutes (600 seconds)
-        $five_CatWise_News = Cache::remember('bottom1_news_' . $this->languageVal, now()->addMinutes(10), function () use ($categoryIds) {
+        $five_CatWise_News = Cache::remember('bottom1_news_' . $this->languageVal, now()->addMinutes(1), function () use ($categoryIds) {
             return NewsPost::select('id', 'slug', 'news_type', 'category_id', 'user_id', 'title', 'slug', 'heading', 
             'image', 'thumbnail', 'status','created_at','updated_at')
                 ->with(['newstype', 'user', 'getmenu'])
