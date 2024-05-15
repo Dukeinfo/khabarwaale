@@ -166,16 +166,24 @@
 			</button>
 			<div class="dropdown-menu dropdown-menu-end">
 				<!-- item-->
-				<a class="dropdown-item" href="{{route('admin_profile')}}"><i class="bx bx-user font-size-16 align-middle me-1"></i> <span key="t-profile">Profile</span></a>
+				<a class="dropdown-item" href="{{route('admin_profile')}}"><i class="bx bx-user font-size-16 align-middle me-1"></i> 
+					<span key="t-profile">Profile</span></a>
 				{{-- manage_contact_us --}}
 				@role('admin')  
 				@if(auth()->user()->can('manage_contact_us') )
-				<a class="dropdown-item" href="{{route('contact_view')}}"><i class="bx bx-wallet font-size-16 align-middle me-1"></i> <span key="t-my-wallet">Contact us</span></a>
+				<a class="dropdown-item" href="{{route('contact_view')}}"><i class="bx bx-cog font-size-16 align-middle me-1"></i> 
+					<span key="t-my-cog">Site Setting </span></a>
+				<a class="dropdown-item" href="{{url('/logs')}}"><i class="bx bxs-report font-size-16 align-middle me-1"></i> 
+					<span key="t-my-report"> Log Report</span></a>
+
+				
 				@endif
 				@if(auth()->user()->can('manage_social_app') )
-				<a class="dropdown-item d-block" href="{{route('social_view')}}"><span class="badge bg-success float-end">11</span><i class="bx bx-wrench font-size-16 align-middle me-1"></i> <span key="t-settings"> Social App</span></a>
+				<a class="dropdown-item d-block" href="{{route('social_view')}}"><span class="badge bg-success float-end">11</span><i class="bx bx-wrench font-size-16 align-middle me-1"></i>
+					 <span key="t-settings"> Social App</span></a>
 				@endif
-				<a class="dropdown-item" href="{{route('contact_entries')}}"><i class="bx bx-lock-open font-size-16 align-middle me-1"></i> <span key="t-lock-screen">Messages </span></a>
+				<a class="dropdown-item" href="{{route('contact_entries')}}"><i class="bx bx-message font-size-16 align-middle me-1"></i> 
+					<span key="t-lock-message">Messages </span></a>
 				@else
 				@endrole
 

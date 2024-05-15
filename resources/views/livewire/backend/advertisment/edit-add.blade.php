@@ -74,6 +74,8 @@
                                                     <input wire:model="editimage" type="file"  class="form-control" id="add_image">
                                                     @error('editimage') <span class="error">{{ $message }}</span> @enderror
                                                <img src="{{getThumbnail($thumbnail)}}" alt="" class="img-fluid"  width="50">
+                                               <i wire:target="editimage" wire:loading.class="fas fa-1x fa-sync fa-spin"></i>
+
                                                 </div>
                                                 
                                                 <div class="col-md-4">

@@ -6,6 +6,8 @@ use App\Models\AddLocation;
 use App\Models\Advertisment;
 use App\Models\Category;
 use App\Traits\UploadTrait;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
@@ -66,14 +68,18 @@ class EditAdd extends Component
                 $image =  $this->editimage;
                 // Define folder path
                 $folder = '/mainAdd';
-                $editimage_add = $this->uploadOne($image, $folder);
+                $editimage_add = $this->uploaadAdvertisment($image, $folder);
                 $updateImg =  Advertisment::find($this->add_Id);
+
+                $this->unlinkImage($updateImg, 'image', 'thumbnail', $folder);
+
                 $updateImg->image = $editimage_add['file_name'];
                 $updateImg->thumbnail = $editimage_add['thumbnail_name'] ;
                 $updateImg->save();
           } 
 
           if(!is_null($this->editimage_add)){
+
                 $image =  $this->editimage_add;
                 // Define folder path
                 $folder = '/image';

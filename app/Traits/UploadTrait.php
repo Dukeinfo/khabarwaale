@@ -55,6 +55,41 @@ trait UploadTrait
          
     }
 
+//  uploaad Advertisment
+public function uploaadAdvertisment(UploadedFile $uploadedFile, $folder = null, $disk = 'public')
+{
+        $currentMonth = date('m');
+        $currentYear = date('Y');
+
+        $file_name =  $currentMonth  . '_' . $currentYear . '_' . strtoupper(uniqid()) .'.'.$uploadedFile->getClientOriginalExtension();
+    
+        try{
+        $uploadedFile->storeAs($folder,$file_name, $disk);
+
+        } catch (\Exception $e) {
+            Log::info( 'Error on savinf Advertisment image '. $e->getMessage());
+        }
+
+            $directory = public_path('uploads/thumbnail');
+        
+            // Check if the directory exists, if not, create it
+            if (!File::exists($directory)) {
+                File::makeDirectory($directory, 0755, true, true);
+            }
+    
+        $thumbnailName = 'thumb_' . $file_name;
+        Image::make($uploadedFile)
+            ->fit(100, 75)
+            ->save($directory .'/'. $thumbnailName);
+        return ['file_name' => $file_name, 'thumbnail_name' => $thumbnailName];
+
+      
+     
+}
+
+
+
+
 
 
 
@@ -133,6 +168,28 @@ trait UploadTrait
             Log::error('Image conversion error: ' . $e->getMessage());
             return null;
         }
+    }
+
+
+    public function unlinkImage($model, $imageField = 'image', $thumbnailField = 'thumbnail' , $folder)
+    
+    {
+        $imagePath = Storage::path('public/' . $folder . '/' . $model->$imageField);
+        if (File::exists($imagePath) && isset($model->$imageField)) {
+            unlink($imagePath);
+            Log::info('Page  Image Deleted');
+        }
+    
+
+        if ($model->$thumbnailField) {
+            $thumbnailPath = public_path('uploads/thumbnail/' . $model->$thumbnailField);
+            if (file_exists($thumbnailPath)) {
+                unlink($thumbnailPath);
+            }
+            Log::info('News thumbnail  Image Removed ');
+        }
+
+    
     }
 
 }

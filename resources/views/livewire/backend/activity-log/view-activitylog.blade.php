@@ -43,7 +43,7 @@
 
                                     <div class="mb-3">
                                         <label class="form-label">Search</label>
-                                        <input type="search" class="form-control" wire:model="search"
+                                        <input type="testS" class="form-control" wire:model.live="search"
                                             placeholder="Search...">
                                         @error('Search')
                                             <span class="error">{{ $message }}</span>

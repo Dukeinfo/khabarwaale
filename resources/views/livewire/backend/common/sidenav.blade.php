@@ -34,7 +34,7 @@
 					<li>
 				<a href="{{route('optimizeSite')}}" target="_blank" class="waves-effect"> 
 				   <i class='bx bx-health'></i>
-				   <span>Optimize <span class="badge bg-danger">New</span></span>
+				   <span>Optimize 
 			   </a>
 			   
 		   </li>
@@ -75,9 +75,10 @@
 	<a href="{{route('View_Activitylog')}}"  class="waves-effect"> 
 
 		<i class='bx bx-bell'></i>
-	   <span>View Activity   <span class="badge bg-danger">New</span></span>
+	   <span>View Activity   
    </a>
 </li>
+
 @endhasanyrole
 
 @elseif(auth()->user()->can('manage_archive') )
@@ -117,7 +118,7 @@
 <li>
 	<a href="{{route('admin.Add_Archive_News')}}"  class="waves-effect"> 
 	   <i class='bx bx-archive'></i>
-	   <span>Add Archive <span class="badge bg-danger">New</span></span>
+	   <span>Add Archive 
    </a>
    
 </li>

@@ -9,6 +9,7 @@ use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 use Spatie\Activitylog\Models\Activity;
 use Illuminate\Support\Facades\Gate;
+use Livewire\Attributes\Url;
 
 #[Title(' View Activitylog  ')]
 class ViewActivitylog extends Component
@@ -18,6 +19,7 @@ class ViewActivitylog extends Component
     use WithFileUploads;
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
+     #[Url(as: 'q')]
     public $search = '';
     public $logId = [];
     public function render()

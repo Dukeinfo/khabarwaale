@@ -95,7 +95,7 @@ class CreateAdd extends Component
       if(!is_null($this->image)){
         $image =  $this->image;
         $folder = '/mainAdd';
-        $mainImg = $this->uploadOne($image, $folder);
+        $mainImg = $this->uploaadAdvertisment($image, $folder);
     } 
         $model = new Advertisment();
         $model->page_name = $this->page_name;

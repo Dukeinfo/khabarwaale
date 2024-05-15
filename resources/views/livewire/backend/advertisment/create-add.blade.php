@@ -73,10 +73,10 @@
 
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <label for="add_image">Enter  Image</label>
+                                                    <label for="add_image">Choose  Image</label>
                                                     <input wire:model="image" type="file"  class="form-control" id="add_image">
                                                     @error('image') <span class="error">{{ $message }}</span> @enderror
-                                               
+                                                    <i wire:target="image" wire:loading.class="fas fa-1x fa-sync fa-spin"></i>
                                                 </div>
                                                 
                                                 <div class="col-md-4">
