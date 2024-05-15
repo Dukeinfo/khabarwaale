@@ -177,7 +177,7 @@ public function uploaadAdvertisment(UploadedFile $uploadedFile, $folder = null, 
         $imagePath = Storage::path('public/' . $folder . '/' . $model->$imageField);
         if (File::exists($imagePath) && isset($model->$imageField)) {
             unlink($imagePath);
-            Log::info('Page  Image Deleted');
+            Log::info('Advertisment  Image Deleted');
         }
     
 
@@ -186,7 +186,7 @@ public function uploaadAdvertisment(UploadedFile $uploadedFile, $folder = null, 
             if (file_exists($thumbnailPath)) {
                 unlink($thumbnailPath);
             }
-            Log::info('News thumbnail  Image Removed ');
+            Log::info('Advertisment thumbnail  Image Removed ');
         }
 
     
