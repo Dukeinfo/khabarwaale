@@ -173,7 +173,7 @@
 				@if(auth()->user()->can('manage_contact_us') )
 				<a class="dropdown-item" href="{{route('contact_view')}}"><i class="bx bx-cog font-size-16 align-middle me-1"></i> 
 					<span key="t-my-cog">Site Setting </span></a>
-				<a class="dropdown-item" href="{{url('/logs')}}"><i class="bx bxs-report font-size-16 align-middle me-1"></i> 
+				<a class="dropdown-item" href="{{url('/logs')}}" target="_blank"><i class="bx bxs-report font-size-16 align-middle me-1"></i> 
 					<span key="t-my-report"> Log Report</span></a>
 
 				
